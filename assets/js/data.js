@@ -887,8 +887,8 @@ window.DATA = {
     // ===== CAUSES (6) =====
     { id: "q-causes-1", operation: "Déterminer des causes et des conséquences", numero: 1, niveau: 2, realite_sociale_id: "renouvellement-vision-homme",
       questionBody: { prompt: "À l'aide des documents 1 et 2, détermine le document qui présente une cause de la réforme protestante et le document qui en présente une conséquence.",
-        responseSpace: { type: "labeled-list", items: ["Cause de la réforme protestante (Document n°)", "Conséquence de la réforme protestante (Document n°)"] } },
-      reglettes: [{ id: "r-ca1", label: "Réglette (2 points)", ...R_CAUSES_2PT_CAUSE_CONS }], documents: pickDocs('causes-1', 1, 2), corrige: ["Document 1", "Document 2"] },
+        responseSpace: { type: "labeled-list", items: ["Cause (Document n°)", "Conséquence (Document n°)"] } },
+      reglettes: [{ id: "r-ca1", label: "Réglette (2 points)", ...R_CAUSES_2PT_CAUSE_CONS }], documents: pickDocs('causes-1', 1, 2), corrige: ["1", "2"] },
     { id: "q-causes-2", operation: "Déterminer des causes et des conséquences", numero: 2, niveau: 2, realite_sociale_id: "renouvellement-vision-homme",
       questionBody: { prompt: "À l'aide du document 3, détermine une conséquence territoriale de l'invention de l'imprimerie par Johannes Gutenberg.", responseSpace: { type: "lines", count: 4 } },
       reglettes: [{ id: "r-ca2", label: "Réglette (2 points)", ...R_CAUSES_2PT_CONSEQ }], documents: pickDocs('causes-1', 3), corrige: "Des ateliers d'imprimerie apparaissent dans 110 villes d'Europe en 1480 (Paris, Mayence, Nuremberg, Francfort)." },
