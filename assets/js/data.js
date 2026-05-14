@@ -770,11 +770,11 @@ const DOCS = {
   'chr-causalite-2': [
     { id: "chr-c2-d1", title: "Document 1 : Appel de Clermont", layout: "text-image",
       text: "Dans la chrétienté, le lieu le plus saint que peut visiter un fidèle est Jérusalem, où se trouve le tombeau de Jésus-Christ. Or, depuis 1078, la ville est sous la domination des Turcs musulmans qui en interdisent l'accès aux chrétiens. En 1095, le pape Urbain II appelle les rois et les nobles de l'Occident à partir à la conquête militaire de Jérusalem. Cette notion d'une guerre pour Dieu est alors complètement nouvelle.",
-      imageUrl: "assets/img/christianisation-causalite-2/img000.png", imageWidthCm: 4.5,
+      imageUrl: "assets/img/christianisation-causalite-2/img000.png", imageWidthCm: 7,
       sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Fondazione Cariplo, Le pape Urbain II prêchant la première croisade sur la place de Clermont, tableau de Francesco Hayez (1835), Wikimedia Commons. Licence : Creative Commons BY-SA 3.0."] },
     { id: "chr-c2-d2", title: "Document 2 : La réponse à l'appel", layout: "text-image",
       text: "L'appel du pape à la croisade soulève un immense enthousiasme chez les seigneurs comme dans la population générale. Plus de 150 000 hommes et femmes répondent à l'invitation.",
-      imageUrl: "assets/img/christianisation-causalite-2/img001.png", imageWidthCm: 5,
+      imageUrl: "assets/img/christianisation-causalite-2/img001.png", imageWidthCm: 7,
       sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Jean Fouquet, Arrivée des croisés à Constantinople, Wikimedia Commons. Licence : image du domaine public."] },
     { id: "chr-c2-d3", title: "Document 3 : Avancées technologiques et scientifiques", layout: "text-only",
       text: "« Les croisades et le commerce qui en découle mirent l'Occident en contact avec la culture et le savoir des Arabes. À partir du 10e siècle, les musulmans ont traduit les œuvres des grands penseurs de l'Antiquité [...] Les Arabes ont fait avancer le domaine de la science. Grâce à eux, les [Européens] acquièrent de nouvelles connaissances en médecine, en astronomie, en mathématiques et en physique. Ils rapportèrent des cartes géographiques précises, de nouveaux instruments de navigation, le collier d'épaule pour les chevaux ainsi que la technologie du moulin à vent. »",
@@ -783,7 +783,7 @@ const DOCS = {
   'chr-causalite-3': [
     { id: "chr-c3-d1", title: "Document 1 : Notre-Dame de Paris", layout: "text-image",
       text: "« Dans la cathédrale de Notre-Dame, la nef dessine la forme d'une croix. Notre-Dame de Paris doit combiner pour la première fois toutes les innovations techniques qui caractérisent le style gothique. Les arcs brisés vont lui permettre d'élever les plus hautes voûtes. En faisant porter leur poids par des piliers, la croisée d'ogives permettra d'ouvrir les murs et d'y installer les grands vitraux. Quant à ces arcs-boutants qui absorbent les poussées horizontales, ils permettront de surpasser tout ce qui a été réalisé auparavant. À Notre-Dame, les arcs-boutants vont connaître un traitement tout à fait extraordinaire, avec des arcs de plus de 15 mètres. »",
-      imageUrl: "assets/img/christianisation-causalite-3/img000.png", imageWidthCm: 4,
+      imageUrl: "assets/img/christianisation-causalite-3/img000.png", imageWidthCm: 7,
       sources: ["Source du texte : Tisseyre, C. (Animateur), Notre-Dame de Paris : les secrets des bâtisseurs (saison 33 épisode 30), 2020, Découverte, Radio-Canada.", "Source de l'image : Notre-Dame de Paris, un exemple de cathédrale gothique, dans Pontifical romain aux armes de Jean II de Mauléon, évêque de Saint-Bertrand-de-Comminges, BnF, Wikimedia Commons."] },
     { id: "chr-c3-d2", title: "Document 2 : Architecture", layout: "text-only",
       text: "Au 12e siècle, un nouveau style architectural fait son apparition : l'architecture gothique. Les nouvelles techniques utilisées permettent la création d'églises plus hautes et plus larges. En effet, l'utilisation d'arc diagonal pour soutenir la voûte et d'arc-boutant (demi-arc) renforce les murs et solidifie les constructions. De larges fenêtres habillées de magnifiques vitraux laissent la lumière inonder l'intérieur des édifices.",
@@ -809,7 +809,7 @@ const DOCS = {
       sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] },
     { id: "chr-f2-d3", title: "Document 3 : Vassal et suzerain", layout: "text-image",
       text: "« Aide et conseil du vassal sont soigneusement codifiés : l'aide peut, en certains cas précis, être une contribution financière, mais elle est pratiquement toujours militaire, avec un service que la coutume finit par réduire à quarante jours. [Offrir le conseil à son seigneur], c'est être présent à [s]a cour [...] et, parfois, siéger à son tribunal. La protection accordée par le seigneur est militaire, mais elle est aussi économique, par l'octroi du fief, qui crée un lien matériel entre seigneur et vassal. Toutefois, certains vassaux ne sont pas pourvus de fiefs, mais sont seulement entretenus et résident au château. »",
-      imageUrl: "assets/img/christianisation-faits-2/img000.png", imageWidthCm: 5,
+      imageUrl: "assets/img/christianisation-faits-2/img000.png", imageWidthCm: 7,
       sources: ["Source du texte : Encyclopédie Larousse, Féodalité, Larousse, consulté le 28 octobre 2021.", "Source de l'image : Archives Nationales, Charles d'Orléans (15e siècle), Wikimedia Commons. Licence : image du domaine public."] }
   ],
   'chr-faits-3': [
@@ -818,7 +818,7 @@ const DOCS = {
       sources: ["Source de l'image : Service national du RÉCIT, domaine de l'univers social."] },
     { id: "chr-f3-d2", title: "Document 2 : Architecture gothique", layout: "text-image",
       text: "Au 12e siècle, un nouveau style architectural fait son apparition : l'architecture gothique. Les nouvelles techniques utilisées permettent la création d'églises plus hautes et plus larges. En effet, l'utilisation d'arc diagonal pour soutenir la voûte et d'arc-boutant (demi-arc) renforce les murs et solidifie les constructions. De larges fenêtres habillées de magnifiques vitraux laissent la lumière inonder l'intérieur des édifices. L'art gothique déborde bientôt du cadre religieux et influence la construction d'autres bâtiments comme les châteaux, les palais et les forteresses. Il se répand grâce aux maîtres bâtisseurs qui parcourent l'Europe à la demande des ordres religieux, des évêques et des princes. Ces bâtisseurs contribuent ainsi à la diffusion des connaissances en mathématiques et en géométrie appliquées.",
-      imageUrl: "assets/img/christianisation-faits-3/img001.png", imageWidthCm: 4,
+      imageUrl: "assets/img/christianisation-faits-3/img001.png", imageWidthCm: 7,
       sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Harmonia Amanda, Notre-Dame de Paris 035 (2005), Wikimedia Commons. Licence : Creative Commons BY-SA 3.0."] }
   ],
   'chr-espace-1': [
@@ -871,7 +871,7 @@ const DOCS = {
       text: "Au cours des mille ans de chrétienté médiévale, l'Église a pu se développer et assurer un rôle central dans la vie de la population. Pour y parvenir, elle a pu prospérer grâce à plusieurs sources financières : tout d'abord grâce aux prélèvements que l'on appelle la dîme ; elle correspondait à un dixième des récoltes produites par les fidèles. Ensuite, l'Église recevait régulièrement des dons des seigneurs, des rois ou autres fidèles pour la remercier des services rendus auprès de la société de l'époque. Enfin, elle assurait un rôle culturel.",
       sources: ["Source du texte : Auteur inconnu, Les rôles de l'Église au Moyen Âge, quels étaient-ils ?, Éditions VoxGallia, consulté le 8 avril 2025."] },
     { id: "chr-r1-d3", title: "Document 3 : Chevaliers", layout: "image-only",
-      imageUrl: "assets/img/christianisation-relation-1/img001.png", imageWidthCm: 4.5,
+      imageUrl: "assets/img/christianisation-relation-1/img001.png", imageWidthCm: 7,
       sources: ["Source de l'image : Artiste anonyme du 13e siècle, Miniature de 1287 représentant des chevaliers munis de leurs lances, Wikimedia Commons. Licence : image du domaine public."] },
     { id: "chr-r1-d4", title: "Document 4 : Monastère de Ripoll", layout: "image-only",
       imageUrl: "assets/img/christianisation-relation-1/img002.png", imageWidthCm: 7,
@@ -888,7 +888,7 @@ const DOCS = {
       text: "Le culte des reliques est à l'origine de grands et de petits pèlerinages depuis les premiers temps du christianisme. Le corps des saints, entiers ou en morceaux, les vêtements, le sang, les instruments de martyre, tout ce qui a été en contact avec eux est objet de vénération et porte des propriétés miraculeuses pour le salut de l'âme et souvent du corps. Les fidèles se déplacent de très loin pour être le plus près possible de ces objets matériels qui les mettent directement en rapport avec la divinité et qui les protègent contre le mal, le diable, le péché ou la condamnation.",
       sources: ["Source du texte : Gonzalo Lopez, Histoire du pèlerinage Saint-Jacques de Compostelle, Via Compostela, consulté le 8 avril 2025."] },
     { id: "chr-r2-d4", title: "Document 4 : Pèlerin de Saint-Jacques", layout: "image-only",
-      imageUrl: "assets/img/christianisation-relation-2/img001.png", imageWidthCm: 4.5,
+      imageUrl: "assets/img/christianisation-relation-2/img001.png", imageWidthCm: 7,
       sources: ["Source de l'image : Kolossos, Pèlerin de Saint-Jacques de Compostelle, Wikimedia Commons. Licence : image du domaine public."] },
     { id: "chr-r2-d5", title: "Document 5 : La vie au monastère", layout: "text-only",
       text: "Le centre du monastère est un cloître, où l'on retrouve un jardin, des colonnes et des galeries. C'est là où les moines pouvaient sortir prendre l'air, car ils vivaient littéralement cloîtrés. Les moines sont les spécialistes de la fabrication des livres. La pièce où travaillent les moines copistes s'appelle le scriptorium. Au Moyen Âge, tous les livres sont écrits à la main, et ensuite recopiés.",
@@ -897,7 +897,7 @@ const DOCS = {
   'chr-causes-1': [
     { id: "chr-ca1-d1", title: "Document 1 : Appel de Clermont", layout: "text-image",
       text: "Dans la chrétienté, le lieu le plus saint que peut visiter un fidèle est Jérusalem, où se trouve le tombeau de Jésus-Christ. Or, depuis 1078, la ville est sous la domination des Turcs musulmans qui en interdisent l'accès aux chrétiens. En 1095, le pape Urbain II appelle les rois et les nobles de l'Occident à partir à la conquête militaire de Jérusalem. Cette notion d'une guerre pour Dieu est alors complètement nouvelle. L'appel du pape à la croisade soulève d'ailleurs un immense enthousiasme chez les seigneurs comme dans la population générale. Plus de 150 000 hommes et femmes répondent à l'invitation. C'est le début des croisades.",
-      imageUrl: "assets/img/christianisation-causes-1/img000.png", imageWidthCm: 4.5,
+      imageUrl: "assets/img/christianisation-causes-1/img000.png", imageWidthCm: 7,
       sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Fondazione Cariplo, Le pape Urbain II prêchant la première croisade sur la place de Clermont, tableau de Francesco Hayez (1835), Wikimedia Commons. Licence : Creative Commons BY-SA 3.0."] },
     { id: "chr-ca1-d2", title: "Document 2 : La conquête de Jérusalem", layout: "text-only",
       text: "Après un siège de plusieurs semaines, les croisés ont réussi à prendre le contrôle de Jérusalem en 1099. Leur objectif était atteint, en dépit du fait qu'ils avaient massacré les habitants de la ville. Des 150 000 chevaliers qui avaient pris la route de la croisade, il n'y en a eu que 15 000 qui sont parvenus à la fin du voyage.",
@@ -920,23 +920,23 @@ const DOCS = {
   'chr-causes-3': [
     { id: "chr-ca3-d1", title: "Document 1 : Appel à la croisade", layout: "text-image",
       text: "Dans la chrétienté, le lieu le plus saint que peut visiter un fidèle est Jérusalem, où se trouve le tombeau de Jésus-Christ. Or, depuis 1078, la ville est sous la domination des Turcs musulmans qui en interdisent l'accès aux chrétiens. En 1095, le pape Urbain II appelle les rois et les nobles de l'Occident à partir à la conquête militaire de Jérusalem. Cette notion d'une guerre pour Dieu est alors complètement nouvelle. L'appel du pape à la croisade soulève d'ailleurs un immense enthousiasme chez les seigneurs comme dans la population générale. Plus de 150 000 hommes et femmes répondent à l'invitation. C'est le début des croisades.",
-      imageUrl: "assets/img/christianisation-causes-3/img000.png", imageWidthCm: 4.5,
+      imageUrl: "assets/img/christianisation-causes-3/img000.png", imageWidthCm: 7,
       sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Fondazione Cariplo, Le pape Urbain II prêchant la première croisade sur la place de Clermont, tableau de Francesco Hayez (1835), Wikimedia Commons. Licence : Creative Commons BY-SA 3.0."] },
     { id: "chr-ca3-d2", title: "Document 2 : Architecture gothique", layout: "text-image",
       text: "Au 12e siècle, un nouveau style architectural fait son apparition : l'architecture gothique. Les nouvelles techniques utilisées permettent la création d'églises plus hautes et plus larges. En effet, l'utilisation d'arc diagonal pour soutenir la voûte et d'arc-boutant (demi-arc) renforce les murs et solidifie les constructions. De larges fenêtres habillées de magnifiques vitraux laissent la lumière inonder l'intérieur des édifices. L'art gothique déborde bientôt du cadre religieux et influence la construction d'autres bâtiments comme les châteaux, les palais et les forteresses. Il se répand grâce aux maîtres bâtisseurs qui parcourent l'Europe à la demande des ordres religieux, des évêques et des princes.",
-      imageUrl: "assets/img/christianisation-causes-3/img001.png", imageWidthCm: 4,
+      imageUrl: "assets/img/christianisation-causes-3/img001.png", imageWidthCm: 7,
       sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Harmonia Amanda, Notre-Dame de Paris 035 (2005), Wikimedia Commons. Licence : Creative Commons BY-SA 3.0."] }
   ],
   'chr-differences-1': [
     { id: "chr-di1-d1", title: "Document 1 : Le clergé régulier", layout: "image-only",
-      imageUrl: "assets/img/christianisation-differences-1/img000.png", imageWidthCm: 5.5,
+      imageUrl: "assets/img/christianisation-differences-1/img000.png", imageWidthCm: 7,
       sources: ["Source de l'image : Le Sodoma, Life of St Benedict, Scene 31 — Benedict Feeds the Monk, Wikimedia Commons. Licence : image du domaine public."] },
     { id: "chr-di1-d2", title: "Document 2 : Le clergé séculier", layout: "image-only",
       imageUrl: "assets/img/christianisation-differences-1/img001.png", imageWidthCm: 7,
       sources: ["Source de l'image : Jean Fouquet, Couronnement de Charlemagne, enluminure dans Grandes Chroniques de France, Paris, BnF, ms. Français 6 465, vers 1460, Wikimedia Commons. Licence : image du domaine public."] },
     { id: "chr-di1-d3", title: "Document 3 : Vassal et suzerain", layout: "text-image",
       text: "« Aide et conseil du vassal sont soigneusement codifiés : l'aide peut, en certains cas précis, être une contribution financière, mais elle est pratiquement toujours militaire, avec un service que la coutume finit par réduire à quarante jours. [Offrir le conseil à son seigneur], c'est être présent à [s]a cour [...] et, parfois, siéger à son tribunal. La protection accordée par le seigneur est militaire, mais elle est aussi économique, par l'octroi du fief, qui crée un lien matériel entre seigneur et vassal. Toutefois, certains vassaux ne sont pas pourvus de fiefs, mais sont seulement entretenus et résident au château. »",
-      imageUrl: "assets/img/christianisation-differences-1/img002.png", imageWidthCm: 5,
+      imageUrl: "assets/img/christianisation-differences-1/img002.png", imageWidthCm: 7,
       sources: ["Source du texte : Encyclopédie Larousse, Féodalité, Larousse, consulté le 28 octobre 2021.", "Source de l'image : Archives Nationales, Charles d'Orléans (15e siècle), Wikimedia Commons. Licence : image du domaine public."] }
   ],
   'chr-differences-2': [
@@ -945,13 +945,13 @@ const DOCS = {
       sources: ["Source : Service national du RÉCIT, domaine de l'univers social."] },
     { id: "chr-di2-d2", title: "Document 2 : Grégoire VIII", layout: "text-image",
       text: "En octobre 1187, le sultan Saladin s'empare de Jérusalem, au terme d'une campagne éclair qui lui a permis d'écraser les armées des Latins d'Orient. La nouvelle est rapidement connue en Occident et le pape Grégoire VIII lance aussitôt un appel à la 3e croisade. Cet appel à la croisade se diffuse dans la chrétienté occidentale, via des légats pontificaux ou l'envoi de lettres. Fin décembre, le roi du Danemark est au courant.",
-      imageUrl: "assets/img/christianisation-differences-2/img000.png", imageWidthCm: 3.5,
+      imageUrl: "assets/img/christianisation-differences-2/img000.png", imageWidthCm: 6,
       sources: ["Source du texte : Auteur inconnu, La troisième croisade, Histoire à la carte, consulté le 9 avril 2025.", "Source de l'image : Auteur inconnu, Gregorius VIII, Wikimedia Commons. Licence : image du domaine public."] },
     { id: "chr-di2-d3", title: "Document 3 : Notre-Dame de Paris", layout: "image-only",
-      imageUrl: "assets/img/christianisation-differences-2/img001.png", imageWidthCm: 6.5,
+      imageUrl: "assets/img/christianisation-differences-2/img001.png", imageWidthCm: 7,
       sources: ["Source de l'image : Église de Notre-Dame de Paris, gravure, Wikimedia Commons. Licence : image du domaine public."] },
     { id: "chr-di2-d4", title: "Document 4 : Monastère de Ripoll", layout: "image-only",
-      imageUrl: "assets/img/christianisation-differences-2/img002.png", imageWidthCm: 6.5,
+      imageUrl: "assets/img/christianisation-differences-2/img002.png", imageWidthCm: 7,
       sources: ["Source de l'image : amador, Chevet avec tour octogonale Monastère de Ripoll, Wikimedia Commons. Licence : Creative Commons BY-SA 3.0."] }
   ],
   'chr-changements-1': [
@@ -960,19 +960,19 @@ const DOCS = {
       sources: ["Source du texte : Mathieu Mercier, enseignant à l'école secondaire de Rivière-du-Loup."] },
     { id: "chr-ch1-d2", title: "Document 2 : Le latin au Moyen Âge", layout: "text-image",
       text: "Le latin, langue utilisée dans l'Empire romain, survit au Moyen Âge en grande partie grâce à l'influence de l'Église. C'est la langue que les prêtres utilisent pour dire la messe aux fidèles. De plus, la Bible, le livre sacré des chrétiens, n'existe qu'en latin à cette époque et il est même interdit de la traduire dans une autre langue. Le latin devient rapidement le langage universel de tous les intellectuels européens. Tous les ouvrages savants sont rédigés dans cette langue, qu'ils traitent de science, de religion, d'art, etc. Dans les écoles et les universités, les enseignements sont aussi dispensés en latin.",
-      imageUrl: "assets/img/christianisation-changements-1/img000.png", imageWidthCm: 4,
+      imageUrl: "assets/img/christianisation-changements-1/img000.png", imageWidthCm: 6,
       sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Psautier de Luttrell (vers 1320-1340), p. 21, The British Library Board, MS 42130, f. 171. Licence : image du domaine public."] }
   ],
   'chr-changements-2': [
     { id: "chr-ch2-d1", title: "Document 1 : Pèlerin", layout: "image-only",
-      imageUrl: "assets/img/christianisation-changements-2/img000.png", imageWidthCm: 4.5,
+      imageUrl: "assets/img/christianisation-changements-2/img000.png", imageWidthCm: 7,
       sources: ["Source de l'image : Kolossos, Pèlerin de Saint-Jacques de Compostelle, Wikimedia Commons. Licence : image du domaine public."] },
     { id: "chr-ch2-d2", title: "Document 2 : Saint-Jacques aujourd'hui", layout: "text-only",
       text: "Les pèlerins de Saint-Jacques-de-Compostelle sont de plus en plus nombreux. En 1992, ils étaient à peine 10 000, mais ce nombre a explosé pour atteindre près de 438 000 en 2023. La majorité des pèlerins sont des marcheurs, tandis qu'une plus petite proportion fait le voyage à vélo (environ 5 %). Les motivations sont variées, allant du religieux au spirituel en passant par le non religieux. L'Espagne est le pays d'origine le plus représenté, suivi des États-Unis, de l'Italie et de l'Allemagne.",
       sources: ["Source du texte : Mathieu Mercier, enseignant d'univers social à l'École secondaire de Rivière-du-Loup."] },
     { id: "chr-ch2-d3", title: "Document 3 : Le sacre de Charlemagne", layout: "text-image",
       text: "Les relations entre l'Église et Charlemagne sont très étroites. Le 25 décembre 800, Charlemagne se fait nommer Empereur des Romains par le pape Léon III. Avec ce couronnement, on assiste à une division des pouvoirs : le pouvoir temporel au roi et le pouvoir spirituel à l'Église. Le pape posa la couronne sur la tête de Charlemagne et la foule s'écria : « À Charles couronné par Dieu, grand et pacifique empereur des Romains, vie et victoire. » Par son geste, le pape tente d'affirmer la supériorité du pouvoir spirituel sur le pouvoir temporel.",
-      imageUrl: "assets/img/christianisation-changements-2/img001.png", imageWidthCm: 5,
+      imageUrl: "assets/img/christianisation-changements-2/img001.png", imageWidthCm: 7,
       sources: ["Source du texte : L. Duchesne (éd.), Liber pontificalis, Bouquet, V, 466, tome II, Paris, Ernest Thorin, 1892, p. 7, en ligne.", "Source de l'image : Jean Fouquet, Grandes chroniques de France (vers 1455-1460), Bibliothèque nationale de France, Français 6465, folio 89v."] }
   ],
 
