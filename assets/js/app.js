@@ -602,17 +602,50 @@
 
     const bodyChildren = [];
 
+    // Déterminer le titre dynamique selon les questions sélectionnées (même logique que la couverture du cahier)
+    const corrNiveaux = new Set();
+    const corrRealites = new Set();
+    groups.forEach(g => {
+      const q = DATA.questions.find(x => x.id === g.questionId);
+      if (q) {
+        corrNiveaux.add(q.niveau);
+        corrRealites.add(q.realite_sociale_id);
+      }
+    });
+    const corrUniformNiveau = corrNiveaux.size === 1 ? [...corrNiveaux][0] : null;
+    const corrUniformRealiteId = corrRealites.size === 1 ? [...corrRealites][0] : null;
+    const corrUniformRealiteTitre = corrUniformRealiteId
+      ? (DATA.realites_sociales.find(r => r.id === corrUniformRealiteId) || {}).titre
+      : null;
+
+    // Construire le sous-titre selon ce qui est sélectionné
+    let subtitleText;
+    if (corrUniformRealiteTitre && corrUniformNiveau != null) {
+      subtitleText = `${corrUniformRealiteTitre} · Secondaire ${corrUniformNiveau}`;
+    } else if (corrUniformRealiteTitre) {
+      subtitleText = corrUniformRealiteTitre;
+    } else if (corrRealites.size > 1) {
+      const titres = [...corrRealites]
+        .map(id => (DATA.realites_sociales.find(r => r.id === id) || {}).titre)
+        .filter(Boolean);
+      subtitleText = titres.join(' · ');
+    } else {
+      subtitleText = '';
+    }
+
     // Titre du guide
     bodyChildren.push(new Paragraph({
       alignment: AlignmentType.CENTER,
       spacing: { before: 0, after: 100 },
       children: [new TextRun({ text: "GUIDE DE L'ENSEIGNANT", bold: true, size: 36, color: "2A2620" })]
     }));
-    bodyChildren.push(new Paragraph({
-      alignment: AlignmentType.CENTER,
-      spacing: { before: 0, after: 200 },
-      children: [new TextRun({ text: "Le renouvellement de la vision de l'Homme · Secondaire 2", italics: true, size: 22, color: "6E685C" })]
-    }));
+    if (subtitleText) {
+      bodyChildren.push(new Paragraph({
+        alignment: AlignmentType.CENTER,
+        spacing: { before: 0, after: 200 },
+        children: [new TextRun({ text: subtitleText, italics: true, size: 22, color: "6E685C" })]
+      }));
+    }
     bodyChildren.push(new Paragraph({
       spacing: { before: 0, after: 300 },
       border: { bottom: { style: BorderStyle.SINGLE, size: 12, color: "8B3A2E", space: 4 } },
@@ -747,13 +780,16 @@
 
     // 1) Texte simple (réponse type "lines")
     if (typeof q.corrige === 'string') {
+      out.push(new Paragraph({
+        spacing: { before: 80, after: 40 },
+        children: [new TextRun({ text: "✓ Corrigé", bold: true, size: 18, color: "8B3A2E" })]
+      }));
       out.push(new Table({
         width: { size: 9000, type: WidthType.DXA }, columnWidths: [9000],
         rows: [new TableRow({ cantSplit: true, children: [new TableCell({
           width: { size: 9000, type: WidthType.DXA },
           borders: ANSWER_BORDERS, shading: SHADING, margins: ANSWER_CELL_MARGINS,
           children: [
-            new Paragraph({ spacing: { after: 40 }, children: [new TextRun({ text: "✓ Corrigé", bold: true, size: 18, color: "8B3A2E" })] }),
             new Paragraph({ children: [new TextRun({ text: q.corrige, size: 20 })] })
           ]
         })] })]
