@@ -55,7 +55,9 @@
   }
 
   function populateFilters() {
-    DATA.realites_sociales.forEach(r => {
+    // Affichage trié par niveau (Sec 1 d'abord) ; ordre stable pour réalités de même niveau.
+    const realitesParNiveau = DATA.realites_sociales.slice().sort((a, b) => a.niveau - b.niveau);
+    realitesParNiveau.forEach(r => {
       const o = document.createElement('option');
       o.value = r.id; o.textContent = r.titre;
       el.filterRealite.appendChild(o);
@@ -145,10 +147,14 @@
       realiteIdxById[r.id] = i;
     });
 
-    // Grouper les questions filtrées par réalité sociale en préservant
-    // l'ordre des réalités tel que défini dans DATA.realites_sociales.
+    // Grouper les questions filtrées par réalité sociale, triées par niveau
+    // (Sec 1 d'abord, puis Sec 2). L'ordre d'insertion dans Map est conservé
+    // à l'itération, donc on pré-initialise dans l'ordre voulu.
     const groupsMap = new Map();
-    DATA.realites_sociales.forEach(r => groupsMap.set(r.id, []));
+    DATA.realites_sociales
+      .slice()
+      .sort((a, b) => a.niveau - b.niveau)
+      .forEach(r => groupsMap.set(r.id, []));
     state.filteredQuestions.forEach(q => {
       if (!groupsMap.has(q.realite_sociale_id)) groupsMap.set(q.realite_sociale_id, []);
       groupsMap.get(q.realite_sociale_id).push(q);
