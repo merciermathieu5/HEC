@@ -1938,7 +1938,10 @@
           }));
         }
       } else if (d_doc.layout === 'image-only') {
-        // Encadré ajusté à l'image (largeur = image + padding, centré)
+        // Encadré image-only :
+        //  - En mode appairé (étroit) : la boîte remplit toute la cellule pour éviter
+        //    un grand espace entre les deux documents côte à côte.
+        //  - En mode seul (large) : la boîte reste à la taille de l'image, alignée à gauche.
         const imgInfo = imageCache[d_doc.imageUrl];
         let targetCm = d_doc.imageWidthCm || 7;
         // En mode étroit, limiter la taille de l'image à ce qui rentre dans la cellule
@@ -1946,7 +1949,9 @@
         targetCm = Math.min(Math.max(targetCm, 3), maxCmInCell);
         const dims = calcImageDims(imgInfo, targetCm);
 
-        const tableWidthDxa = Math.min(Math.round(targetCm * 567) + 480, innerW);
+        const tableWidthDxa = isNarrow
+          ? innerW
+          : Math.min(Math.round(targetCm * 567) + 480, innerW);
 
         const cellChildren = [titleP];
         if (imgInfo) {
@@ -1960,7 +1965,6 @@
 
         elements.push(new Table({
           width: { size: tableWidthDxa, type: WidthType.DXA },
-          alignment: AlignmentType.CENTER,
           columnWidths: [tableWidthDxa],
           rows: [new TableRow({
             cantSplit: true,
