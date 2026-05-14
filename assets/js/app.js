@@ -1205,21 +1205,43 @@
             rows: lineRows
           }));
         } else if (body.responseSpace.type === 'labeled-list') {
-          // Liste d'items à étiqueter : chaque rangée = libellé + ligne d'écriture collée juste après.
-          // Utilise un point de tabulation à droite avec un « leader » souligné : Word remplit l'espace
-          // entre le label et la marge de droite avec un trait continu. La ligne suit donc immédiatement
-          // le libellé, quelle que soit sa longueur.
+          // Liste d'items à étiqueter : tableau 2 colonnes (libellé | ligne d'écriture).
+          // L'ancienne approche utilisait `tabStops` avec un `leader: "underscore"` —
+          // Word le rend bien mais docx-preview ne supporte pas les leaders de tab,
+          // ce qui faisait apparaître les espaces de réponse comme « manquants » dans
+          // l'aperçu. Un tableau bordé fonctionne dans les deux moteurs.
           const items = body.responseSpace.items || [];
-          items.forEach(item => {
-            elements.push(new Paragraph({
-              tabStops: [{ type: "right", position: 10500, leader: "underscore" }],
-              spacing: { before: 100, after: 200 },
-              children: [
-                new TextRun({ text: item + "  ", size: 22 }),
-                new TextRun({ text: "\t", size: 22 })
-              ]
-            }));
-          });
+          const totalW = 10500;
+          const labelColW = 3800;
+          const answerColW = totalW - labelColW;
+          const lineBorder = { style: BorderStyle.SINGLE, size: 4, color: "AAAAAA" };
+          const noBorder = { style: BorderStyle.NONE, size: 0, color: "FFFFFF" };
+          const noBorders = { top: noBorder, bottom: noBorder, left: noBorder, right: noBorder };
+          const writingLineBorders = { top: noBorder, bottom: lineBorder, left: noBorder, right: noBorder };
+          const llRows = items.map(item => new TableRow({
+            height: { value: 480, rule: "atLeast" },
+            children: [
+              new TableCell({
+                width: { size: labelColW, type: WidthType.DXA },
+                borders: noBorders,
+                verticalAlign: VerticalAlign.BOTTOM,
+                margins: { top: 0, bottom: 60, left: 0, right: 120 },
+                children: [new Paragraph({ children: [new TextRun({ text: item, size: 22 })] })]
+              }),
+              new TableCell({
+                width: { size: answerColW, type: WidthType.DXA },
+                borders: writingLineBorders,
+                verticalAlign: VerticalAlign.BOTTOM,
+                margins: { top: 0, bottom: 0, left: 0, right: 0 },
+                children: [new Paragraph({ children: [new TextRun({ text: "" })] })]
+              })
+            ]
+          }));
+          elements.push(new Table({
+            width: { size: totalW, type: WidthType.DXA },
+            columnWidths: [labelColW, answerColW],
+            rows: llRows
+          }));
         } else if (body.responseSpace.type === 'checkbox-table') {
           // Tableau de cases à cocher : lignes (items) × colonnes (catégories)
           const cols = body.responseSpace.columns || [];

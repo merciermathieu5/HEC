@@ -789,7 +789,7 @@ window.DATA = {
     // ===== RELATION (4) =====
     { id: "q-exp-relation-1", operation: "Mettre en relation des faits", numero: 1, niveau: 2, realite_sociale_id: "expansion-europeenne",
       questionBody: { prompt: "Les documents 1 à 3 correspondent à des causes des grandes explorations maritimes du 15e et du 16e siècles. Associe les documents 1 à 3 à la cause économique, culturelle ou politique lui correspondant.",
-        responseSpace: { type: "labeled-list", items: ["Cause économique → Document n°", "Cause politique → Document n°", "Cause culturelle → Document n°"] } },
+        responseSpace: { type: "labeled-list", items: ["Cause économique (Document n°)", "Cause politique (Document n°)", "Cause culturelle (Document n°)"] } },
       reglettes: [{ id: "r-exp-r1", label: "Réglette (2 points)", ...R_RELATION_2PT_3 }], documents: pickDocs('exp-relation-1', 1, 2, 3), corrige: ["1", "3", "2"] },
     { id: "q-exp-relation-2", operation: "Mettre en relation des faits", numero: 2, niveau: 2, realite_sociale_id: "expansion-europeenne",
       questionBody: { prompt: "Lors du premier contact avec les Européens, les Autochtones ont subi des conséquences néfastes. Indique, en cochant dans la case appropriée, si le document 4 représente une conséquence sociale ou s'il représente une conséquence culturelle de la colonisation de l'Amérique.",
@@ -797,17 +797,17 @@ window.DATA = {
       reglettes: [{ id: "r-exp-r2", label: "Réglette (1 point)", ...R_RELATION_1PT }], documents: pickDocs('exp-relation-1', 4), corrige: [[false, true]] },
     { id: "q-exp-relation-3", operation: "Mettre en relation des faits", numero: 3, niveau: 2, realite_sociale_id: "expansion-europeenne",
       questionBody: { prompt: "Associe les documents 1 à 3 à l'innovation technique lui correspondant.",
-        responseSpace: { type: "labeled-list", items: ["La caravelle → Document n°", "L'astrolabe → Document n°", "Le portulan → Document n°"] } },
+        responseSpace: { type: "labeled-list", items: ["La caravelle (Document n°)", "L'astrolabe (Document n°)", "Le portulan (Document n°)"] } },
       reglettes: [{ id: "r-exp-r3", label: "Réglette (2 points)", ...R_RELATION_2PT_3 }], documents: pickDocs('exp-relation-2', 1, 2, 3), corrige: ["1", "3", "2"] },
     { id: "q-exp-relation-4", operation: "Mettre en relation des faits", numero: 4, niveau: 2, realite_sociale_id: "expansion-europeenne",
       questionBody: { prompt: "Un empire correspond à une métropole et à tous les territoires sous son contrôle. À l'aide des documents 4 et 5, indique le document qui correspond à une métropole et le document qui correspond à une colonie.",
-        responseSpace: { type: "labeled-list", items: ["Métropole → Document n°", "Colonie → Document n°"] } },
+        responseSpace: { type: "labeled-list", items: ["Métropole (Document n°)", "Colonie (Document n°)"] } },
       reglettes: [{ id: "r-exp-r4", label: "Réglette (2 points)", ...R_RELATION_2PT_2 }], documents: pickDocs('exp-relation-2', 4, 5), corrige: ["4", "5"] },
 
     // ===== CAUSES (6) =====
     { id: "q-exp-causes-1", operation: "Déterminer des causes et des conséquences", numero: 1, niveau: 2, realite_sociale_id: "expansion-europeenne",
       questionBody: { prompt: "À l'aide des documents 1 et 2, détermine le document qui présente une cause de la recherche d'une route vers les Indes et le document qui en présente une conséquence.",
-        responseSpace: { type: "labeled-list", items: ["Cause → Document n°", "Conséquence → Document n°"] } },
+        responseSpace: { type: "labeled-list", items: ["Cause (Document n°)", "Conséquence (Document n°)"] } },
       reglettes: [{ id: "r-exp-ca1", label: "Réglette (2 points)", ...R_CAUSES_2PT_CAUSE_CONS }], documents: pickDocs('exp-causes-1', 1, 2), corrige: ["1", "2"] },
     { id: "q-exp-causes-2", operation: "Déterminer des causes et des conséquences", numero: 2, niveau: 2, realite_sociale_id: "expansion-europeenne",
       questionBody: { prompt: "À l'aide du document 3, détermine une conséquence linguistique de la colonisation de l'Amérique par les Européens.", responseSpace: { type: "lines", count: 4 } },
@@ -823,7 +823,7 @@ window.DATA = {
       reglettes: [{ id: "r-exp-ca5", label: "Réglette (2 points)", ...R_CAUSES_2PT_CAUSE }], documents: pickDocs('exp-causes-3', 1), corrige: "Une des causes des explorations maritimes est le désir d'évangéliser des populations non converties à travers le monde." },
     { id: "q-exp-causes-6", operation: "Déterminer des causes et des conséquences", numero: 6, niveau: 2, realite_sociale_id: "expansion-europeenne",
       questionBody: { prompt: "À l'aide des documents 1 et 2, indique le document qui correspond à une cause culturelle de la colonisation de l'Amérique et le document qui correspond à une conséquence culturelle de cette colonisation.",
-        responseSpace: { type: "labeled-list", items: ["Cause culturelle → Document n°", "Conséquence culturelle → Document n°"] } },
+        responseSpace: { type: "labeled-list", items: ["Cause culturelle (Document n°)", "Conséquence culturelle (Document n°)"] } },
       reglettes: [{ id: "r-exp-ca6", label: "Réglette (2 points)", ...R_CAUSES_2PT_CAUSE_CONS }], documents: pickDocs('exp-causes-3', 1, 2), corrige: ["1", "2"] },
 
     // ===== DIFFÉRENCES (4) =====
