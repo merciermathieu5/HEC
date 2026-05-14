@@ -524,13 +524,13 @@ const DOCS = {
     { id: "rc1-d1", title: "Document 1 : Des mesures impopulaires", layout: "text-only",
       text: "À la suite de la guerre de Sept Ans, l'Angleterre adopte une série de taxes et de mesures afin de renflouer les coffres de l'État. Elle entend bien faire participer ses colonies aux dépenses entraînées par le conflit. Pour s'assurer de la perception des nouvelles taxes, elle envoie d'ailleurs ses propres douaniers dans les ports coloniaux.",
       sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] },
-    { id: "rc1-d2", title: "Document 2 : La guerre de Sept Ans", layout: "text-image",
+    { id: "rc1-d2", title: "Document 2 : Le Boston Tea Party", layout: "image-only",
+      imageUrl: "assets/img/rev-causalite-1/img001.png", imageWidthCm: 14,
+      sources: ["Source de l'image : Nathaniel Currier, Boston Tea Party de 1773 (1846), Wikimedia Commons. Domaine public."] },
+    { id: "rc1-d3", title: "Document 3 : La guerre de Sept Ans", layout: "text-image",
       text: "La guerre de Sept Ans (de 1756 à 1763) est la première guerre d'envergure mondiale. Elle est menée en Europe, en Inde et en Amérique, ainsi qu'en mer. En Amérique du Nord, la Grande-Bretagne et la France, empires rivaux, luttent pour la suprématie [...]. Malgré ses victoires militaires et marines, la Grande-Bretagne croule sous une dette nationale colossale en 1760.",
-      imageUrl: "assets/img/rev-causalite-1/img000.png", imageWidthCm: 5,
-      sources: ["Source du texte : William John Eccles, « Le Canada et la guerre de Sept Ans », Encyclopédie canadienne, consulté le 16 juillet 2023.", "Source de l'image : Carl Röchling, Frédéric le Grand à la bataille de Zorndorf, Wikimedia Commons. Domaine public."] },
-    { id: "rc1-d3", title: "Document 3 : Le Boston Tea Party", layout: "image-only",
-      imageUrl: "assets/img/rev-causalite-1/img001.png", imageWidthCm: 12,
-      sources: ["Source de l'image : Nathaniel Currier, Boston Tea Party de 1773 (1846), Wikimedia Commons. Domaine public."] }
+      imageUrl: "assets/img/rev-causalite-1/img000.png", imageWidthCm: 6.5,
+      sources: ["Source du texte : William John Eccles, « Le Canada et la guerre de Sept Ans », Encyclopédie canadienne, consulté le 16 juillet 2023.", "Source de l'image : Carl Röchling, Frédéric le Grand à la bataille de Zorndorf, Wikimedia Commons. Domaine public."] }
   ],
   'rev-causalite-2': [
     { id: "rc2-d1", title: "Document 1 : Extrait de la Déclaration d'indépendance américaine", layout: "text-only",
@@ -569,7 +569,7 @@ const DOCS = {
   ],
   'rev-faits-2': [
     { id: "rf2-d1", title: "Document 1 : Stamp Act", layout: "image-only",
-      imageUrl: "assets/img/rev-faits-2/img000.png", imageWidthCm: 5,
+      imageUrl: "assets/img/rev-faits-2/img000.png", imageWidthCm: 3.5,
       sources: ["Source de l'image : British Parliament 1765, Printed copy of the Stamp Act of 1765, Wikimedia Commons. Domaine public."] },
     { id: "rf2-d2", title: "Document 2 : Tea Act", layout: "image-only",
       imageUrl: "assets/img/rev-faits-2/img001.png", imageWidthCm: 5,
@@ -695,10 +695,10 @@ const DOCS = {
   ],
   'rev-causes-3': [
     { id: "rca3-d1", title: "Document 1 : Acte de Québec", layout: "image-only",
-      imageUrl: "assets/img/rev-causes-3/img000.png", imageWidthCm: 6.5,
+      imageUrl: "assets/img/rev-causes-3/img000.png", imageWidthCm: 7,
       sources: ["Source de l'image : Assemblée nationale du Québec, 1774 : Acte de Québec, Par ici la démocratie. Creative Commons BY-SA."] },
     { id: "rca3-d2", title: "Document 2 : Traité de Paris", layout: "image-only",
-      imageUrl: "assets/img/rev-causes-3/img001.png", imageWidthCm: 6.5,
+      imageUrl: "assets/img/rev-causes-3/img001.png", imageWidthCm: 7,
       sources: ["Source de l'image : Assemblée nationale du Québec, 1783 : Traité de Paris, Par ici la démocratie. Creative Commons BY-SA."] },
     { id: "rca3-d3", title: "Document 3 : Le Boston Tea Party", layout: "text-only",
       text: "« [...] le 16 décembre 1773, des colons déguisés en Amérindiens montent sur les navires et jettent le thé à la mer. Cet événement est connu sous l'appellation de Boston Tea Party. [...] À la suite de cette manifestation, l'Angleterre prend cette fois des dispositions radicales. En 1774, Londres vote les Coercitive Laws, qui sont rapidement qualifiées de lois intolérables [...]. L'Angleterre procède à la fermeture du port de Boston jusqu'au remboursement de la cargaison; elle décide unilatéralement d'augmenter les pouvoirs du gouverneur du Massachusetts et de réduire ceux de l'Assemblée législative [...]. Toutefois, c'est le vote du Quebec Act qui semble susciter les plus vives réactions chez les colons. Cette loi élargit les frontières du territoire connu sous le nom de « Province de Québec » jusqu'à la rivière Ohio vers le sud et jusqu'au Mississippi vers l'ouest [...]. »",

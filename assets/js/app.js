@@ -1859,7 +1859,7 @@
         spacing: { after: 80 }
       });
       const sourcesPs = d_doc.sources.map(s =>
-        new Paragraph({ children: [new TextRun({ text: s, italics: true, size: sourceFontSize })], spacing: { after: 40 } })
+        new Paragraph({ children: [new TextRun({ text: s, italics: true, size: sourceFontSize })], spacing: { after: 20, line: 180, lineRule: 'exact' } })
       );
 
       // Aspect ratio réel de l'image (si présente)
@@ -1950,6 +1950,7 @@
 
         elements.push(new Table({
           width: { size: tableWidthDxa, type: WidthType.DXA },
+          alignment: AlignmentType.CENTER,
           columnWidths: [tableWidthDxa],
           rows: [new TableRow({
             cantSplit: true,
