@@ -1,6 +1,12 @@
-# HEC · Premier cycle — Composition de cahier (v2.4)
+# HEC · Premier cycle — Composition de cahier (v2.5)
 
 Outil web pour composer un cahier d'élève à la pièce — sortie en `.docx` éditable.
+
+## ✨ Quoi de neuf (v2.5)
+
+- ⛪ **Nouvelle réalité sociale (Secondaire 1)** : *La christianisation de l'Occident* avec 36 questions atomiques couvrant les 8 opérations intellectuelles. **Premier ajout de niveau 1** dans l'app.
+- 📚 **Catalogue total** : 141 questions réparties sur 4 réalités sociales (Le renouvellement de la vision de l'Homme + L'expansion européenne dans le monde + La Révolution américaine + La christianisation de l'Occident).
+- 🟫 Couleur ocre doré dédiée pour la 4e réalité, en cohérence avec la palette de design (vert / terre cuite / pourpre / ocre).
 
 ## ✨ Quoi de neuf (v2.4)
 

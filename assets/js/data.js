@@ -65,6 +65,7 @@ const R_DIFFERENCES_2PT_GEN = rubric3("Dégager des différences et des similitu
 const R_CHGT_2PT_CHGT = rubric3("Déterminer des changements et des continuités", "L'élève détermine correctement le changement.", "L'élève détermine plus ou moins correctement le changement.", "L'élève ne détermine pas le changement.");
 const R_CHGT_2PT_CONT = rubric3("Déterminer des changements et des continuités", "L'élève détermine correctement la continuité.", "L'élève détermine plus ou moins correctement la continuité.", "L'élève ne détermine pas la continuité.");
 const R_CHGT_1PT_CONT = rubric2("Déterminer des changements et des continuités", "L'élève détermine correctement la continuité.", "L'élève ne détermine pas la continuité.");
+const R_CHGT_1PT_CHGT = rubric2("Déterminer des changements et des continuités", "L'élève détermine correctement le changement.", "L'élève ne détermine pas le changement.");
 const R_SITUER_2PT_3SP = rubric3("Situer dans le temps et dans l'espace", "L'élève situe tous les faits dans l'espace. (3 sur 3)", "L'élève situe certains faits dans l'espace. (1 ou 2 sur 3)", "L'élève ne situe pas les faits dans l'espace. (0 sur 3)");
 
 const CAUSALITE_INSTRUCTIONS = {
@@ -752,7 +753,228 @@ const DOCS = {
     { id: "rch2-d3", title: "Document 3 : Alliances", layout: "text-only",
       text: "Un simple conflit armé entre une métropole et ses colonies s'internationalise dès 1778. La France s'allie avec les Treize colonies américaines et déclare la guerre à l'Angleterre. Par cette alliance, elle souhaite rétablir sa présence dans les colonies antillaises. Dès l'année suivante, l'Espagne s'allie à la France dans l'espoir de reprendre aux Britanniques la Floride et Gibraltar. L'alliance franco-américaine fait basculer la Guerre d'indépendance américaine à l'avantage des coloniaux dès 1778, bien que la reddition de Burgoyne en octobre 1777 y ait grandement contribué aussi.",
       sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] }
-  ]
+  ],
+
+  // ============ Documents — La christianisation de l'Occident ============
+  'chr-causalite-1': [
+    { id: "chr-c1-d1", title: "Document 1 : L'Édit de Milan", layout: "text-only",
+      text: "« Le 13 juin 313, l'empereur Constantin, fort de sa victoire du pont Milvius sur son rival Maxence, promulgue l'édit de tolérance de Milan par lequel il légalise le christianisme. C'est un retournement inattendu après la « Grande Persécution » inaugurée dix ans plus tôt par les tétrarques Dioclétien et Galère. [...] L'édit de Milan reconnaît à chaque individu la faculté de suivre la religion de son choix. »",
+      sources: ["Source du texte : Fabienne Manière, 13 juin 313. Constantin promulgue l'édit de Milan, Herodote.net, consulté le 3 janvier 2024."] },
+    { id: "chr-c1-d2", title: "Document 2 : Bataille du pont Milvius", layout: "text-only",
+      text: "Une chronique postérieure [...] assure que Constantin aurait vu avant la bataille du pont Milvius une Croix dans le ciel, avec les mots ci-après : « In hoc signo vinces », soit en français, « Par ce signe tu vaincras ». Le futur empereur aurait alors fait peindre ces mots sur les boucliers de ses soldats et sur son étendard, le labarum, en les surmontant du chrisme, un symbole désignant Jésus-Christ et constitué des deux premières lettres de son nom, le X et le Rho grec.",
+      sources: ["Source du texte : Auteur inconnu, Constantin bat Maxence au pont Milvius, Herodote.net, consulté le 9 avril 2025."] },
+    { id: "chr-c1-d3", title: "Document 3 : Conversion de Constantin", layout: "image-only",
+      imageUrl: "assets/img/christianisation-causalite-1/img000.png", imageWidthCm: 6,
+      sources: ["Source de l'image : Auteur inconnu, Tête de l'empereur Constantin, Wikimedia Commons. Licence : image du domaine public."] }
+  ],
+  'chr-causalite-2': [
+    { id: "chr-c2-d1", title: "Document 1 : Appel de Clermont", layout: "text-image",
+      text: "Dans la chrétienté, le lieu le plus saint que peut visiter un fidèle est Jérusalem, où se trouve le tombeau de Jésus-Christ. Or, depuis 1078, la ville est sous la domination des Turcs musulmans qui en interdisent l'accès aux chrétiens. En 1095, le pape Urbain II appelle les rois et les nobles de l'Occident à partir à la conquête militaire de Jérusalem. Cette notion d'une guerre pour Dieu est alors complètement nouvelle.",
+      imageUrl: "assets/img/christianisation-causalite-2/img000.png", imageWidthCm: 4.5,
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Fondazione Cariplo, Le pape Urbain II prêchant la première croisade sur la place de Clermont, tableau de Francesco Hayez (1835), Wikimedia Commons. Licence : Creative Commons BY-SA 3.0."] },
+    { id: "chr-c2-d2", title: "Document 2 : La réponse à l'appel", layout: "text-image",
+      text: "L'appel du pape à la croisade soulève un immense enthousiasme chez les seigneurs comme dans la population générale. Plus de 150 000 hommes et femmes répondent à l'invitation.",
+      imageUrl: "assets/img/christianisation-causalite-2/img001.png", imageWidthCm: 5,
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Jean Fouquet, Arrivée des croisés à Constantinople, Wikimedia Commons. Licence : image du domaine public."] },
+    { id: "chr-c2-d3", title: "Document 3 : Avancées technologiques et scientifiques", layout: "text-only",
+      text: "« Les croisades et le commerce qui en découle mirent l'Occident en contact avec la culture et le savoir des Arabes. À partir du 10e siècle, les musulmans ont traduit les œuvres des grands penseurs de l'Antiquité [...] Les Arabes ont fait avancer le domaine de la science. Grâce à eux, les [Européens] acquièrent de nouvelles connaissances en médecine, en astronomie, en mathématiques et en physique. Ils rapportèrent des cartes géographiques précises, de nouveaux instruments de navigation, le collier d'épaule pour les chevaux ainsi que la technologie du moulin à vent. »",
+      sources: ["Source du texte : Hervé Gagnon et al., Réalités, 1er cycle du secondaire, manuel 1B, ERPI, Saint-Laurent, 2005, p. 272."] }
+  ],
+  'chr-causalite-3': [
+    { id: "chr-c3-d1", title: "Document 1 : Notre-Dame de Paris", layout: "text-image",
+      text: "« Dans la cathédrale de Notre-Dame, la nef dessine la forme d'une croix. Notre-Dame de Paris doit combiner pour la première fois toutes les innovations techniques qui caractérisent le style gothique. Les arcs brisés vont lui permettre d'élever les plus hautes voûtes. En faisant porter leur poids par des piliers, la croisée d'ogives permettra d'ouvrir les murs et d'y installer les grands vitraux. Quant à ces arcs-boutants qui absorbent les poussées horizontales, ils permettront de surpasser tout ce qui a été réalisé auparavant. À Notre-Dame, les arcs-boutants vont connaître un traitement tout à fait extraordinaire, avec des arcs de plus de 15 mètres. »",
+      imageUrl: "assets/img/christianisation-causalite-3/img000.png", imageWidthCm: 4,
+      sources: ["Source du texte : Tisseyre, C. (Animateur), Notre-Dame de Paris : les secrets des bâtisseurs (saison 33 épisode 30), 2020, Découverte, Radio-Canada.", "Source de l'image : Notre-Dame de Paris, un exemple de cathédrale gothique, dans Pontifical romain aux armes de Jean II de Mauléon, évêque de Saint-Bertrand-de-Comminges, BnF, Wikimedia Commons."] },
+    { id: "chr-c3-d2", title: "Document 2 : Architecture", layout: "text-only",
+      text: "Au 12e siècle, un nouveau style architectural fait son apparition : l'architecture gothique. Les nouvelles techniques utilisées permettent la création d'églises plus hautes et plus larges. En effet, l'utilisation d'arc diagonal pour soutenir la voûte et d'arc-boutant (demi-arc) renforce les murs et solidifie les constructions. De larges fenêtres habillées de magnifiques vitraux laissent la lumière inonder l'intérieur des édifices.",
+      sources: ["Source : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "chr-c3-d3", title: "Document 3 : La Sainte-Chapelle", layout: "image-only",
+      imageUrl: "assets/img/christianisation-causalite-3/img001.png", imageWidthCm: 8,
+      sources: ["Source de l'image : Didier B, La Sainte-Chapelle, Paris (1241–1248), Wikimedia Commons. Licence : Creative Commons BY-SA 2.5."] }
+  ],
+  'chr-faits-1': [
+    { id: "chr-f1-d1", title: "Document 1 : L'édit de Milan", layout: "text-only",
+      text: "Le 13 juin 313, à Milan, l'empereur Constantin 1er et son collègue Licinius, avec lequel il dirige l'empire romain, octroient aux chrétiens la liberté de pratiquer leur religion. Ils leur restituent les biens confisqués et mettent un terme définitif aux persécutions. Cette décision, connue sous le nom d'« édit de Milan », complète et confirme l'édit octroyé deux ans plus tôt par l'empereur Galère. Elle consacre le triomphe de la nouvelle religion dans l'empire romain quelques années après les très dures persécutions ordonnées par Dioclétien.",
+      sources: ["Source du texte : Auteur inconnu, 13 juin 313. Édit de tolérance de Milan, Herodote.net, consulté le 8 avril 2025."] },
+    { id: "chr-f1-d2", title: "Document 2 : Le baptême de Clovis", layout: "image-only",
+      imageUrl: "assets/img/christianisation-faits-1/img000.png", imageWidthCm: 6.5,
+      sources: ["Source de l'image : Jacob van Maerlant, Clovis, Wikimedia Commons. Licence : image du domaine public."] }
+  ],
+  'chr-faits-2': [
+    { id: "chr-f2-d1", title: "Document 1 : Banalités", layout: "text-only",
+      text: "Profitant de son droit de commandement (le droit de ban) et de sa force militaire, le seigneur exige des paysans qu'ils utilisent les installations qu'il a fait construire. Le moulin banal où le meunier perçoit une partie de la farine en paiement de son travail et de l'utilisation du moulin. Le four banal où l'agent du seigneur (le fournier) retiendra, pour la consommation du seigneur, une partie des miches de pain cuites. Le pressoir à raisins ou à pommes dont une partie du jus recueilli ira dans la cave du seigneur. Ainsi le seigneur dispose d'aliments gratuits dont la perception se fait tout au long de l'année.",
+      sources: ["Source du texte : Vikidia, Banalité (droit seigneurial), Vikidia, consulté le 8 avril 2025."] },
+    { id: "chr-f2-d2", title: "Document 2 : Seigneurie", layout: "text-only",
+      text: "Au sommet de la hiérarchie se trouve le seigneur qui possède une grande terre appelée fief. Pour mettre cette terre en valeur, il en distribue des parcelles de terre (ou tenures) à des paysans qui lui jurent fidélité. Ces paysans deviennent alors ses vassaux. En échange de la terre qu'ils louent, les paysans paient des impôts et accomplissent des corvées pour le seigneur.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "chr-f2-d3", title: "Document 3 : Vassal et suzerain", layout: "text-image",
+      text: "« Aide et conseil du vassal sont soigneusement codifiés : l'aide peut, en certains cas précis, être une contribution financière, mais elle est pratiquement toujours militaire, avec un service que la coutume finit par réduire à quarante jours. [Offrir le conseil à son seigneur], c'est être présent à [s]a cour [...] et, parfois, siéger à son tribunal. La protection accordée par le seigneur est militaire, mais elle est aussi économique, par l'octroi du fief, qui crée un lien matériel entre seigneur et vassal. Toutefois, certains vassaux ne sont pas pourvus de fiefs, mais sont seulement entretenus et résident au château. »",
+      imageUrl: "assets/img/christianisation-faits-2/img000.png", imageWidthCm: 5,
+      sources: ["Source du texte : Encyclopédie Larousse, Féodalité, Larousse, consulté le 28 octobre 2021.", "Source de l'image : Archives Nationales, Charles d'Orléans (15e siècle), Wikimedia Commons. Licence : image du domaine public."] }
+  ],
+  'chr-faits-3': [
+    { id: "chr-f3-d1", title: "Document 1 : Les 3 ordres", layout: "image-only",
+      imageUrl: "assets/img/christianisation-faits-3/img000.png", imageWidthCm: 8,
+      sources: ["Source de l'image : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "chr-f3-d2", title: "Document 2 : Architecture gothique", layout: "text-image",
+      text: "Au 12e siècle, un nouveau style architectural fait son apparition : l'architecture gothique. Les nouvelles techniques utilisées permettent la création d'églises plus hautes et plus larges. En effet, l'utilisation d'arc diagonal pour soutenir la voûte et d'arc-boutant (demi-arc) renforce les murs et solidifie les constructions. De larges fenêtres habillées de magnifiques vitraux laissent la lumière inonder l'intérieur des édifices. L'art gothique déborde bientôt du cadre religieux et influence la construction d'autres bâtiments comme les châteaux, les palais et les forteresses. Il se répand grâce aux maîtres bâtisseurs qui parcourent l'Europe à la demande des ordres religieux, des évêques et des princes. Ces bâtisseurs contribuent ainsi à la diffusion des connaissances en mathématiques et en géométrie appliquées.",
+      imageUrl: "assets/img/christianisation-faits-3/img001.png", imageWidthCm: 4,
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Harmonia Amanda, Notre-Dame de Paris 035 (2005), Wikimedia Commons. Licence : Creative Commons BY-SA 3.0."] }
+  ],
+  'chr-espace-1': [
+    { id: "chr-e1-d1", title: "Document 1 : Mer Méditerranée", layout: "image-only",
+      imageUrl: "assets/img/christianisation-espace-1/img000.png", imageWidthCm: 9,
+      sources: ["Source de l'image : D-Maps, modifiée par Mathieu Mercier."] },
+    { id: "chr-e1-d2", title: "Document 2 : La seigneurie", layout: "image-only",
+      imageUrl: "assets/img/christianisation-espace-1/img001.png", imageWidthCm: 11,
+      sources: ["Source de l'image : Service national du RÉCIT, domaine de l'univers social."] }
+  ],
+  'chr-espace-2': [
+    { id: "chr-e2-d1", title: "Document 1 : L'Occident", layout: "image-only",
+      imageUrl: "assets/img/christianisation-espace-2/img000.png", imageWidthCm: 12,
+      sources: ["Source de l'image : Walter Scheidel et Elijah Meeks, Orbis: The Stanford Geospatial Network Model of the Roman World, en ligne, consulté le 3 janvier 2024."] },
+    { id: "chr-e2-d2", title: "Document 2 : Lieux de pèlerinage", layout: "image-only",
+      imageUrl: "assets/img/christianisation-espace-2/img001.png", imageWidthCm: 11,
+      sources: ["Source de l'image : Adapté par Mathieu Mercier, D-Maps."] }
+  ],
+  'chr-temps-1': [
+    { id: "chr-t1-d1", title: "Document 1 : Époques historiques", layout: "image-only",
+      imageUrl: "assets/img/christianisation-temps-1/timeline.png", imageWidthCm: 13,
+      sources: ["Source : Mathieu Mercier."] },
+    { id: "chr-t1-d2", title: "Document 2 : Appel de Clermont", layout: "image-only",
+      imageUrl: "assets/img/christianisation-temps-1/img000.png", imageWidthCm: 6.5,
+      sources: ["Source de l'image : Fondazione Cariplo, Le pape Urbain II prêchant la première croisade sur la place de Clermont, tableau de Francesco Hayez (1835), Wikimedia Commons. Licence : Creative Commons BY-SA 3.0."] },
+    { id: "chr-t1-d3", title: "Document 3 : Bataille du pont Milvius", layout: "image-only",
+      imageUrl: "assets/img/christianisation-temps-1/img001.png", imageWidthCm: 6.5,
+      sources: ["Source de l'image : Pieter Lastman, Milvbruck, Wikimedia Commons. Licence : image du domaine public."] }
+  ],
+  'chr-temps-2': [
+    { id: "chr-t2-d1", title: "Document 1 : L'Édit de Milan", layout: "text-only",
+      text: "« Le 13 juin 313, l'empereur Constantin, fort de sa victoire du pont Milvius sur son rival Maxence, promulgue l'édit de tolérance de Milan par lequel il légalise le christianisme. C'est un retournement inattendu après la « Grande Persécution » inaugurée dix ans plus tôt par les tétrarques Dioclétien et Galère. [...] L'édit de Milan reconnaît à chaque individu la faculté de suivre la religion de son choix. »",
+      sources: ["Source du texte : Fabienne Manière, 13 juin 313. Constantin promulgue l'édit de Milan, Herodote.net, consulté le 3 janvier 2024."] },
+    { id: "chr-t2-d2", title: "Document 2 : Chrétiens offerts aux animaux sauvages", layout: "text-image",
+      text: "Sous l'Empire romain, les chrétiens font l'objet de persécutions. Certains sont condamnés à être livrés aux bêtes sauvages dans les arènes, à la vue du public.",
+      imageUrl: "assets/img/christianisation-temps-2/img000.png", imageWidthCm: 5,
+      sources: ["Source de l'image : Anonyme, Damnatio ad bestias, Wikimedia Commons. Licence : image du domaine public."] },
+    { id: "chr-t2-d3", title: "Document 3 : L'édit de Thessalonique", layout: "text-only",
+      text: "L'édit de Thessalonique, promulgué en 380 par l'empereur Théodose Ier, s'inscrit dans un contexte de christianisation progressive de l'Empire romain. Bien que le christianisme ait gagné en popularité depuis sa fondation, il coexiste avec d'autres cultes. L'édit vise donc à établir le christianisme comme religion officielle de l'Empire, stipulant que tous les sujets de l'empire doivent adhérer à la foi professée par l'évêque de Rome et l'évêque d'Alexandrie. Cet acte majeur officialise le christianisme comme religion d'État et marginalise les autres croyances.",
+      sources: ["Source du texte : Mathieu Mercier, enseignant à l'école secondaire de Rivière-du-Loup."] },
+    { id: "chr-t2-d4", title: "Document 4 : La première croisade", layout: "text-only",
+      text: "En 1095, le pape Urbain II appelle les rois et les nobles de l'Occident à partir à la conquête militaire de Jérusalem. Cette notion d'une guerre pour Dieu est alors complètement nouvelle. L'appel du pape à la croisade soulève d'ailleurs un immense enthousiasme chez les seigneurs comme dans la population générale. Plus de 150 000 hommes et femmes répondent à l'invitation. C'est le début des croisades.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] }
+  ],
+  'chr-relation-1': [
+    { id: "chr-r1-d1", title: "Document 1 : La charrette", layout: "image-only",
+      imageUrl: "assets/img/christianisation-relation-1/img000.png", imageWidthCm: 7,
+      sources: ["Source de l'image : Louis Le Nain, La charrette, 1641, conservé au musée du Louvre, Wikimedia Commons. Licence : image du domaine public."] },
+    { id: "chr-r1-d2", title: "Document 2 : Le rôle de l'Église", layout: "text-only",
+      text: "Au cours des mille ans de chrétienté médiévale, l'Église a pu se développer et assurer un rôle central dans la vie de la population. Pour y parvenir, elle a pu prospérer grâce à plusieurs sources financières : tout d'abord grâce aux prélèvements que l'on appelle la dîme ; elle correspondait à un dixième des récoltes produites par les fidèles. Ensuite, l'Église recevait régulièrement des dons des seigneurs, des rois ou autres fidèles pour la remercier des services rendus auprès de la société de l'époque. Enfin, elle assurait un rôle culturel.",
+      sources: ["Source du texte : Auteur inconnu, Les rôles de l'Église au Moyen Âge, quels étaient-ils ?, Éditions VoxGallia, consulté le 8 avril 2025."] },
+    { id: "chr-r1-d3", title: "Document 3 : Chevaliers", layout: "image-only",
+      imageUrl: "assets/img/christianisation-relation-1/img001.png", imageWidthCm: 4.5,
+      sources: ["Source de l'image : Artiste anonyme du 13e siècle, Miniature de 1287 représentant des chevaliers munis de leurs lances, Wikimedia Commons. Licence : image du domaine public."] },
+    { id: "chr-r1-d4", title: "Document 4 : Monastère de Ripoll", layout: "image-only",
+      imageUrl: "assets/img/christianisation-relation-1/img002.png", imageWidthCm: 7,
+      sources: ["Source de l'image : amador, Chevet avec tour octogonale Monastère de Ripoll, Wikimedia Commons. Licence : Creative Commons BY-SA 3.0."] }
+  ],
+  'chr-relation-2': [
+    { id: "chr-r2-d1", title: "Document 1 : Appel à la croisade", layout: "text-only",
+      text: "En 1095, le pape Urbain II appelle les rois et les nobles de l'Occident à partir à la conquête militaire de Jérusalem. Cette notion d'une guerre pour Dieu est alors complètement nouvelle. L'appel du pape à la croisade soulève d'ailleurs un immense enthousiasme chez les seigneurs comme dans la population générale. Plus de 150 000 hommes et femmes répondent à l'invitation. C'est le début des croisades.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "chr-r2-d2", title: "Document 2 : Bataille de Dorylée", layout: "image-only",
+      imageUrl: "assets/img/christianisation-relation-2/img000.png", imageWidthCm: 6.5,
+      sources: ["Source de l'image : « La bataille de Dorylée en 1097 », miniature dans Guillaume de Tyr, Histoire d'Outremer (14e siècle), Wikimedia Commons. Licence : image du domaine public."] },
+    { id: "chr-r2-d3", title: "Document 3 : Le culte des reliques", layout: "text-only",
+      text: "Le culte des reliques est à l'origine de grands et de petits pèlerinages depuis les premiers temps du christianisme. Le corps des saints, entiers ou en morceaux, les vêtements, le sang, les instruments de martyre, tout ce qui a été en contact avec eux est objet de vénération et porte des propriétés miraculeuses pour le salut de l'âme et souvent du corps. Les fidèles se déplacent de très loin pour être le plus près possible de ces objets matériels qui les mettent directement en rapport avec la divinité et qui les protègent contre le mal, le diable, le péché ou la condamnation.",
+      sources: ["Source du texte : Gonzalo Lopez, Histoire du pèlerinage Saint-Jacques de Compostelle, Via Compostela, consulté le 8 avril 2025."] },
+    { id: "chr-r2-d4", title: "Document 4 : Pèlerin de Saint-Jacques", layout: "image-only",
+      imageUrl: "assets/img/christianisation-relation-2/img001.png", imageWidthCm: 4.5,
+      sources: ["Source de l'image : Kolossos, Pèlerin de Saint-Jacques de Compostelle, Wikimedia Commons. Licence : image du domaine public."] },
+    { id: "chr-r2-d5", title: "Document 5 : La vie au monastère", layout: "text-only",
+      text: "Le centre du monastère est un cloître, où l'on retrouve un jardin, des colonnes et des galeries. C'est là où les moines pouvaient sortir prendre l'air, car ils vivaient littéralement cloîtrés. Les moines sont les spécialistes de la fabrication des livres. La pièce où travaillent les moines copistes s'appelle le scriptorium. Au Moyen Âge, tous les livres sont écrits à la main, et ensuite recopiés.",
+      sources: ["Source du texte : Boutet, M. (2016), L'histoire au quotidien, documentaire, en ligne."] }
+  ],
+  'chr-causes-1': [
+    { id: "chr-ca1-d1", title: "Document 1 : Appel de Clermont", layout: "text-image",
+      text: "Dans la chrétienté, le lieu le plus saint que peut visiter un fidèle est Jérusalem, où se trouve le tombeau de Jésus-Christ. Or, depuis 1078, la ville est sous la domination des Turcs musulmans qui en interdisent l'accès aux chrétiens. En 1095, le pape Urbain II appelle les rois et les nobles de l'Occident à partir à la conquête militaire de Jérusalem. Cette notion d'une guerre pour Dieu est alors complètement nouvelle. L'appel du pape à la croisade soulève d'ailleurs un immense enthousiasme chez les seigneurs comme dans la population générale. Plus de 150 000 hommes et femmes répondent à l'invitation. C'est le début des croisades.",
+      imageUrl: "assets/img/christianisation-causes-1/img000.png", imageWidthCm: 4.5,
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Fondazione Cariplo, Le pape Urbain II prêchant la première croisade sur la place de Clermont, tableau de Francesco Hayez (1835), Wikimedia Commons. Licence : Creative Commons BY-SA 3.0."] },
+    { id: "chr-ca1-d2", title: "Document 2 : La conquête de Jérusalem", layout: "text-only",
+      text: "Après un siège de plusieurs semaines, les croisés ont réussi à prendre le contrôle de Jérusalem en 1099. Leur objectif était atteint, en dépit du fait qu'ils avaient massacré les habitants de la ville. Des 150 000 chevaliers qui avaient pris la route de la croisade, il n'y en a eu que 15 000 qui sont parvenus à la fin du voyage.",
+      sources: ["Source du texte : AlloProf, Les croisades (notions avancées), AlloProf, consulté le 8 avril 2025."] },
+    { id: "chr-ca1-d3", title: "Document 3 : L'édit de Milan", layout: "text-only",
+      text: "Le 13 juin 313, à Milan, l'empereur Constantin 1er et son collègue Licinius, avec lequel il dirige l'empire romain, octroient aux chrétiens la liberté de pratiquer leur religion. Ils leur restituent les biens confisqués et mettent un terme définitif aux persécutions. Cette décision, connue sous le nom d'« édit de Milan », complète et confirme l'édit octroyé deux ans plus tôt par l'empereur Galère. Elle consacre le triomphe de la nouvelle religion dans l'empire romain quelques années après les très dures persécutions ordonnées par Dioclétien.",
+      sources: ["Source du texte : Auteur inconnu, 13 juin 313. Édit de tolérance de Milan, Herodote.net, consulté le 8 avril 2025."] }
+  ],
+  'chr-causes-2': [
+    { id: "chr-ca2-d1", title: "Document 1 : Banalités", layout: "text-only",
+      text: "Profitant de son droit de commandement (le droit de ban) et de sa force militaire, le seigneur exige des paysans qu'ils utilisent les installations qu'il a fait construire. Le moulin banal où le meunier perçoit une partie de la farine en paiement de son travail et de l'utilisation du moulin. Le four banal où l'agent du seigneur (le fournier) retiendra, pour la consommation du seigneur, une partie des miches de pain cuites. Le pressoir à raisins ou à pommes dont une partie du jus recueilli ira dans la cave du seigneur. Ainsi le seigneur dispose d'aliments gratuits dont la perception se fait tout au long de l'année.",
+      sources: ["Source du texte : Vikidia, Banalité (droit seigneurial), Vikidia, consulté le 8 avril 2025."] },
+    { id: "chr-ca2-d2", title: "Document 2 : Art religieux", layout: "text-only",
+      text: "Au Moyen Âge, dans un contexte où une grande partie de la population ne savait ni lire ni écrire, l'art religieux jouait un rôle crucial dans la diffusion des enseignements de l'Église et le renforcement de la foi chez les fidèles. Les sculptures, les peintures murales, les vitraux et les icônes n'étaient pas de simples décorations, mais de véritables outils pédagogiques. Ils illustraient les récits religieux, la vie des saints et les rites religieux.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "chr-ca2-d3", title: "Document 3 : La nativité", layout: "image-only",
+      imageUrl: "assets/img/christianisation-causes-2/img000.png", imageWidthCm: 6,
+      sources: ["Source de l'image : Robert Campin, La nativité, Wikimedia Commons. Licence : Creative Commons BY-SA 4.0."] }
+  ],
+  'chr-causes-3': [
+    { id: "chr-ca3-d1", title: "Document 1 : Appel à la croisade", layout: "text-image",
+      text: "Dans la chrétienté, le lieu le plus saint que peut visiter un fidèle est Jérusalem, où se trouve le tombeau de Jésus-Christ. Or, depuis 1078, la ville est sous la domination des Turcs musulmans qui en interdisent l'accès aux chrétiens. En 1095, le pape Urbain II appelle les rois et les nobles de l'Occident à partir à la conquête militaire de Jérusalem. Cette notion d'une guerre pour Dieu est alors complètement nouvelle. L'appel du pape à la croisade soulève d'ailleurs un immense enthousiasme chez les seigneurs comme dans la population générale. Plus de 150 000 hommes et femmes répondent à l'invitation. C'est le début des croisades.",
+      imageUrl: "assets/img/christianisation-causes-3/img000.png", imageWidthCm: 4.5,
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Fondazione Cariplo, Le pape Urbain II prêchant la première croisade sur la place de Clermont, tableau de Francesco Hayez (1835), Wikimedia Commons. Licence : Creative Commons BY-SA 3.0."] },
+    { id: "chr-ca3-d2", title: "Document 2 : Architecture gothique", layout: "text-image",
+      text: "Au 12e siècle, un nouveau style architectural fait son apparition : l'architecture gothique. Les nouvelles techniques utilisées permettent la création d'églises plus hautes et plus larges. En effet, l'utilisation d'arc diagonal pour soutenir la voûte et d'arc-boutant (demi-arc) renforce les murs et solidifie les constructions. De larges fenêtres habillées de magnifiques vitraux laissent la lumière inonder l'intérieur des édifices. L'art gothique déborde bientôt du cadre religieux et influence la construction d'autres bâtiments comme les châteaux, les palais et les forteresses. Il se répand grâce aux maîtres bâtisseurs qui parcourent l'Europe à la demande des ordres religieux, des évêques et des princes.",
+      imageUrl: "assets/img/christianisation-causes-3/img001.png", imageWidthCm: 4,
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Harmonia Amanda, Notre-Dame de Paris 035 (2005), Wikimedia Commons. Licence : Creative Commons BY-SA 3.0."] }
+  ],
+  'chr-differences-1': [
+    { id: "chr-di1-d1", title: "Document 1 : Le clergé régulier", layout: "image-only",
+      imageUrl: "assets/img/christianisation-differences-1/img000.png", imageWidthCm: 5.5,
+      sources: ["Source de l'image : Le Sodoma, Life of St Benedict, Scene 31 — Benedict Feeds the Monk, Wikimedia Commons. Licence : image du domaine public."] },
+    { id: "chr-di1-d2", title: "Document 2 : Le clergé séculier", layout: "image-only",
+      imageUrl: "assets/img/christianisation-differences-1/img001.png", imageWidthCm: 7,
+      sources: ["Source de l'image : Jean Fouquet, Couronnement de Charlemagne, enluminure dans Grandes Chroniques de France, Paris, BnF, ms. Français 6 465, vers 1460, Wikimedia Commons. Licence : image du domaine public."] },
+    { id: "chr-di1-d3", title: "Document 3 : Vassal et suzerain", layout: "text-image",
+      text: "« Aide et conseil du vassal sont soigneusement codifiés : l'aide peut, en certains cas précis, être une contribution financière, mais elle est pratiquement toujours militaire, avec un service que la coutume finit par réduire à quarante jours. [Offrir le conseil à son seigneur], c'est être présent à [s]a cour [...] et, parfois, siéger à son tribunal. La protection accordée par le seigneur est militaire, mais elle est aussi économique, par l'octroi du fief, qui crée un lien matériel entre seigneur et vassal. Toutefois, certains vassaux ne sont pas pourvus de fiefs, mais sont seulement entretenus et résident au château. »",
+      imageUrl: "assets/img/christianisation-differences-1/img002.png", imageWidthCm: 5,
+      sources: ["Source du texte : Encyclopédie Larousse, Féodalité, Larousse, consulté le 28 octobre 2021.", "Source de l'image : Archives Nationales, Charles d'Orléans (15e siècle), Wikimedia Commons. Licence : image du domaine public."] }
+  ],
+  'chr-differences-2': [
+    { id: "chr-di2-d1", title: "Document 1 : Urbain II", layout: "text-only",
+      text: "En 1095, le pape Urbain II appelle les rois et les nobles de l'Occident à partir à la conquête militaire de Jérusalem. Cette notion d'une guerre pour Dieu est alors complètement nouvelle. L'appel du pape à la croisade soulève d'ailleurs un immense enthousiasme chez les seigneurs comme dans la population générale. Plus de 150 000 hommes et femmes répondent à l'invitation. C'est le début des croisades.",
+      sources: ["Source : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "chr-di2-d2", title: "Document 2 : Grégoire VIII", layout: "text-image",
+      text: "En octobre 1187, le sultan Saladin s'empare de Jérusalem, au terme d'une campagne éclair qui lui a permis d'écraser les armées des Latins d'Orient. La nouvelle est rapidement connue en Occident et le pape Grégoire VIII lance aussitôt un appel à la 3e croisade. Cet appel à la croisade se diffuse dans la chrétienté occidentale, via des légats pontificaux ou l'envoi de lettres. Fin décembre, le roi du Danemark est au courant.",
+      imageUrl: "assets/img/christianisation-differences-2/img000.png", imageWidthCm: 3.5,
+      sources: ["Source du texte : Auteur inconnu, La troisième croisade, Histoire à la carte, consulté le 9 avril 2025.", "Source de l'image : Auteur inconnu, Gregorius VIII, Wikimedia Commons. Licence : image du domaine public."] },
+    { id: "chr-di2-d3", title: "Document 3 : Notre-Dame de Paris", layout: "image-only",
+      imageUrl: "assets/img/christianisation-differences-2/img001.png", imageWidthCm: 6.5,
+      sources: ["Source de l'image : Église de Notre-Dame de Paris, gravure, Wikimedia Commons. Licence : image du domaine public."] },
+    { id: "chr-di2-d4", title: "Document 4 : Monastère de Ripoll", layout: "image-only",
+      imageUrl: "assets/img/christianisation-differences-2/img002.png", imageWidthCm: 6.5,
+      sources: ["Source de l'image : amador, Chevet avec tour octogonale Monastère de Ripoll, Wikimedia Commons. Licence : Creative Commons BY-SA 3.0."] }
+  ],
+  'chr-changements-1': [
+    { id: "chr-ch1-d1", title: "Document 1 : L'édit de Thessalonique", layout: "text-only",
+      text: "L'édit de Thessalonique, promulgué en 380 par l'empereur Théodose Ier, s'inscrit dans un contexte de christianisation progressive de l'Empire romain. Bien que le christianisme ait gagné en popularité depuis sa fondation, il coexiste avec d'autres cultes. L'édit vise donc à établir le christianisme comme religion officielle de l'Empire, stipulant que tous les sujets de l'empire doivent adhérer à la foi professée par l'évêque de Rome et l'évêque d'Alexandrie. Cet acte majeur officialise le christianisme comme religion d'État et marginalise les autres croyances.",
+      sources: ["Source du texte : Mathieu Mercier, enseignant à l'école secondaire de Rivière-du-Loup."] },
+    { id: "chr-ch1-d2", title: "Document 2 : Le latin au Moyen Âge", layout: "text-image",
+      text: "Le latin, langue utilisée dans l'Empire romain, survit au Moyen Âge en grande partie grâce à l'influence de l'Église. C'est la langue que les prêtres utilisent pour dire la messe aux fidèles. De plus, la Bible, le livre sacré des chrétiens, n'existe qu'en latin à cette époque et il est même interdit de la traduire dans une autre langue. Le latin devient rapidement le langage universel de tous les intellectuels européens. Tous les ouvrages savants sont rédigés dans cette langue, qu'ils traitent de science, de religion, d'art, etc. Dans les écoles et les universités, les enseignements sont aussi dispensés en latin.",
+      imageUrl: "assets/img/christianisation-changements-1/img000.png", imageWidthCm: 4,
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Psautier de Luttrell (vers 1320-1340), p. 21, The British Library Board, MS 42130, f. 171. Licence : image du domaine public."] }
+  ],
+  'chr-changements-2': [
+    { id: "chr-ch2-d1", title: "Document 1 : Pèlerin", layout: "image-only",
+      imageUrl: "assets/img/christianisation-changements-2/img000.png", imageWidthCm: 4.5,
+      sources: ["Source de l'image : Kolossos, Pèlerin de Saint-Jacques de Compostelle, Wikimedia Commons. Licence : image du domaine public."] },
+    { id: "chr-ch2-d2", title: "Document 2 : Saint-Jacques aujourd'hui", layout: "text-only",
+      text: "Les pèlerins de Saint-Jacques-de-Compostelle sont de plus en plus nombreux. En 1992, ils étaient à peine 10 000, mais ce nombre a explosé pour atteindre près de 438 000 en 2023. La majorité des pèlerins sont des marcheurs, tandis qu'une plus petite proportion fait le voyage à vélo (environ 5 %). Les motivations sont variées, allant du religieux au spirituel en passant par le non religieux. L'Espagne est le pays d'origine le plus représenté, suivi des États-Unis, de l'Italie et de l'Allemagne.",
+      sources: ["Source du texte : Mathieu Mercier, enseignant d'univers social à l'École secondaire de Rivière-du-Loup."] },
+    { id: "chr-ch2-d3", title: "Document 3 : Le sacre de Charlemagne", layout: "text-image",
+      text: "Les relations entre l'Église et Charlemagne sont très étroites. Le 25 décembre 800, Charlemagne se fait nommer Empereur des Romains par le pape Léon III. Avec ce couronnement, on assiste à une division des pouvoirs : le pouvoir temporel au roi et le pouvoir spirituel à l'Église. Le pape posa la couronne sur la tête de Charlemagne et la foule s'écria : « À Charles couronné par Dieu, grand et pacifique empereur des Romains, vie et victoire. » Par son geste, le pape tente d'affirmer la supériorité du pouvoir spirituel sur le pouvoir temporel.",
+      imageUrl: "assets/img/christianisation-changements-2/img001.png", imageWidthCm: 5,
+      sources: ["Source du texte : L. Duchesne (éd.), Liber pontificalis, Bouquet, V, 466, tome II, Paris, Ernest Thorin, 1892, p. 7, en ligne.", "Source de l'image : Jean Fouquet, Grandes chroniques de France (vers 1455-1460), Bibliothèque nationale de France, Français 6465, folio 89v."] }
+  ],
 
 };
 
@@ -767,7 +989,8 @@ window.DATA = {
   realites_sociales: [
     { id: "renouvellement-vision-homme", titre: "Le renouvellement de la vision de l'Homme", niveau: 2 },
     { id: "expansion-europeenne", titre: "L'expansion européenne dans le monde", niveau: 2 },
-    { id: "revolution-americaine", titre: "La Révolution américaine", niveau: 2 }
+    { id: "revolution-americaine", titre: "La Révolution américaine", niveau: 2 },
+    { id: "christianisation-occident", titre: "La christianisation de l'Occident", niveau: 1 }
   ],
 
   operations_intellectuelles: [
@@ -1276,7 +1499,194 @@ window.DATA = {
     { id: "q-rev-changements-4", operation: "Déterminer des changements et des continuités", numero: 4, niveau: 2, realite_sociale_id: "revolution-americaine",
       questionBody: { prompt: "Détermine un changement dans les belligérants (pays en état de guerre) impliqués dans la Guerre d'indépendance américaine à partir de 1778.", responseSpace: { type: "lines", count: 4 } },
       reglettes: [{ id: "r-rev-ch4", label: "Réglette (2 points)", ...R_CHGT_2PT_CHGT }], documents: pickDocs('rev-changements-2', 3),
-      corrige: "À partir de 1778, la France s'implique dans la Guerre d'indépendance américaine au côté des Treize colonies américaines." }
+      corrige: "À partir de 1778, la France s'implique dans la Guerre d'indépendance américaine au côté des Treize colonies américaines." },
+    // ============================================================
+    // RÉALITÉ SOCIALE : La christianisation de l'Occident (Secondaire 1)
+    // ============================================================
+
+    // ===== CAUSALITÉ (3) =====
+    { id: "q-chr-causalite-1", operation: "Établir des liens de causalité", numero: 1, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "À l'aide des documents 1 à 3, explique comment le christianisme fut progressivement toléré dans l'Empire romain au 4e siècle de notre ère.",
+        bullets: ["Une décision prise par Constantin lors de la bataille du pont Milvius", "Une conséquence sur ses croyances religieuses", "Un impact culturel sur les habitants de l'empire romain"],
+        instructions: CAUSALITE_INSTRUCTIONS, responseSpace: { type: "lines", count: 8 } },
+      reglettes: [{ id: "r-chr-c1", label: "Réglette (3 points)", opLabel: "Établir des liens de causalité", maxPoints: 3, ...RUBRIC_CAUSALITE_3PT }],
+      documents: pickDocs('chr-causalite-1', 1, 2, 3),
+      corrige: "Lors de la bataille du pont Milvius, Constantin aurait vu une croix dans le ciel accompagnée des mots « In hoc signo vinces » (« Par ce signe tu vaincras »). Par conséquent, Constantin se convertit au christianisme et fait peindre le chrisme sur les boucliers de ses soldats. Quelques mois plus tard, il promulgue l'édit de Milan (313) qui légalise le christianisme et accorde à chaque individu la liberté de pratiquer la religion de son choix." },
+    { id: "q-chr-causalite-2", operation: "Établir des liens de causalité", numero: 2, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "À l'aide des documents 1 à 3, explique comment les croisades ont favorisé l'avancement des connaissances scientifiques en Europe.",
+        bullets: ["Une action du pape Urbain II", "La réaction des chrétiens d'Europe", "Un impact scientifique des Croisades"],
+        instructions: CAUSALITE_INSTRUCTIONS, responseSpace: { type: "lines", count: 8 } },
+      reglettes: [{ id: "r-chr-c2", label: "Réglette (3 points)", opLabel: "Établir des liens de causalité", maxPoints: 3, ...RUBRIC_CAUSALITE_3PT }],
+      documents: pickDocs('chr-causalite-2', 1, 2, 3),
+      corrige: "En 1095, le pape Urbain II appelle les rois et les nobles de l'Occident à partir à la conquête militaire de Jérusalem. Par conséquent, plus de 150 000 chrétiens d'Europe répondent à cet appel avec enthousiasme et partent en croisade. Grâce au contact avec les Arabes lors des croisades, les Européens acquièrent de nouvelles connaissances en médecine, en astronomie, en mathématiques et en physique." },
+    { id: "q-chr-causalite-3", operation: "Établir des liens de causalité", numero: 3, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "À l'aide des documents 1 à 3, explique comment le développement de l'architecture a transformé les lieux de culte chrétiens à travers l'Europe médiévale.",
+        bullets: ["Un nouveau style architectural qui apparaît en Europe", "De nouvelles techniques de construction qui apparaissent avec ce style", "Un impact sur la taille des lieux de culte chrétiens"],
+        instructions: CAUSALITE_INSTRUCTIONS, responseSpace: { type: "lines", count: 8 } },
+      reglettes: [{ id: "r-chr-c3", label: "Réglette (3 points)", opLabel: "Établir des liens de causalité", maxPoints: 3, ...RUBRIC_CAUSALITE_3PT }],
+      documents: pickDocs('chr-causalite-3', 1, 2, 3),
+      corrige: "Au 12e siècle, un nouveau style architectural, l'architecture gothique, apparaît en Europe. Ce style introduit de nouvelles techniques comme l'arc brisé, la croisée d'ogives et l'arc-boutant. Grâce à ces techniques, les cathédrales gothiques deviennent plus hautes et plus larges, avec de grands vitraux qui laissent entrer la lumière." },
+
+    // ===== FAITS (7) =====
+    { id: "q-chr-faits-1", operation: "Établir des faits", numero: 1, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "Que permet l'édit de Milan de 313 ?", responseSpace: { type: "lines", count: 3 } },
+      reglettes: [{ id: "r-chr-f1", label: "Réglette (1 point)", ...R_FAITS_1PT }], documents: pickDocs('chr-faits-1', 1),
+      corrige: "L'Édit de Milan met en place la tolérance religieuse, notamment du christianisme, dans l'Empire romain." },
+    { id: "q-chr-faits-2", operation: "Établir des faits", numero: 2, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "Par quel acte Clovis 1er, roi des Francs, se convertit-il à la religion chrétienne ?", responseSpace: { type: "lines", count: 2 } },
+      reglettes: [{ id: "r-chr-f2", label: "Réglette (1 point)", ...R_FAITS_1PT }], documents: pickDocs('chr-faits-1', 2),
+      corrige: "Clovis se convertit à la religion chrétienne par le baptême." },
+    { id: "q-chr-faits-3", operation: "Établir des faits", numero: 3, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "Indique deux devoirs des censitaires envers le seigneur.", responseSpace: { type: "lines", count: 3 } },
+      reglettes: [{ id: "r-chr-f3", label: "Réglette (2 points)", ...R_FAITS_2PT_3 }], documents: pickDocs('chr-faits-2', 1, 2),
+      corrige: "Les paysans paient des impôts (le cens ou la taille), des banalités et font des corvées." },
+    { id: "q-chr-faits-4", operation: "Établir des faits", numero: 4, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "Comment appelle-t-on le lien entre le vassal et son suzerain ?", responseSpace: { type: "lines", count: 2 } },
+      reglettes: [{ id: "r-chr-f4", label: "Réglette (1 point)", ...R_FAITS_1PT }], documents: pickDocs('chr-faits-2', 3),
+      corrige: "Le lien de vassalité (ou le lien vassalique)." },
+    { id: "q-chr-faits-5", operation: "Établir des faits", numero: 5, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "À l'aide du document 3, indique :",
+        responseSpace: { type: "labeled-list", items: ["Un devoir du vassal envers son suzerain", "Un devoir du suzerain envers son vassal"] } },
+      reglettes: [{ id: "r-chr-f5", label: "Réglette (2 points)", ...R_FAITS_2PT_3 }], documents: pickDocs('chr-faits-2', 3),
+      corrige: ["Offrir conseil à son seigneur, jurer fidélité ou apporter une aide militaire.", "Protection militaire ou octroi d'un fief."] },
+    { id: "q-chr-faits-6", operation: "Établir des faits", numero: 6, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "Quels sont les trois ordres au Moyen Âge ?", responseSpace: { type: "lines", count: 3 } },
+      reglettes: [{ id: "r-chr-f6", label: "Réglette (1 point)", ...R_FAITS_1PT }], documents: pickDocs('chr-faits-3', 1),
+      corrige: "La noblesse, le clergé (ou l'Église) et le tiers-État." },
+    { id: "q-chr-faits-7", operation: "Établir des faits", numero: 7, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "Comment se nomme le type d'architecture présenté dans le document 2 ?", responseSpace: { type: "lines", count: 2 } },
+      reglettes: [{ id: "r-chr-f7", label: "Réglette (2 points)", ...R_FAITS_2PT_3 }], documents: pickDocs('chr-faits-3', 2),
+      corrige: "L'architecture gothique." },
+
+    // ===== ESPACE (4) =====
+    { id: "q-chr-espace-1", operation: "Situer dans l'espace", numero: 1, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "À l'aide du document 1, indique la lettre qui correspond à la ville sainte de Jérusalem.",
+        responseSpace: { type: "labeled-list", items: ["Jérusalem"] } },
+      reglettes: [{ id: "r-chr-e1", label: "Réglette (1 point)", ...R_SITUER_1PT_1 }], documents: pickDocs('chr-espace-1', 1), corrige: ["D"] },
+    { id: "q-chr-espace-2", operation: "Situer dans l'espace", numero: 2, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "À l'aide du document 2, situe les principales parties d'une seigneurie au Moyen Âge.",
+        responseSpace: { type: "labeled-list", items: ["Le château fort", "La réserve", "Les tenures", "Le four banal", "Le moulin banal", "L'église"] } },
+      reglettes: [{ id: "r-chr-e2", label: "Réglette (3 points)", ...R_SITUER_3PT_GVILLES }], documents: pickDocs('chr-espace-1', 2),
+      corrige: ["E", "D", "F", "B", "A", "C"] },
+    { id: "q-chr-espace-3", operation: "Situer dans l'espace", numero: 3, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "À l'aide du document 1, indique la lettre qui correspond à l'Occident au Moyen Âge.",
+        responseSpace: { type: "labeled-list", items: ["L'Occident"] } },
+      reglettes: [{ id: "r-chr-e3", label: "Réglette (1 point)", ...R_SITUER_1PT_1 }], documents: pickDocs('chr-espace-2', 1), corrige: ["B"] },
+    { id: "q-chr-espace-4", operation: "Situer dans l'espace", numero: 4, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "À l'aide du document 2, situe Rome, Saint-Jacques-de-Compostelle et Jérusalem.",
+        responseSpace: { type: "labeled-list", items: ["Rome", "Saint-Jacques-de-Compostelle", "Jérusalem"] } },
+      reglettes: [{ id: "r-chr-e4", label: "Réglette (2 points)", ...R_SITUER_2PT_3SP }], documents: pickDocs('chr-espace-2', 2),
+      corrige: ["B", "A", "C"] },
+
+    // ===== TEMPS (4) =====
+    { id: "q-chr-temps-1", operation: "Situer dans le temps", numero: 1, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "À l'aide du document 1, indique la lettre qui correspond au Moyen Âge.",
+        responseSpace: { type: "labeled-list", items: ["Le Moyen Âge"] } },
+      reglettes: [{ id: "r-chr-t1", label: "Réglette (1 point)", ...R_SITUER_1PT_T1 }], documents: pickDocs('chr-temps-1', 1), corrige: ["B"] },
+    { id: "q-chr-temps-2", operation: "Situer dans le temps", numero: 2, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "Les documents 2 et 3 présentent des faits liés au christianisme. Indique si les faits présentés dans chacun des documents surviennent avant ou après la conversion de Clovis 1er, roi des Francs.",
+        responseSpace: { type: "before-after-axis", beforeLabel: "Antériorité (Avant)", afterLabel: "Postériorité (Après)", pivot: "Conversion de Clovis 1er" } },
+      reglettes: [{ id: "r-chr-t2", label: "Réglette (1 point)", ...R_SITUER_1PT_T2 }], documents: pickDocs('chr-temps-1', 1, 2, 3),
+      corrige: { before: ["Document 3"], after: ["Document 2"] } },
+    { id: "q-chr-temps-3", operation: "Situer dans le temps", numero: 3, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "Les documents 1 à 3 présentent des faits relatifs au christianisme dans l'empire romain. Place les documents en ordre chronologique.",
+        responseSpace: { type: "chrono-ordering", items: ["1er (le plus ancien)", "2e", "3e (le plus récent)"] } },
+      reglettes: [{ id: "r-chr-t3", label: "Réglette (2 points)", ...R_SITUER_2PT_T3 }], documents: pickDocs('chr-temps-2', 1, 2, 3),
+      corrige: ["Document 2", "Document 1", "Document 3"] },
+    { id: "q-chr-temps-4", operation: "Situer dans le temps", numero: 4, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "Sur la ligne du temps du document 5, encercle la lettre correspondant aux faits présentés dans le document 4. Inscris ta réponse ci-dessous.",
+        responseSpace: { type: "labeled-list", items: ["Lettre correspondante"] } },
+      reglettes: [{ id: "r-chr-t4", label: "Réglette (1 point)", ...R_SITUER_1PT_T1 }],
+      documents: [
+        DOCS['chr-temps-2'][3],  // Document 4 : La première croisade
+        { id: "chr-t4-timeline", title: "Document 5 : Ligne du temps", layout: "image-only",
+          imageUrl: "assets/img/christianisation-temps-2/timeline.png", imageWidthCm: 13,
+          sources: ["Source : Mathieu Mercier."] }
+      ],
+      corrige: ["D"] },
+
+    // ===== RELATION (4) =====
+    { id: "q-chr-relation-1", operation: "Mettre en relation des faits", numero: 1, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "Associe les documents 1 à 3 à l'ordre lui correspondant.",
+        responseSpace: { type: "labeled-list", items: ["La noblesse (Document n°)", "Le clergé (Document n°)", "Le tiers-État (Document n°)"] } },
+      reglettes: [{ id: "r-chr-r1", label: "Réglette (2 points)", ...R_RELATION_2PT_3 }], documents: pickDocs('chr-relation-1', 1, 2, 3),
+      corrige: ["3", "2", "1"] },
+    { id: "q-chr-relation-2", operation: "Mettre en relation des faits", numero: 2, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "L'architecture romane et gothique sont présentes en Europe au Moyen Âge. Indique le type d'architecture du lieu de culte présenté dans le document 4.",
+        responseSpace: { type: "checkbox-table", columns: ["Architecture romane", "Architecture gothique"], rows: ["Document 4"] } },
+      reglettes: [{ id: "r-chr-r2", label: "Réglette (1 point)", ...R_RELATION_1PT }], documents: pickDocs('chr-relation-1', 4), corrige: [[true, false]] },
+    { id: "q-chr-relation-3", operation: "Mettre en relation des faits", numero: 3, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "Les documents 1 à 4 présentent des informations sur les pèlerinages et les croisades au Moyen Âge. Associe chacun des documents à la catégorie lui correspondant.",
+        responseSpace: { type: "checkbox-table", columns: ["Pèlerinage", "Croisade"], rows: ["Document 1", "Document 2", "Document 3", "Document 4"] } },
+      reglettes: [{ id: "r-chr-r3", label: "Réglette (2 points)", ...R_RELATION_2PT_2 }], documents: pickDocs('chr-relation-2', 1, 2, 3, 4),
+      corrige: [[false, true], [false, true], [true, false], [true, false]] },
+    { id: "q-chr-relation-4", operation: "Mettre en relation des faits", numero: 4, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "Le document 5 fait référence au clergé catholique. Indique si le document concerne le clergé régulier ou le clergé séculier.",
+        responseSpace: { type: "checkbox-table", columns: ["Clergé régulier", "Clergé séculier"], rows: ["Document 5"] } },
+      reglettes: [{ id: "r-chr-r4", label: "Réglette (1 point)", ...R_RELATION_1PT }], documents: pickDocs('chr-relation-2', 5), corrige: [[true, false]] },
+
+    // ===== CAUSES (6) =====
+    { id: "q-chr-causes-1", operation: "Déterminer des causes et des conséquences", numero: 1, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "À l'aide des documents 1 et 2, détermine le document qui présente une cause de la première croisade et le document qui en présente une conséquence.",
+        responseSpace: { type: "labeled-list", items: ["Cause (Document n°)", "Conséquence (Document n°)"] } },
+      reglettes: [{ id: "r-chr-ca1", label: "Réglette (2 points)", ...R_CAUSES_2PT_CAUSE_CONS }], documents: pickDocs('chr-causes-1', 1, 2), corrige: ["1", "2"] },
+    { id: "q-chr-causes-2", operation: "Déterminer des causes et des conséquences", numero: 2, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "À l'aide du document 3, détermine une conséquence de l'édit de Milan.", responseSpace: { type: "lines", count: 4 } },
+      reglettes: [{ id: "r-chr-ca2", label: "Réglette (2 points)", ...R_CAUSES_2PT_CONSEQ }], documents: pickDocs('chr-causes-1', 3),
+      corrige: "L'Édit de Milan de 313 permet la tolérance du christianisme dans l'Empire romain." },
+    { id: "q-chr-causes-3", operation: "Déterminer des causes et des conséquences", numero: 3, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "Pourquoi les censitaires doivent-ils payer des banalités ?", responseSpace: { type: "lines", count: 4 } },
+      reglettes: [{ id: "r-chr-ca3", label: "Réglette (2 points)", ...R_CAUSES_2PT_CAUSE }], documents: pickDocs('chr-causes-2', 1),
+      corrige: "Les censitaires payent des banalités pour utiliser le moulin banal, le four banal et le pressoir puisqu'ils ont été construits par le seigneur. Il s'agit d'une taxe d'utilisation." },
+    { id: "q-chr-causes-4", operation: "Déterminer des causes et des conséquences", numero: 4, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "Pourquoi l'art religieux chrétien est-il important pour la population au Moyen Âge ?", responseSpace: { type: "lines", count: 5 } },
+      reglettes: [{ id: "r-chr-ca4", label: "Réglette (2 points)", ...R_CAUSES_2PT_CAUSE }], documents: pickDocs('chr-causes-2', 2, 3),
+      corrige: "Au Moyen Âge, la majorité de la population ne sait pas lire et écrire et ne comprend pas le latin. L'art religieux permet alors de présenter les différents récits et rites chrétiens aux fidèles." },
+    { id: "q-chr-causes-5", operation: "Déterminer des causes et des conséquences", numero: 5, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "Pourquoi le pape Urbain II fait-il l'appel à la croisade en 1095 ?", responseSpace: { type: "lines", count: 4 } },
+      reglettes: [{ id: "r-chr-ca5", label: "Réglette (2 points)", ...R_CAUSES_2PT_CAUSE }], documents: pickDocs('chr-causes-3', 1),
+      corrige: "Le pape Urbain II fait l'appel à la croisade afin de reprendre la ville sainte de Jérusalem aux mains des Turcs musulmans." },
+    { id: "q-chr-causes-6", operation: "Déterminer des causes et des conséquences", numero: 6, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "L'architecture gothique transforme de manière importante les lieux de culte chrétiens en Occident. Détermine une conséquence de l'utilisation d'arcs diagonaux et d'arcs-boutants sur ces lieux de culte.", responseSpace: { type: "lines", count: 4 } },
+      reglettes: [{ id: "r-chr-ca6", label: "Réglette (2 points)", ...R_CAUSES_2PT_CONSEQ }], documents: pickDocs('chr-causes-3', 2),
+      corrige: "Les cathédrales gothiques deviennent plus imposantes et élevées grâce à l'utilisation d'arcs diagonaux et d'arcs-boutants." },
+
+    // ===== DIFFÉRENCES (4) =====
+    { id: "q-chr-differences-1", operation: "Dégager des différences et des similitudes", numero: 1, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "À l'aide des documents 1 et 2, dégage une différence entre le clergé régulier et le clergé séculier.", responseSpace: { type: "lines", count: 5 } },
+      reglettes: [{ id: "r-chr-di1", label: "Réglette (2 points)", ...R_DIFFERENCES_2PT }], documents: pickDocs('chr-differences-1', 1, 2),
+      corrige: "Le clergé régulier correspond aux ordres religieux alors que le clergé séculier encadre la vie religieuse des croyants. OU les membres du clergé régulier vivent dans les abbayes et les monastères alors que les membres du clergé séculier se trouvent dans les paroisses et les villes médiévales." },
+    { id: "q-chr-differences-2", operation: "Dégager des différences et des similitudes", numero: 2, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "Le lien de vassalité exige des devoirs entre le suzerain et le vassal. À l'aide du document 3, dégage une différence entre les devoirs du suzerain et ceux du vassal.", responseSpace: { type: "lines", count: 5 } },
+      reglettes: [{ id: "r-chr-di2", label: "Réglette (2 points)", ...R_DIFFERENCES_2PT_GEN }], documents: pickDocs('chr-differences-1', 3),
+      corrige: "Le suzerain doit assurer la protection militaire à son vassal ou doit octroyer un fief à son vassal, alors que le vassal doit offrir conseil à son suzerain ou doit apporter un soutien financier ou militaire à son suzerain." },
+    { id: "q-chr-differences-3", operation: "Dégager des différences et des similitudes", numero: 3, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "À l'aide des documents 1 et 2, dégage une similitude dans les actions posées par les papes Urbain II et Grégoire VIII.", responseSpace: { type: "lines", count: 4 } },
+      reglettes: [{ id: "r-chr-di3", label: "Réglette (2 points)", ...R_SIMILITUDES_2PT }], documents: pickDocs('chr-differences-2', 1, 2),
+      corrige: "Grégoire VIII et Urbain II ont tous deux fait un appel à la croisade afin de reprendre la ville sainte de Jérusalem." },
+    { id: "q-chr-differences-4", operation: "Dégager des différences et des similitudes", numero: 4, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "À l'aide des documents 3 et 4, dégage une différence entre l'architecture romane et l'architecture gothique.", responseSpace: { type: "lines", count: 6 } },
+      reglettes: [{ id: "r-chr-di4", label: "Réglette (2 points)", ...R_DIFFERENCES_2PT_GEN }], documents: pickDocs('chr-differences-2', 3, 4),
+      corrige: "L'architecture romane est caractérisée par des formes massives, des murs épais avec peu de fenêtres et des arcs ronds, tandis que l'architecture gothique est caractérisée par de hauts murs avec de grandes fenêtres, des vitraux et des arcs brisés soutenus par des arcs-boutants et des voûtes à croisée d'ogives." },
+
+    // ===== CHANGEMENTS (4) =====
+    { id: "q-chr-changements-1", operation: "Déterminer des changements et des continuités", numero: 1, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "À l'aide du document 1, détermine un changement quant à la place du christianisme dans l'Empire romain suite à l'édit de Thessalonique.", responseSpace: { type: "lines", count: 4 } },
+      reglettes: [{ id: "r-chr-ch1", label: "Réglette (1 point)", ...R_CHGT_1PT_CHGT }], documents: pickDocs('chr-changements-1', 1),
+      corrige: "L'Édit de Thessalonique fait du christianisme la religion officielle de l'Empire romain." },
+    { id: "q-chr-changements-2", operation: "Déterminer des changements et des continuités", numero: 2, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "Détermine une continuité culturelle entre les périodes de l'Antiquité et du Moyen Âge.", responseSpace: { type: "lines", count: 4 } },
+      reglettes: [{ id: "r-chr-ch2", label: "Réglette (2 points)", ...R_CHGT_2PT_CONT }], documents: pickDocs('chr-changements-1', 2),
+      corrige: "Une continuité culturelle entre l'Antiquité et le Moyen Âge est l'utilisation du latin OU la présence du christianisme en Occident." },
+    { id: "q-chr-changements-3", operation: "Déterminer des changements et des continuités", numero: 3, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "À l'aide des documents 1 et 2, détermine une continuité dans les lieux de pèlerinage lors du Moyen Âge et ceux d'aujourd'hui.", responseSpace: { type: "lines", count: 4 } },
+      reglettes: [{ id: "r-chr-ch3", label: "Réglette (2 points)", ...R_CHGT_2PT_CONT }], documents: pickDocs('chr-changements-2', 1, 2),
+      corrige: "Saint-Jacques-de-Compostelle est un lieu de pèlerinage qui fut utilisé lors du Moyen Âge et qui l'est encore de nos jours." },
+    { id: "q-chr-changements-4", operation: "Déterminer des changements et des continuités", numero: 4, niveau: 1, realite_sociale_id: "christianisation-occident",
+      questionBody: { prompt: "À l'aide du document 3, détermine un changement dans le rôle de l'Église au Moyen Âge.", responseSpace: { type: "lines", count: 5 } },
+      reglettes: [{ id: "r-chr-ch4", label: "Réglette (1 point)", ...R_CHGT_1PT_CHGT }], documents: pickDocs('chr-changements-2', 3),
+      corrige: "Au Moyen Âge, le pouvoir spirituel de l'Église est supérieur au pouvoir temporel des rois. L'Église peut ainsi couronner les rois et les reines d'Europe, comparativement à ce qui se produisait durant l'Antiquité." }
+
   ]
 };
 
