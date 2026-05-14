@@ -1,11 +1,17 @@
-# HEC · Premier cycle — Composition de cahier (v2.3)
+# HEC · Premier cycle — Composition de cahier (v2.4)
 
 Outil web pour composer un cahier d'élève à la pièce — sortie en `.docx` éditable.
+
+## ✨ Quoi de neuf (v2.4)
+
+- 🇺🇸 **Nouvelle réalité sociale** : *La Révolution américaine* (Secondaire 2) avec 35 questions atomiques couvrant les 8 opérations intellectuelles.
+- 📚 **Catalogue total** : 105 questions réparties sur 3 réalités sociales (Le renouvellement de la vision de l'Homme + L'expansion européenne dans le monde + La Révolution américaine).
+- 🟣 Couleur pourpre dédiée pour la 3e réalité, en cohérence avec la palette de design (vert / terre cuite / pourpre).
 
 ## ✨ Quoi de neuf (v2.3)
 
 - 🌍 **Nouvelle réalité sociale** : *L'expansion européenne dans le monde* (Secondaire 2) avec 35 questions atomiques couvrant les 8 opérations intellectuelles.
-- 📚 **Catalogue total** : 70 questions réparties sur 2 réalités sociales (Le renouvellement de la vision de l'Homme + L'expansion européenne dans le monde).
+- 📚 **Catalogue v2.3** : 70 questions réparties sur 2 réalités sociales (Le renouvellement de la vision de l'Homme + L'expansion européenne dans le monde).
 
 ## ✨ Quoi de neuf (v2.2)
 
