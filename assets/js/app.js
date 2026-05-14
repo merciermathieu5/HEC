@@ -780,7 +780,8 @@
       return out;
     }
 
-    // 2b) Réponse "chrono-ordering" : trois cases horizontales avec flèches, chacune remplie de la bonne réponse
+    // 2b) Réponse "chrono-ordering" : N cases avec flèches, étiquettes au-dessus,
+    //     réponses dans les cases (sans le libellé qui est désormais hors de la case).
     if (rs && rs.type === 'chrono-ordering' && Array.isArray(q.corrige)) {
       const items = rs.items || [];
       const n = items.length;
@@ -788,33 +789,41 @@
       const arrowW = 450;
       const boxW = Math.floor((totalW - (n - 1) * arrowW) / n);
       const widths = [];
-      const cells = [];
+      const labelRow = [];
+      const boxRow = [];
       items.forEach((label, i) => {
         widths.push(boxW);
-        cells.push(new TableCell({
+        labelRow.push(new TableCell({
+          width: { size: boxW, type: WidthType.DXA },
+          borders: { top: NO_BORDER, bottom: NO_BORDER, left: NO_BORDER, right: NO_BORDER },
+          verticalAlign: VerticalAlign.BOTTOM,
+          margins: { top: 0, bottom: 60, left: 0, right: 0 },
+          children: [new Paragraph({
+            alignment: AlignmentType.CENTER,
+            children: [new TextRun({ text: label, size: 14, italics: true, color: "6E685C" })]
+          })]
+        }));
+        boxRow.push(new TableCell({
           width: { size: boxW, type: WidthType.DXA },
           borders: ANSWER_BORDERS, shading: SHADING,
           verticalAlign: VerticalAlign.CENTER,
-          margins: { top: 100, bottom: 100, left: 60, right: 60 },
-          children: [
-            new Paragraph({
-              alignment: AlignmentType.CENTER,
-              spacing: { after: 60 },
-              children: [new TextRun({ text: label, size: 14, italics: true, color: "888888" })]
-            }),
-            new Paragraph({
-              alignment: AlignmentType.CENTER,
-              children: [new TextRun({ text: q.corrige[i] || '—', bold: true, size: 22, color: "8B3A2E" })]
-            })
-          ]
+          margins: { top: 120, bottom: 120, left: 80, right: 80 },
+          children: [new Paragraph({
+            alignment: AlignmentType.CENTER,
+            children: [new TextRun({ text: q.corrige[i] || '—', bold: true, size: 22, color: "8B3A2E" })]
+          })]
         }));
         if (i < n - 1) {
           widths.push(arrowW);
-          cells.push(new TableCell({
+          labelRow.push(new TableCell({
+            width: { size: arrowW, type: WidthType.DXA },
+            borders: { top: NO_BORDER, bottom: NO_BORDER, left: NO_BORDER, right: NO_BORDER },
+            children: [new Paragraph({ children: [new TextRun({ text: "" })] })]
+          }));
+          boxRow.push(new TableCell({
             width: { size: arrowW, type: WidthType.DXA },
             borders: { top: NO_BORDER, bottom: NO_BORDER, left: NO_BORDER, right: NO_BORDER },
             verticalAlign: VerticalAlign.CENTER,
-            margins: { top: 0, bottom: 0, left: 0, right: 0 },
             children: [new Paragraph({
               alignment: AlignmentType.CENTER,
               children: [new TextRun({ text: "→", size: 32, bold: true })]
@@ -826,7 +835,92 @@
       out.push(new Table({
         width: { size: totalW, type: WidthType.DXA },
         columnWidths: widths,
-        rows: [new TableRow({ height: { value: 800, rule: "atLeast" }, children: cells })]
+        rows: [
+          new TableRow({ children: labelRow }),
+          new TableRow({ height: { value: 800, rule: "atLeast" }, children: boxRow })
+        ]
+      }));
+      return out;
+    }
+
+    // 2c) Réponse "before-after-axis" : axe à 3 boîtes (Antériorité ← pivot → Postériorité).
+    //     Dans le corrigé, les boîtes latérales contiennent les documents corrects.
+    //     q.corrige attendu : { before: [string, ...], after: [string, ...] }
+    if (rs && rs.type === 'before-after-axis' && q.corrige && typeof q.corrige === 'object' && !Array.isArray(q.corrige)) {
+      const beforeLabel = rs.beforeLabel || 'Antériorité (Avant)';
+      const afterLabel  = rs.afterLabel  || 'Postériorité (Après)';
+      const pivot       = rs.pivot       || '';
+      const beforeAns   = (q.corrige.before || []).join(' · ');
+      const afterAns    = (q.corrige.after  || []).join(' · ');
+      const totalW = 9000;
+      const arrowW = 400;
+      const sideW = Math.floor((totalW - 2 * arrowW) * 0.32);
+      const centerW = totalW - 2 * sideW - 2 * arrowW;
+      const widths = [sideW, arrowW, centerW, arrowW, sideW];
+      const baCells = [
+        new TableCell({
+          width: { size: sideW, type: WidthType.DXA },
+          borders: ANSWER_BORDERS, shading: SHADING,
+          verticalAlign: VerticalAlign.TOP,
+          margins: { top: 100, bottom: 100, left: 80, right: 80 },
+          children: [
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              spacing: { after: 80 },
+              children: [new TextRun({ text: beforeLabel, bold: true, size: 16, color: "6E685C" })]
+            }),
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              children: [new TextRun({ text: beforeAns || '—', bold: true, size: 22, color: "8B3A2E" })]
+            })
+          ]
+        }),
+        new TableCell({
+          width: { size: arrowW, type: WidthType.DXA },
+          borders: { top: NO_BORDER, bottom: NO_BORDER, left: NO_BORDER, right: NO_BORDER },
+          verticalAlign: VerticalAlign.CENTER,
+          children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "←", size: 30, bold: true })] })]
+        }),
+        new TableCell({
+          width: { size: centerW, type: WidthType.DXA },
+          borders: ANSWER_BORDERS,
+          shading: { fill: "F5EFE2", type: ShadingType.CLEAR, color: "auto" },
+          verticalAlign: VerticalAlign.CENTER,
+          margins: { top: 120, bottom: 120, left: 100, right: 100 },
+          children: [new Paragraph({
+            alignment: AlignmentType.CENTER,
+            children: [new TextRun({ text: pivot, bold: true, size: 18 })]
+          })]
+        }),
+        new TableCell({
+          width: { size: arrowW, type: WidthType.DXA },
+          borders: { top: NO_BORDER, bottom: NO_BORDER, left: NO_BORDER, right: NO_BORDER },
+          verticalAlign: VerticalAlign.CENTER,
+          children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "→", size: 30, bold: true })] })]
+        }),
+        new TableCell({
+          width: { size: sideW, type: WidthType.DXA },
+          borders: ANSWER_BORDERS, shading: SHADING,
+          verticalAlign: VerticalAlign.TOP,
+          margins: { top: 100, bottom: 100, left: 80, right: 80 },
+          children: [
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              spacing: { after: 80 },
+              children: [new TextRun({ text: afterLabel, bold: true, size: 16, color: "6E685C" })]
+            }),
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              children: [new TextRun({ text: afterAns || '—', bold: true, size: 22, color: "8B3A2E" })]
+            })
+          ]
+        })
+      ];
+      out.push(new Paragraph({ spacing: { before: 80, after: 40 }, children: [new TextRun({ text: "✓ Corrigé", bold: true, size: 18, color: "8B3A2E" })] }));
+      out.push(new Table({
+        width: { size: totalW, type: WidthType.DXA },
+        columnWidths: widths,
+        rows: [new TableRow({ height: { value: 1000, rule: "atLeast" }, children: baCells })]
       }));
       return out;
     }
@@ -1379,34 +1473,48 @@
           // Mise en ordre chronologique : N cases bordées séparées par des flèches « → ».
           // Format inspiré du gabarit pédagogique original : trois cercles connectés par
           // des flèches que l'élève remplit de gauche (le plus ancien) à droite (le plus récent).
-          // Les `items`, s'ils sont fournis, servent de petites étiquettes au-dessus de chaque case.
+          // Les `items` servent de petites étiquettes AU-DESSUS de chaque case (hors des encadrés).
           const items = body.responseSpace.items || [];
           const n = items.length;
           const totalW = 10500;
           const arrowW = 550;
           const boxW = Math.floor((totalW - (n - 1) * arrowW) / n);
           const widths = [];
-          const cells = [];
+          // Row 1: labels au-dessus (sans bordure)
+          const labelRow = [];
+          // Row 2: cases vides + flèches
+          const boxRow = [];
           items.forEach((label, i) => {
             widths.push(boxW);
-            cells.push(new TableCell({
+            labelRow.push(new TableCell({
+              width: { size: boxW, type: WidthType.DXA },
+              borders: NO_BORDERS,
+              verticalAlign: VerticalAlign.BOTTOM,
+              margins: { top: 0, bottom: 60, left: 0, right: 0 },
+              children: [new Paragraph({
+                alignment: AlignmentType.CENTER,
+                children: [new TextRun({ text: label, size: 18, italics: true, color: "6E685C" })]
+              })]
+            }));
+            boxRow.push(new TableCell({
               width: { size: boxW, type: WidthType.DXA },
               borders: ALL_BORDERS,
               verticalAlign: VerticalAlign.CENTER,
               margins: { top: 100, bottom: 100, left: 80, right: 80 },
               children: [
-                new Paragraph({
-                  alignment: AlignmentType.CENTER,
-                  spacing: { after: 60 },
-                  children: [new TextRun({ text: label, size: 16, italics: true, color: "888888" })]
-                }),
                 new Paragraph({ children: [new TextRun({ text: "", size: 24 })] }),
                 new Paragraph({ children: [new TextRun({ text: "", size: 24 })] })
               ]
             }));
             if (i < n - 1) {
               widths.push(arrowW);
-              cells.push(new TableCell({
+              // Cellule vide alignée avec la flèche dans la 2e row
+              labelRow.push(new TableCell({
+                width: { size: arrowW, type: WidthType.DXA },
+                borders: NO_BORDERS,
+                children: [new Paragraph({ children: [new TextRun({ text: "" })] })]
+              }));
+              boxRow.push(new TableCell({
                 width: { size: arrowW, type: WidthType.DXA },
                 borders: NO_BORDERS,
                 verticalAlign: VerticalAlign.CENTER,
@@ -1421,10 +1529,88 @@
           elements.push(new Table({
             width: { size: totalW, type: WidthType.DXA },
             columnWidths: widths,
-            rows: [new TableRow({
-              height: { value: 1200, rule: "atLeast" },
-              children: cells
-            })]
+            rows: [
+              new TableRow({ children: labelRow }),
+              new TableRow({ height: { value: 1000, rule: "atLeast" }, children: boxRow })
+            ]
+          }));
+        } else if (body.responseSpace.type === 'before-after-axis') {
+          // Axe chronologique à 3 boîtes : Antériorité | événement pivot | Postériorité.
+          // Les boîtes latérales sont vides dans le cahier (l'élève y inscrit les documents
+          // qui surviennent avant/après l'événement). La boîte centrale affiche le pivot.
+          const rs = body.responseSpace;
+          const beforeLabel = rs.beforeLabel || 'Antériorité (Avant)';
+          const afterLabel  = rs.afterLabel  || 'Postériorité (Après)';
+          const pivot       = rs.pivot       || '';
+          const totalW = 10500;
+          const arrowW = 450;
+          const sideW = Math.floor((totalW - 2 * arrowW) * 0.32);
+          const centerW = totalW - 2 * sideW - 2 * arrowW;
+          const widths = [sideW, arrowW, centerW, arrowW, sideW];
+          const baCells = [
+            // Boîte 1 : Antériorité (avec libellé en haut, espace vide en dessous)
+            new TableCell({
+              width: { size: sideW, type: WidthType.DXA },
+              borders: ALL_BORDERS,
+              verticalAlign: VerticalAlign.TOP,
+              margins: { top: 100, bottom: 100, left: 80, right: 80 },
+              children: [
+                new Paragraph({
+                  alignment: AlignmentType.CENTER,
+                  spacing: { after: 80 },
+                  children: [new TextRun({ text: beforeLabel, bold: true, size: 20, color: "6E685C" })]
+                }),
+                new Paragraph({ children: [new TextRun({ text: "", size: 24 })] }),
+                new Paragraph({ children: [new TextRun({ text: "", size: 24 })] })
+              ]
+            }),
+            // Flèche ← du centre vers la gauche
+            new TableCell({
+              width: { size: arrowW, type: WidthType.DXA },
+              borders: NO_BORDERS,
+              verticalAlign: VerticalAlign.CENTER,
+              children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "←", size: 36, bold: true })] })]
+            }),
+            // Boîte centrale : événement pivot (pré-rempli, lecture seule)
+            new TableCell({
+              width: { size: centerW, type: WidthType.DXA },
+              borders: ALL_BORDERS,
+              shading: { fill: "F5EFE2", type: ShadingType.CLEAR, color: "auto" },
+              verticalAlign: VerticalAlign.CENTER,
+              margins: { top: 120, bottom: 120, left: 100, right: 100 },
+              children: [new Paragraph({
+                alignment: AlignmentType.CENTER,
+                children: [new TextRun({ text: pivot, bold: true, size: 20 })]
+              })]
+            }),
+            // Flèche → du centre vers la droite
+            new TableCell({
+              width: { size: arrowW, type: WidthType.DXA },
+              borders: NO_BORDERS,
+              verticalAlign: VerticalAlign.CENTER,
+              children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "→", size: 36, bold: true })] })]
+            }),
+            // Boîte 3 : Postériorité (avec libellé en haut, espace vide en dessous)
+            new TableCell({
+              width: { size: sideW, type: WidthType.DXA },
+              borders: ALL_BORDERS,
+              verticalAlign: VerticalAlign.TOP,
+              margins: { top: 100, bottom: 100, left: 80, right: 80 },
+              children: [
+                new Paragraph({
+                  alignment: AlignmentType.CENTER,
+                  spacing: { after: 80 },
+                  children: [new TextRun({ text: afterLabel, bold: true, size: 20, color: "6E685C" })]
+                }),
+                new Paragraph({ children: [new TextRun({ text: "", size: 24 })] }),
+                new Paragraph({ children: [new TextRun({ text: "", size: 24 })] })
+              ]
+            })
+          ];
+          elements.push(new Table({
+            width: { size: totalW, type: WidthType.DXA },
+            columnWidths: widths,
+            rows: [new TableRow({ height: { value: 1400, rule: "atLeast" }, children: baCells })]
           }));
         } else if (body.responseSpace.type === 'cases-causalite') {
           // Conservé pour rétro-compatibilité — cases bleutées avec flèches
