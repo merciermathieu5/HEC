@@ -107,6 +107,12 @@ html, body {
   min-height: calc(100vh - 180px);
 }
 
+/* Le panneau cahier s'adapte à son contenu (pas de hauteur min imposée) */
+.panel-cahier {
+  min-height: auto;
+  align-self: start;
+}
+
 .panel-header {
   display: flex;
   justify-content: space-between;
@@ -321,13 +327,13 @@ html, body {
 }
 
 .cahier-list {
-  flex: 1;
+  flex: 0 1 auto;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
   padding-right: 0.25rem;
-  min-height: 200px;
+  min-height: 120px;
   border: 1px dashed var(--color-border);
   border-radius: var(--radius);
   padding: 0.5rem;

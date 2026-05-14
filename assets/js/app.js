@@ -45,6 +45,8 @@
 
   // ====== INIT ======
   function init() {
+    // Par défaut, toutes les réalités sociales sont repliées dans le catalogue
+    DATA.realites_sociales.forEach(r => collapsedRealites.add(r.id));
     populateFilters();
     attachEventListeners();
     applyFilters();
@@ -110,6 +112,14 @@
       if (op  && q.operation !== op) return false;
       return true;
     });
+
+    // Si l'utilisateur filtre sur une réalité précise, on la déplie automatiquement.
+    // Sinon (filtre vide), on remet toutes les réalités repliées par défaut.
+    if (rea) {
+      collapsedRealites.delete(rea);
+    } else {
+      DATA.realites_sociales.forEach(r => collapsedRealites.add(r.id));
+    }
 
     el.catalogCount.textContent = `${state.filteredQuestions.length} question(s)`;
     renderCatalog();
