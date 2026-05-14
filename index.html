@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HEC · Premier cycle — Composition de cahier</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <h1 class="site-title">HEC · Premier cycle</h1>
+      <span class="badge">PROTOTYPE v2</span>
+    </div>
+    <p class="site-subtitle">Composition de cahier · Sélection à la pièce</p>
+  </header>
+
+  <main class="layout">
+
+    <!-- ========================================== -->
+    <!-- COLONNE GAUCHE : CATALOGUE                  -->
+    <!-- ========================================== -->
+    <section class="panel panel-catalog" aria-label="Catalogue des pièces">
+      <header class="panel-header">
+        <h2>Catalogue</h2>
+        <span id="catalog-count" class="muted">0 question(s)</span>
+      </header>
+
+      <!-- FILTRES -->
+      <div class="filters">
+        <div class="filter">
+          <label for="filter-niveau">Niveau</label>
+          <select id="filter-niveau">
+            <option value="">Tous</option>
+            <option value="1">Secondaire 1</option>
+            <option value="2">Secondaire 2</option>
+            <option value="3">Secondaire 3</option>
+            <option value="4">Secondaire 4</option>
+          </select>
+        </div>
+        <div class="filter">
+          <label for="filter-realite">Réalité sociale</label>
+          <select id="filter-realite"><option value="">Toutes</option></select>
+        </div>
+        <div class="filter">
+          <label for="filter-operation">Opération intellectuelle</label>
+          <select id="filter-operation"><option value="">Toutes</option></select>
+        </div>
+        <button id="reset-filters" type="button" class="btn-link">↺ Réinitialiser</button>
+      </div>
+
+      <!-- LISTE DES QUESTIONS -->
+      <div id="catalog-list" class="catalog-list"></div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- COLONNE DROITE : CAHIER EN CONSTRUCTION     -->
+    <!-- ========================================== -->
+    <section class="panel panel-cahier" aria-label="Cahier en construction">
+      <header class="panel-header">
+        <h2>Cahier en construction</h2>
+        <span id="cahier-count" class="cahier-stats">0 question</span>
+      </header>
+
+      <p class="hint">
+        Coche des éléments dans le catalogue pour les ajouter ici.<br>
+        Glisse-dépose pour réordonner.
+      </p>
+
+      <div id="cahier-list" class="cahier-list"></div>
+
+      <div class="cahier-actions">
+        <div class="cahier-actions-row">
+          <button id="btn-clear-cahier" type="button" class="btn btn-secondary" disabled>
+            Vider
+          </button>
+          <button id="btn-preview" type="button" class="btn btn-secondary" disabled>
+            👁 Aperçu cahier
+          </button>
+          <button id="btn-preview-corrige" type="button" class="btn btn-secondary" disabled>
+            👁 Aperçu guide
+          </button>
+        </div>
+        <div class="cahier-actions-row">
+          <button id="btn-generate" type="button" class="btn btn-primary" disabled>
+            ⬇ Cahier de l'élève
+          </button>
+          <button id="btn-generate-corrige" type="button" class="btn btn-primary" disabled>
+            ⬇ Guide de l'enseignant
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- PREVIEW MODAL -->
+  <div id="preview-overlay" class="modal-overlay" hidden>
+    <div class="modal">
+      <header class="modal-header">
+        <h3 id="modal-title">Aperçu</h3>
+        <div class="modal-header-actions">
+          <button id="modal-download" class="btn btn-primary btn-sm" type="button">⬇ Télécharger</button>
+          <button id="modal-close" class="modal-close" type="button" aria-label="Fermer">×</button>
+        </div>
+      </header>
+      <div class="modal-body">
+        <div id="preview-container" class="preview-container"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOADING OVERLAY -->
+  <div id="loading-overlay" class="loading-overlay" hidden>
+    <div class="loading-content">
+      <div class="spinner"></div>
+      <p id="loading-message">Génération en cours…</p>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    Outil pédagogique · Histoire et éducation à la citoyenneté · Premier cycle du secondaire
+  </footer>
+
+  <!-- Librairies externes -->
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
+  <script src="https://unpkg.com/docx@8.5.0/build/index.umd.js"></script>
+  <script>
+    // docx-js et docx-preview exposent toutes deux `window.docx` — on isole docx-js sous _docxJs
+    window._docxJs = window.docx;
+    window.docx = undefined;
+  </script>
+  <script src="https://unpkg.com/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="https://unpkg.com/docx-preview@0.3.0/dist/docx-preview.js"></script>
+  <script>
+    // Maintenant `window.docx` = docx-preview. On l'expose sous `docxPreview` et on rétablit docx-js
+    window.docxPreview = window.docx;
+    window.docx = window._docxJs;
+  </script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
