@@ -115,6 +115,9 @@
     renderCatalog();
   }
 
+  // État global des groupes repliés (par realite_sociale_id)
+  const collapsedRealites = new Set();
+
   // ====== RENDU DU CATALOGUE ======
   // (Pas de sous-pièces cochables : chaque question est une unité atomique)
   function renderCatalog() {
@@ -126,60 +129,107 @@
     }
 
     const realiteTitleById = {};
-    DATA.realites_sociales.forEach(r => realiteTitleById[r.id] = r.titre);
+    const realiteIdxById = {};
+    DATA.realites_sociales.forEach((r, i) => {
+      realiteTitleById[r.id] = r.titre;
+      realiteIdxById[r.id] = i;
+    });
 
+    // Grouper les questions filtrées par réalité sociale en préservant
+    // l'ordre des réalités tel que défini dans DATA.realites_sociales.
+    const groupsMap = new Map();
+    DATA.realites_sociales.forEach(r => groupsMap.set(r.id, []));
     state.filteredQuestions.forEach(q => {
-      const card = document.createElement('div');
-      card.className = 'question-card';
-      if (isQuestionUsed(q.id)) card.classList.add('has-selection');
+      if (!groupsMap.has(q.realite_sociale_id)) groupsMap.set(q.realite_sociale_id, []);
+      groupsMap.get(q.realite_sociale_id).push(q);
+    });
 
-      const checked = isQuestionUsed(q.id) ? 'checked' : '';
-      const pointsTotal = computeQuestionPoints(q);
-      const realite = realiteTitleById[q.realite_sociale_id] || '';
+    // Construire les groupes pour chaque réalité présente
+    groupsMap.forEach((questions, realiteId) => {
+      if (questions.length === 0) return;
+      const realiteIdx = realiteIdxById[realiteId] ?? 0;
+      const realiteTitle = realiteTitleById[realiteId] || 'Sans réalité';
 
-      const tagsHtml = `
-        <div class="q-meta">
-          <span class="tag tag-niveau">Secondaire ${q.niveau}</span>
-          <span class="tag tag-operation">${escapeHtml(q.operation)}</span>
-          <span class="tag tag-numero">#${q.numero}</span>
-          ${realite ? `<span class="tag tag-realite">${escapeHtml(realite)}</span>` : ''}
-          ${pointsTotal > 0 ? `<span class="tag tag-points">${pointsTotal} pts</span>` : ''}
-        </div>
+      const groupEl = document.createElement('div');
+      groupEl.className = 'realite-group';
+      if (collapsedRealites.has(realiteId)) groupEl.classList.add('collapsed');
+
+      // En-tête de groupe (cliquable)
+      const headerEl = document.createElement('div');
+      headerEl.className = 'realite-group-header';
+      headerEl.setAttribute('data-realite-idx', String(realiteIdx));
+      headerEl.innerHTML = `
+        <span class="realite-toggle" aria-hidden="true">▼</span>
+        <span class="realite-group-title">${escapeHtml(realiteTitle)}</span>
+        <span class="realite-group-count">${questions.length} question${questions.length > 1 ? 's' : ''}</span>
       `;
-
-      card.innerHTML = `
-        <div class="question-header">
-          <input type="checkbox" class="q-checkbox" data-q-id="${q.id}" ${checked} aria-label="Sélectionner cette question">
-          <div class="q-content">
-            ${tagsHtml}
-            <p class="q-prompt">${escapeHtml(q.questionBody.prompt)}</p>
-          </div>
-        </div>
-      `;
-
-      const header = card.querySelector('.question-header');
-      const checkbox = card.querySelector('.q-checkbox');
-
-      function toggleSelection() {
-        if (isQuestionUsed(q.id)) {
-          removeAllPiecesForQuestion(q.id);
-        } else {
-          addAllPiecesForQuestion(q);
-        }
+      headerEl.addEventListener('click', () => {
+        if (collapsedRealites.has(realiteId)) collapsedRealites.delete(realiteId);
+        else collapsedRealites.add(realiteId);
         renderCatalog();
-        renderCahier();
-      }
-
-      header.addEventListener('click', (e) => {
-        if (e.target === checkbox) return;
-        toggleSelection();
       });
-      checkbox.addEventListener('change', (e) => {
-        e.stopPropagation();
-        toggleSelection();
+      groupEl.appendChild(headerEl);
+
+      const cardsContainer = document.createElement('div');
+      cardsContainer.className = 'realite-group-cards';
+
+      questions.forEach(q => {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.setAttribute('data-realite-idx', String(realiteIdx));
+        if (isQuestionUsed(q.id)) card.classList.add('has-selection');
+
+        const checked = isQuestionUsed(q.id) ? 'checked' : '';
+        const pointsTotal = computeQuestionPoints(q);
+        const realite = realiteTitleById[q.realite_sociale_id] || '';
+
+        const tagsHtml = `
+          <div class="q-meta">
+            <span class="tag tag-niveau">Secondaire ${q.niveau}</span>
+            <span class="tag tag-operation">${escapeHtml(q.operation)}</span>
+            <span class="tag tag-numero">#${q.numero}</span>
+            ${realite ? `<span class="tag tag-realite" data-realite-idx="${realiteIdx}">${escapeHtml(realite)}</span>` : ''}
+            ${pointsTotal > 0 ? `<span class="tag tag-points">${pointsTotal} pts</span>` : ''}
+          </div>
+        `;
+
+        card.innerHTML = `
+          <div class="question-header">
+            <input type="checkbox" class="q-checkbox" data-q-id="${q.id}" ${checked} aria-label="Sélectionner cette question">
+            <div class="q-content">
+              ${tagsHtml}
+              <p class="q-prompt">${escapeHtml(q.questionBody.prompt)}</p>
+            </div>
+          </div>
+        `;
+
+        const header = card.querySelector('.question-header');
+        const checkbox = card.querySelector('.q-checkbox');
+
+        function toggleSelection() {
+          if (isQuestionUsed(q.id)) {
+            removeAllPiecesForQuestion(q.id);
+          } else {
+            addAllPiecesForQuestion(q);
+          }
+          renderCatalog();
+          renderCahier();
+        }
+
+        header.addEventListener('click', (e) => {
+          if (e.target === checkbox) return;
+          toggleSelection();
+        });
+        checkbox.addEventListener('change', (e) => {
+          e.stopPropagation();
+          toggleSelection();
+        });
+
+        cardsContainer.appendChild(card);
       });
 
-      el.catalogList.appendChild(card);
+      groupEl.appendChild(cardsContainer);
+      el.catalogList.appendChild(groupEl);
     });
   }
 

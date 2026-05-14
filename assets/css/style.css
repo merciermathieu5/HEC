@@ -17,6 +17,15 @@
   --color-success: #4a7c4f;
   --color-danger: #a84a3c;
   --color-blue-header: #1f77b4;
+  /* Palette pour les réalités sociales (extensible) */
+  --realite-color-1: #4a7c4f;  /* vert : renouvellement de la vision de l'Homme */
+  --realite-color-1-bg: #e8f0e3;
+  --realite-color-2: #a06642;  /* terre cuite : expansion européenne */
+  --realite-color-2-bg: #f5e8dc;
+  --realite-color-3: #6a4a8a;  /* pourpre : réservé */
+  --realite-color-3-bg: #ece4f0;
+  --realite-color-4: #2e6b8a;  /* bleu pétrole : réservé */
+  --realite-color-4-bg: #dde9f0;
   --shadow-sm: 0 1px 2px rgba(42, 38, 32, 0.06);
   --shadow-md: 0 2px 6px rgba(42, 38, 32, 0.08);
   --radius: 4px;
@@ -221,6 +230,80 @@ html, body {
 .tag-operation { background: #eee5d3; color: #6b5d3e; }
 .tag-realite   { background: #e5dcc8; color: #4a4030; }
 .tag-points    { background: #d8e6f0; color: #1f5482; }
+
+/* Couleurs par réalité sociale (data-realite-idx assigné en JS selon l'ordre dans DATA.realites_sociales) */
+.question-card[data-realite-idx="0"] { border-left: 4px solid var(--realite-color-1); }
+.question-card[data-realite-idx="1"] { border-left: 4px solid var(--realite-color-2); }
+.question-card[data-realite-idx="2"] { border-left: 4px solid var(--realite-color-3); }
+.question-card[data-realite-idx="3"] { border-left: 4px solid var(--realite-color-4); }
+
+.tag-realite[data-realite-idx="0"] { background: var(--realite-color-1); color: #fff; }
+.tag-realite[data-realite-idx="1"] { background: var(--realite-color-2); color: #fff; }
+.tag-realite[data-realite-idx="2"] { background: var(--realite-color-3); color: #fff; }
+.tag-realite[data-realite-idx="3"] { background: var(--realite-color-4); color: #fff; }
+
+/* === Groupes repliables par réalité sociale === */
+.realite-group {
+  margin-bottom: 0.4rem;
+}
+.realite-group-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.7rem;
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  user-select: none;
+  font-weight: 600;
+  font-size: 0.88rem;
+  margin-bottom: 0.4rem;
+  transition: background var(--transition);
+}
+.realite-group-header:hover { background: #f5efe2; }
+.realite-group-header[data-realite-idx="0"] {
+  background: var(--realite-color-1-bg);
+  border-left: 4px solid var(--realite-color-1);
+}
+.realite-group-header[data-realite-idx="1"] {
+  background: var(--realite-color-2-bg);
+  border-left: 4px solid var(--realite-color-2);
+}
+.realite-group-header[data-realite-idx="2"] {
+  background: var(--realite-color-3-bg);
+  border-left: 4px solid var(--realite-color-3);
+}
+.realite-group-header[data-realite-idx="3"] {
+  background: var(--realite-color-4-bg);
+  border-left: 4px solid var(--realite-color-4);
+}
+.realite-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  transition: transform var(--transition);
+}
+.realite-group.collapsed .realite-toggle { transform: rotate(-90deg); }
+.realite-group-title { flex: 1; min-width: 0; }
+.realite-group-count {
+  font-weight: 500;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+.realite-group-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.realite-group.collapsed .realite-group-cards {
+  display: none;
+}
 
 .q-prompt {
   font-size: 0.9rem;
