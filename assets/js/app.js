@@ -660,16 +660,36 @@
         if (r.type === 'simple' && r.levels) {
           const totalW = 9000;
           const cellW = Math.floor(totalW / r.levels.length);
-          const cells = r.levels.map(lvl => new TableCell({
-            width: { size: cellW, type: WidthType.DXA },
-            borders: ALL_BORDERS,
-            verticalAlign: VerticalAlign.CENTER,
-            margins: CELL_MARGINS,
-            children: [
+          const cells = r.levels.map(lvl => {
+            // Isoler « (N sur M) » sur sa propre ligne en italique gris (même règle que la version cahier).
+            const countMatch = lvl.condition.match(/\s*(\([^)]*sur[^)]*\))\s*\.?\s*$/i);
+            const mainText = countMatch
+              ? lvl.condition.slice(0, countMatch.index).replace(/\s+$/, '')
+              : lvl.condition;
+            const countText = countMatch ? countMatch[1] : null;
+            const paragraphs = [
               new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: lvl.points, bold: true, size: 16 })] }),
-              new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: lvl.condition, size: 14 })] })
-            ]
-          }));
+              new Paragraph({
+                alignment: AlignmentType.CENTER,
+                spacing: { after: countText ? 40 : 0 },
+                children: [new TextRun({ text: mainText, size: 14 })]
+              })
+            ];
+            if (countText) {
+              paragraphs.push(new Paragraph({
+                alignment: AlignmentType.CENTER,
+                spacing: { before: 0, after: 0 },
+                children: [new TextRun({ text: countText, size: 14, color: "6E685C", italics: true })]
+              }));
+            }
+            return new TableCell({
+              width: { size: cellW, type: WidthType.DXA },
+              borders: ALL_BORDERS,
+              verticalAlign: VerticalAlign.CENTER,
+              margins: CELL_MARGINS,
+              children: paragraphs
+            });
+          });
           bodyChildren.push(new Table({
             width: { size: totalW, type: WidthType.DXA },
             columnWidths: r.levels.map(() => cellW),
@@ -722,6 +742,7 @@
     const SHADING = { fill: "FDF6EC", type: ShadingType.CLEAR, color: "auto" };
     const ANSWER_BORDER = { style: BorderStyle.SINGLE, size: 6, color: "8B3A2E" };
     const ANSWER_BORDERS = { top: ANSWER_BORDER, bottom: ANSWER_BORDER, left: ANSWER_BORDER, right: ANSWER_BORDER };
+    const NO_BORDER = { style: BorderStyle.NONE, size: 0, color: "FFFFFF" };
     const ANSWER_CELL_MARGINS = { top: 120, bottom: 120, left: 160, right: 160 };
 
     // 1) Texte simple (réponse type "lines")
@@ -756,6 +777,57 @@
       ] }));
       out.push(new Paragraph({ spacing: { before: 80, after: 40 }, children: [new TextRun({ text: "✓ Corrigé", bold: true, size: 18, color: "8B3A2E" })] }));
       out.push(new Table({ width: { size: 9000, type: WidthType.DXA }, columnWidths: [5400, 3600], rows }));
+      return out;
+    }
+
+    // 2b) Réponse "chrono-ordering" : trois cases horizontales avec flèches, chacune remplie de la bonne réponse
+    if (rs && rs.type === 'chrono-ordering' && Array.isArray(q.corrige)) {
+      const items = rs.items || [];
+      const n = items.length;
+      const totalW = 9000;
+      const arrowW = 450;
+      const boxW = Math.floor((totalW - (n - 1) * arrowW) / n);
+      const widths = [];
+      const cells = [];
+      items.forEach((label, i) => {
+        widths.push(boxW);
+        cells.push(new TableCell({
+          width: { size: boxW, type: WidthType.DXA },
+          borders: ANSWER_BORDERS, shading: SHADING,
+          verticalAlign: VerticalAlign.CENTER,
+          margins: { top: 100, bottom: 100, left: 60, right: 60 },
+          children: [
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              spacing: { after: 60 },
+              children: [new TextRun({ text: label, size: 14, italics: true, color: "888888" })]
+            }),
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              children: [new TextRun({ text: q.corrige[i] || '—', bold: true, size: 22, color: "8B3A2E" })]
+            })
+          ]
+        }));
+        if (i < n - 1) {
+          widths.push(arrowW);
+          cells.push(new TableCell({
+            width: { size: arrowW, type: WidthType.DXA },
+            borders: { top: NO_BORDER, bottom: NO_BORDER, left: NO_BORDER, right: NO_BORDER },
+            verticalAlign: VerticalAlign.CENTER,
+            margins: { top: 0, bottom: 0, left: 0, right: 0 },
+            children: [new Paragraph({
+              alignment: AlignmentType.CENTER,
+              children: [new TextRun({ text: "→", size: 32, bold: true })]
+            })]
+          }));
+        }
+      });
+      out.push(new Paragraph({ spacing: { before: 80, after: 40 }, children: [new TextRun({ text: "✓ Corrigé", bold: true, size: 18, color: "8B3A2E" })] }));
+      out.push(new Table({
+        width: { size: totalW, type: WidthType.DXA },
+        columnWidths: widths,
+        rows: [new TableRow({ height: { value: 800, rule: "atLeast" }, children: cells })]
+      }));
       return out;
     }
 
@@ -1302,6 +1374,57 @@
             width: { size: totalW, type: WidthType.DXA },
             columnWidths: colWidths,
             rows: tableRows
+          }));
+        } else if (body.responseSpace.type === 'chrono-ordering') {
+          // Mise en ordre chronologique : N cases bordées séparées par des flèches « → ».
+          // Format inspiré du gabarit pédagogique original : trois cercles connectés par
+          // des flèches que l'élève remplit de gauche (le plus ancien) à droite (le plus récent).
+          // Les `items`, s'ils sont fournis, servent de petites étiquettes au-dessus de chaque case.
+          const items = body.responseSpace.items || [];
+          const n = items.length;
+          const totalW = 10500;
+          const arrowW = 550;
+          const boxW = Math.floor((totalW - (n - 1) * arrowW) / n);
+          const widths = [];
+          const cells = [];
+          items.forEach((label, i) => {
+            widths.push(boxW);
+            cells.push(new TableCell({
+              width: { size: boxW, type: WidthType.DXA },
+              borders: ALL_BORDERS,
+              verticalAlign: VerticalAlign.CENTER,
+              margins: { top: 100, bottom: 100, left: 80, right: 80 },
+              children: [
+                new Paragraph({
+                  alignment: AlignmentType.CENTER,
+                  spacing: { after: 60 },
+                  children: [new TextRun({ text: label, size: 16, italics: true, color: "888888" })]
+                }),
+                new Paragraph({ children: [new TextRun({ text: "", size: 24 })] }),
+                new Paragraph({ children: [new TextRun({ text: "", size: 24 })] })
+              ]
+            }));
+            if (i < n - 1) {
+              widths.push(arrowW);
+              cells.push(new TableCell({
+                width: { size: arrowW, type: WidthType.DXA },
+                borders: NO_BORDERS,
+                verticalAlign: VerticalAlign.CENTER,
+                margins: { top: 0, bottom: 0, left: 0, right: 0 },
+                children: [new Paragraph({
+                  alignment: AlignmentType.CENTER,
+                  children: [new TextRun({ text: "→", size: 40, bold: true })]
+                })]
+              }));
+            }
+          });
+          elements.push(new Table({
+            width: { size: totalW, type: WidthType.DXA },
+            columnWidths: widths,
+            rows: [new TableRow({
+              height: { value: 1200, rule: "atLeast" },
+              children: cells
+            })]
           }));
         } else if (body.responseSpace.type === 'cases-causalite') {
           // Conservé pour rétro-compatibilité — cases bleutées avec flèches
