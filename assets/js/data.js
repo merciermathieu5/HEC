@@ -529,7 +529,7 @@ const DOCS = {
       imageUrl: "assets/img/rev-causalite-1/img000.png", imageWidthCm: 5,
       sources: ["Source du texte : William John Eccles, « Le Canada et la guerre de Sept Ans », Encyclopédie canadienne, consulté le 16 juillet 2023.", "Source de l'image : Carl Röchling, Frédéric le Grand à la bataille de Zorndorf, Wikimedia Commons. Domaine public."] },
     { id: "rc1-d3", title: "Document 3 : Le Boston Tea Party", layout: "image-only",
-      imageUrl: "assets/img/rev-causalite-1/img001.png", imageWidthCm: 9,
+      imageUrl: "assets/img/rev-causalite-1/img001.png", imageWidthCm: 12,
       sources: ["Source de l'image : Nathaniel Currier, Boston Tea Party de 1773 (1846), Wikimedia Commons. Domaine public."] }
   ],
   'rev-causalite-2': [
@@ -541,7 +541,7 @@ const DOCS = {
       sources: ["Source : Service national du RÉCIT, domaine de l'univers social."] },
     { id: "rc2-d3", title: "Document 3 : Influence des Lumières", layout: "text-image",
       text: "Les idées telles que la séparation des pouvoirs, l'égalité des Hommes et l'idée qu'il existe un contrat social entre gouvernant et gouvernés sont très présentes dans les 13 colonies américaines. Circulant sous la forme de pamphlets et des livres, ces idées traversent l'Atlantique. Elles sont connues et débattues dans les salons, fréquentés par ceux qui sont appelés aujourd'hui les pères fondateurs.",
-      imageUrl: "assets/img/rev-causalite-2/img000.png", imageWidthCm: 4.5,
+      imageUrl: "assets/img/rev-causalite-2/img000.png", imageWidthCm: 7,
       sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Rembrandt Peale, Cropped portrait of Thomas Jefferson, the third President of the United States, Wikimedia Commons. Domaine public."] }
   ],
   'rev-causalite-3': [
@@ -571,15 +571,15 @@ const DOCS = {
     { id: "rf2-d1", title: "Document 1 : Stamp Act", layout: "image-only",
       imageUrl: "assets/img/rev-faits-2/img000.png", imageWidthCm: 5,
       sources: ["Source de l'image : British Parliament 1765, Printed copy of the Stamp Act of 1765, Wikimedia Commons. Domaine public."] },
-    { id: "rf2-d2", title: "Document 2 : Sugar Act", layout: "text-only",
-      text: "« qu'un revenu soit levé, dans lesdits dominions de Votre Majesté en Amérique, pour couvrir les dépenses de défense, de protection et de sécurisation de celui-ci ; [...] qu'à partir du vingt-neuvième jour de septembre mil sept cent soixante-quatre, il sera levé, prélevé, perçu et payé à sa majesté, ses héritiers et successeurs, pour et sur tous les sucres blancs [...]. »",
-      sources: ["Source du texte : « American Revenue Act of 1764 (extraits) », cité dans Revolutionary War and Beyond, consulté le 24 juillet 2023."] },
-    { id: "rf2-d3", title: "Document 3 : Tea Act", layout: "image-only",
+    { id: "rf2-d2", title: "Document 2 : Tea Act", layout: "image-only",
       imageUrl: "assets/img/rev-faits-2/img001.png", imageWidthCm: 5,
       sources: ["Source de l'image : George III, First edition of the Tea Act of 1773, New York Public Library. Domaine public."] },
+    { id: "rf2-d3", title: "Document 3 : Sugar Act", layout: "text-only",
+      text: "« qu'un revenu soit levé, dans lesdits dominions de Votre Majesté en Amérique, pour couvrir les dépenses de défense, de protection et de sécurisation de celui-ci ; [...] qu'à partir du vingt-neuvième jour de septembre mil sept cent soixante-quatre, il sera levé, prélevé, perçu et payé à sa majesté, ses héritiers et successeurs, pour et sur tous les sucres blancs [...]. »",
+      sources: ["Source du texte : « American Revenue Act of 1764 (extraits) », cité dans Revolutionary War and Beyond, consulté le 24 juillet 2023."] },
     { id: "rf2-d4", title: "Document 4 : De l'Esprit des Lois", layout: "text-image",
       text: "« Pour qu'on ne puisse abuser du pouvoir, il faut que, par la disposition des choses, le pouvoir arrête le pouvoir. Une constitution peut être telle que personne ne sera contraint de faire les choses auxquelles la loi ne l'oblige pas, et à ne point faire celles que la loi lui permet. [...] Il y a dans chaque État trois sortes de pouvoirs : la puissance législative, la puissance exécutrice des choses qui dépendent du droit des gens et la puissance exécutrice de celles qui dépendent du droit civil. »",
-      imageUrl: "assets/img/rev-faits-2/img002.png", imageWidthCm: 4.5,
+      imageUrl: "assets/img/rev-faits-2/img002.png", imageWidthCm: 7,
       sources: ["Source du texte : Extrait de Montesquieu, De l'Esprit des Lois, XI, chapitres III-VI, Genève, 1748, cité dans Cliotexte, Les trois pouvoirs, en ligne.", "Source de l'image : Jacques-Antoine Dassier, Montesquieu 1, Wikimedia Commons. Domaine public."] }
   ],
   'rev-faits-3': [
@@ -618,10 +618,10 @@ const DOCS = {
       imageUrl: "assets/img/rev-temps-1/timeline.png", imageWidthCm: 14,
       sources: ["Source : Mathieu Mercier."] },
     { id: "rt1-d2", title: "Document 2 : La bataille de Bunker Hill", layout: "image-only",
-      imageUrl: "assets/img/rev-temps-1/img000.png", imageWidthCm: 8,
+      imageUrl: "assets/img/rev-temps-1/img000.png", imageWidthCm: 7,
       sources: ["Source de l'image : Howard Pyle, La bataille de Bunker Hill (1898), Wikimedia Commons, LC-USZ61-449. Domaine public."] },
     { id: "rt1-d3", title: "Document 3 : Le Boston Tea Party", layout: "image-only",
-      imageUrl: "assets/img/rev-temps-1/img001.png", imageWidthCm: 8,
+      imageUrl: "assets/img/rev-temps-1/img001.png", imageWidthCm: 7,
       sources: ["Source de l'image : Nathaniel Currier, Boston Tea Party de 1773 (1846), Wikimedia Commons. Domaine public."] }
   ],
   'rev-temps-2': [
@@ -633,7 +633,7 @@ const DOCS = {
       sources: ["Source de l'image : Paul Revere, The Bloody Massacre Perpetrated in King Street Boston on March 5th, 1770, Wikimedia Commons. Domaine public."] },
     { id: "rt2-d3", title: "Document 3 : Élection présidentielle", layout: "text-image",
       text: "« En 1789, lors de la première élection présidentielle, George Washington est élu à l'unanimité président des États-Unis. »",
-      imageUrl: "assets/img/rev-temps-2/img001.png", imageWidthCm: 4.5,
+      imageUrl: "assets/img/rev-temps-2/img001.png", imageWidthCm: 7,
       sources: ["Source de l'image : Gilbert Stuart, Gilbert Stuart Williamstown Portrait of George Washington (1803), Wikimedia Commons. Domaine public."] },
     { id: "rt2-d4", title: "Document 4 : Extrait de la Déclaration d'indépendance américaine", layout: "text-only",
       text: "« Nous tenons pour allant d'elles-mêmes, les vérités suivantes, à savoir : que tous les Hommes ont été créés égaux, qu'ils ont été dotés par leur Créateur de certains Droits inaliénables [...] »",
@@ -674,13 +674,13 @@ const DOCS = {
     { id: "rca1-d1", title: "Document 1 : Possessions coloniales", layout: "text-only",
       text: "« Après avoir considérablement accru ses possessions sur le continent, par la conquête de la Nouvelle-France, l'Angleterre ne modifie en rien les frontières de ses Treize premières colonies qui s'attendent pourtant à un agrandissement de leur territoire. En outre, la métropole interdit aux Américains, aussi bien qu'aux Canadiens, d'acheter des terres du territoire [amérindien] pour y ériger des villages. L'entrée de ce territoire est d'ailleurs bloquée par des garnisons de l'armée britannique stratégiquement postées à cette fin. Bref, l'Angleterre manifeste son opposition au désir d'expansion des Américains en Amérique du Nord. »",
       sources: ["Source du texte : Lise Pothier, Histoire des États-Unis, Mont-Royal, Modulo Éditeur, 1987, p. 65-66."] },
-    { id: "rca1-d2", title: "Document 2 : Le Boston Tea Party", layout: "image-only",
-      imageUrl: "assets/img/rev-causes-1/img000.png", imageWidthCm: 9,
-      sources: ["Source de l'image : Nathaniel Currier, Boston Tea Party de 1773 (1846), Wikimedia Commons. Domaine public."] },
-    { id: "rca1-d3", title: "Document 3 : La guerre de Sept Ans", layout: "text-image",
+    { id: "rca1-d2", title: "Document 2 : La guerre de Sept Ans", layout: "text-image",
       text: "La guerre de Sept Ans (de 1756 à 1763) est la première guerre d'envergure mondiale. Elle est menée en Europe, en Inde et en Amérique, ainsi qu'en mer. En Amérique du Nord, la Grande-Bretagne et la France, empires rivaux, luttent pour la suprématie [...]. Malgré ses victoires militaires et marines, la Grande-Bretagne croule sous une dette nationale colossale en 1760.",
-      imageUrl: "assets/img/rev-causes-1/img001.png", imageWidthCm: 5,
-      sources: ["Source du texte : William John Eccles, « Le Canada et la guerre de Sept Ans », Encyclopédie canadienne, consulté le 16 juillet 2023.", "Source de l'image : Carl Röchling, Frédéric le Grand à la bataille de Zorndorf, Wikimedia Commons. Domaine public."] }
+      imageUrl: "assets/img/rev-causes-1/img001.png", imageWidthCm: 7,
+      sources: ["Source du texte : William John Eccles, « Le Canada et la guerre de Sept Ans », Encyclopédie canadienne, consulté le 16 juillet 2023.", "Source de l'image : Carl Röchling, Frédéric le Grand à la bataille de Zorndorf, Wikimedia Commons. Domaine public."] },
+    { id: "rca1-d3", title: "Document 3 : Le Boston Tea Party", layout: "image-only",
+      imageUrl: "assets/img/rev-causes-1/img000.png", imageWidthCm: 12,
+      sources: ["Source de l'image : Nathaniel Currier, Boston Tea Party de 1773 (1846), Wikimedia Commons. Domaine public."] }
   ],
   'rev-causes-2': [
     { id: "rca2-d1", title: "Document 1 : Pas de taxes sans représentation", layout: "text-only",
@@ -1220,7 +1220,7 @@ window.DATA = {
       questionBody: { prompt: "Détermine le document qui présente une cause de l'imposition de taxes dans les Treize colonies américaines et le document qui en présente une conséquence.",
         responseSpace: { type: "labeled-list", items: ["Cause (Document n°)", "Conséquence (Document n°)"] } },
       reglettes: [{ id: "r-rev-ca1", label: "Réglette (2 points)", ...R_CAUSES_2PT_CAUSE_CONS }], documents: pickDocs('rev-causes-1', 1, 2, 3),
-      corrige: ["3", "2"] },
+      corrige: ["2", "3"] },
     { id: "q-rev-causes-2", operation: "Déterminer des causes et des conséquences", numero: 2, niveau: 2, realite_sociale_id: "revolution-americaine",
       questionBody: { prompt: "À l'aide du document 1, détermine une conséquence de la Proclamation royale de 1763 sur le territoire des Treize colonies américaines.", responseSpace: { type: "lines", count: 4 } },
       reglettes: [{ id: "r-rev-ca2", label: "Réglette (2 points)", ...R_CAUSES_2PT_CONSEQ }], documents: pickDocs('rev-causes-1', 1),
