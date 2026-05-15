@@ -1,6 +1,12 @@
-# HEC · Premier cycle — Composition de cahier (v2.7)
+# HEC · Premier cycle — Composition de cahier (v2.8)
 
 Outil web pour composer un cahier d'élève à la pièce — sortie en `.docx` éditable.
+
+## ✨ Quoi de neuf (v2.8)
+
+- 🌾 **Nouvelle réalité sociale (Secondaire 1)** : *La sédentarisation* avec 35 questions atomiques couvrant les 8 opérations intellectuelles. **Deuxième ajout de niveau 1** dans l'app, aux côtés de la christianisation de l'Occident. Couvre la révolution néolithique : Croissant fertile, irrigation, premiers villages, agriculture et élevage, poterie, sépultures, Çatal Höyük.
+- 📚 **Catalogue total** : 246 questions réparties sur 7 réalités sociales (Le renouvellement de la vision de l'Homme + L'expansion européenne dans le monde + La Révolution américaine + La christianisation de l'Occident + L'industrialisation + L'expansion du monde industriel + La sédentarisation).
+- 🟠 Couleur **sienne brûlée** dédiée pour la 7ᵉ réalité — teinte argile/terre cuite évocatrice du Néolithique, en cohérence avec la palette de design (vert / terre cuite / pourpre / ocre / bleu ardoise / bordeaux / sienne).
 
 ## ✨ Quoi de neuf (v2.7)
 

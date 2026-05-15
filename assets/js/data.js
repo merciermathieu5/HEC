@@ -93,6 +93,11 @@ const R_RELATION_2PT_4 = rubric3("Mettre en relation des faits", "L'élève met 
 const R_DIFFERENCES_2PT_PART = rubric3("Dégager des différences et des similitudes", "L'élève dégage correctement la différence.", "L'élève dégage partiellement la différence.", "L'élève dégage incorrectement la différence.");
 const R_SIMILITUDES_2PT_PART = rubric3("Dégager des différences et des similitudes", "L'élève dégage correctement la similitude.", "L'élève dégage partiellement la similitude.", "L'élève dégage incorrectement la similitude.");
 
+// === Rubriques additionnelles v2.8 (sédentarisation) ===
+const R_SITUER_2PT_T2 = rubric3("Situer dans le temps et dans l'espace", "L'élève situe tous les faits dans le temps. (2 sur 2)", "L'élève situe certains faits dans le temps. (1 sur 2)", "L'élève ne situe pas les faits dans le temps. (0 sur 2)");
+const R_CAUSES_2PT_CAUSES = rubric3("Déterminer des causes et des conséquences", "L'élève détermine correctement les causes.", "L'élève détermine plus ou moins correctement les causes.", "L'élève détermine incorrectement les causes ou ne les détermine pas.");
+const R_CHGT_2PT_PAIR = rubric3("Déterminer des changements et des continuités", "L'élève détermine correctement le changement et la continuité.", "L'élève détermine correctement le changement ou la continuité.", "L'élève ne détermine ni le changement ni la continuité.");
+
 const CAUSALITE_INSTRUCTIONS = {
   parts: [
     { text: "Fais des phrases complètes et utilise des marqueurs de relation de " },
@@ -1001,6 +1006,226 @@ const DOCS = {
       sources: ["Source du texte : L. Duchesne (éd.), Liber pontificalis, Bouquet, V, 466, tome II, Paris, Ernest Thorin, 1892, p. 7, en ligne.", "Source de l'image : Jean Fouquet, Grandes chroniques de France (vers 1455-1460), Bibliothèque nationale de France, Français 6465, folio 89v."] }
   ],
 
+  // ============ Documents — La sédentarisation (Secondaire 1) ============
+  'sed-causalite-1': [
+    { id: "sed-c1-d1", title: "Document 1 : Le Croissant fertile", layout: "image-only",
+      imageUrl: "assets/img/sed-causalite-1/img000.png", imageWidthCm: 11,
+      sources: ["Source de l'image : Croissant fertile, Wikimedia Commons. Licence : Creative Commons (BY-SA)."] },
+    { id: "sed-c1-d2", title: "Document 2 : Améliorer les récoltes", layout: "text-only",
+      text: "Les paysans se rendent également compte que pour obtenir de meilleures récoltes, il leur faut fournir davantage d'eau à leurs cultures. C'est ainsi qu'ils vont développer d'ingénieux systèmes d'irrigation, grâce auxquels l'eau parvient régulièrement aux plantes. Le rendement des récoltes sera ainsi augmenté, ce qui permettra d'accumuler des surplus.",
+      sources: ["Source : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "sed-c1-d3", title: "Document 3 : Tous paysans ?", layout: "text-only",
+      text: "La plupart des habitants sont des paysans. Ils cultivent l'orge et le blé dans les champs environnants, en plus de faire l'élevage de chèvres et de moutons. Avec le temps, l'amélioration des techniques agricoles permet de produire des surplus et de bien nourrir tous les habitants des villes et des villages.",
+      sources: ["Source : Service national du RÉCIT, domaine de l'univers social."] }
+  ],
+  'sed-causalite-2': [
+    { id: "sed-c2-d1", title: "Document 1 : Révolution agricole", layout: "text-only",
+      text: "Les tribus nomades découvrent peu à peu que certaines céréales poussent chaque année dans la région du Croissant fertile et commencent eux-mêmes à semer et à cultiver des céréales. C'est le début de la révolution agricole qui amorce la période néolithique.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "sed-c2-d2", title: "Document 2 : La poterie", layout: "text-only",
+      text: "Pour les agriculteurs, la poterie représente une innovation fort utile. Les contenants de terre cuite permettent en effet de conserver et de transporter les récoltes et les aliments, sous forme de grains, de farine ou de liquide. Les récipients de céramique servent aussi à la cuisson des aliments.",
+      sources: ["Source : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "sed-c2-d3", title: "Document 3 : Sédentarisation", layout: "text-only",
+      text: "En contrôlant la production de céréales et en les conservant, les tribus nomades de la Mésopotamie n'ont plus à se soucier des déplacements de gibiers afin de subvenir à leurs besoins. Ils se réunissent et fondent les premiers villages permanents à proximité du Tigre ou de l'Euphrate. Les déplacements sur le territoire, bien que présents, sont de moins en moins nombreux. Les tribus nomades se sédentarisent peu à peu.",
+      sources: ["Source : Service national du RÉCIT, domaine de l'univers social."] }
+  ],
+  'sed-causalite-3': [
+    { id: "sed-c3-d1", title: "Document 1 : Çatal Höyük", layout: "image-only",
+      imageUrl: "assets/img/sed-causalite-3/img000.png", imageWidthCm: 11,
+      sources: ["Source de l'image : Steve Quirion, Une des premières villes : Çatal Höyük (environ 6800 av. J.-C.). Licence : Creative Commons (BY-NC-SA)."] },
+    { id: "sed-c3-d2", title: "Document 2 : Une sépulture en Bulgarie", layout: "text-image",
+      text: "Plusieurs objets de la vie quotidienne ont été retrouvés dans les tombes datant du 4e et 5e millénaire avant J.-C. : des bijoux en or, des boucles d'oreilles, des bracelets, des colliers de perles, etc. On a aussi trouvé des coquillages, ce qui témoigne de nombreux échanges grâce au troc. Néanmoins, les archéologues ont aussi découvert que certaines tombes ne contenaient que le corps de la personne défunte, sans objet du quotidien. Il est donc possible que certains habitants du Néolithique accumulaient des richesses et que d'autres n'en aient pas la possibilité.",
+      imageUrl: "assets/img/sed-causalite-3/img001.png", imageWidthCm: 5,
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Yelkrokoyade, Or de Varna - Nécropole, Wikimedia Commons. Licence : Creative Commons BY-SA 3.0."] },
+    { id: "sed-c3-d3", title: "Document 3 : Les rites funéraires", layout: "text-only",
+      text: "D'abord enterrées à l'intérieur ou à proximité des maisons, les dépouilles sont progressivement séparées des espaces de vie quotidienne. Les premières nécropoles naissent afin de les rassembler. Les pratiques funéraires se diversifient : les défunts sont enterrés seuls ou dans des fosses collectives, en pleine terre, dans des coffres en bois, en pierre, dans des grottes ou en pleine terre.",
+      sources: ["Source : Julie Lacaze, « Quand l'Homme a-t-il commencé à enterrer ses morts ? », National Geographic, consulté le 14 juillet 2021."] }
+  ],
+  'sed-faits-1': [
+    { id: "sed-f1-d1", title: "Document 1 : Les outils agricoles", layout: "text-image",
+      text: "Avec la sédentarisation et l'agriculture, les paysans créent toute une gamme de nouveaux outils spécifiques à ce mode de vie : les haches de pierre dure polie, fabriquées avec un manche de bois (pour défricher de nouvelles terres), la meule en pierre (pour moudre le grain), la faucille à lame de pierre (pour récolter les céréales) et la houe (qui sert à labourer, biner, sarcler).",
+      imageUrl: "assets/img/sed-faits-1/img000.png", imageWidthCm: 7,
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Steve Quirion, Un système d'irrigation en Égypte vers 3000 av. J.-C. Licence : Creative Commons (BY-NC-SA)."] },
+    { id: "sed-f1-d2", title: "Document 2 : L'alimentation au Néolithique", layout: "text-image",
+      text: "Les paysans deviennent des éleveurs pour combler leurs besoins alimentaires. Au départ, on capture des animaux qu'on garde en captivité jusqu'à ce qu'on les mange. Progressivement, on commence à pratiquer un élevage plus spécialisé et on élève des animaux pour la viande, les produits laitiers, la laine et pour aider aux travaux agricoles. Les premiers animaux élevés sont la chèvre et le mouton, puis le bœuf et le porc. Grâce aux produits laitiers de la chèvre, les paysans découvrent la fabrication du fromage et du yogourt.",
+      imageUrl: "assets/img/sed-faits-1/img001.png", imageWidthCm: 6,
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Steve Quirion, La domestication des moutons. Licence : Creative Commons (BY-NC-SA)."] }
+  ],
+  'sed-faits-2': [
+    { id: "sed-f2-d1", title: "Document 1 : Les échanges", layout: "text-only",
+      text: "Les premiers échanges ont certainement lieu entre membres d'une même communauté, au sein du village. On échange des colliers de perles, des pointes de flèche, des armatures de faucilles, de la viande, etc. Les productions sont également échangées de village en village. Le bétail, les fromages, les outils, les tissus, les coquillages et même les femmes ont sans doute été l'objet de transactions entre communautés.",
+      sources: ["Source du texte : INRAP, « La circulation des biens et des hommes », INRAP, consulté le 15 juillet 2021. Licence : droits réservés."] },
+    { id: "sed-f2-d2", title: "Document 2 : La houe", layout: "image-only",
+      imageUrl: "assets/img/sed-faits-2/img000.png", imageWidthCm: 7,
+      sources: ["Source de l'image : H. Camps-Fabrer, Houe, Encyclopédie berbère, consulté le 24 septembre 2020."] }
+  ],
+  'sed-faits-3': [
+    { id: "sed-f3-d1", title: "Document 1 : Un rôle complémentaire", layout: "text-only",
+      text: "Dans [les sociétés néolithiques], les femmes consacrent une grande part de leur temps à la cueillette, ajoute-t-elle. Elles entretiennent une relation très étroite avec la flore, en témoignent leur grande connaissance des plantes comestibles, de celles dotées de vertus médicinales et de celles pouvant servir au tissage ainsi qu'à la fabrication de cordes et de paniers, objets essentiels pour une multitude de tâches. « Les femmes contribuent pour une très grande part à la subsistance du groupe par tous les petits animaux, œufs, coquillages et plantes qu'elles ramassent. »",
+      sources: ["Source du texte : Pauline Gravel, « Le rôle méconnu de la femme préhistorique », Le Devoir, 18 avril 2018."] },
+    { id: "sed-f3-d2", title: "Document 2 : La déesse-mère", layout: "image-only",
+      imageUrl: "assets/img/sed-faits-3/img000.png", imageWidthCm: 5,
+      sources: ["Source de l'image : Nevit Dilmen, Museum of Anatolian Civilizations 1320259 nevit, Wikimedia Commons. Licence : Creative Commons BY-SA 3.0."] }
+  ],
+  'sed-espace-1': [
+    { id: "sed-e1-d1", title: "Document 1 : Hydrographie du Croissant fertile", layout: "image-only",
+      imageUrl: "assets/img/sed-espace-1/img000.png", imageWidthCm: 11,
+      sources: ["Source de l'image : D-Maps."] },
+    { id: "sed-e1-d2", title: "Document 2 : Le Croissant fertile", layout: "image-only",
+      imageUrl: "assets/img/sed-espace-1/img001.png", imageWidthCm: 13,
+      sources: ["Source de l'image : D-Maps."] }
+  ],
+  'sed-espace-2': [
+    { id: "sed-e2-d1", title: "Document 1 : Hydrographie du Croissant fertile", layout: "image-only",
+      imageUrl: "assets/img/sed-espace-2/img000.png", imageWidthCm: 11,
+      sources: ["Source de l'image : D-Maps."] },
+    { id: "sed-e2-d2", title: "Document 2 : Les foyers de sédentarisation", layout: "image-only",
+      imageUrl: "assets/img/sed-espace-2/img001.png", imageWidthCm: 13,
+      sources: ["Source de l'image : D-Maps."] }
+  ],
+  'sed-temps-1': [
+    { id: "sed-t1-d1", title: "Document 1 : La préhistoire", layout: "image-only",
+      imageUrl: "assets/img/sed-temps-1/img000.png", imageWidthCm: 13,
+      sources: ["Source : Mathieu Mercier."] },
+    { id: "sed-t1-d2", title: "Document 2 : Moyens de subsistance", layout: "text-only",
+      text: "En plus de pratiquer la chasse, la pêche et la cueillette, les humains qui vivent durant cette période pratiquent l'agriculture et l'élevage afin de subvenir à leurs besoins alimentaires.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "sed-t1-d3", title: "Document 3 : Les grottes de Lascaux", layout: "image-only",
+      imageUrl: "assets/img/sed-temps-1/img001.png", imageWidthCm: 11,
+      sources: ["Source de l'image : Prof saxx, Lascaux painting, Wikimedia Commons. Licence : image du domaine public."] }
+  ],
+  'sed-temps-2': [
+    { id: "sed-t2-d1", title: "Document 1 : Çatal Höyük", layout: "image-only",
+      imageUrl: "assets/img/sed-temps-2/img000.png", imageWidthCm: 9,
+      sources: ["Source de l'image : Steve Quirion, Une des premières villes : Çatal Höyük (environ 6800 av. J.-C.). Licence : Creative Commons (BY-NC-SA)."] },
+    { id: "sed-t2-d2", title: "Document 2 : L'abondance des céréales", layout: "text-only",
+      text: "Vers [...], des tribus nomades s'installent à des endroits où la nourriture est abondante, dans certaines régions du Croissant fertile. Ils découvrent peu à peu que certaines céréales (orge, blé et seigle) poussent chaque année et commencent eux-mêmes à semer et à cultiver ces céréales. C'est le début de la révolution agricole qui amorce la période [...].",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "sed-t2-d3", title: "Document 3 : La domestication des bovins", layout: "image-only",
+      imageUrl: "assets/img/sed-temps-2/img001.png", imageWidthCm: 11,
+      sources: ["Source de l'image : Maler der Grabkammer des Zenue — The Yorck Project, Maler der Grabkammer des Zenue 001, Wikimedia Commons. Licence : image du domaine public."] }
+  ],
+  'sed-relation-1': [
+    { id: "sed-r1-d1", title: "Document 1 : Le troc", layout: "text-only",
+      text: "Les premiers échanges ont certainement lieu entre membres d'une même communauté, au sein du village. On échange des colliers de perles, des pointes de flèche, des armatures de faucilles, de la viande, etc. Les productions sont également échangées de village en village. Le bétail, les fromages, les outils, les tissus, les coquillages et même les femmes ont sans doute été l'objet de transactions entre communautés.",
+      sources: ["Source du texte : INRAP, « La circulation des biens et des hommes », INRAP, consulté le 15 juillet 2021. Licence : droits réservés."] },
+    { id: "sed-r1-d2", title: "Document 2 : Les premiers villages", layout: "image-only",
+      imageUrl: "assets/img/sed-relation-1/img000.png", imageWidthCm: 9,
+      sources: ["Source de l'image : Adaptée par Mathieu Mercier, D-Maps."] },
+    { id: "sed-r1-d3", title: "Document 3 : Les rites funéraires", layout: "text-only",
+      text: "D'abord enterrées à l'intérieur ou à proximité des maisons, les dépouilles sont progressivement séparées des espaces de vie quotidienne. Les premières nécropoles naissent afin de les rassembler. Les pratiques funéraires se diversifient : les défunts sont enterrés seuls ou dans des fosses collectives, en pleine terre, dans des coffres en bois, en pierre, dans des grottes ou en pleine terre.",
+      sources: ["Source : Julie Lacaze, « Quand l'Homme a-t-il commencé à enterrer ses morts ? », National Geographic, consulté le 14 juillet 2021."] },
+    { id: "sed-r1-d4", title: "Document 4 : L'agriculture", layout: "text-only",
+      text: "En plus de pratiquer la chasse, la pêche et la cueillette, les humains qui vivent durant cette période pratiquent l'agriculture et l'élevage afin de subvenir à leurs besoins alimentaires.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "sed-r1-d5", title: "Document 5 : Chasseurs-cueilleurs", layout: "text-only",
+      text: "Les humains du Paléolithique vivent en petits groupes de chasseurs-cueilleurs. Ils sont des prédateurs et suivent les troupeaux de gibiers afin de subvenir à leurs besoins.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] }
+  ],
+  'sed-relation-2': [
+    { id: "sed-r2-d1", title: "Document 1 : La meule", layout: "text-only",
+      text: "Cette innovation est très utile pour les habitants de Çatal Höyük. Elle permet de moudre le grain, en l'écrasant avec une pierre sur un plateau circulaire. Grâce à cette innovation, les paysans se mettent à produire de la farine, puis du pain.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "sed-r2-d2", title: "Document 2 : Un outil agricole", layout: "image-only",
+      imageUrl: "assets/img/sed-relation-2/img000.png", imageWidthCm: 7,
+      sources: ["Source de l'image : H. Camps-Fabrer, Houe, Encyclopédie berbère, consulté le 24 septembre 2020."] },
+    { id: "sed-r2-d3", title: "Document 3 : Les contenants de terre cuite", layout: "text-only",
+      text: "Pour les agriculteurs, [...] représente une innovation fort utile. Les contenants de terre cuite permettent en effet de conserver et de transporter les récoltes et les aliments, sous forme de grains, de farine ou de liquide. Les récipients de céramique servent aussi à la cuisson des aliments.",
+      sources: ["Source : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "sed-r2-d4", title: "Document 4 : Production alimentaire", layout: "text-only",
+      text: "La plupart des habitants sont des paysans. Ils cultivent l'orge et le blé dans les champs environnants, en plus de faire l'élevage de chèvres et de moutons. Avec le temps, l'amélioration des techniques agricoles permet de produire des surplus et de bien nourrir tous les habitants des villes et des villages.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "sed-r2-d5", title: "Document 5 : Nouveaux procédés", layout: "text-only",
+      text: "La spécialisation des artisans leur permet de développer leurs habiletés et leur expertise dans la production d'un bien. Par exemple, le potier fabrique des pots en terre cuite (poterie), le forgeron travaille le métal (armes, outils) et le vannier fabrique des paniers tressés (vannerie).",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] }
+  ],
+  'sed-causes-1': [
+    { id: "sed-ca1-d1", title: "Document 1 : Réchauffement du climat", layout: "text-only",
+      text: "Les grands glaciers commencent à fondre. À mesure que le climat devient plus chaud et humide, la végétation change. Les grands mammifères qui peuplaient les steppes froides de l'Europe et de l'Amérique du Nord perdent leur écosystème et disparaissent avec lui. Les humains, qui chassaient ces animaux, doivent trouver de nouveaux moyens de subsistance. Heureusement, les plantes poussent maintenant en abondance.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "sed-ca1-d2", title: "Document 2 : Çatal Höyük", layout: "image-only",
+      imageUrl: "assets/img/sed-causes-1/img000.png", imageWidthCm: 11,
+      sources: ["Source de l'image : Steve Quirion, Une des premières villes : Çatal Höyük (environ 6800 av. J.-C.). Licence : Creative Commons (BY-NC-SA)."] },
+    { id: "sed-ca1-d3", title: "Document 3 : La production de surplus alimentaires", layout: "text-only",
+      text: "Lorsque les techniques agricoles permettent de produire des surplus, les récipients permettent de les conserver. Ainsi, les villageois jouissent d'une meilleure sécurité alimentaire. N'étant plus en mode de survie, ils ont plus de temps pour développer de nouvelles techniques, de nouveaux outils, de nouveaux loisirs. C'est ainsi qu'apparaissent les premiers artisans : vannier, potier, tisserand, forgeron, etc. Ils se spécialisent dans des activités complémentaires à l'agriculture puisqu'ils n'ont plus à se soucier de subvenir à leurs besoins alimentaires.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] }
+  ],
+  'sed-causes-2': [
+    { id: "sed-ca2-d1", title: "Document 1 : Pas si bêtes !", layout: "text-image",
+      text: "Les paysans deviennent des éleveurs pour combler leurs besoins alimentaires. Au départ, on capture des animaux qu'on garde en captivité jusqu'à ce qu'on les mange. Progressivement, on commence à pratiquer un élevage plus spécialisé et on élève des animaux pour la viande, les produits laitiers, la laine et pour aider aux travaux agricoles. Les premiers animaux élevés sont la chèvre et le mouton, puis le bœuf et le porc. Grâce aux produits laitiers de la chèvre, les paysans découvrent la fabrication du fromage et du yogourt.",
+      imageUrl: "assets/img/sed-causes-2/img000.png", imageWidthCm: 6,
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Steve Quirion, La domestication des moutons. Licence : Creative Commons (BY-NC-SA)."] },
+    { id: "sed-ca2-d2", title: "Document 2 : Les premiers villages", layout: "image-only",
+      imageUrl: "assets/img/sed-causes-2/img001.png", imageWidthCm: 9,
+      sources: ["Source de l'image : Adaptée par Mathieu Mercier, D-Maps."] },
+    { id: "sed-ca2-d3", title: "Document 3 : Le Croissant fertile", layout: "image-only",
+      imageUrl: "assets/img/sed-causes-2/img002.png", imageWidthCm: 9,
+      sources: ["Source de l'image : Adaptée par Mathieu Mercier, D-Maps."] }
+  ],
+  'sed-causes-3': [
+    { id: "sed-ca3-d1", title: "Document 1 : Un climat favorable", layout: "text-only",
+      text: "Vers -10 000, le climat commence à se réchauffer à différents endroits de la planète. Dans le Croissant fertile, ce réchauffement entraîne des changements importants sur la faune, la flore ainsi que sur les déplacements humains. Les populations, qui sont nomades et qui vivent de la chasse et de la cueillette, réalisent que cette région offre des ressources naturelles en abondance.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "sed-ca3-d2", title: "Document 2 : La houe", layout: "image-only",
+      imageUrl: "assets/img/sed-causes-3/img000.png", imageWidthCm: 7,
+      sources: ["Source de l'image : H. Camps-Fabrer, Houe, Encyclopédie berbère, consulté le 24 septembre 2020."] },
+    { id: "sed-ca3-d3", title: "Document 3 : L'irrigation", layout: "text-only",
+      text: "Les paysans se rendent également compte que pour obtenir [...], il leur faut fournir davantage d'eau à leurs cultures. C'est ainsi qu'ils vont développer d'ingénieux systèmes d'irrigation, grâce auxquels l'eau parvient régulièrement aux plantes.",
+      sources: ["Source : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "sed-ca3-d4", title: "Document 4 : La poterie", layout: "text-only",
+      text: "Pour les agriculteurs, [...] représente une innovation fort utile. Les contenants de terre cuite permettent en effet de conserver et de transporter les récoltes et les aliments, sous forme de grains, de farine ou de liquide. Les récipients de céramique servent aussi à la cuisson des aliments.",
+      sources: ["Source : Service national du RÉCIT, domaine de l'univers social."] }
+  ],
+  'sed-differences-1': [
+    { id: "sed-d1-d1", title: "Document 1 : Chasseurs-cueilleurs", layout: "text-only",
+      text: "Les humains du Paléolithique vivent en petits groupes de chasseurs-cueilleurs. Ils sont des prédateurs et suivent les troupeaux de gibiers afin de subvenir à leurs besoins.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "sed-d1-d2", title: "Document 2 : Le développement de l'agriculture", layout: "text-image",
+      text: "Les tribus nomades découvrent peu à peu que certaines céréales poussent chaque année dans la région du Croissant fertile et commencent eux-mêmes à semer et à cultiver des céréales. C'est le début de la révolution agricole qui amorce la période néolithique.",
+      imageUrl: "assets/img/sed-differences-1/img000.png", imageWidthCm: 6,
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Croissant fertile, Wikimedia Commons. Licence : Creative Commons (BY-SA)."] },
+    { id: "sed-d1-d3", title: "Document 3 : Hutte paléolithique", layout: "image-only",
+      imageUrl: "assets/img/sed-differences-1/img001.png", imageWidthCm: 7,
+      sources: ["Source de l'image : José-Manuel Benito, Hutte paléolithique de Terra Amata, Wikimedia Commons. Licence : Domaine public."] },
+    { id: "sed-d1-d4", title: "Document 4 : Çatal Höyük", layout: "image-only",
+      imageUrl: "assets/img/sed-differences-1/img002.png", imageWidthCm: 9,
+      sources: ["Source de l'image : Steve Quirion, Une des premières villes : Çatal Höyük (environ 6800 av. J.-C.). Licence : Creative Commons (BY-NC-SA)."] }
+  ],
+  'sed-differences-2': [
+    { id: "sed-d2-d1", title: "Document 1 : Une sépulture en Bulgarie", layout: "text-image",
+      text: "Plusieurs objets de la vie quotidienne ont été retrouvés dans les tombes datant du 4e et 5e millénaire avant J.-C. : des bijoux en or, des boucles d'oreilles, des bracelets, des colliers de perles, etc. On a aussi trouvé des coquillages, ce qui témoigne de nombreux échanges grâce au troc. Néanmoins, les archéologues ont aussi découvert que certaines tombes ne contenaient que le corps de la personne défunte, sans objet du quotidien. Il est donc possible que certains habitants du Néolithique accumulaient des richesses et que d'autres n'en aient pas la possibilité.",
+      imageUrl: "assets/img/sed-differences-2/img000.png", imageWidthCm: 5,
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Yelkrokoyade, Or de Varna - Nécropole, Wikimedia Commons. Licence : Creative Commons BY-SA 3.0."] },
+    { id: "sed-d2-d2", title: "Document 2 : La houe", layout: "text-only",
+      text: "La fonction de la houe était de briser, de retourner et de mélanger la terre, ainsi que de désherber et de creuser des sillons pour semer les graines. Les houes étaient généralement fabriquées avec des matériaux tels que le bois et la pierre, puis en bronze et en fer.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "sed-d2-d3", title: "Document 3 : La faucille", layout: "text-only",
+      text: "La faucille était utilisée pour couper les tiges des plantes cultivées, en particulier les céréales comme le blé, l'orge et le seigle. Les faucilles étaient, au Néolithique, fabriquées avec des lames en pierre ou en os fixées à un manche en bois ou en os.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] }
+  ],
+  'sed-changements-1': [
+    { id: "sed-ch1-d1", title: "Document 1 : L'agriculture", layout: "text-only",
+      text: "En plus de pratiquer la chasse, la pêche et la cueillette, les humains qui vivent durant cette période pratiquent l'agriculture et l'élevage afin de subvenir à leurs besoins alimentaires.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "sed-ch1-d2", title: "Document 2 : Chasseurs-cueilleurs", layout: "text-only",
+      text: "Les humains du Paléolithique vivent en petits groupes de chasseurs-cueilleurs. Ils sont des prédateurs et suivent les troupeaux de gibiers afin de subvenir à leurs besoins.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "sed-ch1-d3", title: "Document 3 : La poterie", layout: "text-only",
+      text: "Pour les agriculteurs, [...] représente une innovation fort utile. Les contenants de terre cuite permettent en effet de conserver et de transporter les récoltes et les aliments, sous forme de grains, de farine ou de liquide. L'accumulation de surplus agricole devient possible. Les récipients de céramique servent aussi à la cuisson des aliments.",
+      sources: ["Source : Service national du RÉCIT, domaine de l'univers social."] }
+  ],
+  'sed-changements-2': [
+    { id: "sed-ch2-d1", title: "Document 1 : Les réseaux d'échanges", layout: "text-only",
+      text: "« Les populations néolithiques entretiennent des réseaux d'échange bien rodés reliant entre elles différentes aires géographiques, parfois fort distantes les unes des autres. Ces relations favorisent la diffusion d'idées et de techniques. Les premiers échanges, basés sur le troc, ont certainement lieu entre membres d'une même communauté, au sein du village. On échange des colliers de perles, des pointes de flèche, des armatures de faucilles, de la viande, etc. Les productions sont également échangées de village en village. Le bétail, les fromages, les outils, les tissus, les coquillages et même les femmes ont sans doute été l'objet de transactions entre communautés. »",
+      sources: ["Source du texte : INRAP, « La circulation des biens et des hommes », INRAP, consulté le 15 juillet 2021. Licence : droits réservés."] },
+    { id: "sed-ch2-d2", title: "Document 2 : Le troc", layout: "text-only",
+      text: "Il est probable que le troc ait été utilisé au Paléolithique, bien que les preuves archéologiques soient limitées. Au cours de cette période, les humains étaient principalement des chasseurs-cueilleurs, vivant en groupes relativement petits. Les chercheurs ont découvert certaines preuves d'échanges, comme des pierres et des coquillages qui ont été transportés sur de longues distances. Cela suggère que ces matériaux étaient échangés entre des groupes qui ne partageaient pas le même environnement.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "sed-ch2-d3", title: "Document 3 : Les rites funéraires", layout: "text-only",
+      text: "« En s'implantant durablement dans des régions, les hommes modernes peuvent alors conserver, dans des espaces dédiés, les restes de leurs défunts. [...] D'abord enterrées à l'intérieur ou à proximité des maisons, les dépouilles sont progressivement séparées des espaces de vie quotidienne. Les premières nécropoles naissent afin de les rassembler. Les pratiques funéraires se diversifient : les défunts sont enterrés seuls ou dans des fosses collectives, en pleine terre, dans des coffres en bois, en pierre, dans des grottes ou en pleine terre. Certaines populations ont même recours à la crémation. »",
+      sources: ["Source du texte : Julie Lacaze, « Quand l'Homme a-t-il commencé à enterrer ses morts ? », National Geographic, consulté le 14 juillet 2021."] }
+  ],
+
   // ============ Documents — L'industrialisation ============
   'ind-causalite-1': [
     { id: "ind-c1-d1", title: "Document 1 : Législations ouvrières", layout: "image-only",
@@ -1445,7 +1670,8 @@ window.DATA = {
     { id: "revolution-americaine", titre: "La Révolution américaine", niveau: 2 },
     { id: "christianisation-occident", titre: "La christianisation de l'Occident", niveau: 1 },
     { id: "industrialisation", titre: "L'industrialisation", niveau: 2 },
-    { id: "expansion-monde-industriel", titre: "L'expansion du monde industriel", niveau: 2 }
+    { id: "expansion-monde-industriel", titre: "L'expansion du monde industriel", niveau: 2 },
+    { id: "sedentarisation", titre: "La sédentarisation", niveau: 1 }
   ],
 
   operations_intellectuelles: [
@@ -2574,7 +2800,197 @@ window.DATA = {
       questionBody: { prompt: "À l'aide du document 2, détermine un changement démographique chez les Herero entre 1885 et 1911.", responseSpace: { type: "lines", count: 3 } },
       reglettes: [{ id: "r-emi-ch2-2", label: "Réglette (2 points)", ...R_CHGT_2PT_CHGT }],
       documents: pickDocs('emi-changements-2', 2),
-      corrige: "Entre 1885 et 1911, la population des Herero passe de 80 000 individus à un peu plus de 15 000." }
+      corrige: "Entre 1885 et 1911, la population des Herero passe de 80 000 individus à un peu plus de 15 000." },
+
+    // ============================================================
+    // RÉALITÉ SOCIALE : La sédentarisation (Secondaire 1)
+    // ============================================================
+
+    // ===== CAUSALITÉ (3) =====
+    { id: "q-sed-causalite-1", operation: "Établir des liens de causalité", numero: 1, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "À l'aide des documents 1 à 3, établis des liens entre les éléments suivants :",
+        bullets: ["Un élément naturel favorisant l'agriculture", "Une nouvelle technique agricole", "Une conséquence sur la production agricole"],
+        instructions: CAUSALITE_INSTRUCTIONS, responseSpace: { type: "lines", count: 8 } },
+      reglettes: [{ id: "r-sed-c1", label: "Réglette (3 points)", opLabel: "Établir des liens de causalité", maxPoints: 3, ...RUBRIC_CAUSALITE_3PT }],
+      documents: pickDocs('sed-causalite-1', 1, 2, 3),
+      corrige: "Dans la région du Croissant fertile, il y a de nombreux cours d'eau comme le Tigre, l'Euphrate et le Nil. La présence de ces cours d'eau favorise la mise en place de systèmes d'irrigation. Grâce aux systèmes d'irrigation mis en place, les êtres humains sont capables d'augmenter leur production agricole et d'en dégager des surplus." },
+    { id: "q-sed-causalite-2", operation: "Établir des liens de causalité", numero: 2, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "À l'aide des documents 1 à 3, établis des liens entre les éléments suivants :",
+        bullets: ["Une caractéristique naturelle du territoire", "Une invention utile à la conservation des aliments", "Une conséquence sur le mode de vie des êtres humains"],
+        instructions: CAUSALITE_INSTRUCTIONS, responseSpace: { type: "lines", count: 8 } },
+      reglettes: [{ id: "r-sed-c2", label: "Réglette (3 points)", opLabel: "Établir des liens de causalité", maxPoints: 3, ...RUBRIC_CAUSALITE_3PT }],
+      documents: pickDocs('sed-causalite-2', 1, 2, 3),
+      corrige: "La région du Croissant fertile est favorable au développement de l'agriculture et à la culture de certaines céréales. Les céréales récoltées peuvent alors être transportées et conservées dans des pots en terre cuite (poterie). La conservation des céréales, grâce à la poterie, favorise l'établissement permanent des êtres humains (sédentarisation) dans la région du Croissant fertile." },
+    { id: "q-sed-causalite-3", operation: "Établir des liens de causalité", numero: 3, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "À l'aide des documents 1 à 3, établis des liens entre les éléments suivants :",
+        bullets: ["Organisation des populations au Néolithique", "Une nouvelle pratique culturelle", "Un constat sur la hiérarchie sociale"],
+        instructions: CAUSALITE_INSTRUCTIONS, responseSpace: { type: "lines", count: 8 } },
+      reglettes: [{ id: "r-sed-c3", label: "Réglette (3 points)", opLabel: "Établir des liens de causalité", maxPoints: 3, ...RUBRIC_CAUSALITE_3PT }],
+      documents: pickDocs('sed-causalite-3', 1, 2, 3),
+      corrige: "Les populations du Néolithique vivent dans des villages sédentaires ou permanents. Parce qu'ils vivent dans des villages permanents, les populations sédentaires commencent à enterrer leurs morts. Grâce aux sépultures retrouvées et à l'analyse de ce qui se trouvait à l'intérieur, il est possible de constater que certains individus étaient plus riches que d'autres au Néolithique." },
+
+    // ===== FAITS (6) =====
+    { id: "q-sed-faits-1", operation: "Établir des faits", numero: 1, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "Indique un outil utilisé par les paysans lors du Néolithique.", responseSpace: { type: "lines", count: 2 } },
+      reglettes: [{ id: "r-sed-f1", label: "Réglette (1 point)", ...R_FAITS_1PT }], documents: pickDocs('sed-faits-1', 1),
+      corrige: "La hache de pierre polie, la meule et la molette, la faucille ou la houe." },
+    { id: "q-sed-faits-2", operation: "Établir des faits", numero: 2, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "Indique deux moyens de subsistance des paysans lors du Néolithique.", responseSpace: { type: "lines", count: 3 } },
+      reglettes: [{ id: "r-sed-f2", label: "Réglette (2 points)", ...R_FAITS_2PT_GEN }], documents: pickDocs('sed-faits-1', 2),
+      corrige: "L'agriculture (se nourrir) et l'élevage (se vêtir et se nourrir)." },
+    { id: "q-sed-faits-3", operation: "Établir des faits", numero: 3, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "À l'aide du document 2, indique la fonction de la houe.", responseSpace: { type: "lines", count: 3 } },
+      reglettes: [{ id: "r-sed-f3", label: "Réglette (1 point)", ...R_FAITS_1PT }], documents: pickDocs('sed-faits-2', 2),
+      corrige: "La houe sert à labourer la terre, désherber et remuer la terre." },
+    { id: "q-sed-faits-4", operation: "Établir des faits", numero: 4, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "Indique comment se font les échanges de biens et de ressources naturelles durant le Néolithique.", responseSpace: { type: "lines", count: 3 } },
+      reglettes: [{ id: "r-sed-f4", label: "Réglette (2 points)", ...R_FAITS_2PT_GEN }], documents: pickDocs('sed-faits-2', 1),
+      corrige: "Les échanges sont souvent réalisés entre membres de différentes communautés à l'aide du troc." },
+    { id: "q-sed-faits-5", operation: "Établir des faits", numero: 5, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "À l'aide du document 2, indique la fonction des déesses-mères.", responseSpace: { type: "lines", count: 3 } },
+      reglettes: [{ id: "r-sed-f5", label: "Réglette (1 point)", ...R_FAITS_1PT }], documents: pickDocs('sed-faits-3', 2),
+      corrige: "Les déesses-mères sont des statuettes auxquelles certaines populations du Néolithique adressaient leurs prières afin de favoriser les récoltes ou de favoriser la fertilité." },
+    { id: "q-sed-faits-6", operation: "Établir des faits", numero: 6, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "Quel est le rôle de la femme lors de la préhistoire ?", responseSpace: { type: "lines", count: 4 } },
+      reglettes: [{ id: "r-sed-f6", label: "Réglette (2 points)", ...R_FAITS_2PT_GEN }], documents: pickDocs('sed-faits-3', 1),
+      corrige: "La femme participe à la subsistance de la communauté (chasse, cueillette, etc.), mais aussi à la confection des paniers (tissage, vannerie, etc.) et des vêtements." },
+
+    // ===== ESPACE (4) =====
+    { id: "q-sed-espace-1", operation: "Situer dans l'espace", numero: 1, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "À l'aide du document 1, indique la lettre qui correspond au Tigre et la lettre qui correspond à l'Euphrate.",
+        responseSpace: { type: "labeled-list", items: ["Le Tigre", "L'Euphrate"] } },
+      reglettes: [{ id: "r-sed-e1", label: "Réglette (2 points)", ...R_SITUER_2PT_2 }], documents: pickDocs('sed-espace-1', 1),
+      corrige: ["B", "A"] },
+    { id: "q-sed-espace-2", operation: "Situer dans l'espace", numero: 2, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "Le Croissant fertile se situe à la croisée de trois continents. Quels sont les continents sur lesquels se trouve le Croissant fertile ?",
+        responseSpace: { type: "labeled-list", items: ["Continent 1", "Continent 2", "Continent 3"] } },
+      reglettes: [{ id: "r-sed-e2", label: "Réglette (2 points)", ...R_SITUER_2PT_3SP }], documents: pickDocs('sed-espace-1', 2),
+      corrige: ["Afrique", "Asie", "Europe"] },
+    { id: "q-sed-espace-3", operation: "Situer dans l'espace", numero: 3, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "À l'aide du document 1, indique les lettres qui correspondent aux mers Méditerranée, Rouge et Noire.",
+        responseSpace: { type: "labeled-list", items: ["Mer Méditerranée", "Mer Rouge", "Mer Noire"] } },
+      reglettes: [{ id: "r-sed-e3", label: "Réglette (2 points)", ...R_SITUER_2PT_3SP }], documents: pickDocs('sed-espace-2', 1),
+      corrige: ["D", "A", "B"] },
+    { id: "q-sed-espace-4", operation: "Situer dans l'espace", numero: 4, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "Vers -10 000, plusieurs foyers de sédentarisation se développent sur la planète. À l'aide du document 2, quelle lettre ne correspond pas à un foyer de sédentarisation qui se développe à cette époque ?",
+        responseSpace: { type: "labeled-list", items: ["Lettre"] } },
+      reglettes: [{ id: "r-sed-e4", label: "Réglette (1 point)", ...R_SITUER_1PT_1 }], documents: pickDocs('sed-espace-2', 2),
+      corrige: ["A"] },
+
+    // ===== TEMPS (4) =====
+    { id: "q-sed-temps-1", operation: "Situer dans le temps", numero: 1, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "À l'aide du document 1, indique la lettre qui correspond à la période du Paléolithique et la lettre qui correspond à la période du Néolithique.",
+        responseSpace: { type: "labeled-list", items: ["Le Paléolithique", "Le Néolithique"] } },
+      reglettes: [{ id: "r-sed-t1", label: "Réglette (2 points)", ...R_SITUER_2PT_T2 }], documents: pickDocs('sed-temps-1', 1),
+      corrige: ["A", "B"] },
+    { id: "q-sed-temps-2", operation: "Situer dans le temps", numero: 2, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "Les documents 2 et 3 présentent des faits se déroulant lors de la Préhistoire. Indique si les faits présentés surviennent avant ou après -10 000.",
+        responseSpace: { type: "before-after-axis", beforeLabel: "Antériorité", afterLabel: "Postériorité", pivot: "-10 000" } },
+      reglettes: [{ id: "r-sed-t2", label: "Réglette (1 point)", ...R_SITUER_1PT_T2 }], documents: pickDocs('sed-temps-1', 1, 2, 3),
+      corrige: { before: ["Document 3"], after: ["Document 2"] } },
+    { id: "q-sed-temps-3", operation: "Situer dans le temps", numero: 3, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "Place en ordre chronologique les documents 1 à 3.",
+        responseSpace: { type: "chrono-ordering", items: ["1er (le plus ancien)", "2e", "3e (le plus récent)"] } },
+      reglettes: [{ id: "r-sed-t3", label: "Réglette (2 points)", ...R_SITUER_2PT_T3 }], documents: pickDocs('sed-temps-2', 1, 2, 3),
+      corrige: ["Document 2", "Document 1", "Document 3"] },
+    { id: "q-sed-temps-4", operation: "Situer dans le temps", numero: 4, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "Sur la ligne du temps du document 4, encercle la lettre correspondante aux faits présentés dans le document 2. Inscris ta réponse ci-dessous.",
+        responseSpace: { type: "labeled-list", items: ["Lettre correspondante"] } },
+      reglettes: [{ id: "r-sed-t4", label: "Réglette (1 point)", ...R_SITUER_1PT_T1 }],
+      documents: [
+        DOCS['sed-temps-2'][1],  // Document 2 : L'abondance des céréales
+        { id: "sed-t4-timeline", title: "Document 4 : Ligne du temps", layout: "image-only",
+          imageUrl: "assets/img/sed-temps-1/img000.png", imageWidthCm: 13,
+          sources: ["Source : Mathieu Mercier."] }
+      ],
+      corrige: ["B"] },
+
+    // ===== RELATION (4) =====
+    { id: "q-sed-relation-1", operation: "Mettre en relation des faits", numero: 1, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "Associe les documents 1 à 3 à la conséquence économique, culturelle ou territoriale de la sédentarisation lui correspondant.",
+        responseSpace: { type: "labeled-list", items: ["Conséquence économique (Document n°)", "Conséquence culturelle (Document n°)", "Conséquence territoriale (Document n°)"] } },
+      reglettes: [{ id: "r-sed-r1", label: "Réglette (2 points)", ...R_RELATION_2PT_3 }], documents: pickDocs('sed-relation-1', 1, 2, 3),
+      corrige: ["1", "3", "2"] },
+    { id: "q-sed-relation-2", operation: "Mettre en relation des faits", numero: 2, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "Indique si les documents 4 et 5 correspondent au mode de vie nomade ou au mode de vie sédentaire.",
+        responseSpace: { type: "checkbox-table", columns: ["Mode de vie nomade", "Mode de vie sédentaire"], rows: ["Document 4", "Document 5"] } },
+      reglettes: [{ id: "r-sed-r2", label: "Réglette (2 points)", ...R_RELATION_2PT_2 }], documents: pickDocs('sed-relation-1', 4, 5),
+      corrige: [[false, true], [true, false]] },
+    { id: "q-sed-relation-3", operation: "Mettre en relation des faits", numero: 3, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "Associe les documents 1 à 3 à l'innovation apparue lors de la Préhistoire lui correspondant.",
+        responseSpace: { type: "labeled-list", items: ["La houe (Document n°)", "La meule et la molette (Document n°)", "La poterie (Document n°)"] } },
+      reglettes: [{ id: "r-sed-r3", label: "Réglette (2 points)", ...R_RELATION_2PT_3 }], documents: pickDocs('sed-relation-2', 1, 2, 3),
+      corrige: ["2", "1", "3"] },
+    { id: "q-sed-relation-4", operation: "Mettre en relation des faits", numero: 4, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "Indique si les documents 4 et 5 correspondent au travail du paysan ou à celui de l'artisan.",
+        responseSpace: { type: "labeled-list", items: ["Paysan (Document n°)", "Artisan (Document n°)"] } },
+      reglettes: [{ id: "r-sed-r4", label: "Réglette (2 points)", ...R_RELATION_2PT_2 }], documents: pickDocs('sed-relation-2', 4, 5),
+      corrige: ["4", "5"] },
+
+    // ===== CAUSES (6) =====
+    { id: "q-sed-causes-1", operation: "Déterminer des causes et des conséquences", numero: 1, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "À l'aide des documents 1 et 2, détermine le document qui présente une cause de la sédentarisation et le document qui en présente une conséquence.",
+        responseSpace: { type: "labeled-list", items: ["Cause de la sédentarisation (Document n°)", "Conséquence de la sédentarisation (Document n°)"] } },
+      reglettes: [{ id: "r-sed-ca1", label: "Réglette (2 points)", ...R_CAUSES_2PT_CAUSE_CONS }], documents: pickDocs('sed-causes-1', 1, 2),
+      corrige: ["1", "2"] },
+    { id: "q-sed-causes-2", operation: "Déterminer des causes et des conséquences", numero: 2, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "À l'aide du document 3, détermine une conséquence sociale et économique des surplus alimentaires.", responseSpace: { type: "lines", count: 4 } },
+      reglettes: [{ id: "r-sed-ca2", label: "Réglette (2 points)", ...R_CAUSES_2PT_CONSEQ }], documents: pickDocs('sed-causes-1', 3),
+      corrige: "Les surplus alimentaires permettent l'apparition des premiers artisans, puisque les sédentaires n'ont plus à consacrer leur temps à la production de nourriture." },
+    { id: "q-sed-causes-3", operation: "Déterminer des causes et des conséquences", numero: 3, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "Détermine un facteur naturel qui favorise l'établissement des premiers villages permanents dans la région du Croissant fertile.", responseSpace: { type: "lines", count: 3 } },
+      reglettes: [{ id: "r-sed-ca3", label: "Réglette (2 points)", ...R_CAUSES_2PT_CAUSE }], documents: pickDocs('sed-causes-2', 2, 3),
+      corrige: "La présence de nombreux cours d'eau dans la région du Croissant fertile." },
+    { id: "q-sed-causes-4", operation: "Déterminer des causes et des conséquences", numero: 4, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "Détermine une conséquence de la domestication des animaux lors de la préhistoire.", responseSpace: { type: "lines", count: 4 } },
+      reglettes: [{ id: "r-sed-ca4", label: "Réglette (2 points)", ...R_CAUSES_2PT_CONSEQ }], documents: pickDocs('sed-causes-2', 1),
+      corrige: "La domestication des animaux permet la production de nourriture, le travail des champs et la production de vêtements." },
+    { id: "q-sed-causes-5", operation: "Déterminer des causes et des conséquences", numero: 5, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "Détermine un facteur naturel qui favorise l'établissement des premiers villages permanents dans la région du Croissant fertile.", responseSpace: { type: "lines", count: 4 } },
+      reglettes: [{ id: "r-sed-ca5", label: "Réglette (2 points)", ...R_CAUSES_2PT_CAUSE }], documents: pickDocs('sed-causes-3', 1),
+      corrige: "Le réchauffement du climat permet le développement de l'agriculture dans la région du Croissant fertile, ce qui favorise la sédentarisation de l'Homme." },
+    { id: "q-sed-causes-6", operation: "Déterminer des causes et des conséquences", numero: 6, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "À l'aide des documents 2 à 4, détermine les documents qui présentent des causes de l'amélioration des rendements agricoles.",
+        responseSpace: { type: "labeled-list", items: ["Document n°", "Document n°"] } },
+      reglettes: [{ id: "r-sed-ca6", label: "Réglette (2 points)", ...R_CAUSES_2PT_CAUSES }], documents: pickDocs('sed-causes-3', 2, 3, 4),
+      corrige: ["2", "3"] },
+
+    // ===== DIFFÉRENCES (4) =====
+    { id: "q-sed-differences-1", operation: "Dégager des différences et des similitudes", numero: 1, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "À l'aide des documents 1 et 2, dégage une différence dans les moyens de subsistance entre les populations nomades et les populations sédentaires.", responseSpace: { type: "lines", count: 4 } },
+      reglettes: [{ id: "r-sed-d1", label: "Réglette (2 points)", ...R_DIFFERENCES_2PT }], documents: pickDocs('sed-differences-1', 1, 2),
+      corrige: "Les sédentaires pratiquent l'agriculture et l'élevage alors que les nomades ne les pratiquent pas." },
+    { id: "q-sed-differences-2", operation: "Dégager des différences et des similitudes", numero: 2, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "Dégage une différence entre les regroupements humains du Paléolithique et ceux du Néolithique.", responseSpace: { type: "lines", count: 4 } },
+      reglettes: [{ id: "r-sed-d2", label: "Réglette (2 points)", ...R_DIFFERENCES_2PT_GEN }], documents: pickDocs('sed-differences-1', 3, 4),
+      corrige: "Les sédentaires du Néolithique vivent à l'intérieur de villages permanents, composés de plusieurs centaines ou milliers de personnes, alors que les nomades du Paléolithique vivent en petits regroupements." },
+    { id: "q-sed-differences-3", operation: "Dégager des différences et des similitudes", numero: 3, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "Dégage une similitude entre les innovations techniques présentées dans les documents 2 et 3.", responseSpace: { type: "lines", count: 4 } },
+      reglettes: [{ id: "r-sed-d3", label: "Réglette (2 points)", ...R_SIMILITUDES_2PT }], documents: pickDocs('sed-differences-2', 2, 3),
+      corrige: "La houe et la faucille sont deux innovations techniques utiles à l'agriculture ou deux outils agricoles." },
+    { id: "q-sed-differences-4", operation: "Dégager des différences et des similitudes", numero: 4, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "Dégage une différence entre la sépulture des paysans et celle des marchands fortunés au Néolithique.", responseSpace: { type: "lines", count: 4 } },
+      reglettes: [{ id: "r-sed-d4", label: "Réglette (2 points)", ...R_DIFFERENCES_2PT_GEN }], documents: pickDocs('sed-differences-2', 1),
+      corrige: "Les sépultures des marchands fortunés comprenaient des bijoux et plusieurs objets témoignant de leur richesse alors que les sépultures des paysans n'en comprenaient pas ou très peu." },
+
+    // ===== CHANGEMENTS (4) =====
+    { id: "q-sed-changements-1", operation: "Déterminer des changements et des continuités", numero: 1, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "Détermine un changement et une continuité dans l'alimentation des êtres humains lors du Néolithique.",
+        responseSpace: { type: "labeled-list", items: ["Changement", "Continuité"] } },
+      reglettes: [{ id: "r-sed-ch1", label: "Réglette (2 points)", ...R_CHGT_2PT_PAIR }], documents: pickDocs('sed-changements-1', 1, 2),
+      corrige: ["Les êtres humains du Néolithique commencent à produire leur nourriture grâce à l'élevage et à l'agriculture.", "Les êtres humains du Néolithique continuent de pêcher, de chasser et de cueillir afin de subvenir à leurs besoins."] },
+    { id: "q-sed-changements-2", operation: "Déterminer des changements et des continuités", numero: 2, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "Détermine un changement dans la conservation de la nourriture au Néolithique.", responseSpace: { type: "lines", count: 3 } },
+      reglettes: [{ id: "r-sed-ch2", label: "Réglette (1 point)", ...R_CHGT_1PT_CHGT }], documents: pickDocs('sed-changements-1', 3),
+      corrige: "Comparativement au Paléolithique, la nourriture peut être conservée plus longtemps au Néolithique grâce à l'invention de la poterie." },
+    { id: "q-sed-changements-3", operation: "Déterminer des changements et des continuités", numero: 3, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "Détermine un changement dans les pratiques culturelles au Néolithique.", responseSpace: { type: "lines", count: 4 } },
+      reglettes: [{ id: "r-sed-ch3", label: "Réglette (2 points)", ...R_CHGT_2PT_CHGT }], documents: pickDocs('sed-changements-2', 3),
+      corrige: "Au Néolithique, les pratiques funéraires se complexifient. Les morts sont dorénavant enterrés dans des fosses communes, individuellement ou même brûlés, comparativement au Paléolithique où ce n'est pas le cas." },
+    { id: "q-sed-changements-4", operation: "Déterminer des changements et des continuités", numero: 4, niveau: 1, realite_sociale_id: "sedentarisation",
+      questionBody: { prompt: "Détermine une continuité dans la forme d'échange utilisée au Paléolithique et au Néolithique.", responseSpace: { type: "lines", count: 3 } },
+      reglettes: [{ id: "r-sed-ch4", label: "Réglette (1 point)", ...R_CHGT_1PT_CONT }], documents: pickDocs('sed-changements-2', 1, 2),
+      corrige: "Au Néolithique, les échanges se font toujours grâce au troc." }
 
 
   ]
