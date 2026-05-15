@@ -1,6 +1,12 @@
-# HEC · Premier cycle — Composition de cahier (v2.6)
+# HEC · Premier cycle — Composition de cahier (v2.7)
 
 Outil web pour composer un cahier d'élève à la pièce — sortie en `.docx` éditable.
+
+## ✨ Quoi de neuf (v2.7)
+
+- 🌍 **Nouvelle réalité sociale (Secondaire 2)** : *L'expansion du monde industriel* avec 35 questions atomiques couvrant les 8 opérations intellectuelles. Pendant impérial et colonial de l'industrialisation : Conférence de Berlin, partage de l'Afrique, canal de Suez, génocide des Herero, exploitation du caoutchouc au Congo belge.
+- 📚 **Catalogue total** : 211 questions réparties sur 6 réalités sociales (Le renouvellement de la vision de l'Homme + L'expansion européenne dans le monde + La Révolution américaine + La christianisation de l'Occident + L'industrialisation + L'expansion du monde industriel).
+- 🟥 Couleur bordeaux profond dédiée pour la 6ᵉ réalité, en cohérence avec la palette de design (vert / terre cuite / pourpre / ocre / bleu ardoise / bordeaux).
 
 ## ✨ Quoi de neuf (v2.6)
 
