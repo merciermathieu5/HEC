@@ -1227,7 +1227,7 @@ const DOCS = {
       text: "[...] Ce caoutchouc se trouve à l'état sauvage [sève d'hévéa] dans l'épaisse forêt équatoriale du Congo, qui est la propriété du roi des Belges, Léopold II, depuis la fameuse Conférence de Berlin en 1885 où les puissances européennes ont procédé au « partage de l'Afrique ».",
       sources: ["Source du texte : France Culture, Épisode 1 : Produire du caoutchouc à tout prix, consulté le 28 octobre 2021."] },
     { id: "emi-c1-d3", title: "Document 3 : Usine de fabrication de pneus", layout: "image-only",
-      imageUrl: "assets/img/emi-causalite-1/img000.png", imageWidthCm: 7,
+      imageUrl: "assets/img/emi-causalite-1/img000.png", imageWidthCm: 9,
       sources: ["Source de l'image : Louis Figuier, Alambic pour distiller le goudron par la vapeur dans les usines de produits chimiques (1873). Wikimedia Commons. Licence : Creative Commons BY-SA 2.0."] }
   ],
   'emi-causalite-2': [
@@ -1247,7 +1247,7 @@ const DOCS = {
       sources: ["Source de l'image : Eric Gaba, Colonial Africa 1913 map, Wikimedia Commons. Licence : Creative Commons BY-SA 3.0.", "Source du texte : Anaïs Kien, La Namibie, histoire d'une colonie allemande, Radio France, consulté le 21 avril 2024."] },
     { id: "emi-c3-d2", title: "Document 2 : Génocide", layout: "text-image",
       text: "« Selon le rapport Whitaker de l'ONU (1985), ce seraient quelque 65 000 Herero (80 % du total de la population) et 10 000 Nama (50 %) qui auraient été exterminés entre 1904 et 1907. [En 1911], les autorités coloniales allemandes recensent [seulement] 15 130 Hereros ».",
-      imageUrl: "assets/img/emi-causalite-3/img001.png", imageWidthCm: 5,
+      imageUrl: "assets/img/emi-causalite-3/img001.png", imageWidthCm: 7,
       sources: ["Source du texte : Joël Kotek, « Le génocide des Herero, symptôme d'un Sonderweg allemand ? », Revue d'Histoire de la Shoah, vol. 189, no. 2, 2008, pp. 177-197.", "Source de l'image : Le Petit Journal, Illustration du conflit par le supplément du Petit Journal paru le 21 février 1904, Wikimedia Commons. Licence : image du domaine public."] },
     { id: "emi-c3-d3", title: "Document 3 : Ordre du général Lothar von Trotha", layout: "text-only",
       text: "« Les Hereros ne sont dorénavant plus sujets allemands (…). Tout Herero aperçu à l'intérieur des frontières allemandes [namibiennes] avec ou sans arme, avec ou sans bétail sera fusillé. Je n'accepterai plus désormais les femmes et les enfants, je les renverrai à leur peuple ou les laisserai être abattus. »",
@@ -1256,13 +1256,13 @@ const DOCS = {
   'emi-faits-1': [
     { id: "emi-f1-d1", title: "Document 1 : Les expéditions en Afrique", layout: "text-image",
       text: "Les expéditions visant l'exploration du continent africain se multiplient au 19e siècle. En effet, des explorateurs tels que David Livingstone, un pasteur britannique, cartographient progressivement l'Afrique. Financés par les métropoles européennes, ceux-ci sont à la recherche de richesses et de voies de circulation naturelles du continent africain (fleuves, rivières, etc.). L'objectif est de coloniser progressivement le territoire afin de s'approprier les matières premières, dont les industries européennes ont tant besoin.",
-      imageUrl: "assets/img/emi-faits-1/img000.png", imageWidthCm: 5,
+      imageUrl: "assets/img/emi-faits-1/img000.png", imageWidthCm: 11,
       sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : John Thomson, Thomson Map of Africa - Geographicus - Africa-thomson-1813 (1813), Wikimedia Commons. Licence : image du domaine public."] },
     { id: "emi-f1-d2", title: "Document 2 : La récolte du caoutchouc", layout: "text-only",
       text: "Les Européens, armés, forcent les Africains du Congo à travailler à la récolte du caoutchouc. Ces gens subissent des mauvais traitements et de la violence ; leur situation ressemble à de l'esclavage. Les agents du roi Léopold II réprimandent avec une grande violence ceux qui tentent de se rebeller.",
       sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] },
     { id: "emi-f1-d3", title: "Document 3", layout: "image-only",
-      imageUrl: "assets/img/emi-faits-1/img001.png", imageWidthCm: 5,
+      imageUrl: "assets/img/emi-faits-1/img001.png", imageWidthCm: 7,
       sources: ["Source de l'image : Alice Harris, Daniel Danielson, others, Mutilated children from Congo, Wikimedia Commons. Licence : image du domaine public."] }
   ],
   'emi-faits-2': [
@@ -1280,7 +1280,7 @@ const DOCS = {
       sources: ["Source de l'image : Сканирование: Владимир Васильев, Opening of the Suez Canal, 1869, Wikimedia Commons. Licence : image du domaine public."] },
     { id: "emi-f3-d2", title: "Document 2", layout: "text-image",
       text: "Dans les années 1890, le gouvernement belge délègue à des communautés religieuses le soin d'éduquer les enfants abandonnés ou orphelins en Afrique. Pour les soutenir dans leur tâche, il leur concède des terres de 200 à 300 hectares et leur offre des subventions. En contrepartie, les missionnaires enseignent aux enfants le français, la lecture, l'écriture, les bases du christianisme, ainsi qu'une formation pratique (par exemple en agriculture ou en agronomie forestière).",
-      imageUrl: "assets/img/emi-faits-3/img001.png", imageWidthCm: 5,
+      imageUrl: "assets/img/emi-faits-3/img001.png", imageWidthCm: 7,
       sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Fæ, Près du Tanganika (1882), Wikimedia Commons. Licence : libre de droits."] }
   ],
   'emi-espace-1': [
@@ -1340,13 +1340,13 @@ const DOCS = {
       text: "Chef de l'Empire wassoulou, Samory Touré tente de freiner l'expansion française en Afrique de l'Ouest à partir de 1881. Il résiste durant presque 20 ans au colonisateur français. Grâce à l'achat d'armes britanniques, il peut faire face à la supériorité technologique militaire des Européens. Malgré sa résistance, il sera capturé le 29 septembre 1898 par l'armée française. Il est encore à ce jour, un symbole de résistance acharnée à la colonisation de l'Afrique par les puissances occidentales.",
       sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] },
     { id: "emi-r2-d2", title: "Document 2", layout: "image-only",
-      imageUrl: "assets/img/emi-relation-2/img000.png", imageWidthCm: 7,
+      imageUrl: "assets/img/emi-relation-2/img000.png", imageWidthCm: 9,
       sources: ["Source de l'image : Draner, « Découpage de l'Afrique à la conférence de Berlin », Journal L'Illustration (1885), Wikimedia Commons. Licence : image du domaine public."] },
     { id: "emi-r2-d3", title: "Document 3", layout: "text-only",
       text: "« Au début du 20e siècle, l'invention de la bicyclette avec des roues en caoutchouc est une jolie révolution dans la vie quotidienne. Rapidement, \"la petite reine\", surnom du vélo, est un succès : les [...] s'équipent de ce nouveau moyen de transport. Un vent de liberté souffle sur ce début de siècle. »",
       sources: ["Source du texte : France Culture, Épisode 1 : Produire du caoutchouc à tout prix, consulté le 28 octobre 2021."] },
     { id: "emi-r2-d4", title: "Document 4", layout: "image-only",
-      imageUrl: "assets/img/emi-relation-2/img001.png", imageWidthCm: 7,
+      imageUrl: "assets/img/emi-relation-2/img001.png", imageWidthCm: 9,
       sources: ["Source de l'image : Chaumot, Missionnaire : un membre des Pères Blancs enseignant à des enfants dans une école d'Afrique équatoriale, Wikimedia Commons. Licence : image du domaine public."] },
     { id: "emi-r2-d5", title: "Document 5", layout: "text-only",
       text: "« Que faisons-nous au Congo ? Nous y poursuivons un double but : répandre la civilisation [et développer les opportunités économiques] de la Belgique. Ces buts sont inséparables. »",
@@ -1357,7 +1357,7 @@ const DOCS = {
       text: "Les Européens, armés, forcent les Africains du Congo à travailler à la récolte du caoutchouc. Ces gens subissent des mauvais traitements et de la violence ; leur situation ressemble à de l'esclavage. Les agents du roi Léopold II réprimandent avec une grande violence ceux qui tentent de se rebeller.",
       sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] },
     { id: "emi-ca1-d2", title: "Document 2", layout: "image-only",
-      imageUrl: "assets/img/emi-causes-1/img000.png", imageWidthCm: 5,
+      imageUrl: "assets/img/emi-causes-1/img000.png", imageWidthCm: 7,
       sources: ["Source de l'image : Le Petit journal, La France va pouvoir porter librement au Maroc la civilisation, la richesse et la paix. (1911), Bibliothèque Nationale de France. Licence : domaine public."] },
     { id: "emi-ca1-d3", title: "Document 3 : Congo belge", layout: "text-only",
       text: "« Littéralement obnubilé par les profits à tirer de son Congo, Leopold II et son administration vont mettre en place un système d'exploitation très dur pour les [Congolais], qui atteindra son apogée avec le développement de la culture du caoutchouc. Pour obtenir ce précieux produit, les agents de l'État utiliseront tous les moyens jusqu'à la violence et au meurtre pour mettre les [Congolais] au travail, au point que l'opinion internationale s'inquiétera de cette situation et qu'un mouvement baptisé The Congo Reform Movement sera mis sur pied pour dénoncer ces crimes. Le constat posé alors est effrayant, certains auteurs parlant de 10 millions de morts ».",
@@ -1373,7 +1373,7 @@ const DOCS = {
   ],
   'emi-causes-3': [
     { id: "emi-ca3-d1", title: "Document 1 : Le canal de Suez", layout: "image-only",
-      imageUrl: "assets/img/emi-causes-3/img000.png", imageWidthCm: 7,
+      imageUrl: "assets/img/emi-causes-3/img000.png", imageWidthCm: 9,
       sources: ["Source de l'image : Сканирование: Владимир Васильев, Opening of the Suez Canal, 1869, Wikimedia Commons. Licence : image du domaine public."] },
     { id: "emi-ca3-d2", title: "Document 2 : Trajet", layout: "text-only",
       text: "Ferdinand de Lesseps, un diplomate et homme d'affaires français, réussit à convaincre le vice-roi Said en 1854 de poursuivre le rêve de relier la mer Rouge et la mer Méditerranée. L'Égypte devient copropriétaire du projet avec la France. Après 10 ans de travaux, le canal de Suez de 193 km de long est inauguré en novembre 1869. Avec le raccourci que représente le canal, le trajet Londres-Bombay prendra désormais 40 jours au lieu de 4 mois en contournant le continent africain.",
@@ -1399,7 +1399,7 @@ const DOCS = {
       imageUrl: "assets/img/emi-differences-2/img000.png", imageWidthCm: 7,
       sources: ["Source de l'image : Female missionary in rickshaw (vers 1920), Wikimedia Commons. Licence : image du domaine public."] },
     { id: "emi-di2-d2", title: "Document 2", layout: "image-only",
-      imageUrl: "assets/img/emi-differences-2/img001.png", imageWidthCm: 5,
+      imageUrl: "assets/img/emi-differences-2/img001.png", imageWidthCm: 7,
       sources: ["Source de l'image : Le Petit journal, La France va pouvoir porter librement au Maroc la civilisation, la richesse et la paix. (1911), Bibliothèque Nationale de France. Licence : domaine public."] },
     { id: "emi-di2-d3", title: "Document 3", layout: "text-only",
       text: "Cette distinction est également basée sur une vision raciste : « les craintes de dégénération raciale du peuple allemand vont finalement mener à l'interdiction des mariages mixtes le 23 septembre 1905. Les notions de différence raciale sont fondées sur l'anthropologie allemande de la fin du 19e siècle qui établissait une distinction entre les peuples dits civilisés et les autres considérés comme primitifs. Les Allemands croient donc être engagés dans une guerre raciale, une lutte entre deux peuples pour le droit d'exister ».",
@@ -1413,7 +1413,7 @@ const DOCS = {
       imageUrl: "assets/img/emi-changements-1/img000.png", imageWidthCm: 7,
       sources: ["Source de l'image : Elikia M'Bokolo (dir.), Afrique Noire. Histoire et Civilisations, t. 2, xixe-xxe siècles, op. cit., p. 14."] },
     { id: "emi-ch1-d2", title: "Document 2 : Afrique vers 1914", layout: "image-only",
-      imageUrl: "assets/img/emi-changements-1/img001.png", imageWidthCm: 7,
+      imageUrl: "assets/img/emi-changements-1/img001.png", imageWidthCm: 9,
       sources: ["Source de l'image : Gundan, Afrique coloniale en 1914, Wikimedia Commons. Licence : Creative Commons BY-SA 4.0."] },
     { id: "emi-ch1-d3", title: "Document 3", layout: "image-only",
       imageUrl: "assets/img/emi-changements-1/img002.png", imageWidthCm: 11,
@@ -1425,7 +1425,7 @@ const DOCS = {
       sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] },
     { id: "emi-ch2-d2", title: "Document 2 : Génocide", layout: "text-image",
       text: "« Selon le rapport Whitaker de l'ONU (1985), ce seraient quelque 65 000 Herero (80 % du total de la population) et 10 000 Nama (50 %) qui auraient été exterminés entre 1904 et 1907. [En 1911], les autorités coloniales allemandes recensent [seulement] 15 130 Hereros ».",
-      imageUrl: "assets/img/emi-changements-2/img000.png", imageWidthCm: 5,
+      imageUrl: "assets/img/emi-changements-2/img000.png", imageWidthCm: 7,
       sources: ["Source du texte : Joël Kotek, « Le génocide des Herero, symptôme d'un Sonderweg allemand ? », Revue d'Histoire de la Shoah, vol. 189, no. 2, 2008, pp. 177-197.", "Source de l'image : Le Petit Journal, Illustration du conflit par le supplément du Petit Journal paru le 21 février 1904, Wikimedia Commons. Licence : image du domaine public."] }
   ]
 
