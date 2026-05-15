@@ -1,6 +1,10 @@
-# HEC · Premier cycle — Composition de cahier (v2.8)
+# HEC · Premier cycle — Composition de cahier (v2.9)
 
 Outil web pour composer un cahier d'élève à la pièce — sortie en `.docx` éditable.
+
+## ✨ Quoi de neuf (v2.9)
+
+- ☑️ **Bouton « Tout cocher / décocher »** sur l'en-tête de chaque réalité sociale : un clic ajoute (ou retire) d'un coup toutes les questions de la réalité au cahier. L'étiquette du bouton bascule automatiquement selon l'état (tout coché → décocher, sinon → cocher). Le clic sur le bouton ne replie pas le groupe.
 
 ## ✨ Quoi de neuf (v2.8)
 

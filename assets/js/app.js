@@ -174,15 +174,31 @@
       const headerEl = document.createElement('div');
       headerEl.className = 'realite-group-header';
       headerEl.setAttribute('data-realite-idx', String(realiteIdx));
+      const allUsed = questions.every(q => isQuestionUsed(q.id));
+      const toggleAllLabel = allUsed ? 'Tout décocher' : 'Tout cocher';
       headerEl.innerHTML = `
         <span class="realite-toggle" aria-hidden="true">▼</span>
         <span class="realite-group-title">${escapeHtml(realiteTitle)}</span>
         <span class="realite-group-count">${questions.length} question${questions.length > 1 ? 's' : ''}</span>
+        <button type="button" class="realite-group-toggle-all" aria-label="${toggleAllLabel} pour cette réalité">${toggleAllLabel}</button>
       `;
-      headerEl.addEventListener('click', () => {
+      headerEl.addEventListener('click', (e) => {
+        if (e.target.closest('.realite-group-toggle-all')) return;
         if (collapsedRealites.has(realiteId)) collapsedRealites.delete(realiteId);
         else collapsedRealites.add(realiteId);
         renderCatalog();
+      });
+      // Bouton « Tout cocher / décocher » : ne déclenche pas le repli du groupe
+      const toggleAllBtn = headerEl.querySelector('.realite-group-toggle-all');
+      toggleAllBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (allUsed) {
+          questions.forEach(q => removeAllPiecesForQuestion(q.id));
+        } else {
+          questions.forEach(q => { if (!isQuestionUsed(q.id)) addAllPiecesForQuestion(q); });
+        }
+        renderCatalog();
+        renderCahier();
       });
       groupEl.appendChild(headerEl);
 

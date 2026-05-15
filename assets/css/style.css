@@ -326,6 +326,25 @@ html, body {
   color: var(--color-text-muted);
   font-style: italic;
 }
+.realite-group-toggle-all {
+  margin-left: 0.4rem;
+  padding: 0.2rem 0.6rem;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 0.74rem;
+  font-weight: 500;
+  color: var(--color-text);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--transition), border-color var(--transition);
+}
+.realite-group-toggle-all:hover {
+  background: rgba(255, 255, 255, 0.55);
+  border-color: var(--color-text-muted);
+}
+.realite-group-toggle-all:active { transform: translateY(1px); }
 .realite-group-cards {
   display: flex;
   flex-direction: column;
