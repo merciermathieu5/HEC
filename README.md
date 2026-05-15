@@ -1,6 +1,10 @@
-# HEC · Premier cycle — Composition de cahier (v2.10)
+# HEC · Premier cycle — Composition de cahier (v2.11)
 
 Outil web pour composer un cahier d'élève à la pièce — sortie en `.docx` éditable.
+
+## ✨ Quoi de neuf (v2.11)
+
+- 🔢 **Ordre curriculaire du Secondaire 1** : *La sédentarisation* (1er dossier de 1re sec.) apparaît maintenant **avant** *La christianisation de l'Occident* (5e dossier) dans le filtre et dans le catalogue. Chaque réalité conserve son identité couleur (sed = sienne brûlée, chr = ocre doré, ind = bleu ardoise, emi = bordeaux) ; les valeurs des slots couleur 4-7 ont été permutées en interne pour suivre les nouveaux indices sans altérer l'apparence visuelle des cartes.
 
 ## ✨ Quoi de neuf (v2.10)
 

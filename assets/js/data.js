@@ -1668,10 +1668,10 @@ window.DATA = {
     { id: "renouvellement-vision-homme", titre: "Le renouvellement de la vision de l'Homme", niveau: 2 },
     { id: "expansion-europeenne", titre: "L'expansion européenne dans le monde", niveau: 2 },
     { id: "revolution-americaine", titre: "La Révolution américaine", niveau: 2 },
+    { id: "sedentarisation", titre: "La sédentarisation", niveau: 1 },
     { id: "christianisation-occident", titre: "La christianisation de l'Occident", niveau: 1 },
     { id: "industrialisation", titre: "L'industrialisation", niveau: 2 },
-    { id: "expansion-monde-industriel", titre: "L'expansion du monde industriel", niveau: 2 },
-    { id: "sedentarisation", titre: "La sédentarisation", niveau: 1 }
+    { id: "expansion-monde-industriel", titre: "L'expansion du monde industriel", niveau: 2 }
   ],
 
   operations_intellectuelles: [
