@@ -2139,6 +2139,15 @@ const DOCS = {
 // afin que les énoncés "À l'aide du document 2" restent cohérents.
 const pickDocs = (section, ...indices) => indices.map(i => DOCS[section][i - 1]);
 
+// Variante qui renumérote les documents sélectionnés à partir de 1 — utile lorsqu'une
+// question n'affiche qu'un sous-ensemble des documents d'une section et que l'énoncé doit
+// référer à "Document 1", "Document 2" indépendamment de la position d'origine.
+const pickDocsRenumbered = (section, ...indices) => indices.map((origIdx, k) => {
+  const doc = DOCS[section][origIdx - 1];
+  const newTitle = doc.title.replace(/^Document\s+\d+/, `Document ${k + 1}`);
+  return { ...doc, title: newTitle };
+});
+
 // ============ EXPORT ============
 window.DATA = {
 
@@ -3707,11 +3716,11 @@ window.DATA = {
       corrige: "Le territoire de la Grèce antique est montagneux, son relief est accidenté, la Grèce est entourée de cours d'eau et de nombreuses îles sont présentes sur la mer Égée." },
     { id: "q-dem-faits-4", operation: "Établir des faits", numero: 4, niveau: 1, realite_sociale_id: "premiere-experience-democratie",
       questionBody: { prompt: "Comment se nomme la région grecque où se situe la cité-État d'Athènes ?", responseSpace: { type: "lines", count: 2 } },
-      reglettes: [{ id: "r-dem-f4", label: "Réglette (1 point)", ...R_FAITS_1PT }], documents: pickDocs('dem-faits-2', 1, 2),
+      reglettes: [{ id: "r-dem-f4", label: "Réglette (1 point)", ...R_FAITS_1PT }], documents: pickDocsRenumbered('dem-faits-2', 2),
       corrige: "Cette région se nomme l'Attique." },
     { id: "q-dem-faits-5", operation: "Établir des faits", numero: 5, niveau: 1, realite_sociale_id: "premiere-experience-democratie",
       questionBody: { prompt: "Comment se nomme la région grecque où se situe la cité-État de Sparte ?", responseSpace: { type: "lines", count: 2 } },
-      reglettes: [{ id: "r-dem-f5", label: "Réglette (1 point)", ...R_FAITS_1PT }], documents: pickDocs('dem-faits-2', 1, 2),
+      reglettes: [{ id: "r-dem-f5", label: "Réglette (1 point)", ...R_FAITS_1PT }], documents: pickDocsRenumbered('dem-faits-2', 2),
       corrige: "Cette région se nomme le Péloponnèse." },
     { id: "q-dem-faits-6", operation: "Établir des faits", numero: 6, niveau: 1, realite_sociale_id: "premiere-experience-democratie",
       questionBody: { prompt: "À l'aide du document 1, indique une fonction culturelle de l'Acropole.", responseSpace: { type: "lines", count: 3 } },
@@ -3719,7 +3728,7 @@ window.DATA = {
       corrige: "L'Acropole regroupe plusieurs bâtiments culturels comme le Parthénon, le temple d'Athéna Nikè, plusieurs autels, le théâtre de Dionysos, etc." },
     { id: "q-dem-faits-7", operation: "Établir des faits", numero: 7, niveau: 1, realite_sociale_id: "premiere-experience-democratie",
       questionBody: { prompt: "Nomme un philosophe grec qui a vécu lors de l'âge d'or d'Athènes (5e siècle avant notre ère).", responseSpace: { type: "lines", count: 2 } },
-      reglettes: [{ id: "r-dem-f7", label: "Réglette (1 point)", ...R_FAITS_1PT }], documents: pickDocs('dem-faits-3', 2),
+      reglettes: [{ id: "r-dem-f7", label: "Réglette (1 point)", ...R_FAITS_1PT }], documents: pickDocsRenumbered('dem-faits-3', 2),
       corrige: "Socrate." },
 
     // ===== ESPACE (4) =====
@@ -3729,9 +3738,9 @@ window.DATA = {
       reglettes: [{ id: "r-dem-e1", label: "Réglette (2 points)", ...R_SITUER_2PT_4 }], documents: pickDocs('dem-espace-1', 1),
       corrige: ["A", "C", "B", "D"] },
     { id: "q-dem-espace-2", operation: "Situer dans l'espace", numero: 2, niveau: 1, realite_sociale_id: "premiere-experience-democratie",
-      questionBody: { prompt: "À l'aide du document 2, situe les cités-État d'Athènes et de Sparte.",
+      questionBody: { prompt: "À l'aide du document 1, situe les cités-État d'Athènes et de Sparte.",
         responseSpace: { type: "labeled-list", items: ["Athènes", "Sparte"] } },
-      reglettes: [{ id: "r-dem-e2", label: "Réglette (2 points)", ...R_SITUER_2PT_2_PART }], documents: pickDocs('dem-espace-1', 2),
+      reglettes: [{ id: "r-dem-e2", label: "Réglette (2 points)", ...R_SITUER_2PT_2_PART }], documents: pickDocsRenumbered('dem-espace-1', 2),
       corrige: ["B", "A"] },
     { id: "q-dem-espace-3", operation: "Situer dans l'espace", numero: 3, niveau: 1, realite_sociale_id: "premiere-experience-democratie",
       questionBody: { prompt: "À l'aide du document 1, indique les lettres qui correspondent aux régions de l'Attique et du Péloponnèse.",
@@ -3740,7 +3749,7 @@ window.DATA = {
       corrige: ["C", "A"] },
     { id: "q-dem-espace-4", operation: "Situer dans l'espace", numero: 4, niveau: 1, realite_sociale_id: "premiere-experience-democratie",
       questionBody: { prompt: "Lors de l'ecclésia, les citoyens participent à la vie démocratique en décidant de la paix ou de la guerre, en votant des lois, en entamant une procédure d'ostracisme (bannissement), etc. Où cette assemblée des citoyens se déroule-t-elle ?", responseSpace: { type: "lines", count: 2 } },
-      reglettes: [{ id: "r-dem-e4", label: "Réglette (1 point)", ...R_SITUER_1PT_SP_1SUR1 }], documents: pickDocs('dem-espace-2', 2),
+      reglettes: [{ id: "r-dem-e4", label: "Réglette (1 point)", ...R_SITUER_1PT_SP_1SUR1 }], documents: pickDocsRenumbered('dem-espace-2', 2),
       corrige: "Sur la colline de la Pnyx." },
 
     // ===== TEMPS (4) =====
@@ -3750,22 +3759,21 @@ window.DATA = {
       reglettes: [{ id: "r-dem-t1", label: "Réglette (1 point)", ...R_SITUER_1PT_1 }], documents: pickDocs('dem-temps-1', 1),
       corrige: ["A"] },
     { id: "q-dem-temps-2", operation: "Situer dans le temps", numero: 2, niveau: 1, realite_sociale_id: "premiere-experience-democratie",
-      questionBody: { prompt: "Les documents 2 et 3 présentent des faits se déroulant au 5e siècle avant notre ère. Indique si les faits présentés surviennent avant ou après la bataille de Marathon, mettant fin à la première guerre médique.",
+      questionBody: { prompt: "Les documents 1 et 2 présentent des faits se déroulant au 5e siècle avant notre ère. Indique si les faits présentés surviennent avant ou après la bataille de Marathon, mettant fin à la première guerre médique.",
         responseSpace: { type: "before-after-axis", beforeLabel: "Antériorité", afterLabel: "Postériorité", pivot: "Bataille de Marathon (490 avant notre ère)" } },
-      reglettes: [{ id: "r-dem-t2", label: "Réglette (1 point)", ...R_SITUER_1PT_T2 }], documents: pickDocs('dem-temps-1', 1, 2, 3),
-      corrige: { before: ["Document 2"], after: ["Document 3"] } },
+      reglettes: [{ id: "r-dem-t2", label: "Réglette (1 point)", ...R_SITUER_1PT_T2 }], documents: pickDocsRenumbered('dem-temps-1', 2, 3),
+      corrige: { before: ["Document 1"], after: ["Document 2"] } },
     { id: "q-dem-temps-3", operation: "Situer dans le temps", numero: 3, niveau: 1, realite_sociale_id: "premiere-experience-democratie",
       questionBody: { prompt: "Les documents 1 à 3 présentent des étapes de la vie du citoyen athénien. Place-les en ordre chronologique.",
         responseSpace: { type: "chrono-ordering", items: ["1er (le plus ancien)", "2e", "3e (le plus récent)"] } },
       reglettes: [{ id: "r-dem-t3", label: "Réglette (2 points)", ...R_SITUER_2PT_T3 }], documents: pickDocs('dem-temps-2', 1, 2, 3),
       corrige: ["Document 3", "Document 2", "Document 1"] },
     { id: "q-dem-temps-4", operation: "Situer dans le temps", numero: 4, niveau: 1, realite_sociale_id: "premiere-experience-democratie",
-      questionBody: { prompt: "Sur la ligne du temps du document 4, encercle la lettre correspondante aux faits présentés dans le document 2. Inscris ta réponse ci-dessous.",
+      questionBody: { prompt: "Sur la ligne du temps du document 1, encercle la lettre qui correspond au 5e siècle avant notre ère, période durant laquelle se déroule la vie politique athénienne. Inscris ta réponse ci-dessous.",
         responseSpace: { type: "labeled-list", items: ["Lettre correspondante"] } },
       reglettes: [{ id: "r-dem-t4", label: "Réglette (1 point)", ...R_SITUER_1PT_TF_1SUR1 }],
       documents: [
-        DOCS['dem-temps-2'][1],
-        { id: "dem-t4-timeline", title: "Document 4 : Ligne du temps", layout: "image-only",
+        { id: "dem-t4-timeline", title: "Document 1 : Ligne du temps", layout: "image-only",
           imageUrl: "assets/img/dem-temps-2/timeline.png", imageWidthCm: 13,
           sources: ["Source de l'image : Service national du RÉCIT, domaine de l'univers social."] }
       ],
@@ -3778,9 +3786,9 @@ window.DATA = {
       reglettes: [{ id: "r-dem-r1", label: "Réglette (2 points)", ...R_RELATION_2PT_3 }], documents: pickDocs('dem-relation-1', 1, 2, 3),
       corrige: [[false, true], [true, false], [true, false]] },
     { id: "q-dem-relation-2", operation: "Mettre en relation des faits", numero: 2, niveau: 1, realite_sociale_id: "premiere-experience-democratie",
-      questionBody: { prompt: "À l'aide des documents 4 et 5, associe l'institution politique au pouvoir qui lui correspond.",
+      questionBody: { prompt: "À l'aide des documents 1 et 2, associe l'institution politique au pouvoir qui lui correspond.",
         responseSpace: { type: "labeled-list", items: ["Boulè", "Héliée", "Ecclésia"] } },
-      reglettes: [{ id: "r-dem-r2", label: "Réglette (2 points)", ...R_RELATION_2PT_3 }], documents: pickDocs('dem-relation-1', 4, 5),
+      reglettes: [{ id: "r-dem-r2", label: "Réglette (2 points)", ...R_RELATION_2PT_3 }], documents: pickDocsRenumbered('dem-relation-1', 4, 5),
       corrige: ["Pouvoir législatif", "Pouvoir judiciaire", "Pouvoir législatif"] },
     { id: "q-dem-relation-3", operation: "Mettre en relation des faits", numero: 3, niveau: 1, realite_sociale_id: "premiere-experience-democratie",
       questionBody: { prompt: "Les documents 1 à 3 présentent des informations sur les différentes classes sociales présentes à Athènes au 5e siècle avant notre ère. Associe chacune des classes sociales au document lui correspondant.",
@@ -3788,10 +3796,10 @@ window.DATA = {
       reglettes: [{ id: "r-dem-r3", label: "Réglette (2 points)", ...R_RELATION_2PT_3 }], documents: pickDocs('dem-relation-2', 1, 2, 3),
       corrige: ["2", "1", "3"] },
     { id: "q-dem-relation-4", operation: "Mettre en relation des faits", numero: 4, niveau: 1, realite_sociale_id: "premiere-experience-democratie",
-      questionBody: { prompt: "Indique si les documents 4 et 5 correspondent au domaine de la philosophie ou à celui de la mythologie.",
+      questionBody: { prompt: "Indique si les documents 1 et 2 correspondent au domaine de la philosophie ou à celui de la mythologie.",
         responseSpace: { type: "labeled-list", items: ["Philosophie (Document n°)", "Mythologie (Document n°)"] } },
-      reglettes: [{ id: "r-dem-r4", label: "Réglette (1 point)", ...R_RELATION_1PT_2 }], documents: pickDocs('dem-relation-2', 4, 5),
-      corrige: ["5", "4"] },
+      reglettes: [{ id: "r-dem-r4", label: "Réglette (1 point)", ...R_RELATION_1PT_2 }], documents: pickDocsRenumbered('dem-relation-2', 4, 5),
+      corrige: ["2", "1"] },
 
     // ===== CAUSES (6) =====
     { id: "q-dem-causes-1", operation: "Déterminer des causes et des conséquences", numero: 1, niveau: 1, realite_sociale_id: "premiere-experience-democratie",
@@ -3800,26 +3808,26 @@ window.DATA = {
       reglettes: [{ id: "r-dem-ca1", label: "Réglette (1 point)", ...R_CAUSES_1PT_CAUSE_CONS }], documents: pickDocs('dem-causes-1', 1, 2),
       corrige: ["2", "1"] },
     { id: "q-dem-causes-2", operation: "Déterminer des causes et des conséquences", numero: 2, niveau: 1, realite_sociale_id: "premiere-experience-democratie",
-      questionBody: { prompt: "À l'aide du document 3, explique l'objectif derrière l'apprentissage de l'art du discours et de la rhétorique.", responseSpace: { type: "lines", count: 5 } },
-      reglettes: [{ id: "r-dem-ca2", label: "Réglette (2 points)", ...R_CAUSES_2PT_CAUSE }], documents: pickDocs('dem-causes-1', 3),
+      questionBody: { prompt: "À l'aide du document 1, explique l'objectif derrière l'apprentissage de l'art du discours et de la rhétorique.", responseSpace: { type: "lines", count: 5 } },
+      reglettes: [{ id: "r-dem-ca2", label: "Réglette (2 points)", ...R_CAUSES_2PT_CAUSE }], documents: pickDocsRenumbered('dem-causes-1', 3),
       corrige: "L'apprentissage de l'art du discours et de la rhétorique prépare le futur citoyen à participer à la vie politique. Par exemple, ces compétences peuvent lui être utiles lors de la prise de la parole à l'Ecclesia." },
     { id: "q-dem-causes-3", operation: "Déterminer des causes et des conséquences", numero: 3, niveau: 1, realite_sociale_id: "premiere-experience-democratie",
       questionBody: { prompt: "Pourquoi Périclès ordonne-t-il la construction d'un corridor fortifié entre le port du Pirée et la cité-État d'Athènes ?", responseSpace: { type: "lines", count: 4 } },
       reglettes: [{ id: "r-dem-ca3", label: "Réglette (2 points)", ...R_CAUSES_2PT_CAUSE }], documents: pickDocs('dem-causes-2', 1),
       corrige: "Périclès ordonne la construction d'un corridor fortifié afin de permettre la circulation sécuritaire des marchandises entre le port et la cité-État." },
     { id: "q-dem-causes-4", operation: "Déterminer des causes et des conséquences", numero: 4, niveau: 1, realite_sociale_id: "premiere-experience-democratie",
-      questionBody: { prompt: "À l'aide des documents 2 et 3, détermine une conséquence politique et une conséquence économique de la Guerre du Péloponnèse sur la cité-État d'Athènes.",
+      questionBody: { prompt: "À l'aide des documents 1 et 2, détermine une conséquence politique et une conséquence économique de la Guerre du Péloponnèse sur la cité-État d'Athènes.",
         responseSpace: { type: "labeled-list", items: ["Conséquence politique", "Conséquence économique"] } },
-      reglettes: [{ id: "r-dem-ca4", label: "Réglette (4 points)", ...R_CAUSES_4PT_CONSEQ_PMC }], documents: pickDocs('dem-causes-2', 2, 3),
+      reglettes: [{ id: "r-dem-ca4", label: "Réglette (4 points)", ...R_CAUSES_4PT_CONSEQ_PMC }], documents: pickDocsRenumbered('dem-causes-2', 2, 3),
       corrige: ["Une conséquence politique de la Guerre du Péloponnèse sur la cité-État d'Athènes est sa perte d'influence et de pouvoir sur la Grèce, au profit de Sparte OU La perte de confiance des Athéniens dans la démocratie.", "La Guerre du Péloponnèse contribue à la ruine de la cité-État d'Athènes."] },
     { id: "q-dem-causes-5", operation: "Déterminer des causes et des conséquences", numero: 5, niveau: 1, realite_sociale_id: "premiere-experience-democratie",
       questionBody: { prompt: "À l'aide du document 1, détermine une conséquence politique de la structure sociale athénienne.", responseSpace: { type: "lines", count: 4 } },
       reglettes: [{ id: "r-dem-ca5", label: "Réglette (2 points)", ...R_CAUSES_2PT_CONSEQ }], documents: pickDocs('dem-causes-3', 1),
       corrige: "Une faible partie de la population (seulement 10 à 15%) possède des droits politiques (les citoyens)." },
     { id: "q-dem-causes-6", operation: "Déterminer des causes et des conséquences", numero: 6, niveau: 1, realite_sociale_id: "premiere-experience-democratie",
-      questionBody: { prompt: "Les documents 2 et 3 font référence à la procédure d'ostracisme. Détermine une cause et une conséquence de cette procédure.",
+      questionBody: { prompt: "Les documents 1 et 2 font référence à la procédure d'ostracisme. Détermine une cause et une conséquence de cette procédure.",
         responseSpace: { type: "labeled-list", items: ["Cause de l'ostracisme", "Conséquence de l'ostracisme"] } },
-      reglettes: [{ id: "r-dem-ca6", label: "Réglette (2 points)", ...R_CAUSES_2PT_CAUSE_CONS }], documents: pickDocs('dem-causes-3', 2, 3),
+      reglettes: [{ id: "r-dem-ca6", label: "Réglette (2 points)", ...R_CAUSES_2PT_CAUSE_CONS }], documents: pickDocsRenumbered('dem-causes-3', 2, 3),
       corrige: ["L'ostracisme est causé par le vote, 1 fois par année, des citoyens athéniens qui sont dangereux pour la démocratie.", "La conséquence de l'ostracisme est l'exil pour une durée de 10 ans."] },
 
     // ===== DIFFÉRENCES (4) =====
@@ -3829,29 +3837,29 @@ window.DATA = {
       corrige: "Le système politique d'Athènes est la démocratie alors que celui de Sparte est l'oligarchie/monarchie." },
     { id: "q-dem-differences-2", operation: "Dégager des différences et des similitudes", numero: 2, niveau: 1, realite_sociale_id: "premiere-experience-democratie",
       questionBody: { prompt: "Dégage une différence entre l'éducation des garçons et des filles chez les Athéniens.", responseSpace: { type: "lines", count: 4 } },
-      reglettes: [{ id: "r-dem-di2", label: "Réglette (2 points)", ...R_DIFFERENCES_2PT_GEN }], documents: pickDocs('dem-differences-1', 3),
+      reglettes: [{ id: "r-dem-di2", label: "Réglette (2 points)", ...R_DIFFERENCES_2PT_GEN }], documents: pickDocsRenumbered('dem-differences-1', 3),
       corrige: "Les jeunes garçons apprennent à devenir de bons citoyens qui participent à la politique alors que les jeunes filles apprennent à devenir de bonnes épouses." },
     { id: "q-dem-differences-3", operation: "Dégager des différences et des similitudes", numero: 3, niveau: 1, realite_sociale_id: "premiere-experience-democratie",
       questionBody: { prompt: "Dégage une différence entre l'armée athénienne et l'armée spartiate au 5e siècle avant notre ère.", responseSpace: { type: "lines", count: 4 } },
       reglettes: [{ id: "r-dem-di3", label: "Réglette (2 points)", ...R_DIFFERENCES_2PT_GEN }], documents: pickDocs('dem-differences-2', 1, 2),
       corrige: "L'armée athénienne est composée des citoyens et des métèques alors que l'armée spartiate est composée de soldats de profession." },
     { id: "q-dem-differences-4", operation: "Dégager des différences et des similitudes", numero: 4, niveau: 1, realite_sociale_id: "premiere-experience-democratie",
-      questionBody: { prompt: "À l'aide du document 3, dégage une différence entre les situations géographiques d'Athènes et de Sparte.", responseSpace: { type: "lines", count: 4 } },
-      reglettes: [{ id: "r-dem-di4", label: "Réglette (2 points)", ...R_DIFFERENCES_2PT_GEN }], documents: pickDocs('dem-differences-2', 3),
+      questionBody: { prompt: "À l'aide du document 1, dégage une différence entre les situations géographiques d'Athènes et de Sparte.", responseSpace: { type: "lines", count: 4 } },
+      reglettes: [{ id: "r-dem-di4", label: "Réglette (2 points)", ...R_DIFFERENCES_2PT_GEN }], documents: pickDocsRenumbered('dem-differences-2', 3),
       corrige: "Athènes est située dans la région de l'Attique alors que Sparte se trouve dans la région du Péloponnèse." },
 
     // ===== CHANGEMENTS (4) =====
     { id: "q-dem-changements-1", operation: "Déterminer des changements et des continuités", numero: 1, niveau: 1, realite_sociale_id: "premiere-experience-democratie",
       questionBody: { prompt: "Détermine un changement quant au lieu où l'ecclésia se réunit au 5e siècle avant notre ère.", responseSpace: { type: "lines", count: 4 } },
-      reglettes: [{ id: "r-dem-ch1", label: "Réglette (1 point)", ...R_CHGT_1PT_CHGT }], documents: pickDocs('dem-changements-1', 3),
+      reglettes: [{ id: "r-dem-ch1", label: "Réglette (1 point)", ...R_CHGT_1PT_CHGT }], documents: pickDocsRenumbered('dem-changements-1', 3),
       corrige: "L'Ecclésia s'est d'abord réunie à l'Agora, puis s'est déplacée sur la colline de la Pnyx au 5e siècle avant notre ère." },
     { id: "q-dem-changements-2", operation: "Déterminer des changements et des continuités", numero: 2, niveau: 1, realite_sociale_id: "premiere-experience-democratie",
       questionBody: { prompt: "Détermine un changement dans le régime politique en place à Athènes entre le 8e et le 5e siècle avant notre ère.", responseSpace: { type: "lines", count: 4 } },
       reglettes: [{ id: "r-dem-ch2", label: "Réglette (2 points)", ...R_CHGT_2PT_CHGT_OR_CONT }], documents: pickDocs('dem-changements-1', 1, 2),
       corrige: "Entre le 8e et le 5e siècle avant J-C., Athènes passe de l'oligarchie à la démocratie." },
     { id: "q-dem-changements-3", operation: "Déterminer des changements et des continuités", numero: 3, niveau: 1, realite_sociale_id: "premiere-experience-democratie",
-      questionBody: { prompt: "À l'aide des documents 2 et 3, détermine une continuité dans les alliances militaires d'Athènes à la fin des guerres médiques et lors de la Guerre du Péloponnèse.", responseSpace: { type: "lines", count: 5 } },
-      reglettes: [{ id: "r-dem-ch3", label: "Réglette (2 points)", ...R_CHGT_2PT_CONT }], documents: pickDocs('dem-changements-2', 2, 3),
+      questionBody: { prompt: "À l'aide des documents 1 et 2, détermine une continuité dans les alliances militaires d'Athènes à la fin des guerres médiques et lors de la Guerre du Péloponnèse.", responseSpace: { type: "lines", count: 5 } },
+      reglettes: [{ id: "r-dem-ch3", label: "Réglette (2 points)", ...R_CHGT_2PT_CONT }], documents: pickDocsRenumbered('dem-changements-2', 2, 3),
       corrige: "À la fin des guerres médiques, Athènes fait partie de la Ligue de Délos. Puis, lors de la Guerre du Péloponnèse, Athènes fait toujours partie de la Ligue de Délos." },
     { id: "q-dem-changements-4", operation: "Déterminer des changements et des continuités", numero: 4, niveau: 1, realite_sociale_id: "premiere-experience-democratie",
       questionBody: { prompt: "À l'aide du document 1, détermine un changement dans le système politique athénien au tournant du 5e siècle avant notre ère.", responseSpace: { type: "lines", count: 4 } },
