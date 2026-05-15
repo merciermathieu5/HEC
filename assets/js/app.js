@@ -1446,7 +1446,13 @@
           // l'aperçu. Un tableau bordé fonctionne dans les deux moteurs.
           const items = body.responseSpace.items || [];
           const totalW = 10500;
-          const labelColW = 3800;
+          // Auto-dimensionner la colonne libellé pour éviter le retour à la ligne sur
+          // les longs libellés (ex. « Conséquence de la sédentarisation (Document n°) »).
+          // ~140 DXA/char + 400 DXA marge (calibré pour Word ET docx-preview, ce dernier
+          // utilisant un rendu un peu plus large). Plancher à 3800, plafond pour garder
+          // au moins 3500 DXA à la ligne de réponse.
+          const maxChars = items.reduce((m, it) => Math.max(m, (it || '').length), 0);
+          const labelColW = Math.max(3800, Math.min(totalW - 3500, maxChars * 140 + 400));
           const answerColW = totalW - labelColW;
           const lineBorder = { style: BorderStyle.SINGLE, size: 4, color: "AAAAAA" };
           const noBorder = { style: BorderStyle.NONE, size: 0, color: "FFFFFF" };

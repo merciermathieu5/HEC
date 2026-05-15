@@ -1,6 +1,10 @@
-# HEC · Premier cycle — Composition de cahier (v2.9)
+# HEC · Premier cycle — Composition de cahier (v2.10)
 
 Outil web pour composer un cahier d'élève à la pièce — sortie en `.docx` éditable.
+
+## ✨ Quoi de neuf (v2.10)
+
+- 📏 **Largeur auto-adaptative des libellés en *labeled-list*** : la colonne de gauche des questions « tableau libellé / ligne de réponse » se dimensionne maintenant selon le libellé le plus long (formule `~140 DXA/caractère + 400`, plancher 3800, plafond préservant ≥3500 DXA pour la ligne de réponse). Corrige le retour à la ligne sur les libellés sédentarisation comme « *Conséquence de la sédentarisation (Document n°)* » et « *Conséquence territoriale (Document n°)* ». Bénéfice secondaire : 26 questions plus anciennes (christianisation, expansion, révolution, industrialisation) qui étaient marginales obtiennent aussi des libellés plus aérés.
 
 ## ✨ Quoi de neuf (v2.9)
 
