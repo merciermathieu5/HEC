@@ -1,6 +1,12 @@
-# HEC · Premier cycle — Composition de cahier (v2.11)
+# HEC · Premier cycle — Composition de cahier (v2.12)
 
 Outil web pour composer un cahier d'élève à la pièce — sortie en `.docx` éditable.
+
+## ✨ Quoi de neuf (v2.12)
+
+- 🏛️ **Nouvelle réalité sociale (Secondaire 1)** : *L'émergence d'une civilisation* avec 35 questions atomiques couvrant les 8 opérations intellectuelles. **Troisième dossier de niveau 1** dans l'app, inséré entre *La sédentarisation* (1er dossier de 1re sec.) et *La christianisation de l'Occident* (5e dossier). Couvre la civilisation mésopotamienne : Croissant fertile, Tigre et Euphrate, écriture cunéiforme, calculi, Code d'Hammourabi, cités-État (Ur, Babylone, Lagash), ziggourats, Étendard d'Ur, Épopée de Gilgamesh, scribes, sceaux-cylindres, hiérarchie sociale antique.
+- 📚 **Catalogue total** : 281 questions réparties sur 8 réalités sociales (renouvellement de la vision de l'Homme + expansion européenne + Révolution américaine + sédentarisation + **émergence d'une civilisation** + christianisation de l'Occident + industrialisation + expansion du monde industriel).
+- 🟦 Couleur **bleu lapis-lazuli profond** (`#2c5a7a`) dédiée pour la 8ᵉ réalité — teinte évocatrice du pigment antique le plus emblématique de la Mésopotamie (Étendard d'Ur, Porte d'Ishtar, sceaux-cylindres). Nouveau slot CSS 5 ; les valeurs des slots couleur 5-7 ont été permutées vers 6-8 pour conserver l'identité visuelle de chr (ocre), ind (bleu ardoise) et emi (bordeaux).
 
 ## ✨ Quoi de neuf (v2.11)
 
