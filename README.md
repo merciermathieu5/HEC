@@ -1,6 +1,12 @@
-# HEC · Premier cycle — Composition de cahier (v2.12)
+# HEC · Premier cycle — Composition de cahier (v2.13)
 
 Outil web pour composer un cahier d'élève à la pièce — sortie en `.docx` éditable.
+
+## ✨ Quoi de neuf (v2.13)
+
+- 🏛️ **Nouvelle réalité sociale (Secondaire 1)** : *Une première expérience de démocratie* avec 36 questions atomiques couvrant les 8 opérations intellectuelles. **Troisième dossier de niveau 1 dans l'ordre curriculaire (Sec 1)**, inséré entre *L'émergence d'une civilisation* (2e dossier) et *La christianisation de l'Occident* (5e dossier, ex-4e). Couvre la Grèce antique du 5e siècle av. J.-C. : cités-État (Athènes, Sparte, Attique, Péloponnèse), démocratie athénienne, institutions politiques (Ecclésia, Boulè, Héliée, 10 Stratèges), citoyens / métèques / femmes / esclaves, philosophie (Socrate, Platon, méthode socratique), ostracisme, Acropole et Parthénon, port du Pirée et Longs Murs, guerres médiques (bataille de Marathon, Phidippidès), Ligue de Délos, guerre du Péloponnèse.
+- 📚 **Catalogue total** : 317 questions réparties sur 9 réalités sociales (renouvellement de la vision de l'Homme + expansion européenne + Révolution américaine + sédentarisation + émergence d'une civilisation + **Une première expérience de démocratie** + christianisation de l'Occident + industrialisation + expansion du monde industriel).
+- 🟥 Couleur **rouge attique** (`#9a3a30`) dédiée pour la 9ᵉ réalité — teinte évocatrice de la céramique attique à figures rouges, signature visuelle de l'Athènes classique. Nouveau slot CSS 6 ; les valeurs des slots couleur 6-8 ont été permutées vers 7-9 pour conserver l'identité visuelle de chr (ocre), ind (bleu ardoise) et emi (bordeaux).
 
 ## ✨ Quoi de neuf (v2.12)
 
