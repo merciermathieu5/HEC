@@ -26,6 +26,8 @@
   --realite-color-3-bg: #ece4f0;
   --realite-color-4: #b08840;  /* ocre doré : christianisation de l'Occident */
   --realite-color-4-bg: #f3ead4;
+  --realite-color-5: #4a6a82;  /* bleu ardoise : industrialisation */
+  --realite-color-5-bg: #dde6ee;
   --shadow-sm: 0 1px 2px rgba(42, 38, 32, 0.06);
   --shadow-md: 0 2px 6px rgba(42, 38, 32, 0.08);
   --radius: 4px;
@@ -242,11 +244,13 @@ html, body {
 .question-card[data-realite-idx="1"] { border-left: 4px solid var(--realite-color-2); }
 .question-card[data-realite-idx="2"] { border-left: 4px solid var(--realite-color-3); }
 .question-card[data-realite-idx="3"] { border-left: 4px solid var(--realite-color-4); }
+.question-card[data-realite-idx="4"] { border-left: 4px solid var(--realite-color-5); }
 
 .tag-realite[data-realite-idx="0"] { background: var(--realite-color-1); color: #fff; }
 .tag-realite[data-realite-idx="1"] { background: var(--realite-color-2); color: #fff; }
 .tag-realite[data-realite-idx="2"] { background: var(--realite-color-3); color: #fff; }
 .tag-realite[data-realite-idx="3"] { background: var(--realite-color-4); color: #fff; }
+.tag-realite[data-realite-idx="4"] { background: var(--realite-color-5); color: #fff; }
 
 /* === Groupes repliables par réalité sociale === */
 .realite-group {
@@ -283,6 +287,10 @@ html, body {
 .realite-group-header[data-realite-idx="3"] {
   background: var(--realite-color-4-bg);
   border-left: 4px solid var(--realite-color-4);
+}
+.realite-group-header[data-realite-idx="4"] {
+  background: var(--realite-color-5-bg);
+  border-left: 4px solid var(--realite-color-5);
 }
 .realite-toggle {
   display: inline-flex;

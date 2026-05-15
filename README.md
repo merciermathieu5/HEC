@@ -1,6 +1,12 @@
-# HEC · Premier cycle — Composition de cahier (v2.5)
+# HEC · Premier cycle — Composition de cahier (v2.6)
 
 Outil web pour composer un cahier d'élève à la pièce — sortie en `.docx` éditable.
+
+## ✨ Quoi de neuf (v2.6)
+
+- 🏭 **Nouvelle réalité sociale (Secondaire 2)** : *L'industrialisation* avec 35 questions atomiques couvrant les 8 opérations intellectuelles. C'est la 4ᵉ réalité du programme Secondaire 2 — pendant économique et social aux trois précédentes.
+- 📚 **Catalogue total** : 176 questions réparties sur 5 réalités sociales (Le renouvellement de la vision de l'Homme + L'expansion européenne dans le monde + La Révolution américaine + La christianisation de l'Occident + L'industrialisation).
+- 🔵 Couleur bleu ardoise dédiée pour la 5ᵉ réalité, en cohérence avec la palette de design (vert / terre cuite / pourpre / ocre / bleu ardoise).
 
 ## ✨ Quoi de neuf (v2.5)
 

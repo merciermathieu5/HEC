@@ -68,6 +68,23 @@ const R_CHGT_1PT_CONT = rubric2("Déterminer des changements et des continuités
 const R_CHGT_1PT_CHGT = rubric2("Déterminer des changements et des continuités", "L'élève détermine correctement le changement.", "L'élève ne détermine pas le changement.");
 const R_SITUER_2PT_3SP = rubric3("Situer dans le temps et dans l'espace", "L'élève situe tous les faits dans l'espace. (3 sur 3)", "L'élève situe certains faits dans l'espace. (1 ou 2 sur 3)", "L'élève ne situe pas les faits dans l'espace. (0 sur 3)");
 
+// 4/2/0 — deux conséquences à déterminer (ex. locomotive)
+const R_CAUSES_4PT_CONSEQ = { type: "simple", opLabel: "Déterminer des causes et des conséquences", maxPoints: 4,
+  levels: [
+    { points: "4 points", condition: "L'élève détermine correctement les conséquences." },
+    { points: "2 points", condition: "L'élève détermine partiellement les conséquences ou n'en détermine qu'une seule." },
+    { points: "0 point", condition: "L'élève détermine incorrectement les conséquences ou ne les détermine pas." }
+  ]};
+// 4/2/0 — deux causes à déterminer (ex. espérance de vie)
+const R_CAUSES_4PT_CAUSES = { type: "simple", opLabel: "Déterminer des causes et des conséquences", maxPoints: 4,
+  levels: [
+    { points: "4 points", condition: "L'élève détermine correctement les causes." },
+    { points: "2 points", condition: "L'élève détermine partiellement les causes ou n'en détermine qu'une seule." },
+    { points: "0 point", condition: "L'élève détermine incorrectement les causes ou ne les détermine pas." }
+  ]};
+// 2/1/0 — 6 affirmations à classer (artisanal/industriel)
+const R_RELATION_2PT_6 = rubric3("Mettre en relation des faits", "L'élève met en relation les faits. (6 sur 6)", "L'élève met en relation certains faits. (3, 4 ou 5 sur 6)", "L'élève ne met pas en relation les faits. (0, 1 ou 2 sur 6)");
+
 const CAUSALITE_INSTRUCTIONS = {
   parts: [
     { text: "Fais des phrases complètes et utilise des marqueurs de relation de " },
@@ -976,6 +993,224 @@ const DOCS = {
       sources: ["Source du texte : L. Duchesne (éd.), Liber pontificalis, Bouquet, V, 466, tome II, Paris, Ernest Thorin, 1892, p. 7, en ligne.", "Source de l'image : Jean Fouquet, Grandes chroniques de France (vers 1455-1460), Bibliothèque nationale de France, Français 6465, folio 89v."] }
   ],
 
+  // ============ Documents — L'industrialisation ============
+  'ind-causalite-1': [
+    { id: "ind-c1-d1", title: "Document 1 : Législations ouvrières", layout: "text-only",
+      text: "1802 — Loi qui interdit les journées de travail en usine de plus de 12 heures pour les enfants. 1819 — Loi qui interdit aux enfants de moins de 9 ans de travailler dans les usines de coton. 1842 — Loi qui interdit le travail des femmes et des enfants de moins de 10 ans dans les mines. 1871 — Loi qui reconnaît légalement les syndicats.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "ind-c1-d2", title: "Document 2 : La classe ouvrière", layout: "text-only",
+      text: "Le surplus de main-d'œuvre profite à la bourgeoisie. L'ouvrier est considéré comme une simple force de travail qui peut être remplacée au besoin. Les salaires sont très faibles pour les hommes et ceux des femmes et des enfants le sont encore plus. Les journées de travail comptent 12 à 14 heures, et ce, 7 jours sur 7, dès l'âge de 10 ans. On emploie même des enfants de 5 ans dans les mines et les filatures de coton.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "ind-c1-d3", title: "Document 3 : Grève au port de Londres en 1889", layout: "image-only",
+      imageUrl: "assets/img/industrialisation-causalite-1/img000.png", imageWidthCm: 9,
+      sources: ["Source de l'image : Sandivas, London Dock Strike of 1889 (2008), Wikimedia Commons. Licence : image du domaine public."] }
+  ],
+  'ind-causalite-2': [
+    { id: "ind-c2-d1", title: "Document 1 : Le développement des villes", layout: "text-image",
+      text: "Plusieurs personnes doivent déménager en ville afin de chercher du travail, ce qui crée une vague d'urbanisation. L'usine attire des ouvriers qui s'installent près de leur lieu de travail et forment ainsi un noyau urbain. Les familles vivent entassées dans des logements insalubres ce qui favorise la propagation de maladies.",
+      imageUrl: "assets/img/industrialisation-causalite-2/img000.png", imageWidthCm: 7,
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Gustave Doré, Over London by rail (vers 1870), Wikimédia Commons. Licence : image du domaine public."] },
+    { id: "ind-c2-d2", title: "Document 2 : Mouvement de population", layout: "image-only",
+      imageUrl: "assets/img/industrialisation-causalite-2/img001.png", imageWidthCm: 12,
+      sources: ["Source des images : Noun Projet, adapté par Mathieu Mercier."] },
+    { id: "ind-c2-d3", title: "Document 3 : Les enclosures", layout: "text-image",
+      text: "Le mouvement des enclosures, imposé grâce à une série de lois votées au Parlement britannique (Inclosure Acts), marque la fin de l'usage commun des terres agricoles de l'Angleterre. Ce mouvement mécontente bon nombre de paysans puisque ces derniers dépendent de l'accès à ces terres pour subvenir à leurs besoins.",
+      imageUrl: "assets/img/industrialisation-causalite-2/img002.png", imageWidthCm: 5,
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Act of Parliament, Archives — Shropshire Archive reference: 539/1/5/3, Un acte d'enclosure datant de 1793, Wikimedia Commons. Licence : image du domaine public."] }
+  ],
+  'ind-causalite-3': [
+    { id: "ind-c3-d1", title: "Document 1 : La machine à vapeur", layout: "image-only",
+      imageUrl: "assets/img/industrialisation-causalite-3/img000.png", imageWidthCm: 7,
+      sources: ["Source de l'image : Smiles, Samuel, Rocket (Smiles), Wikimedia Commons. Licence : image du domaine public."] },
+    { id: "ind-c3-d2", title: "Document 2 : De nombreux gisements", layout: "text-image",
+      text: "Aux 18e et 19e siècles, de nombreux gisements de charbon furent exploités en Angleterre, principalement dans les comtés de Northumberland (25), Yorkshire (39), Leicestershire (20). Le Pays de Galles n'est cependant pas en reste à cette époque avec de nombreuses mines ayant contribué de manière significative à l'approvisionnement énergétique des usines.",
+      imageUrl: "assets/img/industrialisation-causalite-3/img001.png", imageWidthCm: 6,
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Kirk979, Carte des comtés traditionnels d'Angleterre, Wikimedia Commons. Licence : Creative Commons BY-SA 3.0."] },
+    { id: "ind-c3-d3", title: "Document 3 : Le chemin de fer et le transport des marchandises", layout: "text-only",
+      text: "Au début du 19e siècle, la locomotive à vapeur et les chemins de fer se développent rapidement en Angleterre, mais il faudra quelques années avant que le rail remplace les canaux comme principal moyen de transport. En 1840, l'Angleterre ne compte que 1349 kilomètres de chemin de fer, mais près de 17 000 en 1860 et plus de 30 000 en 1880. Le train peut atteindre 60 à 75 km/h et peut transporter jusqu'à 2 000 tonnes de marchandises.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] }
+  ],
+  'ind-faits-1': [
+    { id: "ind-f1-d1", title: "Document 1 : Mouvement de population", layout: "image-only",
+      imageUrl: "assets/img/industrialisation-faits-1/img000.png", imageWidthCm: 12,
+      sources: ["Source des images : Noun Projet, adapté par Mathieu Mercier."] },
+    { id: "ind-f1-d2", title: "Document 2 : La classe ouvrière", layout: "text-image",
+      text: "L'ouvrier est considéré comme une simple force de travail qui peut être remplacée au besoin. De plus, les salaires des femmes et des enfants sont beaucoup plus bas que ceux des hommes. Les journées de travail comptent 12 à 14 heures, et ce, 7 jours sur 7, dès l'âge de 10 ans. On emploie même des enfants de 5 ans dans les mines et les filatures. Pour faire face à ces conditions difficiles, les ouvriers commencent à se regrouper en unions ouvrières.",
+      imageUrl: "assets/img/industrialisation-faits-1/img001.png", imageWidthCm: 6,
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Lewis Wickes Hine, Un ouvrier du textile et son assistant (le jeune Leopold Daigneau), Chace Cotton Mill, Burlington, Vermont (7 mai 1909), Library of Congress, LOT 7479, v. 2, no. 0740."] }
+  ],
+  'ind-faits-2': [
+    { id: "ind-f2-d1", title: "Document 1 : Groupe social", layout: "text-image",
+      text: "Un groupe social qui émerge lors de la Révolution industrielle est la [...]. Celle-ci possède les moyens de production, grâce à l'accès au capital, et contrôle l'accès aux ressources naturelles. La [...] engage une main-d'œuvre ouvrière, en échange d'un faible salaire. Leur objectif est de dégager un profit, afin de le réinvestir dans les moyens de production, puis de dégager un plus grand profit. C'est alors qu'est né le capitalisme industriel, basé sur le libéralisme économique de John Locke.",
+      imageUrl: "assets/img/industrialisation-faits-2/img000.png", imageWidthCm: 5,
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Image provenant du livre par Rius, La trukulenta historia del kapitalismo / The cruel history of capitalism, 30 avril 2007."] },
+    { id: "ind-f2-d2", title: "Document 2 : Le marteau-pilon", layout: "image-only",
+      imageUrl: "assets/img/industrialisation-faits-2/img001.png", imageWidthCm: 7,
+      sources: ["Source de l'image : Auteur inconnu, Steam-hammer in full work (1883), Library of Congress. Dans : Harper's weekly, 1883 April 14, p. 236."] },
+    { id: "ind-f2-d3", title: "Document 3 : La mule-jenny", layout: "image-only",
+      imageUrl: "assets/img/industrialisation-faits-2/img002.png", imageWidthCm: 7,
+      sources: ["Source de l'image : Pezzab, Mule-jenny (2007), Wikimedia Commons. Licence : Creative Commons BY-SA 3.0."] }
+  ],
+  'ind-faits-3': [
+    { id: "ind-f3-d1", title: "Document 1 : La production industrielle", layout: "text-only",
+      text: "« Prenons un exemple dans une manufacture de la plus petite importance, mais où la division du travail s'est fait souvent remarquer : une manufacture d'épingles. [...] Un ouvrier lie le fil à la bobine, un autre le dresse, un troisième coupe la dressée, un quatrième empointe [...] Ainsi dix ouvriers pouvaient faire entre eux plus de quarante-huit milliers d'épingles dans une journée; donc chaque ouvrier, faisant une dixième partie de ce produit, peut être considéré comme faisant dans sa journée quatre mille huit cents épingles. Mais s'ils avaient tous travaillé à part et indépendamment les uns des autres, [...] chacun d'eux assurément n'eût pas fait vingt épingles, peut-être pas une seule, dans sa journée. »",
+      sources: ["Source du texte : Adam Smith, Recherches sur la nature et les causes de la richesse des nations (1776), chapitre 1, p. 12."] },
+    { id: "ind-f3-d2", title: "Document 2", layout: "text-image",
+      text: "C'est vers 1750 qu'on voit l'apparition des premières [...] qui sont créées pour favoriser la circulation des capitaux. Ainsi, il devient possible d'emprunter d'importantes sommes d'argent à crédit pour le développement industriel. La disponibilité des capitaux permet aux propriétaires d'industries d'investir dans leur commerce, d'augmenter leur production et de faire encore plus de profits. Les gens qui sont propriétaires des industries et qui en tirent des profits forment une classe sociale qu'on appelle bourgeoisie industrielle. La classe ouvrière, pour sa part, a difficilement accès aux capitaux.",
+      imageUrl: "assets/img/industrialisation-faits-3/img000.png", imageWidthCm: 12,
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Infrogmation, La [...] d'Angleterre vers 1890-1900 (2004), Wikimedia Commons. Licence : image du domaine public."] }
+  ],
+  'ind-espace-1': [
+    { id: "ind-e1-d1", title: "Document 1 : Les villes industrielles anglaises", layout: "image-only",
+      imageUrl: "assets/img/industrialisation-espace-1/img000.png", imageWidthCm: 7,
+      sources: ["Source de l'image : D-Maps, adapté par Mathieu Mercier."] },
+    { id: "ind-e1-d2", title: "Document 2 : Industrialisation", layout: "image-only",
+      imageUrl: "assets/img/industrialisation-espace-1/img001.png", imageWidthCm: 7,
+      sources: ["Source de l'image : D-Maps, adapté par Mathieu Mercier."] }
+  ],
+  'ind-espace-2': [
+    { id: "ind-e2-d1", title: "Document 1 : Les frontières de l'Angleterre", layout: "image-only",
+      imageUrl: "assets/img/industrialisation-espace-2/img000.png", imageWidthCm: 7,
+      sources: ["Source de l'image : D-Maps, adapté par Mathieu Mercier."] },
+    { id: "ind-e2-d2", title: "Document 2 : L'Angleterre industrielle vers 1850", layout: "image-only",
+      imageUrl: "assets/img/industrialisation-espace-2/img001.png", imageWidthCm: 12,
+      sources: ["Source de l'image : J.M. Gallard et A. Lespagnol, Les mutations économiques et sociales au XIXe siècle (1780-1880), Nathan, 1984."] }
+  ],
+  'ind-temps-1': [
+    { id: "ind-t1-d1", title: "Document 1 : Ligne du temps", layout: "image-only",
+      imageUrl: "assets/img/industrialisation-temps-1/img000.png", imageWidthCm: 13,
+      sources: ["Source : Mathieu Mercier."] },
+    { id: "ind-t1-d2", title: "Document 2", layout: "text-only",
+      text: "« Cette insalubrité puise essentiellement son origine dans le rôle économique et commercial central de la plupart des villes, où de gros volumes de produits agricoles et industriels transitaient depuis et vers les marchés, les quais, les magasins et les ateliers. Cette activité économique générait un important trafic de véhicules, d'humains et d'animaux, la plupart du temps désorganisé, ainsi qu'une quantité impressionnante de déchets, de saletés et de crottin de cheval. Les chevaux étaient en effet les principaux moteurs du système de transport. »",
+      sources: ["Source du texte : Peter Borsay et Paula Salnot, Transport et divertissement dans les villes anglaises à travers le long XVIIIe siècle, Histoire urbaine, 2013, n° 38, p. 90."] },
+    { id: "ind-t1-d3", title: "Document 3", layout: "text-only",
+      text: "Au début du 19e siècle, la [...] et les [...] se développent rapidement en Angleterre, mais il faudra quelques années avant que le rail ne remplace les canaux comme principal moyen de transport. En 1840, l'Angleterre ne compte que 1349 kilomètres de [...], mais près de 17 000 en 1860 et plus de 30 000 en 1880. Le [...] peut atteindre 60 à 75 km/h et peut transporter jusqu'à 2 000 tonnes de marchandises.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] }
+  ],
+  'ind-temps-2': [
+    { id: "ind-t2-d1", title: "Document 1 : Machine à vapeur de James Watt", layout: "text-only",
+      text: "La machine à vapeur a été perfectionnée par James Watt au [...]. Il a en effet perfectionné le moteur à vapeur inventé par Thomas Newcomen en [...], en utilisant un système de condensation séparé pour augmenter l'efficacité de la machine. L'utilisation première de la machine à vapeur de James Watt était pour la propulsion des bateaux à vapeur et pour les pompes de mines, pour extraire l'eau des mines de charbon. Cela a permis de réduire les coûts de production et d'augmenter la productivité dans les mines, stimulant ainsi la croissance économique. Cette utilisation première a ensuite été étendue à d'autres secteurs industriels, comme les usines textiles et les chemins de fer.",
+      sources: ["Source du texte : Mathieu Mercier, L'industrialisation : une révolution économique et sociale, muniverssocial.ca, consulté le 5 août 2023."] },
+    { id: "ind-t2-d2", title: "Document 2 : Machine à vapeur à balancier de Thomas Newcomen", layout: "image-only",
+      imageUrl: "assets/img/industrialisation-temps-2/img000.png", imageWidthCm: 5,
+      sources: ["Source de l'image : Emoscopes, Principe de la machine à vapeur à balancier de Newcomen, Wikimedia Commons. Licence : Creative Commons BY 2.5."] },
+    { id: "ind-t2-d3", title: "Document 3 : The Rocket", layout: "image-only",
+      imageUrl: "assets/img/industrialisation-temps-2/img001.png", imageWidthCm: 7,
+      sources: ["Source de l'image : Samuel Smiles, Stephenson's Rocket, the locomotive built by Robert Stephenson, Wikimedia Commons. Licence : image du domaine public."] },
+    { id: "ind-t2-d4", title: "Document 4 : Périodisation historique", layout: "image-only",
+      imageUrl: "assets/img/industrialisation-temps-2/img002.png", imageWidthCm: 13,
+      sources: ["Source de l'image : Mathieu Mercier, libre de droit."] }
+  ],
+  'ind-relation-1': [
+    { id: "ind-r1-d1", title: "Document 1 : Karl Marx", layout: "image-only",
+      imageUrl: "assets/img/industrialisation-relation-1/img000.png", imageWidthCm: 6,
+      sources: ["Source de l'image : John Jabez Edwin Mayall, Portrait de Karl Marx (1818-1883), Wikimedia Commons. Licence : image du domaine public."] },
+    { id: "ind-r1-d2", title: "Document 2 : Adam Smith", layout: "image-only",
+      imageUrl: "assets/img/industrialisation-relation-1/img001.png", imageWidthCm: 6,
+      sources: ["Source de l'image : Etching created by Cadell and Davies (1811), John Horsburgh (1828) or R.C. Bell (1872), Profile of Adam Smith, Wikimedia Commons. Licence : image du domaine public."] },
+    { id: "ind-r1-d3", title: "Document 3 : Modes de production", layout: "image-only",
+      imageUrl: "assets/img/industrialisation-relation-1/img002.png", imageWidthCm: 9,
+      sources: ["Source de l'image : John Henry Walker, L'ancienne façon / La nouvelle façon (1880), Musée McCord, M930.50.5.142 et M930.50.5.262. Licence : Creative Commons BY-NC-ND."] }
+  ],
+  'ind-relation-2': [
+    { id: "ind-r2-d1", title: "Document 1", layout: "text-only",
+      text: "L'industrialisation permet l'émergence de nouveaux groupes sociaux : la bourgeoisie industrielle et la classe ouvrière. Les individus faisant partie de la [...] possèdent les moyens de production (les capitaux, les usines, les machines, etc.). Ils offrent ensuite de faibles salaires à la main-d'œuvre abondante [...] en retour de leur force de travail. Il s'agit de la base du capitalisme industriel.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "ind-r2-d2", title: "Document 2", layout: "image-only",
+      imageUrl: "assets/img/industrialisation-relation-2/img000.png", imageWidthCm: 7,
+      sources: ["Source de l'image : Gustave Doré, Over London by rail (vers 1870), Wikimédia Commons. Licence : image du domaine public."] },
+    { id: "ind-r2-d3", title: "Document 3", layout: "text-only",
+      text: "Logés dans des conditions inhumaines, exploités dans les manufactures, les [...] échangeaient leur force physique contre un faible salaire. Le quartier [...] ne possède que rarement les commodités que sont l'eau courante, les services de ramassage des déchets et un système d'aqueduc. À Manchester, l'espérance de vie dans les quartiers [...] était de 28 ans. Plus de la moitié des enfants mouraient avant d'atteindre l'âge de 5 ans.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "ind-r2-d4", title: "Document 4", layout: "image-only",
+      imageUrl: "assets/img/industrialisation-relation-2/img001.png", imageWidthCm: 7,
+      sources: ["Source de l'image : Honoré Daumier, [...] à la bourse de Paris en 1850, Wikimedia Commons. Licence : image du domaine public."] },
+    { id: "ind-r2-d5", title: "Document 5", layout: "image-only",
+      imageUrl: "assets/img/industrialisation-relation-2/img002.png", imageWidthCm: 7,
+      sources: ["Source de l'image : Pezzab, Mule-jenny (2007), Wikimedia Commons. Licence : Creative Commons BY-SA 3.0."] }
+  ],
+  'ind-causes-1': [
+    { id: "ind-cs1-d1", title: "Document 1 : Les enclosures", layout: "text-only",
+      text: "Le mouvement des enclosures, imposé grâce à une série de lois votées au Parlement britannique (Enclosure Acts), marque la fin de l'usage commun des terres agricoles de l'Angleterre. Ce mouvement mécontente bon nombre de paysans puisque ces derniers dépendent de l'accès à ces terres pour subvenir à leurs besoins.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "ind-cs1-d2", title: "Document 2 : Population de l'Angleterre", layout: "text-only",
+      text: "Angleterre — 1851 : population totale 18 millions, population rurale 48 %, population urbaine 52 %. 1881 : population totale 26 millions, population rurale 31 %, population urbaine 69 %. 1911 : population totale 36 millions, population rurale 22 %, population urbaine 78 %.",
+      sources: ["Source des données : Statistiques tirées de Jean-Pierre Rioux, La Révolution industrielle 1770-1880, Points - Histoire, Éditions du Seuil, Paris, 2015, p. 154."] },
+    { id: "ind-cs1-d3", title: "Document 3 : Législations ouvrières", layout: "text-only",
+      text: "1802 — Loi qui interdit les journées de travail en usine de plus de 12 heures pour les enfants. 1819 — Loi qui interdit aux enfants de moins de 9 ans de travailler dans les usines de coton. 1842 — Loi qui interdit le travail des femmes et des enfants de moins de 10 ans dans les mines. 1871 — Loi qui reconnaît légalement les syndicats.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] }
+  ],
+  'ind-causes-2': [
+    { id: "ind-cs2-d1", title: "Document 1 : La division du travail", layout: "text-image",
+      text: "« Prenons un exemple dans une manufacture de la plus petite importance, mais où la division du travail s'est fait souvent remarquer : une manufacture d'épingles. [...] Un ouvrier lie le fil à la bobine, un autre le dresse, un troisième coupe la dressée, un quatrième empointe [...] Ainsi dix ouvriers pouvaient faire entre eux plus de quarante-huit milliers d'épingles dans une journée; donc chaque ouvrier, faisant une dixième partie de ce produit, peut être considéré comme faisant dans sa journée quatre mille huit cents épingles. Mais s'ils avaient tous travaillé à part et indépendamment les uns des autres, [...] chacun d'eux assurément n'eût pas fait vingt épingles, peut-être pas une seule, dans sa journée. »",
+      imageUrl: "assets/img/industrialisation-causes-2/img000.png", imageWidthCm: 4,
+      sources: ["Source du texte : Adam Smith, Recherches sur la nature et les causes de la richesse des nations (1776), chapitre 1, p. 12.", "Source de l'image : MacKenzie, Portrait d'Adam Smith (1723-1790), Library of Congress, LC-USZ62-17407. Licence : image du domaine public."] },
+    { id: "ind-cs2-d2", title: "Document 2 : Le chemin de fer", layout: "text-image",
+      text: "Au début du 19e siècle, la locomotive à vapeur et les chemins de fer se développent rapidement en Angleterre, mais il faudra quelques années avant que le rail remplace les canaux comme principal moyen de transport des marchandises. En 1840, l'Angleterre ne compte que 1349 kilomètres de chemin de fer, mais près de 17 000 en 1860 et plus de 30 000 en 1880. Le train peut atteindre 60 à 75 km/h et peut transporter jusqu'à 2 000 tonnes de marchandises. Néanmoins, le train ne sert pas uniquement à transporter des ressources naturelles et des marchandises. Il devient également un moyen de transport incontournable en Angleterre à partir des années 1840.",
+      imageUrl: "assets/img/industrialisation-causes-2/img001.png", imageWidthCm: 6,
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : G-13114, Euston Station showing wrought iron roof of 1837 (2013), Wikimedia Commons. Licence : image du domaine public."] }
+  ],
+  'ind-causes-3': [
+    { id: "ind-cs3-d1", title: "Document 1 : Les quartiers ouvriers", layout: "text-image",
+      text: "L'usine attire des ouvriers qui s'installent près de leur lieu de travail et forment ainsi un noyau urbain. Les familles vivent entassées dans des logements insalubres ce qui favorise la propagation de maladies.",
+      imageUrl: "assets/img/industrialisation-causes-3/img000.png", imageWidthCm: 6,
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Gustave Doré, Over London by rail (vers 1870), Wikimédia Commons. Licence : image du domaine public."] },
+    { id: "ind-cs3-d2", title: "Document 2 : Les conditions de travail", layout: "text-image",
+      text: "L'ouvrier est considéré comme une simple force de travail qui peut être remplacée au besoin. De plus, les salaires des femmes et des enfants sont beaucoup plus bas que ceux des hommes. Les journées de travail comptent 12 à 14 heures, et ce, 7 jours sur 7, dès l'âge de 10 ans. On emploie même des enfants de 5 ans dans les mines et les filatures.",
+      imageUrl: "assets/img/industrialisation-causes-3/img001.png", imageWidthCm: 5,
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Lewis Wickes Hine, Un ouvrier du textile et son assistant (le jeune Leopold Daigneau), Chace Cotton Mill, Burlington, Vermont (7 mai 1909), Library of Congress, LOT 7479, v. 2, no. 0740."] },
+    { id: "ind-cs3-d3", title: "Document 3", layout: "image-only",
+      imageUrl: "assets/img/industrialisation-causes-3/img002.png", imageWidthCm: 7,
+      sources: ["Source de l'image : J.M. Gallard et A. Lespagnol, Les mutations économiques et sociales au XIXe siècle (1780-1880), Nathan, 1984."] }
+  ],
+  'ind-differences-1': [
+    { id: "ind-di1-d1", title: "Document 1 : Modes de production", layout: "image-only",
+      imageUrl: "assets/img/industrialisation-differences-1/img000.png", imageWidthCm: 9,
+      sources: ["Source de l'image : John Henry Walker, L'ancienne façon / La nouvelle façon (1880), Musée McCord, M930.50.5.142 et M930.50.5.262. Licence : Creative Commons BY-NC-ND."] },
+    { id: "ind-di1-d2", title: "Document 2 : Libéralisme économique", layout: "text-only",
+      text: "« Le libéralisme économique (capitalisme) considère que la recherche du profit et de l'intérêt personnel constitue le moteur du progrès. Il doit s'accompagner de libertés fondamentales [comme la] liberté de vendre et d'acheter des biens, la liberté d'entreprendre et la liberté de propriété. »",
+      sources: ["Source du texte : Perspective Monde, Libéralisme, Université de Sherbrooke, consulté le 5 août 2023."] },
+    { id: "ind-di1-d3", title: "Document 3 : Le socialisme", layout: "text-only",
+      text: "« [Le socialisme] désigne une idéologie de gauche proposant la propriété collective des moyens de production. Dans un régime économique socialiste, l'État est propriétaire des usines, des manufactures, des grandes surfaces agricoles de même que des moyens de communication et de télécommunication. Le socialisme s'oppose au capitalisme, régime dans lequel les moyens de production appartiennent généralement à des entrepreneurs privés (capitalistes). »",
+      sources: ["Source du texte : Perspective Monde, Socialisme, Université de Sherbrooke, consulté le 5 août 2023."] }
+  ],
+  'ind-differences-2': [
+    { id: "ind-di2-d1", title: "Document 1", layout: "image-only",
+      imageUrl: "assets/img/industrialisation-differences-2/img000.png", imageWidthCm: 9,
+      sources: ["Source de l'image : James Tissot, The Circle of the Rue Royale - Google Art Project, Wikimedia Commons. Licence : image du domaine public."] },
+    { id: "ind-di2-d2", title: "Document 2", layout: "text-image",
+      text: "Dans la seconde moitié du 18e siècle, les lois de l'enclosure modifient les paysages rural et urbain. Privés de moyens de subsistance, les habitants des zones rurales se dirigeaient en masse vers les villes. Entre 1801 et 1831, la ville de Manchester est passée de 90 000 à 237 000 habitants. Logés dans des conditions inhumaines, exploités dans les manufactures, les ouvriers échangeaient leur force physique contre un faible salaire. Le quartier ouvrier ne possède que rarement les commodités que sont l'eau courante, les services de ramassage des déchets et un système d'aqueduc. À Manchester, l'espérance de vie dans les quartiers ouvriers était de 28 ans. Plus de la moitié des enfants mouraient avant d'atteindre l'âge de 5 ans.",
+      imageUrl: "assets/img/industrialisation-differences-2/img001.png", imageWidthCm: 5,
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social.", "Source de l'image : Jungpionier, Saltaire Wohnviertel, Wikimedia Commons. Licence : Creative Commons BY-SA 3.0."] },
+    { id: "ind-di2-d3", title: "Document 3", layout: "text-only",
+      text: "Exploités dans les manufactures, les ouvriers échangeaient leur force physique contre un faible salaire. Le quartier ouvrier ne possède que rarement les commodités que sont l'eau courante, les services de ramassage des déchets et un système d'aqueduc.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "ind-di2-d4", title: "Document 4", layout: "text-only",
+      text: "La bourgeoisie industrielle possède les moyens de production, grâce à l'accès au capital, et contrôle l'accès aux ressources naturelles. Elle engage des ouvriers, en échange d'un faible salaire. Leur objectif est de dégager un profit, afin de le réinvestir, puis de dégager un plus grand profit.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] }
+  ],
+  'ind-changements-1': [
+    { id: "ind-ch1-d1", title: "Document 1", layout: "text-only",
+      text: "« Cette insalubrité puise essentiellement son origine dans le rôle économique et commercial central de la plupart des villes, où de gros volumes de produits agricoles et industriels transitaient depuis et vers les marchés, les quais, les magasins et les ateliers. Cette activité économique générait un important trafic de véhicules, d'humains et d'animaux, la plupart du temps désorganisé, ainsi qu'une quantité impressionnante de déchets, de saletés et de crottin de cheval. Les chevaux étaient en effet les principaux moteurs du système de transport. »",
+      sources: ["Source du texte : Peter Borsay et Paula Salnot, Transport et divertissement dans les villes anglaises à travers le long XVIIIe siècle, Histoire urbaine, 2013, n° 38, p. 90."] },
+    { id: "ind-ch1-d2", title: "Document 2 : La locomotive et les chemins de fer", layout: "text-only",
+      text: "Au début du 19e siècle, la locomotive à vapeur et les chemins de fer se développent rapidement en Angleterre, mais il faudra quelques années avant que le rail ne remplace les canaux comme principal moyen de transport. En 1840, l'Angleterre ne compte que 1349 kilomètres de chemin de fer, mais près de 17 000 en 1860 et plus de 30 000 en 1880. Le train peut atteindre 60 à 75 km/h et peut transporter jusqu'à 2 000 tonnes de marchandises.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "ind-ch1-d3", title: "Document 3 : Répartition de la population", layout: "text-only",
+      text: "Angleterre — 1851 : population totale 18 millions, population rurale 48 %, population urbaine 52 %. 1881 : population totale 26 millions, population rurale 31 %, population urbaine 69 %. 1911 : population totale 36 millions, population rurale 22 %, population urbaine 78 %.",
+      sources: ["Source des données : Statistiques tirées de Jean-Pierre Rioux, La Révolution industrielle 1770-1880, Points - Histoire, Éditions du Seuil, Paris, 2015, p. 154."] }
+  ],
+  'ind-changements-2': [
+    { id: "ind-ch2-d1", title: "Document 1 : L'apparition des premières banques", layout: "text-only",
+      text: "C'est vers 1750 qu'on voit l'apparition des premières banques qui sont créées pour favoriser la circulation des capitaux. Ainsi, il devient possible d'emprunter d'importantes sommes d'argent à crédit pour le développement industriel. La disponibilité des capitaux permet aux propriétaires d'industries d'investir dans leur commerce, d'augmenter leur production et de faire encore plus de profits. Les gens qui sont propriétaires des industries et qui en tirent des profits forment une classe sociale qu'on appelle bourgeoisie industrielle. La classe ouvrière, pour sa part, a difficilement accès aux capitaux.",
+      sources: ["Source du texte : Service national du RÉCIT, domaine de l'univers social."] },
+    { id: "ind-ch2-d2", title: "Document 2 : La bourse", layout: "text-image",
+      text: "L'industrialisation crée une forte demande en capitaux pour financer la construction de manufactures, la mécanisation de la production et le développement de nouvelles infrastructures. La bourgeoisie industrielle a donc de plus en plus besoin de sources de financement variées, complémentaires aux banques, afin de soutenir l'essor de leur entreprise. Les propriétaires commencent alors à émettre des actions sur les marchés boursiers. Des investisseurs peuvent acheter ces titres, ce qui permettait aux entreprises d'acquérir des capitaux rapidement. Les investisseurs, pour leur part, deviennent propriétaires d'une part de l'entreprise et, du même coup, d'une part des profits.",
+      imageUrl: "assets/img/industrialisation-changements-2/img000.png", imageWidthCm: 6,
+      sources: ["Source du texte : Mathieu Mercier.", "Source de l'image : Thomas Rowlandson, Le London Stock Exchange en 1810, Wikimedia Commons. Licence : image du domaine public."] }
+  ]
+
+
 };
 
 // Helper : sélectionne uniquement les documents nécessaires à une question
@@ -990,7 +1225,8 @@ window.DATA = {
     { id: "renouvellement-vision-homme", titre: "Le renouvellement de la vision de l'Homme", niveau: 2 },
     { id: "expansion-europeenne", titre: "L'expansion européenne dans le monde", niveau: 2 },
     { id: "revolution-americaine", titre: "La Révolution américaine", niveau: 2 },
-    { id: "christianisation-occident", titre: "La christianisation de l'Occident", niveau: 1 }
+    { id: "christianisation-occident", titre: "La christianisation de l'Occident", niveau: 1 },
+    { id: "industrialisation", titre: "L'industrialisation", niveau: 2 }
   ],
 
   operations_intellectuelles: [
@@ -1685,7 +1921,227 @@ window.DATA = {
     { id: "q-chr-changements-4", operation: "Déterminer des changements et des continuités", numero: 4, niveau: 1, realite_sociale_id: "christianisation-occident",
       questionBody: { prompt: "À l'aide du document 3, détermine un changement dans le rôle de l'Église au Moyen Âge.", responseSpace: { type: "lines", count: 5 } },
       reglettes: [{ id: "r-chr-ch4", label: "Réglette (1 point)", ...R_CHGT_1PT_CHGT }], documents: pickDocs('chr-changements-2', 3),
-      corrige: "Au Moyen Âge, le pouvoir spirituel de l'Église est supérieur au pouvoir temporel des rois. L'Église peut ainsi couronner les rois et les reines d'Europe, comparativement à ce qui se produisait durant l'Antiquité." }
+      corrige: "Au Moyen Âge, le pouvoir spirituel de l'Église est supérieur au pouvoir temporel des rois. L'Église peut ainsi couronner les rois et les reines d'Europe, comparativement à ce qui se produisait durant l'Antiquité." },
+
+    // ===== INDUSTRIALISATION — CAUSALITÉ (3) =====
+    { id: "q-ind-causalite-1", operation: "Établir des liens de causalité", numero: 1, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "À l'aide des documents 1 à 3, établis des liens entre les éléments suivants :",
+        bullets: ["Les conditions de vie et de travail des ouvriers", "Une action réalisée par les ouvriers", "Des mesures mises en place par le gouvernement britannique"],
+        instructions: CAUSALITE_INSTRUCTIONS, responseSpace: { type: "lines", count: 8 } },
+      reglettes: [{ id: "r-ind-c1", label: "Réglette (3 points)", opLabel: "Établir des liens de causalité", maxPoints: 3, ...RUBRIC_CAUSALITE_3PT }],
+      documents: pickDocs('ind-causalite-1', 1, 2, 3),
+      corrige: "Les ouvriers travaillent de longues heures de travail, en plus de n'avoir qu'un très faible salaire en échange de leur dur labeur. Par conséquent, les ouvriers se syndicalisent et organisent des grèves afin de protester contre leurs conditions de travail. Grâce au mouvement syndical et aux nombreuses grèves, les ouvriers forcent l'intervention de l'État, qui met en place des lois améliorant les conditions de travail des ouvriers." },
+    { id: "q-ind-causalite-2", operation: "Établir des liens de causalité", numero: 2, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "À l'aide des documents 1 à 3, établis des liens entre les éléments suivants :",
+        bullets: ["Une mesure mise en place par le gouvernement britannique", "Un mouvement de population causé par cette mesure", "Une conséquence sur le développement des villes"],
+        instructions: CAUSALITE_INSTRUCTIONS, responseSpace: { type: "lines", count: 8 } },
+      reglettes: [{ id: "r-ind-c2", label: "Réglette (3 points)", opLabel: "Établir des liens de causalité", maxPoints: 3, ...RUBRIC_CAUSALITE_3PT }],
+      documents: pickDocs('ind-causalite-2', 1, 2, 3),
+      corrige: "Au 18e siècle, le gouvernement britannique met en place les lois de l'enclosure. En conséquence, les paysans perdent accès aux terres communales et doivent se diriger massivement vers les villes (exode rural). Avec l'arrivée massive des paysans, les villes se développent et s'urbanisent rapidement avec l'aménagement des quartiers ouvriers." },
+    { id: "q-ind-causalite-3", operation: "Établir des liens de causalité", numero: 3, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "À l'aide des documents 1 à 3, établis des liens entre les éléments suivants :",
+        bullets: ["La présence d'une ressource naturelle en Angleterre", "Une invention dans le domaine du transport", "Un impact sur le transport des marchandises"],
+        instructions: CAUSALITE_INSTRUCTIONS, responseSpace: { type: "lines", count: 8 } },
+      reglettes: [{ id: "r-ind-c3", label: "Réglette (3 points)", opLabel: "Établir des liens de causalité", maxPoints: 3, ...RUBRIC_CAUSALITE_3PT }],
+      documents: pickDocs('ind-causalite-3', 1, 2, 3),
+      corrige: "En Angleterre, il y a de nombreux gisements de charbon. Grâce à sa présence en grande quantité, le charbon permet d'alimenter une invention récente : la locomotive à vapeur. Cette nouvelle invention dans le domaine des transports permet d'augmenter la charge transportée, mais aussi de diminuer le temps nécessaire au transport des marchandises." },
+
+    // ===== INDUSTRIALISATION — FAITS (6) =====
+    { id: "q-ind-faits-1-1", operation: "Établir des faits", numero: 1, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "Comment se nomme le phénomène représenté dans le document 1 ?", responseSpace: { type: "lines", count: 2 } },
+      reglettes: [{ id: "r-ind-f1-1", label: "Réglette (1 point)", ...R_FAITS_1PT }],
+      documents: pickDocs('ind-faits-1', 1),
+      corrige: "Le phénomène présenté dans le document 1 est l'exode rural." },
+    { id: "q-ind-faits-1-2", operation: "Établir des faits", numero: 2, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "Caractérise les conditions de travail des ouvriers dans les manufactures anglaises aux 18e et 19e siècles.", responseSpace: { type: "lines", count: 4 } },
+      reglettes: [{ id: "r-ind-f1-2", label: "Réglette (1 point)", ...R_FAITS_1PT }],
+      documents: pickDocs('ind-faits-1', 2),
+      corrige: "Les ouvriers travaillent de longues heures de travail (14-16h par jour / 6 à 7 jours par semaine), les milieux de travail sont dangereux, mal éclairés et mal aérés et les salaires sont extrêmement faibles." },
+    { id: "q-ind-faits-2-1", operation: "Établir des faits", numero: 3, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "Indique le groupe social décrit dans le document 1.", responseSpace: { type: "lines", count: 2 } },
+      reglettes: [{ id: "r-ind-f2-1", label: "Réglette (1 point)", ...R_FAITS_1PT }],
+      documents: pickDocs('ind-faits-2', 1),
+      corrige: "Il s'agit de la bourgeoisie industrielle." },
+    { id: "q-ind-faits-2-2", operation: "Établir des faits", numero: 4, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "À l'aide des documents 2 et 3, indique les deux secteurs industriels qui se développent en Angleterre lors de la révolution industrielle.", responseSpace: { type: "lines", count: 2 } },
+      reglettes: [{ id: "r-ind-f2-2", label: "Réglette (2 points)", ...R_FAITS_2PT_3 }],
+      documents: pickDocs('ind-faits-2', 2, 3),
+      corrige: "Les secteurs du textile et de la métallurgie." },
+    { id: "q-ind-faits-3-1", operation: "Établir des faits", numero: 5, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "Selon Adam Smith, quel principe permet d'augmenter la production de biens dans les manufactures ?", responseSpace: { type: "lines", count: 2 } },
+      reglettes: [{ id: "r-ind-f3-1", label: "Réglette (1 point)", ...R_FAITS_1PT }],
+      documents: pickDocs('ind-faits-3', 1),
+      corrige: "La division du travail permet d'augmenter la production de biens." },
+    { id: "q-ind-faits-3-2", operation: "Établir des faits", numero: 6, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "Quelle institution favorise la circulation des capitaux et, par le fait même, l'apparition de la bourgeoisie industrielle ?", responseSpace: { type: "lines", count: 2 } },
+      reglettes: [{ id: "r-ind-f3-2", label: "Réglette (1 point)", ...R_FAITS_1PT }],
+      documents: pickDocs('ind-faits-3', 2),
+      corrige: "La banque favorise la circulation des capitaux." },
+
+    // ===== INDUSTRIALISATION — ESPACE (4) =====
+    { id: "q-ind-espace-1-1", operation: "Situer dans l'espace", numero: 1, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "Aux 18e et 19e siècles, plusieurs pays s'industrialisent. À l'aide du document 2, situe l'Angleterre, la France, l'Allemagne et les États-Unis.",
+        responseSpace: { type: "labeled-list", items: ["Angleterre", "France", "Allemagne", "États-Unis"] } },
+      reglettes: [{ id: "r-ind-e1-1", label: "Réglette (2 points)", ...R_SITUER_2PT_4 }],
+      documents: pickDocs('ind-espace-1', 1, 2),
+      corrige: ["B", "C", "D", "A"] },
+    { id: "q-ind-espace-1-2", operation: "Situer dans l'espace", numero: 2, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "À l'aide du document 1, associe la ville industrielle anglaise au chiffre lui correspondant.",
+        responseSpace: { type: "labeled-list", items: ["Liverpool", "Manchester", "Birmingham", "Newcastle"] } },
+      reglettes: [{ id: "r-ind-e1-2", label: "Réglette (2 points)", ...R_SITUER_2PT_4 }],
+      documents: pickDocs('ind-espace-1', 1, 2),
+      corrige: ["2", "3", "4", "1"] },
+    { id: "q-ind-espace-2-1", operation: "Situer dans l'espace", numero: 3, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "À l'aide du document 1, situe les États qui partagent une frontière, terrestre ou maritime, avec l'Angleterre.",
+        responseSpace: { type: "labeled-list", items: ["France", "Écosse", "Pays de Galles"] } },
+      reglettes: [{ id: "r-ind-e2-1", label: "Réglette (2 points)", ...R_SITUER_2PT_3SP }],
+      documents: pickDocs('ind-espace-2', 1, 2),
+      corrige: ["2", "1", "3"] },
+    { id: "q-ind-espace-2-2", operation: "Situer dans l'espace", numero: 4, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "À l'aide du document 2 et des points cardinaux, situe les principaux gisements de charbon de l'Angleterre.", responseSpace: { type: "lines", count: 3 } },
+      reglettes: [{ id: "r-ind-e2-2", label: "Réglette (1 point)", ...R_SITUER_1PT_T1 }],
+      documents: pickDocs('ind-espace-2', 1, 2),
+      corrige: "Les principaux gisements de charbon se trouvent au sud-ouest, au centre et au nord-est de l'Angleterre." },
+
+    // ===== INDUSTRIALISATION — TEMPS (4) =====
+    { id: "q-ind-temps-1-1", operation: "Situer dans le temps", numero: 1, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "À l'aide du document 1, indique la lettre qui correspond au début de l'industrialisation de l'Angleterre.",
+        responseSpace: { type: "labeled-list", items: ["Début de l'industrialisation de l'Angleterre"] } },
+      reglettes: [{ id: "r-ind-t1-1", label: "Réglette (1 point)", ...R_SITUER_1PT_1 }],
+      documents: pickDocs('ind-temps-1', 1, 2, 3),
+      corrige: ["A"] },
+    { id: "q-ind-temps-1-2", operation: "Situer dans le temps", numero: 2, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "Les documents 2 et 3 présentent des faits se déroulant lors de la révolution industrielle. Indique si les faits présentés surviennent avant ou après l'invention de la locomotive à vapeur.",
+        responseSpace: { type: "before-after-axis", beforeLabel: "Antériorité (Avant)", afterLabel: "Postériorité (Après)", pivot: "L'invention de la locomotive à vapeur de George Stephenson" } },
+      reglettes: [{ id: "r-ind-t1-2", label: "Réglette (1 point)", ...R_SITUER_1PT_T2 }],
+      documents: pickDocs('ind-temps-1', 1, 2, 3),
+      corrige: { before: ["Document 2"], after: ["Document 3"] } },
+    { id: "q-ind-temps-2-1", operation: "Situer dans le temps", numero: 3, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "Place en ordre chronologique les documents 1 à 3.",
+        responseSpace: { type: "chrono-ordering", items: ["1er (le plus ancien)", "2e", "3e (le plus récent)"] } },
+      reglettes: [{ id: "r-ind-t2-1", label: "Réglette (2 points)", ...R_SITUER_2PT_T3 }],
+      documents: pickDocs('ind-temps-2', 1, 2, 3),
+      corrige: ["Document 2", "Document 1", "Document 3"] },
+    { id: "q-ind-temps-2-2", operation: "Situer dans le temps", numero: 4, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "Durant quelle période historique la révolution industrielle s'est-elle majoritairement déroulée ?", responseSpace: { type: "lines", count: 2 } },
+      reglettes: [{ id: "r-ind-t2-2", label: "Réglette (1 point)", ...R_SITUER_1PT_T1 }],
+      documents: pickDocs('ind-temps-2', 4),
+      corrige: "La révolution industrielle s'est majoritairement déroulée lors de l'époque contemporaine." },
+
+    // ===== INDUSTRIALISATION — RELATION (4) =====
+    { id: "q-ind-relation-1-1", operation: "Mettre en relation des faits", numero: 1, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "Les documents 1 et 2 présentent des philosophes associés aux idées du communisme et du libéralisme économique. Associe le philosophe à l'idéologie lui correspondant.",
+        responseSpace: { type: "labeled-list", items: ["Communisme", "Libéralisme économique"] } },
+      reglettes: [{ id: "r-ind-r1-1", label: "Réglette (1 point)", ...R_RELATION_1PT }],
+      documents: pickDocs('ind-relation-1', 1, 2, 3),
+      corrige: ["1", "2"] },
+    { id: "q-ind-relation-1-2", operation: "Mettre en relation des faits", numero: 2, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "La révolution industrielle amène plusieurs changements dans la manière de produire des biens. À l'aide du document 3, indique si les affirmations suivantes correspondent au mode de production artisanal ou industriel.",
+        responseSpace: { type: "checkbox-table", columns: ["Artisanal", "Industriel"], rows: [
+          "1. Le travail se fait dans un atelier.",
+          "2. Les biens sont produits en grande quantité.",
+          "3. [...] échange sa force physique et son temps en échange d'un salaire.",
+          "4. Le travail effectué par [...] est lent et minutieux.",
+          "5. [...] réalise des tâches complexes qu'il a perfectionnées durant de nombreuses années de formation.",
+          "6. Les tâches effectuées par [...] sont simples et répétitives."
+        ] } },
+      reglettes: [{ id: "r-ind-r1-2", label: "Réglette (2 points)", ...R_RELATION_2PT_6 }],
+      documents: pickDocs('ind-relation-1', 1, 2, 3),
+      corrige: [[true, false], [false, true], [false, true], [true, false], [true, false], [false, true]] },
+    { id: "q-ind-relation-2-1", operation: "Mettre en relation des faits", numero: 3, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "Les documents 1 à 4 décrivent et représentent la classe ouvrière et la bourgeoisie industrielle. Associe chacun des documents à la classe sociale lui correspondant.",
+        responseSpace: { type: "checkbox-table", columns: ["Classe ouvrière", "Bourgeoisie industrielle"], rows: ["Document 1", "Document 2", "Document 3", "Document 4"] } },
+      reglettes: [{ id: "r-ind-r2-1", label: "Réglette (2 points)", ...R_RELATION_2PT_2 }],
+      documents: pickDocs('ind-relation-2', 1, 2, 3, 4, 5),
+      corrige: [[false, true], [true, false], [true, false], [false, true]] },
+    { id: "q-ind-relation-2-2", operation: "Mettre en relation des faits", numero: 4, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "Associe le document 5 au secteur industriel lui correspondant.",
+        responseSpace: { type: "checkbox-table", columns: ["Textile", "Métallurgie"], rows: ["Document 5"] } },
+      reglettes: [{ id: "r-ind-r2-2", label: "Réglette (1 point)", ...R_RELATION_1PT }],
+      documents: pickDocs('ind-relation-2', 1, 2, 3, 4, 5),
+      corrige: [[true, false]] },
+
+    // ===== INDUSTRIALISATION — CAUSES (6) =====
+    { id: "q-ind-causes-1-1", operation: "Déterminer des causes et des conséquences", numero: 1, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "Détermine le document qui présente une cause de l'exode rural et le document qui en présente une conséquence.",
+        responseSpace: { type: "labeled-list", items: ["Cause de l'exode rural", "Conséquence de l'exode rural"] } },
+      reglettes: [{ id: "r-ind-cs1-1", label: "Réglette (2 points)", ...R_CAUSES_2PT_CAUSE_CONS }],
+      documents: pickDocs('ind-causes-1', 1, 2, 3),
+      corrige: ["1", "2"] },
+    { id: "q-ind-causes-1-2", operation: "Déterminer des causes et des conséquences", numero: 2, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "Au 19e siècle, les grèves ouvrières se multiplient en Angleterre. À l'aide du document 3, détermine une conséquence de ces grèves.", responseSpace: { type: "lines", count: 4 } },
+      reglettes: [{ id: "r-ind-cs1-2", label: "Réglette (2 points)", ...R_CAUSES_2PT_CONSEQ }],
+      documents: pickDocs('ind-causes-1', 1, 2, 3),
+      corrige: "Les grèves ouvrières favorisent l'intervention du gouvernement. Ce dernier encadre le monde du travail en mettant en place des lois qui améliorent les conditions de travail des ouvriers." },
+    { id: "q-ind-causes-2-1", operation: "Déterminer des causes et des conséquences", numero: 3, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "À l'aide du document 2, détermine deux conséquences de l'invention de la locomotive à vapeur.", responseSpace: { type: "lines", count: 5 } },
+      reglettes: [{ id: "r-ind-cs2-1", label: "Réglette (4 points)", ...R_CAUSES_4PT_CONSEQ }],
+      documents: pickDocs('ind-causes-2', 1, 2),
+      corrige: "Le déplacement de marchandises est plus rapide OU La quantité de marchandises transportées est en augmentation OU Le nombre de kilomètres de réseau ferroviaire est en augmentation en Angleterre OU La locomotive permet dorénavant de transporter des personnes d'un lieu à un autre." },
+    { id: "q-ind-causes-2-2", operation: "Déterminer des causes et des conséquences", numero: 4, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "Détermine une conséquence de la division du travail.", responseSpace: { type: "lines", count: 3 } },
+      reglettes: [{ id: "r-ind-cs2-2", label: "Réglette (2 points)", ...R_CAUSES_2PT_CONSEQ }],
+      documents: pickDocs('ind-causes-2', 1, 2),
+      corrige: "La division du travail permet l'augmentation du nombre de biens produits." },
+    { id: "q-ind-causes-3-1", operation: "Déterminer des causes et des conséquences", numero: 5, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "À l'aide des documents 1 et 2, détermine deux facteurs expliquant la faible espérance de vie dans les quartiers ouvriers.", responseSpace: { type: "lines", count: 5 } },
+      reglettes: [{ id: "r-ind-cs3-1", label: "Réglette (4 points)", ...R_CAUSES_4PT_CAUSES }],
+      documents: pickDocs('ind-causes-3', 1, 2, 3),
+      corrige: "Le quartier ouvrier est très pollué, ce qui favorise l'apparition de maladies et d'épidémies. Les longues heures de travail, les faibles salaires et les lieux de travail non sécuritaires réduisent l'espérance de vie des ouvriers." },
+    { id: "q-ind-causes-3-2", operation: "Déterminer des causes et des conséquences", numero: 6, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "À l'aide du document 3, détermine une cause de l'industrialisation de l'Angleterre.", responseSpace: { type: "lines", count: 3 } },
+      reglettes: [{ id: "r-ind-cs3-2", label: "Réglette (1 point)", opLabel: "Déterminer des causes et des conséquences", maxPoints: 1,
+        levels: [
+          { points: "1 point", condition: "L'élève détermine correctement la cause." },
+          { points: "0 point", condition: "L'élève détermine incorrectement la cause ou ne la détermine pas." }
+        ] }],
+      documents: pickDocs('ind-causes-3', 1, 2, 3),
+      corrige: "La présence de gisements de charbon favorise l'industrialisation de l'Angleterre." },
+
+    // ===== INDUSTRIALISATION — DIFFÉRENCES (4) =====
+    { id: "q-ind-differences-1-1", operation: "Dégager des différences et des similitudes", numero: 1, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "Dégage une différence entre le mode de production artisanal et le mode de production industriel.", responseSpace: { type: "lines", count: 4 } },
+      reglettes: [{ id: "r-ind-di1-1", label: "Réglette (2 points)", ...R_DIFFERENCES_2PT }],
+      documents: pickDocs('ind-differences-1', 1),
+      corrige: "Plusieurs réponses possibles : L'artisan produit peu de biens alors que l'ouvrier en produit énormément pour une même période OU L'artisan participe à toutes les étapes de production, alors que l'ouvrier participe à une seule étape." },
+    { id: "q-ind-differences-1-2", operation: "Dégager des différences et des similitudes", numero: 2, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "À l'aide des documents 2 et 3, dégage une différence entre le socialisme et le libéralisme économique.", responseSpace: { type: "lines", count: 4 } },
+      reglettes: [{ id: "r-ind-di1-2", label: "Réglette (2 points)", ...R_DIFFERENCES_2PT }],
+      documents: pickDocs('ind-differences-1', 1, 2, 3),
+      corrige: "Le socialisme vise une répartition équitable de la richesse et l'appropriation collective des moyens de production, alors que le libéralisme économique vise la recherche du profit." },
+    { id: "q-ind-differences-2-1", operation: "Dégager des différences et des similitudes", numero: 3, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "Dégage une différence entre le milieu de vie de la classe ouvrière et celui de la bourgeoisie industrielle.", responseSpace: { type: "lines", count: 4 } },
+      reglettes: [{ id: "r-ind-di2-1", label: "Réglette (2 points)", ...R_DIFFERENCES_2PT_GEN }],
+      documents: pickDocs('ind-differences-2', 1, 2, 3, 4),
+      corrige: "Le quartier ouvrier est insalubre, l'air y est pollué et il n'y a pas de ramassage des ordures, alors que le quartier bourgeois est propre, éloigné des usines et on y trouve de nombreux espaces verts." },
+    { id: "q-ind-differences-2-2", operation: "Dégager des différences et des similitudes", numero: 4, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "À l'aide des documents 3 et 4, dégage une différence dans la source des revenus de la classe ouvrière et de la bourgeoisie.", responseSpace: { type: "lines", count: 4 } },
+      reglettes: [{ id: "r-ind-di2-2", label: "Réglette (2 points)", ...R_DIFFERENCES_2PT_GEN }],
+      documents: pickDocs('ind-differences-2', 1, 2, 3, 4),
+      corrige: "Les ouvriers échangent leur force de travail contre un salaire alors que le revenu des bourgeois provient des profits qu'ils réalisent grâce à la vente de biens." },
+
+    // ===== INDUSTRIALISATION — CHANGEMENTS (4) =====
+    { id: "q-ind-changements-1-1", operation: "Déterminer des changements et des continuités", numero: 1, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "À l'aide des documents 1 et 2, détermine un changement apporté par la révolution industrielle dans le domaine des transports.", responseSpace: { type: "lines", count: 4 } },
+      reglettes: [{ id: "r-ind-ch1-1", label: "Réglette (2 points)", ...R_CHGT_2PT_CHGT }],
+      documents: pickDocs('ind-changements-1', 1, 2, 3),
+      corrige: "Le transport des marchandises par cheval sur de longues distances est progressivement remplacé par l'utilisation de la locomotive à vapeur." },
+    { id: "q-ind-changements-1-2", operation: "Déterminer des changements et des continuités", numero: 2, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "À l'aide du document 3, détermine un changement dans la répartition de la population anglaise entre 1851 et 1911.", responseSpace: { type: "lines", count: 3 } },
+      reglettes: [{ id: "r-ind-ch1-2", label: "Réglette (2 points)", ...R_CHGT_2PT_CHGT }],
+      documents: pickDocs('ind-changements-1', 1, 2, 3),
+      corrige: "La population anglaise devient de plus en plus urbaine durant cette période." },
+    { id: "q-ind-changements-2-1", operation: "Déterminer des changements et des continuités", numero: 3, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "À l'aide du document 1, détermine un changement apporté par la création des premières banques.", responseSpace: { type: "lines", count: 4 } },
+      reglettes: [{ id: "r-ind-ch2-1", label: "Réglette (2 points)", ...R_CHGT_2PT_CHGT }],
+      documents: pickDocs('ind-changements-2', 1, 2),
+      corrige: "L'apparition des premières banques favorise l'emprunt des capitaux, leur circulation, le développement industriel de l'Angleterre et l'apparition de la bourgeoisie industrielle." },
+    { id: "q-ind-changements-2-2", operation: "Déterminer des changements et des continuités", numero: 4, niveau: 2, realite_sociale_id: "industrialisation",
+      questionBody: { prompt: "À l'aide du document 2, détermine un changement dans la provenance des capitaux durant la révolution industrielle.", responseSpace: { type: "lines", count: 3 } },
+      reglettes: [{ id: "r-ind-ch2-2", label: "Réglette (2 points)", ...R_CHGT_2PT_CHGT }],
+      documents: pickDocs('ind-changements-2', 1, 2),
+      corrige: "Les capitaux des industries ne proviennent plus uniquement des banques, mais aussi de l'émission d'actions à la bourse." }
+
 
   ]
 };
