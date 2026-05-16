@@ -723,6 +723,21 @@ html, body {
   gap: 1.25rem;
   flex-wrap: wrap;
 }
+.footer-logo {
+  height: 48px;
+  width: auto;
+  display: block;
+  opacity: 0.85;
+  transition: opacity var(--transition);
+  vertical-align: middle;
+}
+.footer-logo:hover {
+  opacity: 1;
+}
+.footer-text {
+  display: inline-flex;
+  align-items: center;
+}
 .footer-credit .title-sep {
   color: var(--color-border);
   margin: 0 0.15em;
