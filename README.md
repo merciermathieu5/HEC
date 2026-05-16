@@ -1,6 +1,13 @@
-# HEC · Premier cycle — Composition de cahier (v2.13)
+# HEC · Premier cycle — Composition de cahier (v2.14)
 
 Outil web pour composer un cahier d'élève à la pièce — sortie en `.docx` éditable.
+
+## ✨ Quoi de neuf (v2.14)
+
+- 🏛️ **Nouvelle réalité sociale (Secondaire 1)** : *La romanisation* avec 37 questions atomiques couvrant les 8 opérations intellectuelles. **Quatrième dossier de niveau 1 dans l'ordre curriculaire (Sec 1)**, inséré entre *Une première expérience de démocratie* (3e dossier) et *La christianisation de l'Occident* (5e dossier, ex-4e). Couvre la civilisation romaine de la République à la chute de Rome : conquêtes de Jules César et provinces (Bretagne, Gaule, Afrique, Égypte), invasions germaniques et sac de 455 par Genséric, classes sociales (patriciens, plébéiens, esclaves, pérégrins) et citoyenneté romaine (Édit de Caracalla 212), institutions impériales (Sénat, empereur, gouverneurs), infrastructures et romanité (aqueducs, théâtres, thermes, cirques, voies romaines, arc de triomphe), Pax Romana et limes (mur d'Hadrien), éducation des garçons et des filles, Édit de Milan (313), partage de l'Empire sous Théodose (395), Odoacre et la fin de Rome (476), héritage juridique (Édit perpétuel, Code Justinien, présomption d'innocence).
+- 📚 **Catalogue total** : 354 questions réparties sur 10 réalités sociales (renouvellement de la vision de l'Homme + expansion européenne + Révolution américaine + sédentarisation + émergence d'une civilisation + Une première expérience de démocratie + **La romanisation** + christianisation de l'Occident + industrialisation + expansion du monde industriel).
+- 🟢 Couleur **bronze antique** (vert-de-gris, `#5e7868`) dédiée pour la 10ᵉ réalité — teinte évocatrice de la patine des bronzes romains (statuaire impériale, monnaies). Nouveau slot CSS 7 ; les valeurs des slots couleur 7-9 ont été permutées vers 8-10 pour conserver l'identité visuelle de chr (ocre), ind (bleu ardoise) et emi (bordeaux).
+- 🖼️ **25 images iconographiques** intégrées : portrait de l'empereur Auguste, *Le sac de Rome par Genséric* de Briullov, dénier des Ides de Mars, *Course de chars* d'Albert Kuhn, Curie Julienne (forum romain), aqueducs (Ségovie, schéma technique), théâtre d'Aspendos, arène de Lutèce (Paris), Odoacre déposant Romulus Augustule, illustration de la toge romaine, et 11 cartes (République de César, Empire d'Antonin, Empire à l'apogée, 4 provinces locator, villes romaines, Italie avec mers, partage Occident/Orient, mur d'Hadrien, réseau de communication, ligne du temps des régimes politiques). Une **ligne du temps reconstruite** pour la question chrono « 5e siècle de notre ère » a vu son repère D, à l'origine marqué en rouge dans le corrigé, redessiné en gris pour égaler les repères A/B/C de la version élève.
 
 ## ✨ Quoi de neuf (v2.13)
 

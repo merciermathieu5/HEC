@@ -30,12 +30,14 @@
   --realite-color-5-bg: #dde4ed;
   --realite-color-6: #9a3a30;  /* rouge attique : Une première expérience de démocratie (Athènes, céramique à figures rouges) (idx 5) */
   --realite-color-6-bg: #ecdbd6;
-  --realite-color-7: #b08840;  /* ocre doré : christianisation de l'Occident (idx 6) */
-  --realite-color-7-bg: #f3ead4;
-  --realite-color-8: #4a6a82;  /* bleu ardoise : industrialisation (idx 7) */
-  --realite-color-8-bg: #dde6ee;
-  --realite-color-9: #7a3a4a;  /* bordeaux profond : expansion du monde industriel (idx 8) */
-  --realite-color-9-bg: #ecdfe2;
+  --realite-color-7: #5e7868;  /* bronze antique (vert-de-gris) : la romanisation (patine des bronzes romains, statuaire impériale) (idx 6) */
+  --realite-color-7-bg: #dfe6e1;
+  --realite-color-8: #b08840;  /* ocre doré : christianisation de l'Occident (idx 7) */
+  --realite-color-8-bg: #f3ead4;
+  --realite-color-9: #4a6a82;  /* bleu ardoise : industrialisation (idx 8) */
+  --realite-color-9-bg: #dde6ee;
+  --realite-color-10: #7a3a4a;  /* bordeaux profond : expansion du monde industriel (idx 9) */
+  --realite-color-10-bg: #ecdfe2;
   --shadow-sm: 0 1px 2px rgba(42, 38, 32, 0.06);
   --shadow-md: 0 2px 6px rgba(42, 38, 32, 0.08);
   --radius: 4px;
@@ -271,6 +273,7 @@ html, body {
 .question-card[data-realite-idx="6"] { border-left: 4px solid var(--realite-color-7); }
 .question-card[data-realite-idx="7"] { border-left: 4px solid var(--realite-color-8); }
 .question-card[data-realite-idx="8"] { border-left: 4px solid var(--realite-color-9); }
+.question-card[data-realite-idx="9"] { border-left: 4px solid var(--realite-color-10); }
 
 .tag-realite[data-realite-idx="0"] { background: var(--realite-color-1); color: #fff; }
 .tag-realite[data-realite-idx="1"] { background: var(--realite-color-2); color: #fff; }
@@ -281,6 +284,7 @@ html, body {
 .tag-realite[data-realite-idx="6"] { background: var(--realite-color-7); color: #fff; }
 .tag-realite[data-realite-idx="7"] { background: var(--realite-color-8); color: #fff; }
 .tag-realite[data-realite-idx="8"] { background: var(--realite-color-9); color: #fff; }
+.tag-realite[data-realite-idx="9"] { background: var(--realite-color-10); color: #fff; }
 
 /* === Groupes repliables par réalité sociale === */
 .realite-group {
@@ -337,6 +341,10 @@ html, body {
 .realite-group-header[data-realite-idx="8"] {
   background: var(--realite-color-9-bg);
   border-left: 4px solid var(--realite-color-9);
+}
+.realite-group-header[data-realite-idx="9"] {
+  background: var(--realite-color-10-bg);
+  border-left: 4px solid var(--realite-color-10);
 }
 .realite-toggle {
   display: inline-flex;
