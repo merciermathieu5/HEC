@@ -539,7 +539,7 @@ html, body {
 .cahier-actions {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.7rem;
   margin-top: 0.75rem;
   padding-top: 0.75rem;
   border-top: 1px solid var(--color-border);
@@ -547,6 +547,107 @@ html, body {
 .cahier-actions-row {
   display: flex;
   gap: 0.4rem;
+}
+
+/* Groupes d'actions par document produit : libellé + paire Aperçu/Télécharger */
+.action-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.action-group-label {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1.25;
+}
+.action-group-tag {
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: var(--color-text-muted);
+  background: var(--color-primary-light);
+  padding: 0.08rem 0.45rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.action-group-row {
+  display: flex;
+  gap: 0.4rem;
+}
+/* La variante (fonctionnalité de test) : encadré pointillé discret pour la distinguer */
+.action-group--variante {
+  padding: 0.55rem 0.6rem;
+  background: var(--color-bg-alt);
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius);
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.action-group-variante-head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.action-subgroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.action-subgroup-label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+/* Action utilitaire (Vider) : séparée et volontairement discrète */
+.action-group-utility {
+  display: flex;
+  margin-top: 0.1rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid var(--color-border);
+}
+.btn-clear {
+  flex: 1;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  border-color: var(--color-border-strong);
+}
+.btn-clear:hover:not(:disabled) {
+  color: var(--color-danger);
+  border-color: var(--color-danger);
+  background: #fbf1ee;
+}
+
+/* Aperçu variante : coupures de page simulées (affichage seulement, ne touche pas le .docx) */
+.page-sim-spacer { width: 100%; }
+.page-sim-break {
+  position: relative;
+  height: 0;
+  border-top: 2px dashed var(--color-primary);
+  margin: 0 0 30px;
+}
+.page-sim-break::after {
+  content: attr(data-page);
+  position: absolute;
+  top: 5px;
+  right: 0;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  background: #fff;
+  padding: 1px 7px;
+  border-radius: 999px;
 }
 
 .btn {

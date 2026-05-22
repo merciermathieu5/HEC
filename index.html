@@ -66,25 +66,67 @@
       <div id="cahier-list" class="cahier-list"></div>
 
       <div class="cahier-actions">
-        <div class="cahier-actions-row">
-          <button id="btn-clear-cahier" type="button" class="btn btn-secondary" disabled>
-            Vider
-          </button>
-          <button id="btn-preview" type="button" class="btn btn-secondary" disabled>
-            👁 Aperçu cahier
-          </button>
-          <button id="btn-preview-corrige" type="button" class="btn btn-secondary" disabled>
-            👁 Aperçu guide
+
+        <div class="action-group">
+          <span class="action-group-label">Cahier de l'élève</span>
+          <div class="action-group-row">
+            <button id="btn-preview" type="button" class="btn btn-secondary" disabled>
+              👁 Aperçu
+            </button>
+            <button id="btn-generate" type="button" class="btn btn-primary" disabled>
+              ⬇ Télécharger
+            </button>
+          </div>
+        </div>
+
+        <div class="action-group">
+          <span class="action-group-label">Guide de l'enseignant</span>
+          <div class="action-group-row">
+            <button id="btn-preview-corrige" type="button" class="btn btn-secondary" disabled>
+              👁 Aperçu
+            </button>
+            <button id="btn-generate-corrige" type="button" class="btn btn-primary" disabled>
+              ⬇ Télécharger
+            </button>
+          </div>
+        </div>
+
+        <!-- VARIANTE (test) : documents regroupés à la fin, numérotés globalement -->
+        <div class="action-group action-group--variante">
+          <span class="action-group-variante-head">
+            Variante
+            <span class="action-group-tag">documents à la fin</span>
+          </span>
+          <div class="action-subgroup">
+            <span class="action-subgroup-label">Cahier de l'élève</span>
+            <div class="action-group-row">
+              <button id="btn-preview-variante" type="button" class="btn btn-secondary" disabled>
+                👁 Aperçu
+              </button>
+              <button id="btn-generate-variante" type="button" class="btn btn-primary" disabled>
+                ⬇ Télécharger
+              </button>
+            </div>
+          </div>
+          <div class="action-subgroup">
+            <span class="action-subgroup-label">Guide de l'enseignant</span>
+            <div class="action-group-row">
+              <button id="btn-preview-corrige-variante" type="button" class="btn btn-secondary" disabled>
+                👁 Aperçu
+              </button>
+              <button id="btn-generate-corrige-variante" type="button" class="btn btn-primary" disabled>
+                ⬇ Télécharger
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="action-group-utility">
+          <button id="btn-clear-cahier" type="button" class="btn btn-secondary btn-clear" disabled>
+            ↺ Vider le cahier
           </button>
         </div>
-        <div class="cahier-actions-row">
-          <button id="btn-generate" type="button" class="btn btn-primary" disabled>
-            ⬇ Cahier de l'élève
-          </button>
-          <button id="btn-generate-corrige" type="button" class="btn btn-primary" disabled>
-            ⬇ Guide de l'enseignant
-          </button>
-        </div>
+
       </div>
     </section>
 

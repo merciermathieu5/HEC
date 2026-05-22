@@ -33,6 +33,10 @@
     btnGenerateCorrige: $('btn-generate-corrige'),
     btnPreview:         $('btn-preview'),
     btnPreviewCorrige:  $('btn-preview-corrige'),
+    btnGenerateVariante: $('btn-generate-variante'),
+    btnPreviewVariante:  $('btn-preview-variante'),
+    btnGenerateCorrigeVariante: $('btn-generate-corrige-variante'),
+    btnPreviewCorrigeVariante:  $('btn-preview-corrige-variante'),
     btnClear:           $('btn-clear-cahier'),
     loading:            $('loading-overlay'),
     loadingMsg:         $('loading-message'),
@@ -88,11 +92,17 @@
     el.btnGenerateCorrige.addEventListener('click', () => generateDocx(true, /*corrige*/ true));
     el.btnPreview.addEventListener('click', () => previewCahier(false));
     el.btnPreviewCorrige.addEventListener('click', () => previewCahier(true));
+    el.btnGenerateVariante.addEventListener('click', () => generateDocx(true, false, /*variant*/ true));
+    el.btnPreviewVariante.addEventListener('click', () => previewCahier(false, /*variant*/ true));
+    el.btnGenerateCorrigeVariante.addEventListener('click', () => generateDocx(true, /*corrige*/ true, /*variant*/ true));
+    el.btnPreviewCorrigeVariante.addEventListener('click', () => previewCahier(/*corrige*/ true, /*variant*/ true));
     el.modalClose.addEventListener('click', closePreview);
     el.modalDownload.addEventListener('click', () => {
-      const isCorrige = state.previewMode === 'corrige';
+      const mode = state.previewMode;
+      const isCorrige = mode === 'corrige' || mode === 'variante-corrige';
+      const isVariant = mode === 'variante' || mode === 'variante-corrige';
       closePreview();
-      generateDocx(true, isCorrige);
+      generateDocx(true, isCorrige, isVariant);
     });
     el.previewOverlay.addEventListener('click', (e) => {
       if (e.target === el.previewOverlay) closePreview();
@@ -434,6 +444,10 @@
     el.btnClear.disabled    = state.cahier.length === 0;
     el.btnPreview.disabled  = state.cahier.length === 0;
     el.btnPreviewCorrige.disabled = state.cahier.length === 0;
+    el.btnGenerateVariante.disabled = state.cahier.length === 0;
+    el.btnPreviewVariante.disabled  = state.cahier.length === 0;
+    el.btnGenerateCorrigeVariante.disabled = state.cahier.length === 0;
+    el.btnPreviewCorrigeVariante.disabled  = state.cahier.length === 0;
   }
 
   // ====== DRAG-AND-DROP (au niveau des groupes-questions) ======
@@ -608,10 +622,206 @@
     return await Packer.toBlob(doc);
   }
 
+  // ====== VARIANTE : CAHIER « DOCUMENTS À LA FIN » (test) ======
+  // Structure : pour chaque question, énoncé → espace de réponse → réglette (sans documents
+  // intercalés). TOUS les documents du cahier sont regroupés en fin de cahier et renumérotés
+  // globalement 1, 2, 3, … L'espace est maximisé : aucune question ne démarre sur une page neuve
+  // (les questions s'enchaînent), et les documents étroits sont appariés côte à côte.
+
+  // Renumérote les renvois « document(s) <liste> » d'un texte selon une table local→global.
+  // La regex ne capture que la liste de nombres collée à « document(s) » et s'arrête au 1er
+  // token non-liste : les années entre parenthèses et autres nombres sont préservés. Couvre
+  // aussi les « Document N » des espaces de réponse / corrigés, ET les titres « Document N : légende »
+  // (seul le numéro est remplacé ; la légende est conservée).
+  function makeDocRenumberer(map) {
+    return function (text) {
+      if (typeof text !== 'string' || !text) return text;
+      return text.replace(
+        /(\bdocuments?\b\s+)(\d+(?:\s*(?:,\s*|\s+à\s+|\s+et\s+)\d+)*)/gi,
+        (m, head, list) => head + list.replace(/\d+/g, d => {
+          const g = map[parseInt(d, 10)];
+          return g != null ? String(g) : d;
+        })
+      );
+    };
+  }
+
+  // Applique le renuméroteur récursivement à toutes les chaînes d'une valeur (clone immuable).
+  function deepRenumber(value, ren) {
+    if (typeof value === 'string') return ren(value);
+    if (Array.isArray(value)) return value.map(v => deepRenumber(v, ren));
+    if (value && typeof value === 'object') {
+      const out = {};
+      for (const k in value) out[k] = deepRenumber(value[k], ren);
+      return out;
+    }
+    return value;
+  }
+
+  // Copie de la question avec énoncé + espace de réponse renumérotés (la question source intacte).
+  function renumberQuestion(q, map) {
+    const ren = makeDocRenumberer(map);
+    const b = q.questionBody || {};
+    return {
+      ...q,
+      questionBody: {
+        ...b,
+        prompt: ren(b.prompt),
+        bullets: b.bullets ? b.bullets.map(ren) : b.bullets,
+        instructions: b.instructions ? deepRenumber(b.instructions, ren) : b.instructions,
+        responseSpace: b.responseSpace ? deepRenumber(b.responseSpace, ren) : b.responseSpace
+      }
+    };
+  }
+
+  // Numéro local d'un document : lu dans son titre (« Document 3 : … » → 3), sinon position.
+  // Les titres HEC portent une légende (« Document 1 : Les 95 thèses ») et pickDocs peut conserver
+  // des numéros non contigus (« Document 4 », « Document 5 ») : lire le titre est donc la source fiable.
+  function localDocNumber(doc, fallbackIdx) {
+    const m = doc && typeof doc.title === 'string' ? doc.title.match(/(\d+)/) : null;
+    return m ? parseInt(m[1], 10) : (fallbackIdx + 1);
+  }
+
+  async function buildDocxBlobFlat() {
+    const {
+      Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell,
+      BorderStyle, WidthType, PageBreak
+    } = docx;
+
+    const imageCache = await preloadImages();
+    const builders = makeBuilders(docx, imageCache);
+
+    const coverElements = buildCoverPage(docx);
+
+    // Grouper les pièces du cahier par question (consécutivement)
+    const groups = [];
+    let cur = null;
+    state.cahier.forEach(p => {
+      if (!cur || cur.questionId !== p.questionId) {
+        cur = { questionId: p.questionId, pieces: [] };
+        groups.push(cur);
+      }
+      cur.pieces.push(p);
+    });
+
+    const NO_B = { style: BorderStyle.NONE, size: 0, color: "FFFFFF" };
+    const WRAPPER_NO_BORDERS = { top: NO_B, bottom: NO_B, left: NO_B, right: NO_B };
+
+    // ---- PASSE 1 : numérotation globale des documents + table local→global par question ----
+    let globalDoc = 0;
+    const endDocs = []; // { doc (titre renuméroté, légende conservée), narrow }
+    const isDocNarrow = (d) => !d.imageUrl || (d.imageWidthCm || 12) <= 7;
+    groups.forEach(g => {
+      const q = DATA.questions.find(x => x.id === g.questionId);
+      g._map = {};
+      if (!q) return;
+      const presentIds = new Set(g.pieces.filter(p => p.kind === 'document').map(p => p.pieceId));
+      const ren = makeDocRenumberer(g._map);
+      q.documents.forEach((doc, idx) => {
+        if (!presentIds.has(doc.id)) return;
+        globalDoc++;
+        const local = localDocNumber(doc, idx);
+        g._map[local] = globalDoc;
+        // Titre renuméroté en conservant la légende : « Document 1 : Les 95 thèses » → « Document 7 : Les 95 thèses »
+        endDocs.push({ doc: { ...doc, title: ren(doc.title) }, narrow: isDocNarrow(doc) });
+      });
+    });
+
+    const bodyChildren = [];
+    bodyChildren.push(...coverElements);
+    bodyChildren.push(new Paragraph({ children: [new PageBreak()] }));
+
+    // ---- PASSE 2 : énoncés (question → espace de réponse → réglette), AUCUN document intercalé ----
+    groups.forEach((g, idx) => {
+      const q0 = DATA.questions.find(x => x.id === g.questionId);
+      if (!q0) return;
+      const q = renumberQuestion(q0, g._map);
+      const seqNumero = idx + 1;
+
+      const corePieces = g.pieces.filter(p => p.kind === 'questionBody' || p.kind === 'reglette');
+      const coreChildren = [];
+      corePieces.forEach(p => {
+        if (p.kind === 'questionBody') {
+          coreChildren.push(...builders.buildQuestionBody(q, seqNumero));
+        } else if (p.kind === 'reglette') {
+          const r = q.reglettes.find(x => x.id === p.pieceId);
+          if (r) {
+            coreChildren.push(new Paragraph({ children: [new TextRun({ text: "", size: 8 })], spacing: { before: 0, after: 80 } }));
+            coreChildren.push(...builders.buildReglette(r));
+          }
+        }
+      });
+      if (coreChildren.length === 0) return;
+      coreChildren.push(new Paragraph({ children: [new TextRun({ text: "", size: 4 })], spacing: { before: 0, after: 0 } }));
+
+      // Enveloppe cantSplit : la question ne se coupe pas entre deux pages.
+      // PAS de saut de page forcé → les questions s'enchaînent pour densifier le cahier.
+      bodyChildren.push(new Table({
+        width: { size: 10500, type: WidthType.DXA },
+        columnWidths: [10500],
+        rows: [new TableRow({
+          cantSplit: true,
+          children: [new TableCell({
+            width: { size: 10500, type: WidthType.DXA },
+            borders: WRAPPER_NO_BORDERS,
+            margins: { top: 0, bottom: 0, left: 0, right: 0 },
+            children: coreChildren
+          })]
+        })]
+      }));
+      // Mince séparateur entre deux questions
+      bodyChildren.push(new Paragraph({ children: [new TextRun({ text: "", size: 12 })], spacing: { before: 0, after: 120 } }));
+    });
+
+    // ---- DOCUMENTS REGROUPÉS À LA FIN (numérotés 1..N), appariés si étroits ----
+    if (endDocs.length > 0) {
+      bodyChildren.push(new Paragraph({ children: [new PageBreak()] }));
+      bodyChildren.push(new Paragraph({
+        children: [new TextRun({ text: "Documents", bold: true, size: 32, color: "8B3A2E" })],
+        spacing: { after: 160 },
+        border: { bottom: { style: BorderStyle.SINGLE, size: 8, color: "8B3A2E", space: 4 } }
+      }));
+
+      const slots = [];
+      let i = 0;
+      while (i < endDocs.length) {
+        const a = endDocs[i];
+        const b = (i + 1 < endDocs.length) ? endDocs[i + 1] : null;
+        if (b && a.narrow && b.narrow) { slots.push([a.doc, b.doc]); i += 2; }
+        else { slots.push([a.doc]); i += 1; }
+      }
+      slots.forEach((slot, sIdx) => {
+        if (sIdx > 0) {
+          bodyChildren.push(new Paragraph({ children: [new TextRun({ text: "", size: 8 })], spacing: { before: 0, after: 80 } }));
+        }
+        if (slot.length === 1) bodyChildren.push(...builders.buildDocument(slot[0]));
+        else bodyChildren.push(builders.buildPairedDocuments(slot[0], slot[1]));
+      });
+    }
+
+    const doc = new Document({
+      creator: "HEC Premier cycle",
+      title: "Cahier de l'élève (variante — documents à la fin)",
+      styles: { default: { document: { run: { font: "Calibri", size: 22 } } } },
+      sections: [{
+        properties: {
+          page: {
+            size: { width: 12240, height: 15840 },
+            margin: { top: 720, right: 720, bottom: 720, left: 720 }
+          }
+        },
+        headers: undefined,
+        children: bodyChildren.length > 0 ? bodyChildren : [new Paragraph({ children: [new TextRun("(vide)")] })]
+      }]
+    });
+
+    return await Packer.toBlob(doc);
+  }
+
   // ====== GÉNÉRATION DU GUIDE DE L'ENSEIGNANT (corrigé) ======
   // Mise en page concise : pas de page couverture, pas de documents, pas d'espace de réponse vide.
   // Chaque question : titre + énoncé + corrigé surligné + réglette compacte.
-  async function buildCorrigeBlob() {
+  async function buildCorrigeBlob(flat) {
     const {
       Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell,
       AlignmentType, BorderStyle, WidthType, ShadingType, VerticalAlign, PageBreak
@@ -622,15 +832,35 @@
     const ALL_BORDERS = { top: TEXT_BORDER, bottom: TEXT_BORDER, left: TEXT_BORDER, right: TEXT_BORDER };
     const CELL_MARGINS = { top: 80, bottom: 80, left: 120, right: 120 };
 
-    // Grouper les pièces par question
+    // Grouper les pièces par question (on conserve les pièces pour pouvoir, en mode variante,
+    // compter les documents réellement présents — strictement la même logique que le cahier variante).
     const groups = [];
     let cur = null;
     state.cahier.forEach(p => {
       if (!cur || cur.questionId !== p.questionId) {
-        cur = { questionId: p.questionId };
+        cur = { questionId: p.questionId, pieces: [] };
         groups.push(cur);
       }
+      cur.pieces.push(p);
     });
+
+    // MODE VARIANTE : numérotation globale des documents, IDENTIQUE à buildDocxBlobFlat
+    // (mêmes pièces-documents comptées, dans le même ordre) → les renvois du guide concordent
+    // exactement avec le cahier variante. Le guide n'affiche pas les documents pour autant.
+    if (flat) {
+      let globalDoc = 0;
+      groups.forEach(g => {
+        const q = DATA.questions.find(x => x.id === g.questionId);
+        g._map = {};
+        if (!q) return;
+        const presentIds = new Set((g.pieces || []).filter(p => p.kind === 'document').map(p => p.pieceId));
+        q.documents.forEach((doc, i) => {
+          if (!presentIds.has(doc.id)) return;
+          globalDoc++;
+          g._map[localDocNumber(doc, i)] = globalDoc;
+        });
+      });
+    }
 
     const bodyChildren = [];
 
@@ -685,8 +915,17 @@
     }));
 
     groups.forEach((g, idx) => {
-      const q = DATA.questions.find(x => x.id === g.questionId);
-      if (!q) return;
+      const qRaw = DATA.questions.find(x => x.id === g.questionId);
+      if (!qRaw) return;
+      // En mode variante : renumérotation globale de l'énoncé, de l'espace de réponse ET du
+      // corrigé (les corrigés du type ["Document 4","Document 5"] / {before:[…]} passent par
+      // la même règle « Document N → Document N+décalage »).
+      const q = flat
+        ? (function () {
+            const base = renumberQuestion(qRaw, g._map || {});
+            return { ...base, corrige: deepRenumber(qRaw.corrige, makeDocRenumberer(g._map || {})) };
+          })()
+        : qRaw;
       const seqNumero = idx + 1;
 
       // Titre concis : "Question N"
@@ -1186,17 +1425,27 @@
     return out;
   }
 
-  async function generateDocx(download, corrige) {
+  async function generateDocx(download, corrige, variant) {
     if (state.cahier.length === 0) return;
-    showLoading(corrige ? 'Génération du guide de l\'enseignant…' : 'Génération du cahier…');
+    showLoading(
+      variant && corrige ? 'Génération du guide (variante)…'
+      : variant ? 'Génération du cahier (variante)…'
+      : corrige ? 'Génération du guide de l\'enseignant…'
+      : 'Génération du cahier…'
+    );
     try {
-      const blob = corrige ? await buildCorrigeBlob() : await buildDocxBlob();
+      const blob = variant
+        ? (corrige ? await buildCorrigeBlob(/*flat*/ true) : await buildDocxBlobFlat())
+        : (corrige ? await buildCorrigeBlob() : await buildDocxBlob());
       const url = URL.createObjectURL(blob);
       if (download !== false) {
         const a = document.createElement('a');
         a.href = url;
         const date = new Date().toISOString().slice(0, 10);
-        a.download = corrige ? `HEC-guide-enseignant-${date}.docx` : `HEC-cahier-${date}.docx`;
+        a.download = variant && corrige ? `HEC-guide-enseignant-variante-${date}.docx`
+          : variant ? `HEC-cahier-variante-${date}.docx`
+          : corrige ? `HEC-guide-enseignant-${date}.docx`
+          : `HEC-cahier-${date}.docx`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -1213,16 +1462,31 @@
 
   // ====== PRÉVISUALISATION ======
   // Utilise docx-preview pour un rendu fidèle du .docx (préserve bordures, couleurs, mises en page)
-  async function previewCahier(corrige) {
+  async function previewCahier(corrige, variant) {
     if (state.cahier.length === 0) return;
-    state.previewMode = corrige ? 'corrige' : 'cahier';
-    showLoading(corrige ? 'Préparation du guide…' : 'Préparation de l\'aperçu…');
+    state.previewMode = variant ? (corrige ? 'variante-corrige' : 'variante') : corrige ? 'corrige' : 'cahier';
+    showLoading(
+      variant && corrige ? 'Préparation du guide (variante)…'
+      : variant ? 'Préparation de l\'aperçu (variante)…'
+      : corrige ? 'Préparation du guide…'
+      : 'Préparation de l\'aperçu…'
+    );
     try {
-      const blob = corrige ? await buildCorrigeBlob() : await buildDocxBlob();
+      const blob = variant
+        ? (corrige ? await buildCorrigeBlob(/*flat*/ true) : await buildDocxBlobFlat())
+        : (corrige ? await buildCorrigeBlob() : await buildDocxBlob());
 
       // Mettre à jour le titre et le bouton du modal selon le mode
-      if (el.modalTitle) el.modalTitle.textContent = corrige ? 'Aperçu — Guide de l\'enseignant' : 'Aperçu — Cahier de l\'élève';
-      if (el.modalDownload) el.modalDownload.textContent = corrige ? '⬇ Télécharger le guide' : '⬇ Télécharger le cahier';
+      if (el.modalTitle) el.modalTitle.textContent =
+        variant && corrige ? 'Aperçu — Guide de l\'enseignant (variante · documents à la fin)'
+        : variant ? 'Aperçu — Cahier de l\'élève (variante · documents à la fin)'
+        : corrige ? 'Aperçu — Guide de l\'enseignant'
+        : 'Aperçu — Cahier de l\'élève';
+      if (el.modalDownload) el.modalDownload.textContent =
+        variant && corrige ? '⬇ Télécharger le guide (variante)'
+        : variant ? '⬇ Télécharger la variante'
+        : corrige ? '⬇ Télécharger le guide'
+        : '⬇ Télécharger le cahier';
 
       // Vider le conteneur et y faire rendre le docx
       el.previewContainer.innerHTML = '';
@@ -1242,11 +1506,89 @@
         useBase64URL: true
       });
 
+      // VARIANTE : l'aperçu n'affiche pas les coupures de page (docx-preview ne repagine pas
+      // le texte qui s'enchaîne). On simule les coupures, sans toucher au .docx, une fois les
+      // images chargées. Repli sûr : toute erreur est avalée et l'aperçu reste affiché.
+      if (variant) {
+        await awaitImages(el.previewContainer);
+        simulatePageBreaks(el.previewContainer);
+      }
+
       hideLoading();
     } catch (err) {
       hideLoading();
       console.error('Erreur lors de la prévisualisation :', err);
       alert('Erreur lors de la prévisualisation : ' + err.message);
+    }
+  }
+
+  // Attend le chargement de toutes les images du conteneur (pour mesurer des hauteurs justes).
+  function awaitImages(container) {
+    const imgs = Array.from(container.querySelectorAll('img'));
+    return Promise.all(imgs.map(img => (img.complete && img.naturalHeight !== 0)
+      ? Promise.resolve()
+      : new Promise(res => {
+          img.addEventListener('load', res, { once: true });
+          img.addEventListener('error', res, { once: true });
+          setTimeout(res, 3000); // garde-fou
+        })
+    ));
+  }
+
+  // Simule les coupures de page dans l'aperçu de la variante (affichage seulement).
+  // Principe : chaque bloc de premier niveau est insécable (enveloppe cantSplit pour les
+  // questions, tableau unique pour chaque document) — exactement comme Word les traite. On
+  // empile les blocs et, dès qu'un bloc déborde la hauteur utile d'une page, on insère une
+  // coupure AVANT lui (comble + ligne pointillée + n° de page), reproduisant la pagination de Word.
+  // docx-preview rend : <section class="docx" style="min-height:<page>; padding:<marges>"> <article> blocs… </article>.
+  // La hauteur utile = minHeight de la section − marges haut/bas ; les blocs sont les enfants de l'<article>.
+  function simulatePageBreaks(container) {
+    try {
+      const sections = container.querySelectorAll('section.docx');
+      if (!sections.length) return;
+      sections.forEach(section => {
+        // Les blocs sont les enfants de l'<article> (docx-preview rend : section.docx > article > blocs).
+        const article = section.querySelector(':scope > article') || section;
+
+        // Hauteur utile de page, en PX (cohérent avec offsetHeight) et indépendante de l'unité
+        // que getComputedStyle renvoie : on part de la largeur de contenu rendue (toujours en px)
+        // × le ratio réel du contenu de page du .docx — contenu = (12240−1440) twips de large
+        // × (15840−1440) twips de haut, soit 14400/10800.
+        const contentWidthPx = (article.clientWidth || section.clientWidth || 0);
+        const pageContentHeightPx = contentWidthPx * (14400 / 10800);
+        if (!(pageContentHeightPx > 0)) return;
+
+        const blocks = Array.from(article.children);
+        if (blocks.length < 2) return;
+
+        // Mesurer toutes les hauteurs AVANT toute insertion (évite tout effet de reflux).
+        const heights = blocks.map(b => {
+          const bcs = getComputedStyle(b);
+          return b.offsetHeight + (parseFloat(bcs.marginTop) || 0) + (parseFloat(bcs.marginBottom) || 0);
+        });
+
+        let acc = 0, pageNo = 1;
+        blocks.forEach((block, i) => {
+          const h = heights[i];
+          if (i > 0 && acc + h > pageContentHeightPx) {
+            const remaining = Math.max(0, pageContentHeightPx - acc);
+            const spacer = document.createElement('div');
+            spacer.className = 'page-sim-spacer';
+            spacer.style.height = remaining + 'px';
+            pageNo++;
+            const brk = document.createElement('div');
+            brk.className = 'page-sim-break';
+            brk.setAttribute('data-page', 'Page ' + pageNo);
+            article.insertBefore(spacer, block);
+            article.insertBefore(brk, block);
+            acc = 0;
+          }
+          acc += h;
+          if (h > pageContentHeightPx) acc = 0; // bloc plus grand qu'une page : on repart à 0
+        });
+      });
+    } catch (e) {
+      console.warn('Simulation de pages (aperçu) ignorée :', e);
     }
   }
 
