@@ -16,6 +16,8 @@
     cahier: [],
     // Mode courant de prévisualisation ('cahier' | 'corrige')
     previewMode: 'cahier',
+    // Terme de recherche courant (normalisé : minuscules, sans accents)
+    searchTerm: '',
   };
 
   // ====== DOM ======
@@ -29,6 +31,8 @@
     filterRealite:    $('filter-realite'),
     filterOp:         $('filter-operation'),
     resetFilters:     $('reset-filters'),
+    searchInput:      $('search-input'),
+    searchClear:      $('search-clear'),
     btnGenerate:        $('btn-generate'),
     btnGenerateCorrige: $('btn-generate-corrige'),
     btnPreview:         $('btn-preview'),
@@ -81,6 +85,13 @@
       el.filterNiveau.value = '';
       el.filterRealite.value = '';
       el.filterOp.value = '';
+      el.searchInput.value = '';
+      applyFilters();
+    });
+    el.searchInput.addEventListener('input', applyFilters);
+    el.searchClear.addEventListener('click', () => {
+      el.searchInput.value = '';
+      el.searchInput.focus();
       applyFilters();
     });
     el.btnClear.addEventListener('click', () => {
@@ -112,22 +123,84 @@
     });
   }
 
+  // ====== RECHERCHE PAR MOT-CLÉ ======
+
+  // Normalise pour une comparaison insensible à la casse et aux accents.
+  function normalizeText(s) {
+    return (s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  }
+
+  // Texte interrogeable d'une question : énoncé + puces + titres/textes/sources des documents.
+  function questionSearchText(q) {
+    const parts = [q.questionBody.prompt || ''];
+    if (q.questionBody.bullets) parts.push(q.questionBody.bullets.join(' '));
+    if (q.questionBody.instructions) parts.push(String(q.questionBody.instructions));
+    (q.documents || []).forEach(d => {
+      if (!d) return;
+      if (d.title) parts.push(d.title);
+      if (d.text) parts.push(d.text);
+      if (d.sources) parts.push(d.sources.join(' '));
+    });
+    return normalizeText(parts.join('  '));
+  }
+
+  // Le terme apparaît-il dans l'énoncé (ou les puces) plutôt que seulement dans un document ?
+  function termInPrompt(q, term) {
+    const t = normalizeText((q.questionBody.prompt || '') + ' ' + ((q.questionBody.bullets || []).join(' ')));
+    return t.includes(term);
+  }
+
+  // Surligne (insensible aux accents) les occurrences du terme dans le texte original, en échappant le HTML.
+  function highlightMatches(original, term) {
+    if (!term) return escapeHtml(original);
+    let norm = '';
+    const map = []; // map[k] = index dans `original` du k-ième caractère normalisé
+    for (let i = 0; i < original.length; i++) {
+      const nf = normalizeText(original[i]);
+      for (let j = 0; j < nf.length; j++) { norm += nf[j]; map.push(i); }
+    }
+    const ranges = [];
+    let from = 0, idx;
+    while ((idx = norm.indexOf(term, from)) !== -1) {
+      ranges.push([map[idx], map[idx + term.length - 1] + 1]);
+      from = idx + term.length;
+    }
+    if (!ranges.length) return escapeHtml(original);
+    let out = '', cur = 0;
+    ranges.forEach(([s, e]) => {
+      out += escapeHtml(original.slice(cur, s));
+      out += '<mark class="search-hit">' + escapeHtml(original.slice(s, e)) + '</mark>';
+      cur = e;
+    });
+    out += escapeHtml(original.slice(cur));
+    return out;
+  }
+
   // ====== FILTRES ======
   function applyFilters() {
     const niv = el.filterNiveau.value;
     const rea = el.filterRealite.value;
     const op  = el.filterOp.value;
 
+    // Terme de recherche courant (normalisé) + bascule de la croix d'effacement.
+    const term = normalizeText((el.searchInput.value || '').trim());
+    state.searchTerm = term;
+    el.searchClear.hidden = !el.searchInput.value;
+
     state.filteredQuestions = DATA.questions.filter(q => {
       if (niv && String(q.niveau) !== niv) return false;
       if (rea && q.realite_sociale_id !== rea) return false;
       if (op  && q.operation !== op) return false;
+      if (term && !questionSearchText(q).includes(term)) return false;
       return true;
     });
 
-    // Si l'utilisateur filtre sur une réalité précise, on la déplie automatiquement.
-    // Sinon (filtre vide), on remet toutes les réalités repliées par défaut.
-    if (rea) {
+    // Une recherche déplie toutes les sections pour montrer les résultats.
+    // Sinon : si l'utilisateur filtre sur une réalité précise, on la déplie ;
+    // si aucun filtre, on remet toutes les réalités repliées par défaut.
+    if (term) {
+      collapsedRealites.clear();
+    } else if (rea) {
       collapsedRealites.delete(rea);
     } else {
       DATA.realites_sociales.forEach(r => collapsedRealites.add(r.id));
@@ -240,7 +313,8 @@
             <input type="checkbox" class="q-checkbox" data-q-id="${q.id}" ${checked} aria-label="Sélectionner cette question">
             <div class="q-content">
               ${tagsHtml}
-              <p class="q-prompt">${escapeHtml(q.questionBody.prompt)}</p>
+              <p class="q-prompt">${state.searchTerm ? highlightMatches(q.questionBody.prompt, state.searchTerm) : escapeHtml(q.questionBody.prompt)}</p>
+              ${state.searchTerm && !termInPrompt(q, state.searchTerm) ? '<span class="q-doc-hit">🔍 trouvé dans un document</span>' : ''}
             </div>
           </div>
         `;
