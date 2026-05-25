@@ -2505,9 +2505,37 @@
   }
 
   // ====== BOOT ======
+  // Avant init(), on tente de charger les questions éditées via le CMS
+  // (assets/data/questions.json). Si le fichier est absent ou illisible
+  // (ex. ouverture en file://), on retombe proprement sur les données
+  // héritées de data.js — l'app fonctionne exactement comme avant.
+  async function loadCMSQuestions() {
+    if (typeof window.QuizCMS === 'undefined') return;       // adaptateur non chargé
+    if (typeof DATA === 'undefined' || !DATA || !Array.isArray(DATA.questions)) return; // data.js absent / vide
+    try {
+      const res = await fetch('assets/data/questions.json', { cache: 'no-store' });
+      if (!res.ok) return;
+      const data = await res.json();
+      const list = Array.isArray(data) ? data : (data.questions || []);
+      if (!list.length) return;
+      const indexById = new Map(DATA.questions.map((q, i) => [q.id, i]));
+      let remplacees = 0, ajoutees = 0;
+      list.forEach((cms) => {
+        const rq = window.QuizCMS.toRuntime(cms);
+        if (indexById.has(rq.id)) { DATA.questions[indexById.get(rq.id)] = rq; remplacees++; }
+        else { DATA.questions.push(rq); indexById.set(rq.id, DATA.questions.length - 1); ajoutees++; }
+      });
+      console.info(`[CMS] questions.json : ${remplacees} remplacée(s), ${ajoutees} ajoutée(s).`);
+    } catch (e) {
+      console.warn('[CMS] questions.json non chargé — données héritées utilisées.', e && e.message);
+    }
+  }
+
+  function boot() { loadCMSQuestions().then(init).catch(init); }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', boot);
   } else {
-    init();
+    boot();
   }
 })();
