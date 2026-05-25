@@ -26019,62 +26019,6 @@
           "valeur": "Les communautés religieuses OU L'Église chrétienne OU Les missionnaires."
         }
       ]
-    },
-    {
-      "id": "q-faits-7",
-      "operation": "Établir des faits",
-      "numero": 8,
-      "niveau": 1,
-      "realite_sociale_id": "christianisation-occident",
-      "questionBody": {
-        "prompt": "Par quel acte Clovis, le roi des Francs, se convertit-il au christianisme ?",
-        "responseSpace": [
-          {
-            "type": "lines",
-            "count": 1
-          }
-        ]
-      },
-      "reglettes": [
-        {
-          "type": "simple",
-          "id": "r-q-faits-7-1",
-          "label": "Réglette (2 points)",
-          "opLabel": "Dégager des différences et des similitudes",
-          "maxPoints": 2,
-          "levels": [
-            {
-              "points": "2 points",
-              "condition": "L'élève dégage correctement la similitude."
-            },
-            {
-              "points": "1 point",
-              "condition": "L'élève dégage plus ou moins correctement la similitude."
-            },
-            {
-              "points": "0 point",
-              "condition": "L'élève ne dégage pas la similitude."
-            }
-          ]
-        }
-      ],
-      "documents": [
-        {
-          "id": "d-q-faits-7-1",
-          "title": "Document 1",
-          "layout": "image-only",
-          "imageUrl": "assets/img/faits-7/Clovis.jpg",
-          "sources": [
-            "Jacques van Maerlant, Clovis, Wikimedia Commons. Licence : Image du domaine public."
-          ]
-        }
-      ],
-      "corrige": [
-        {
-          "kind": "texte",
-          "valeur": "Clovis se convertit au christianisme par le baptême."
-        }
-      ]
     }
   ]
 }
