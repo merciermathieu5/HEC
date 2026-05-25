@@ -26021,6 +26021,74 @@
           "valeur": "Les communautés religieuses OU L'Église chrétienne OU Les missionnaires."
         }
       ]
+    },
+    {
+      "id": "q-temps-5",
+      "operation": "Situer dans le temps",
+      "numero": 7,
+      "niveau": 1,
+      "realite_sociale_id": "sedentarisation",
+      "questionBody": {
+        "prompt": "Les document 1 et 2 présentent des faits se déroulant lors de la Préhistoire. Place les documents 1 et 2 au bon endroit dans le schéma ci-dessous.",
+        "responseSpace": [
+          {
+            "type": "before-after-axis",
+            "beforeLabel": "Antériorité (Avant)",
+            "afterLabel": "Postériorité (Après)",
+            "pivot": "- 10 000"
+          }
+        ]
+      },
+      "reglettes": [
+        {
+          "type": "simple",
+          "id": "r-q-temps-5-1",
+          "label": "Réglette (1 point)",
+          "opLabel": "Situer dans le temps et dans l'espace",
+          "maxPoints": 1,
+          "levels": [
+            {
+              "points": "1 point",
+              "condition": "L'élève situe tous les faits dans le temps. (1 sur 1)"
+            },
+            {
+              "points": "0 point",
+              "condition": "L'élève ne situe pas les faits dans l'espace. (0 sur 1)"
+            }
+          ]
+        }
+      ],
+      "documents": [
+        {
+          "id": "d-q-temps-5-1",
+          "title": "Document 1 : Chasseurs-cueilleurs",
+          "layout": "text-only",
+          "text": "Les humains du Paléolithique vivent en petits groupes de chasseurs-cueilleurs. Ils sont des prédateurs et suivent les troupeaux de gibiers afin de subvenir à leurs besoins.",
+          "sources": [
+            "Service national du RÉCIT, domaine de l'univers social."
+          ]
+        },
+        {
+          "id": "d-q-temps-5-2",
+          "title": "Document 2 : Les premières sépultures",
+          "layout": "text-only",
+          "text": "Plusieurs objets de la vie quotidienne ont été retrouvés dans les tombes datant du 4e et 5e millénaire avant J-C : des bijoux en or, des boucles d’oreilles, des bracelets, des colliers de perles, etc. On a aussi trouvé des coquillages, ce qui témoigne de nombreux échanges grâce au troc.",
+          "sources": [
+            "Service national du RÉCIT, domaine de l'univers social."
+          ]
+        }
+      ],
+      "corrige": [
+        {
+          "kind": "avant_apres",
+          "avant": [
+            "Document 1"
+          ],
+          "apres": [
+            "Document 2"
+          ]
+        }
+      ]
     }
   ]
 }
