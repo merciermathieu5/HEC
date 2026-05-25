@@ -282,7 +282,7 @@
           <div class="sub" style="margin-top:10px">
             <div class="row c2">
               <label class="fld" style="margin:0"><span class="lab">Fichier image</span><input type="file" id="imgFile" accept="image/*"></label>
-              <label class="fld" style="margin:0"><span class="lab">Sous-dossier <span class="sub">(dans assets/img/)</span></span><input type="text" id="imgFolder" placeholder="ex. faits-7"></label>
+              <label class="fld" style="margin:0"><span class="lab">Dossier <span class="sub">(automatique, d'apr&egrave;s l'identifiant)</span></span><input type="text" id="imgFolder" readonly tabindex="-1" style="background:#f3efe6;color:#5b5446" placeholder="(d&eacute;fini par l'identifiant de la question)"></label>
             </div>
             <button class="btn ghost sm" id="btnUpload" type="button">&#8593; T&eacute;l&eacute;verser</button>
             <span id="uploadMsg" class="note"></span>
@@ -335,6 +335,7 @@
   const store = { sha:null, file:{questions:[]}, currentIndex:-1, mode:'new' };
   let presets = [];
   let presetBySig = {};
+  let opRegGroups = {};  // opération de question -> ensemble des opLabels de réglettes réellement utilisés avec elle
   // signature normalisée d'une réglette (ignore id/label, traite null et "" pareil, ordre de clés fixe)
   function regSig(r){
     if(!r) return '';
@@ -368,8 +369,10 @@
   function allIds(){ const s=new Set(store.file.questions.map(q=>q.id)); (DATA.questions||[]).forEach(q=>s.add(q.id)); return s; }
   function genId(op){ const slug=slugForOp(op), ids=allIds(); let n=1; while(ids.has('q-'+slug+'-'+n)) n++; return 'q-'+slug+'-'+n; }
   function suggestNumero(realite){ let mx=0; store.file.questions.forEach(q=>{ if(q.realite_sociale_id===realite && (+q.numero||0)>mx) mx=+q.numero; }); return mx+1; }
-  function applyAutoId(){ if(store.mode!=='new') return; if($('#qidCustom').checked) return; $('#qid').value=genId($('#qop').value); refreshPreview(); }
+  function applyAutoId(){ if(store.mode!=='new') return; if($('#qidCustom').checked) return; $('#qid').value=genId($('#qop').value); updateImgFolder(); refreshPreview(); }
   function applyAutoNumero(){ if(store.mode!=='new'||numeroTouched) return; $('#qnumero').value=suggestNumero($('#qrealite').value); refreshPreview(); }
+  function imgFolderFromId(){ return ($('#qid').value||'').trim().replace(/^q-/,''); }   // dossier images = identifiant sans le préfixe q-
+  function updateImgFolder(){ const el=$('#imgFolder'); if(el) el.value=imgFolderFromId(); }
   function initNewForm(){
     $('#qidCustom').checked=false; $('#qid').readOnly=true; numeroTouched=false;
     resetForm();
@@ -378,10 +381,10 @@
     applyAutoNumero(); applyAutoId();
   }
   // câblage (les éléments existent : le script est en fin de body)
-  $('#qop').addEventListener('change', ()=>{ applyAutoId(); refreshPreview(); });
+  $('#qop').addEventListener('change', ()=>{ applyAutoId(); refreshRegPresets(); refreshPreview(); });
   $('#qrealite').addEventListener('change', ()=>{ applyAutoNumero(); refreshPreview(); });
   $('#qnumero').addEventListener('input', ()=>{ numeroTouched=true; refreshPreview(); });
-  $('#qid').addEventListener('input', ()=>refreshPreview());
+  $('#qid').addEventListener('input', ()=>{ updateImgFolder(); refreshPreview(); });
   $('#qidCustom').addEventListener('change', function(){
     if(this.checked){ $('#qid').readOnly=false; $('#qid').focus(); $('#qidHint').textContent='(personnalis\u00e9)'; }
     else { $('#qid').readOnly=true; $('#qidHint').textContent='(g\u00e9n\u00e9r\u00e9 automatiquement)'; applyAutoId(); }
@@ -394,10 +397,19 @@
 
   function fillSelect(sel, items, opt){opt=opt||{}; sel.innerHTML=(opt.blank?`<option value="">${opt.blank}</option>`:'');
     items.forEach(it=>{const o=document.createElement('option'); o.value=opt.value?opt.value(it):it; o.textContent=opt.label?opt.label(it):it; sel.appendChild(o);});}
+  // réalités triées par niveau (Sec 1 puis Sec 2), en gardant l'ordre du programme, regroupées par année
+  function fillRealiteSelect(sel, blank){
+    const list=DATA.realites_sociales.map((r,idx)=>({r,idx})).sort((a,b)=>((a.r.niveau||0)-(b.r.niveau||0))||(a.idx-b.idx));
+    const byLvl={}; list.forEach(o=>{(byLvl[o.r.niveau||0]=byLvl[o.r.niveau||0]||[]).push(o.r);});
+    let html=blank?'<option value="">'+esc(blank)+'</option>':'';
+    Object.keys(byLvl).sort((a,b)=>a-b).forEach(lvl=>{ html+='<optgroup label="Secondaire '+esc(lvl)+'">';
+      byLvl[lvl].forEach(r=>{ html+='<option value="'+esc(r.id)+'">'+esc(r.titre||r.id)+'</option>'; }); html+='</optgroup>'; });
+    sel.innerHTML=html;
+  }
   fillSelect($('#qop'), DATA.operations_intellectuelles);
-  fillSelect($('#qrealite'), DATA.realites_sociales, {value:r=>r.id,label:r=>r.titre});
+  fillRealiteSelect($('#qrealite'));
   fillSelect($('#fOp'), DATA.operations_intellectuelles, {blank:'Toutes'});
-  fillSelect($('#fRealite'), DATA.realites_sociales, {value:r=>r.id,label:r=>r.titre,blank:'Toutes'});
+  fillRealiteSelect($('#fRealite'), 'Toutes');
 
   (function buildPresets(){
     const seen=new Map();
@@ -416,9 +428,11 @@
     }).sort((a,b)=> String(a.group).localeCompare(String(b.group)) || b.count-a.count);
     presets.forEach((p,k)=>{ p.i=k; });   // réindexer APRÈS le tri : p.i == position réelle dans le tableau
     presetBySig={}; presets.forEach(p=>{ const s=regSig(p.reglette); if(!(s in presetBySig)) presetBySig[s]=p.i; });
+    opRegGroups={}; (DATA.questions||[]).forEach(q=>{ const op=q.operation||''; (q.reglettes||[]).forEach(r=>{ (opRegGroups[op]=opRegGroups[op]||{})[r.opLabel||'']=1; }); });
   })();
-  function presetSelectHTML(){
-    const groups={}; presets.forEach(p=>{(groups[p.group]=groups[p.group]||[]).push(p);});
+  function presetSelectHTML(op){
+    const allow = (op && opRegGroups[op]) ? opRegGroups[op] : null;   // filtre selon les réglettes réellement utilisées avec cette opération
+    const groups={}; presets.forEach(p=>{ if(allow && !allow[p.group]) return; (groups[p.group]=groups[p.group]||[]).push(p); });
     let html='<option value="">— choisir une r&eacute;glette pr&eacute;m&eacute;moris&eacute;e —</option>';
     Object.keys(groups).sort().forEach(g=>{ html+='<optgroup label="'+esc(g)+'">';
       groups[g].forEach(p=>{html+='<option value="'+p.i+'">'+esc(p.label)+' (&times;'+p.count+')</option>';}); html+='</optgroup>'; });
@@ -660,7 +674,7 @@
   function addRegletteCard(state){
     const card=document.createElement('div'); card.className='sub reglette';
     card.innerHTML='<div class="subhead"><span class="tag">R\u00e9glette</span><span class="regSummary muted" style="font-size:12.5px;font-weight:400"></span><button class="x" type="button" title="Retirer">&times;</button></div>'+
-      '<label class="fld"><span class="lab">R\u00e9glette pr\u00e9m\u00e9moris\u00e9e</span><select class="regPreset">'+presetSelectHTML()+'</select></label>'+
+      '<label class="fld"><span class="lab">R\u00e9glette pr\u00e9m\u00e9moris\u00e9e <span class="sub">(filtr\u00e9e selon l\u2019op\u00e9ration choisie)</span></span><select class="regPreset">'+presetSelectHTML($('#qop').value)+'</select></label>'+
       '<details class="preview regAdv"><summary>Ajuster en d\u00e9tail (type, points, paliers)</summary><div style="padding-top:12px">'+
         '<div class="row c3">'+
           '<label class="fld"><span class="lab">Type</span><select class="regKind"><option value="simple">Simple (paliers)</option><option value="complex">Complexe (grille)</option></select></label>'+
@@ -677,6 +691,14 @@
     $('#reglettes').appendChild(card);
     if(state) fillReglette(card,state); else renderRegLevels(card);
     updateRegSummary(card);
+  }
+  // re-filtrer les menus de réglette quand l'opération de la question change
+  function refreshRegPresets(){
+    const op=$('#qop').value;
+    $$('#reglettes .reglette .regPreset').forEach(sel=>{
+      const cur=sel.value; sel.innerHTML=presetSelectHTML(op);
+      if(cur && sel.querySelector('option[value="'+cur+'"]')) sel.value=cur; else sel.value='';
+    });
   }
   function updateRegSummary(card){
     const kind=card.querySelector('.regKind').value, max=card.querySelector('.regMax').value, op=card.querySelector('.regOp').value;
@@ -728,18 +750,34 @@
 
   // ===================== Documents =====================
   $$('[data-layout]').forEach(b=> b.onclick=()=>addDocCard({layout:b.getAttribute('data-layout')}) );
+  // « Document N : détail » -> {num, detail} ; préserve les numéros existants (qui ne suivent pas toujours la position)
+  function parseDocTitle(t){
+    t=String(t==null?'':t);
+    let m=t.match(/^Documents?\s+(\d+)\s*[:\-\u2013\u2014]\s*(.+)$/);
+    if(m) return {num:m[1], detail:m[2].trim()};
+    m=t.match(/^Documents?\s+(\d+)\s*$/);
+    if(m) return {num:m[1], detail:''};
+    return {num:'', detail:t.trim()};   // forme inhabituelle : on garde tout dans le détail
+  }
+  function nextDocNumber(){ let mx=0; $$('#documents .doc .docNum').forEach(inp=>{ const v=parseInt(inp.value,10); if(!isNaN(v)&&v>mx) mx=v; }); return mx+1; }
   function addDocCard(state){
-    state=state||{}; const n=$$('#documents .doc').length+1;
+    state=state||{};
     const card=document.createElement('div'); card.className='sub doc';
     card.innerHTML='<div class="subhead"><span class="tag">Document</span>'+
       '<select class="docLayout" style="width:auto"><option value="text-only">Texte seul</option><option value="image-only">Image seule</option><option value="text-image">Texte + image</option></select>'+
       '<button class="x" type="button">&times;</button></div>'+
-      '<label class="fld"><span class="lab">Titre</span><input type="text" class="docTitle" value="'+esc(state.title||('Document '+n))+'"></label>'+
+      '<div style="display:flex; gap:10px; align-items:flex-end">'+
+        '<label class="fld" style="margin:0; flex:0 0 92px"><span class="lab">Document n&deg;</span><input type="number" min="1" step="1" class="docNum"></label>'+
+        '<label class="fld" style="margin:0; flex:1"><span class="lab">D\u00e9tail du titre <span class="sub">(facultatif)</span></span><input type="text" class="docDetail" placeholder="ex. Les 95 th\u00e8ses"></label>'+
+      '</div>'+
       '<label class="fld docTextWrap"><span class="lab">Texte</span><textarea class="docText">'+esc(state.text||'')+'</textarea></label>'+
       '<div class="row c2 docImgWrap">'+
         '<label class="fld" style="margin:0"><span class="lab">Chemin de l\'image</span><input type="text" class="docImg" value="'+esc(state.imageUrl||'')+'" placeholder="assets/img/…/img000.png"></label>'+
         '<label class="fld" style="margin:0"><span class="lab">Largeur (cm)</span><input type="number" step="0.5" class="docW" value="'+(state.imageWidthCm!=null?state.imageWidthCm:'')+'"></label></div>'+
       '<label class="fld" style="margin-top:4px"><span class="lab">Sources</span></label><div class="docSources"></div><button class="btn-add addSrc" type="button">&#65291; Source</button>';
+    const parsed=parseDocTitle(state.title);
+    card.querySelector('.docNum').value = parsed.num || nextDocNumber();   // numéro existant préservé ; sinon auto-incrément
+    card.querySelector('.docDetail').value = parsed.detail || '';
     card.querySelector('.docLayout').value=state.layout||'text-only';
     card.querySelector('.x').onclick=()=>{card.remove();refreshPreview();};
     card.querySelector('.docLayout').onchange=()=>{toggleDocFields(card);refreshPreview();};
@@ -757,7 +795,10 @@
   function readDocuments(){
     return $$('#documents .doc').map((card,i)=>{
       const l=card.querySelector('.docLayout').value;
-      const d={id:'d-'+($('#qid').value||'q')+'-'+(i+1), title:card.querySelector('.docTitle').value, layout:l};
+      const num=parseInt(card.querySelector('.docNum').value,10);
+      const detail=card.querySelector('.docDetail').value.trim();
+      const title='Document '+(isNaN(num)?(i+1):num)+(detail?' : '+detail:'');
+      const d={id:'d-'+($('#qid').value||'q')+'-'+(i+1), title:title, layout:l};
       if(l!=='image-only'){const t=card.querySelector('.docText').value; if(t) d.text=t;}
       if(l!=='text-only'){const u=card.querySelector('.docImg').value; if(u) d.imageUrl=u; const w=parseFloat(card.querySelector('.docW').value); if(!isNaN(w)) d.imageWidthCm=w;}
       const src=readStringList(card.querySelector('.docSources')); if(src.length) d.sources=src;
@@ -769,7 +810,7 @@
   $('#btnUpload').onclick=async()=>{
     const f=$('#imgFile').files[0], folder=$('#imgFolder').value.trim();
     if(!f){ $('#uploadMsg').textContent='Choisis un fichier.'; return; }
-    if(!folder){ $('#uploadMsg').textContent='Indique un sous-dossier.'; return; }
+    if(!folder){ $('#uploadMsg').textContent='Saisis d\u2019abord l\u2019identifiant de la question (le dossier en d\u00e9coule).'; return; }
     const path='assets/img/'+folder.replace(/^\/+|\/+$/g,'')+'/'+f.name;
     $('#uploadMsg').textContent='T\u00e9l\u00e9versement…';
     try{ await ghUploadImage(f,path); $('#uploadMsg').innerHTML='\u2713 T\u00e9l\u00e9vers\u00e9 : <code>'+esc(path)+'</code> — copie ce chemin dans un document.'; toast('Image t\u00e9l\u00e9vers\u00e9e.','ok'); }
@@ -781,6 +822,7 @@
     q=q||{};
     $('#qid').value=q.id||''; $('#qnumero').value=q.numero||1;
     $('#qrealite').value=q.realite_sociale_id||''; $('#qop').value=q.operation||''; $('#qniveau').value=q.niveau||1;
+    updateImgFolder();
     const qb=q.questionBody||{};
     $('#qprompt').value=qb.prompt||'';
     $('#bullets').innerHTML=''; (qb.bullets||[]).forEach(b=>addStringRow($('#bullets'),b,'ex. Une action de Martin Luther'));
@@ -788,7 +830,7 @@
     const rs=(qb.responseSpace&&qb.responseSpace[0])||{type:'lines',count:4};
     $('#rsType').value=rs.type||'lines'; renderRsFields(rs);
     $('#reglettes').innerHTML=''; (q.reglettes&&q.reglettes.length?q.reglettes:[null]).forEach(r=>addRegletteCard(r));
-    $('#documents').innerHTML=''; (q.documents||[]).forEach(d=>addDocCard(d));
+    $('#documents').innerHTML=''; (q.documents||[]).filter(Boolean).forEach(d=>addDocCard(d));
     const cor=(q.corrige&&q.corrige[0])||{kind:'texte',valeur:''};
     $('#corType').value=cor.kind||'texte'; renderCorFields(cor);
     refreshPreview();
