@@ -334,6 +334,19 @@
 
   const store = { sha:null, file:{questions:[]}, currentIndex:-1, mode:'new' };
   let presets = [];
+  let presetBySig = {};
+  // signature normalisée d'une réglette (ignore id/label, traite null et "" pareil, ordre de clés fixe)
+  function regSig(r){
+    if(!r) return '';
+    const o={ type:r.type, opLabel:r.opLabel||'', maxPoints:r.maxPoints };
+    if(r.type==='complex'){
+      o.rows=(r.rows||[]).map(x=>({precise:(x.precise==null?'':x.precise), condition:(x.condition==null?'':x.condition), points:String(x.points)}));
+    } else {
+      o.levels=(r.levels||[]).map(x=>({points:String(x.points), condition:(x.condition==null?'':x.condition)}));
+    }
+    if(r.footnote) o.footnote=r.footnote;
+    return JSON.stringify(o);
+  }
   let numeroTouched = false;
 
   // ----- Génération automatique de l'identifiant -----
@@ -401,6 +414,8 @@
       return { i, group:r.opLabel||'&Eacute;tablir des liens de causalit&eacute;',
                label:r.maxPoints+' pt · '+String(cond).slice(0,52), count:p.count, reglette:r };
     }).sort((a,b)=> String(a.group).localeCompare(String(b.group)) || b.count-a.count);
+    presets.forEach((p,k)=>{ p.i=k; });   // réindexer APRÈS le tri : p.i == position réelle dans le tableau
+    presetBySig={}; presets.forEach(p=>{ const s=regSig(p.reglette); if(!(s in presetBySig)) presetBySig[s]=p.i; });
   })();
   function presetSelectHTML(){
     const groups={}; presets.forEach(p=>{(groups[p.group]=groups[p.group]||[]).push(p);});
@@ -673,6 +688,7 @@
     card.querySelector('.regMax').value=r.maxPoints!=null?r.maxPoints:2;
     card.querySelector('.regLabel').value=r.label||('R\u00e9glette ('+(r.maxPoints||0)+' point'+((r.maxPoints||0)>1?'s':'')+')');
     card.querySelector('.regOp').value=r.opLabel||'';
+    const ps=card.querySelector('.regPreset'); if(ps){ const m=presetBySig[regSig(r)]; ps.value=(m!=null?String(m):''); }
     renderRegLevels(card,r); updateRegSummary(card);
   }
   function renderRegLevels(card,r){
