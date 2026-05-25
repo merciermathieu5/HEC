@@ -8920,14 +8920,12 @@
       "niveau": 1,
       "realite_sociale_id": "sedentarisation",
       "questionBody": {
-        "prompt": "Les documents 2 et 3 présentent des faits se déroulant lors de la Préhistoire. Indique si les faits présentés surviennent avant ou après -10 000.",
-        "bullets": [],
-        "instructions": [],
+        "prompt": "Les documents 1 et 2 présentent des faits se déroulant lors de la Préhistoire. Indique si les faits présentés surviennent avant ou après -10 000.",
         "responseSpace": [
           {
             "type": "before-after-axis",
-            "beforeLabel": "Antériorité",
-            "afterLabel": "Postériorité",
+            "beforeLabel": "Antériorité (Avant)",
+            "afterLabel": "Postériorité (Après)",
             "pivot": "-10 000"
           }
         ]
@@ -8935,7 +8933,7 @@
       "reglettes": [
         {
           "type": "simple",
-          "id": "r-sed-t2",
+          "id": "r-q-sed-temps-2-1",
           "label": "Réglette (1 point)",
           "opLabel": "Situer dans le temps et dans l'espace",
           "maxPoints": 1,
@@ -8953,18 +8951,8 @@
       ],
       "documents": [
         {
-          "id": "sed-t1-d1",
-          "title": "Document 1 : La préhistoire",
-          "layout": "image-only",
-          "imageUrl": "assets/img/sed-temps-1/img000.png",
-          "imageWidthCm": 13,
-          "sources": [
-            "Source : Mathieu Mercier."
-          ]
-        },
-        {
-          "id": "sed-t1-d2",
-          "title": "Document 2 : Moyens de subsistance",
+          "id": "d-q-sed-temps-2-1",
+          "title": "Document 1 : Moyens de subsistance",
           "layout": "text-only",
           "text": "En plus de pratiquer la chasse, la pêche et la cueillette, les humains qui vivent durant cette période pratiquent l'agriculture et l'élevage afin de subvenir à leurs besoins alimentaires.",
           "sources": [
@@ -8972,8 +8960,8 @@
           ]
         },
         {
-          "id": "sed-t1-d3",
-          "title": "Document 3 : Les grottes de Lascaux",
+          "id": "d-q-sed-temps-2-2",
+          "title": "Document 2 : Les grottes de Lascaux",
           "layout": "image-only",
           "imageUrl": "assets/img/sed-temps-1/img001.png",
           "imageWidthCm": 11,
@@ -8986,10 +8974,10 @@
         {
           "kind": "avant_apres",
           "avant": [
-            "Document 3"
+            "Document 2"
           ],
           "apres": [
-            "Document 2"
+            "Document 1"
           ]
         }
       ]
