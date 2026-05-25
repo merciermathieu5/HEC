@@ -42,6 +42,7 @@
     btnGenerateCorrigeVariante: $('btn-generate-corrige-variante'),
     btnPreviewCorrigeVariante:  $('btn-preview-corrige-variante'),
     btnClear:           $('btn-clear-cahier'),
+    btnShuffle:         $('btn-shuffle-cahier'),
     loading:            $('loading-overlay'),
     loadingMsg:         $('loading-message'),
     previewOverlay:     $('preview-overlay'),
@@ -99,6 +100,7 @@
       renderCatalog();
       renderCahier();
     });
+    el.btnShuffle.addEventListener('click', shuffleCahier);
     el.btnGenerate.addEventListener('click', () => generateDocx(true));
     el.btnGenerateCorrige.addEventListener('click', () => generateDocx(true, /*corrige*/ true));
     el.btnPreview.addEventListener('click', () => previewCahier(false));
@@ -379,7 +381,7 @@
   function isQuestionFullySelected(qId) {
     const q = DATA.questions.find(x => x.id === qId);
     if (!q) return false;
-    const required = 1 + q.reglettes.length + q.documents.length;
+    const required = 1 + q.reglettes.filter(Boolean).length + q.documents.filter(Boolean).length;
     const have = state.cahier.filter(p => p.questionId === qId).length;
     return have === required;
   }
@@ -387,8 +389,8 @@
   function addAllPiecesForQuestion(question) {
     // Add questionBody, then each réglette, then each document — only if not already in cahier
     addPiece(question, 'questionBody', null);
-    question.reglettes.forEach(r => addPiece(question, 'reglette', r.id));
-    question.documents.forEach(d => addPiece(question, 'document', d.id));
+    question.reglettes.forEach(r => { if (r) addPiece(question, 'reglette', r.id); });
+    question.documents.forEach(d => { if (d) addPiece(question, 'document', d.id); });
     sortCahier();
   }
 
@@ -426,8 +428,8 @@
       if (!q) return;
       const orderMap = {};
       orderMap['questionBody::'] = 0;
-      q.reglettes.forEach((r, i) => orderMap[`reglette::${r.id}`] = 100 + i);
-      q.documents.forEach((d, i) => orderMap[`document::${d.id}`] = 200 + i);
+      q.reglettes.forEach((r, i) => { if (r) orderMap[`reglette::${r.id}`] = 100 + i; });
+      q.documents.forEach((d, i) => { if (d) orderMap[`document::${d.id}`] = 200 + i; });
       pieces.sort((a, b) => {
         const aKey = `${a.kind}::${a.pieceId || ''}`;
         const bKey = `${b.kind}::${b.pieceId || ''}`;
@@ -435,6 +437,28 @@
       });
     });
     state.cahier = groupOrder.flatMap(qId => groups.get(qId));
+  }
+
+  // Place les questions dans un ordre aléatoire (mélange les groupes-questions,
+  // sans toucher à l'ordre interne des pièces ; le glisser-déposer reste possible ensuite).
+  function shuffleCahier() {
+    const groups = new Map();
+    const order = [];
+    state.cahier.forEach(p => {
+      if (!groups.has(p.questionId)) { groups.set(p.questionId, []); order.push(p.questionId); }
+      groups.get(p.questionId).push(p);
+    });
+    if (order.length < 2) return;
+    const original = order.join('|');
+    let tries = 0;
+    do {
+      for (let i = order.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [order[i], order[j]] = [order[j], order[i]];
+      }
+    } while (order.join('|') === original && order.length > 1 && ++tries < 8);
+    state.cahier = order.flatMap(qId => groups.get(qId));
+    renderCahier();
   }
 
   function makePieceLabel(q, kind, pieceId) {
@@ -516,6 +540,7 @@
     el.btnGenerate.disabled = state.cahier.length === 0;
     el.btnGenerateCorrige.disabled = state.cahier.length === 0;
     el.btnClear.disabled    = state.cahier.length === 0;
+    el.btnShuffle.disabled  = groups.length < 2;
     el.btnPreview.disabled  = state.cahier.length === 0;
     el.btnPreviewCorrige.disabled = state.cahier.length === 0;
     el.btnGenerateVariante.disabled = state.cahier.length === 0;
