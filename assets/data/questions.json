@@ -19195,19 +19195,17 @@
       "realite_sociale_id": "christianisation-occident",
       "questionBody": {
         "prompt": "Par quel acte Clovis 1er, roi des Francs, se convertit-il à la religion chrétienne ?",
-        "bullets": [],
-        "instructions": [],
         "responseSpace": [
           {
             "type": "lines",
-            "count": 2
+            "count": 1
           }
         ]
       },
       "reglettes": [
         {
           "type": "simple",
-          "id": "r-chr-f2",
+          "id": "r-q-chr-faits-2-1",
           "label": "Réglette (1 point)",
           "opLabel": "Établir des faits",
           "maxPoints": 1,
@@ -19225,8 +19223,8 @@
       ],
       "documents": [
         {
-          "id": "chr-f1-d2",
-          "title": "Document 2 : Le baptême de Clovis",
+          "id": "d-q-chr-faits-2-1",
+          "title": "Document 1 : Le baptême de Clovis",
           "layout": "image-only",
           "imageUrl": "assets/img/christianisation-faits-1/img000.png",
           "imageWidthCm": 6.5,
