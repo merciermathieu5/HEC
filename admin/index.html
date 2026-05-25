@@ -206,14 +206,13 @@
     <section class="card">
       <div class="head"><span class="n">3</span><h2>Identification</h2></div>
       <div class="body">
-        <div class="row c2">
+        <div class="row">
           <label class="fld"><span class="lab">Identifiant <span class="sub" id="qidHint">(g&eacute;n&eacute;r&eacute; automatiquement)</span></span>
             <input type="text" id="qid" spellcheck="false" readonly>
             <div class="checkline hide" id="qidCustomWrap" style="margin-top:6px">
               <input type="checkbox" id="qidCustom"><label for="qidCustom" style="margin:0;cursor:pointer">Personnaliser l'identifiant</label>
             </div></label>
-          <label class="fld"><span class="lab">Num&eacute;ro</span>
-            <input type="number" id="qnumero" min="1" step="1"></label>
+          <input type="hidden" id="qnumero"><!-- num&eacute;ro g&eacute;r&eacute; automatiquement en coulisses -->
         </div>
         <div class="row c3">
           <label class="fld"><span class="lab">R&eacute;alit&eacute; sociale</span><select id="qrealite"></select></label>
