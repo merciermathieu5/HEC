@@ -26122,6 +26122,7 @@
           "title": "Document 1 : Non-whites only (Noirs seulement)",
           "layout": "image-only",
           "imageUrl": "assets/img/differences-similitudes-1/Non-whites_Only_Bench_Outside_High_Court_Civil_Annex_CT.jpg",
+          "imageWidthCm": 10,
           "sources": [
             "KNewman1, Banc réservé aux non blancs au Cap, Wikimedia Commons. Licence : Creative Commons (BY-SA 3.0). "
           ]
@@ -26131,6 +26132,7 @@
           "title": "Document 2 : Abreuvoir pour personnes de couleur",
           "layout": "image-only",
           "imageUrl": "assets/img/differences-similitudes-1/wikiimages-discrimination-60512.jpg",
+          "imageWidthCm": 10,
           "sources": [
             "Wikilmages (2012). « Discrimination » Pixabay. 26452. Licence: libre de droits."
           ]
