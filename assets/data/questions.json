@@ -26306,12 +26306,19 @@
         {
           "id": "d-q-faits-7-1",
           "title": "Document 1",
-          "layout": "text-image",
+          "layout": "text-only",
           "text": "En 1955 et 1956, les Noirs de Montgomery boycottent les autobus pour protester contre la ségrégation raciale dans les lieux publics. Cette action se passe à la suite de la désobéissance civile de Rosa Parks. Ils se rendent ainsi au travail à pied pendant un an (381 jours consécutifs).",
+          "sources": [
+            "Source du texte : Service national du RÉCIT, domaine de l'univers social."
+          ]
+        },
+        {
+          "id": "d-q-faits-7-2",
+          "title": "Document 2",
+          "layout": "image-only",
           "imageUrl": "assets/img/faits-7/montgomery-bus-boycott.jpeg",
           "sources": [
-            "Source du texte : Service national du RÉCIT, domaine de l'univers social",
-            "Source de l'image : Teaching for change "
+            "Source de l'image : Teaching for change"
           ]
         }
       ],
