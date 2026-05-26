@@ -2419,7 +2419,8 @@ window.DATA = {
     { id: "romanisation", titre: "La romanisation", niveau: 1 },
     { id: "christianisation-occident", titre: "La christianisation de l'Occident", niveau: 1 },
     { id: "industrialisation", titre: "L'industrialisation", niveau: 2 },
-    { id: "expansion-monde-industriel", titre: "L'expansion du monde industriel", niveau: 2 }
+    { id: "expansion-monde-industriel", titre: "L'expansion du monde industriel", niveau: 2 },
+    { id: "reconnaissance-libertes-droits-civils", titre: "La reconnaissance des libertés et des droits civils", niveau: 2 }
   ],
 
   operations_intellectuelles: [
