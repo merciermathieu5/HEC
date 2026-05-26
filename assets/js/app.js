@@ -1710,33 +1710,62 @@
       }
     });
 
-    // Lit la largeur et la hauteur depuis l'en-tête PNG (toujours aux offsets 16-23)
-    // Signature PNG : 8 bytes, puis chunk IHDR de 4 bytes longueur + 4 bytes type + 13 bytes data
-    // Les bytes 16-19 = width (big-endian uint32), 20-23 = height
-    // C'est plus fiable que `new Image()` qui dépend du contexte navigateur.
+    // Lit la largeur et la hauteur directement dans le fichier image, sans dépendre
+    // du navigateur. Gère les PNG ET les JPG (les deux formats les plus courants).
+    function detectImageFormat(bytes) {
+      if (!bytes || bytes.length < 4) return null;
+      if (bytes[0] === 0x89 && bytes[1] === 0x50 && bytes[2] === 0x4E && bytes[3] === 0x47) return 'png';
+      if (bytes[0] === 0xFF && bytes[1] === 0xD8 && bytes[2] === 0xFF) return 'jpg';
+      return null;
+    }
+    // PNG : signature 8 octets puis chunk IHDR ; largeur aux octets 16-19, hauteur 20-23 (big-endian).
     function readPngDimensions(bytes) {
       if (!bytes || bytes.length < 24) return null;
-      // Vérifier la signature PNG
-      const sig = [0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A];
-      for (let i = 0; i < 8; i++) {
-        if (bytes[i] !== sig[i]) return null;
-      }
       const view = new DataView(bytes.buffer, bytes.byteOffset || 0, bytes.byteLength);
       const width = view.getUint32(16, false);
       const height = view.getUint32(20, false);
       if (!width || !height) return null;
       return { width, height };
     }
+    // JPG : on parcourt les marqueurs jusqu'au segment « Start Of Frame » (SOFn),
+    // qui contient la hauteur (2 octets) puis la largeur (2 octets).
+    function readJpegDimensions(bytes) {
+      if (!bytes || bytes.length < 4 || bytes[0] !== 0xFF || bytes[1] !== 0xD8) return null;
+      let off = 2; const len = bytes.length;
+      while (off + 1 < len) {
+        if (bytes[off] !== 0xFF) { off++; continue; }
+        let marker = bytes[off + 1];
+        while (marker === 0xFF && off + 1 < len) { off++; marker = bytes[off + 1]; }
+        off += 2;
+        // marqueurs sans contenu (SOI, EOI, RSTn) : on continue
+        if (marker === 0xD8 || marker === 0xD9 || (marker >= 0xD0 && marker <= 0xD7)) continue;
+        if (off + 1 >= len) break;
+        const segLen = (bytes[off] << 8) | bytes[off + 1];
+        // SOFn (dimensions) : 0xC0–0xCF sauf 0xC4, 0xC8, 0xCC
+        if (marker >= 0xC0 && marker <= 0xCF && marker !== 0xC4 && marker !== 0xC8 && marker !== 0xCC) {
+          if (off + 6 < len) {
+            const height = (bytes[off + 3] << 8) | bytes[off + 4];
+            const width  = (bytes[off + 5] << 8) | bytes[off + 6];
+            if (width && height) return { width, height };
+          }
+          return null;
+        }
+        off += segLen; // sauter ce segment
+      }
+      return null;
+    }
 
     await Promise.all(Array.from(urls).map(async (url) => {
       try {
         const buf = await fetch(url).then(r => r.arrayBuffer());
         const bytes = new Uint8Array(buf);
-        const dims = readPngDimensions(bytes) || { width: 400, height: 400 };
+        const format = detectImageFormat(bytes);
+        const dims = (format === 'jpg' ? readJpegDimensions(bytes) : readPngDimensions(bytes)) || { width: 400, height: 400 };
         cache[url] = {
           bytes,
           naturalWidth: dims.width,
-          naturalHeight: dims.height
+          naturalHeight: dims.height,
+          format: format || 'png'
         };
       } catch (e) {
         console.warn('Image non chargée:', url, e);
@@ -2356,7 +2385,7 @@
         const imgChildren = imgInfo
           ? [new Paragraph({
               alignment: AlignmentType.CENTER,
-              children: [new ImageRun({ data: imgInfo.bytes, transformation: { width: dims.widthPx, height: dims.heightPx }, type: 'png' })]
+              children: [new ImageRun({ data: imgInfo.bytes, transformation: { width: dims.widthPx, height: dims.heightPx }, type: imgInfo.format || 'png' })]
             })]
           : [new Paragraph({ children: [new TextRun({ text: "[image]" })] })];
 
@@ -2426,7 +2455,7 @@
         if (imgInfo) {
           cellChildren.push(new Paragraph({
             alignment: AlignmentType.CENTER,
-            children: [new ImageRun({ data: imgInfo.bytes, transformation: { width: dims.widthPx, height: dims.heightPx }, type: 'png' })],
+            children: [new ImageRun({ data: imgInfo.bytes, transformation: { width: dims.widthPx, height: dims.heightPx }, type: imgInfo.format || 'png' })],
             spacing: { after: 80 }
           }));
         }
