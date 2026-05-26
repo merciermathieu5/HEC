@@ -26077,6 +26077,71 @@
           ]
         }
       ]
+    },
+    {
+      "id": "q-differences-similitudes-1",
+      "operation": "Dégager des différences et des similitudes",
+      "numero": 1,
+      "niveau": 2,
+      "realite_sociale_id": "reconnaissance-libertes-droits-civils",
+      "questionBody": {
+        "prompt": "Les documents 1 à 2 illustrent la ségrégation raciale aux États-Unis et en Afrique du Sud. Dégage une similitude (ressemblance) qui existe concernant la ségrégation dans ces 2 pays.",
+        "responseSpace": [
+          {
+            "type": "lines",
+            "count": 3
+          }
+        ]
+      },
+      "reglettes": [
+        {
+          "type": "simple",
+          "id": "r-q-differences-similitudes-1-1",
+          "label": "Réglette (2 points)",
+          "opLabel": "Dégager des différences et des similitudes",
+          "maxPoints": 2,
+          "levels": [
+            {
+              "points": "2 points",
+              "condition": "L'élève dégage correctement la similitude."
+            },
+            {
+              "points": "1 point",
+              "condition": "L'élève dégage plus ou moins correctement la similitude."
+            },
+            {
+              "points": "0 point",
+              "condition": "L'élève ne dégage pas la similitude."
+            }
+          ]
+        }
+      ],
+      "documents": [
+        {
+          "id": "d-q-differences-similitudes-1-1",
+          "title": "Document 1 : Non-whites only (Noirs seulement)",
+          "layout": "image-only",
+          "imageUrl": "assets/img/differences-similitudes-1/Non-whites_Only_Bench_Outside_High_Court_Civil_Annex_CT.jpg",
+          "sources": [
+            "KNewman1, Banc réservé aux non blancs au Cap, Wikimedia Commons. Licence : Creative Commons (BY-SA 3.0). "
+          ]
+        },
+        {
+          "id": "d-q-differences-similitudes-1-2",
+          "title": "Document 2 : Abreuvoir pour personnes de couleur",
+          "layout": "image-only",
+          "imageUrl": "assets/img/differences-similitudes-1/wikiimages-discrimination-60512.jpg",
+          "sources": [
+            "Wikilmages (2012). « Discrimination » Pixabay. 26452. Licence: libre de droits."
+          ]
+        }
+      ],
+      "corrige": [
+        {
+          "kind": "texte",
+          "valeur": "Aux États-Unis et en Afrique du Sud, les personnes qui ont la peau noire doivent utiliser des services publics distincts des personnes qui ont la peau blanche."
+        }
+      ]
     }
   ]
 }
