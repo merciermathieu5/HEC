@@ -26122,6 +26122,7 @@
           "title": "Document 1 : Non-whites only (Noirs seulement)",
           "layout": "image-only",
           "imageUrl": "assets/img/differences-similitudes-1/Non-whites_Only_Bench_Outside_High_Court_Civil_Annex_CT.jpg",
+          "imageWidthCm": 10,
           "sources": [
             "KNewman1, Banc réservé aux non blancs au Cap, Wikimedia Commons. Licence : Creative Commons (BY-SA 3.0). "
           ]
@@ -26131,6 +26132,7 @@
           "title": "Document 2 : Abreuvoir pour personnes de couleur",
           "layout": "image-only",
           "imageUrl": "assets/img/differences-similitudes-1/wikiimages-discrimination-60512.jpg",
+          "imageWidthCm": 10,
           "sources": [
             "Wikilmages (2012). « Discrimination » Pixabay. 26452. Licence: libre de droits."
           ]
@@ -26140,6 +26142,193 @@
         {
           "kind": "texte",
           "valeur": "Aux États-Unis et en Afrique du Sud, les personnes qui ont la peau noire doivent utiliser des services publics distincts des personnes qui ont la peau blanche."
+        }
+      ]
+    },
+    {
+      "id": "q-relation-5",
+      "operation": "Mettre en relation des faits",
+      "numero": 2,
+      "niveau": 2,
+      "realite_sociale_id": "reconnaissance-libertes-droits-civils",
+      "questionBody": {
+        "prompt": "Les documents 1 à 4 concernent des événements liés à la lutte pour l’obtention des droits civils et des libertés pour les Noirs. Indique si les documents se sont produits aux États-Unis ou en Afrique du Sud.",
+        "responseSpace": [
+          {
+            "type": "checkbox-table",
+            "columns": [
+              "Document 1",
+              "Document 2",
+              "Document 3",
+              "Document 4"
+            ],
+            "rows": [
+              "États-Unis",
+              "Afrique du Sud"
+            ]
+          }
+        ]
+      },
+      "reglettes": [
+        {
+          "type": "simple",
+          "id": "r-q-relation-5-1",
+          "label": "Réglette (2 points)",
+          "opLabel": "Mettre en relation des faits",
+          "maxPoints": 2,
+          "levels": [
+            {
+              "points": "2 points",
+              "condition": "L'élève met en relation les faits. (4 sur 4)"
+            },
+            {
+              "points": "1 point",
+              "condition": "L'élève met en relation certains faits. (2 ou 3 sur 4)"
+            },
+            {
+              "points": "0 point",
+              "condition": "L'élève ne met pas en relation le fait. (0 ou 1 sur 4)"
+            }
+          ]
+        }
+      ],
+      "documents": [
+        {
+          "id": "d-q-relation-5-1",
+          "title": "Document 1",
+          "layout": "image-only",
+          "imageUrl": "assets/img/relation-5/Rosa_Parks_1956.jpg",
+          "sources": [
+            "Auteur inconnu, Rosaparks bus, Wikimedia Commons. Licence : libre de droit."
+          ]
+        },
+        {
+          "id": "d-q-relation-5-2",
+          "title": "Document 2",
+          "layout": "image-only",
+          "imageUrl": "assets/img/relation-5/Mandela_burn_pass_1960.jpg",
+          "sources": [
+            "Auteur inconnu, Mandela burn pass, Wikimedia Commons. Licence : Domaine public"
+          ]
+        },
+        {
+          "id": "d-q-relation-5-3",
+          "title": "Document 3",
+          "layout": "text-only",
+          "text": "J'ai fait un rêve, qu'un jour, sur les collines de terre rouge de la Géorgie, les fils des anciens esclaves et les fils des anciens propriétaires d'esclaves pourront s'asseoir ensemble à la table de la fraternité. J'ai fait un rêve, qu'un jour même l'État du Mississippi, un désert étouffant d'injustice et d'oppression, sera transformé en un oasis de liberté et de justice. J'ai fait un rêve, que mes quatre enfants habiteront un jour une nation où ils seront jugés non pas par la couleur de leur peau, mais par le contenu de leur caractère. J'ai fait un rêve aujourd'hui.",
+          "sources": [
+            "Perspective Monde, Université Sherbrooke"
+          ]
+        },
+        {
+          "id": "d-q-relation-5-4",
+          "title": "Document 4",
+          "layout": "text-only",
+          "text": "69 hommes, femmes et enfants sont morts et au moins 180 autres personnes ont été blessées lorsque la police a tiré sur une foule de manifestants dans un canton près de Vereeniging. Le photographe Ian Berry, présent sur les lieux, a dit : Je suis retourné à la voiture, et les flics ont ouvert le feu. J'ai vu ces enfants courir vers moi, et au début, j'ai pensé qu'ils ne faisaient que tirer à blanc ... Ce n'est qu'au moment où ils ont commencé à tomber autour de moi que j'ai réalisé qu'ils tiraient de vraies balles dans le dos des gens.",
+          "sources": [
+            "BBC"
+          ]
+        }
+      ],
+      "corrige": [
+        {
+          "kind": "cases",
+          "lignes": [
+            {
+              "cochees": [
+                {
+                  "coche": true
+                },
+                {
+                  "coche": false
+                },
+                {
+                  "coche": true
+                },
+                {
+                  "coche": false
+                }
+              ]
+            },
+            {
+              "cochees": [
+                {
+                  "coche": false
+                },
+                {
+                  "coche": true
+                },
+                {
+                  "coche": false
+                },
+                {
+                  "coche": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q-faits-7",
+      "operation": "Établir des faits",
+      "numero": 3,
+      "niveau": 2,
+      "realite_sociale_id": "reconnaissance-libertes-droits-civils",
+      "questionBody": {
+        "prompt": "Indique une action réalisée par les Noirs afin de lutter pour l’amélioration des droits civiques aux États-Unis.",
+        "responseSpace": [
+          {
+            "type": "lines",
+            "count": 2
+          }
+        ]
+      },
+      "reglettes": [
+        {
+          "type": "simple",
+          "id": "r-q-faits-7-1",
+          "label": "Réglette (1 point)",
+          "opLabel": "Établir des faits",
+          "maxPoints": 1,
+          "levels": [
+            {
+              "points": "1 point",
+              "condition": "L'élève établit correctement le fait."
+            },
+            {
+              "points": "0 point",
+              "condition": "L'élève établit incorrectement le fait ou ne l'établit pas."
+            }
+          ]
+        }
+      ],
+      "documents": [
+        {
+          "id": "d-q-faits-7-1",
+          "title": "Document 1",
+          "layout": "text-only",
+          "text": "En 1955 et 1956, les Noirs de Montgomery boycottent les autobus pour protester contre la ségrégation raciale dans les lieux publics. Cette action se passe à la suite de la désobéissance civile de Rosa Parks. Ils se rendent ainsi au travail à pied pendant un an (381 jours consécutifs).",
+          "sources": [
+            "Source du texte : Service national du RÉCIT, domaine de l'univers social."
+          ]
+        },
+        {
+          "id": "d-q-faits-7-2",
+          "title": "Document 2",
+          "layout": "image-only",
+          "imageUrl": "assets/img/faits-7/montgomery-bus-boycott.jpeg",
+          "imageWidthCm": 12,
+          "sources": [
+            "Source de l'image : Teaching for change"
+          ]
+        }
+      ],
+      "corrige": [
+        {
+          "kind": "texte",
+          "valeur": "Parmi les actions réalisées, il y a des manifestations pacifiques comme les sit-in, les marches et le boycott de différents produits ou services."
         }
       ]
     }

@@ -133,6 +133,42 @@
   details.preview summary{cursor:pointer; color:var(--muted); font-size:13px}
   pre.json{background:#2a2420; color:#e9e0d2; padding:14px; border-radius:8px; overflow:auto; font-size:12px; max-height:340px}
   code{font-family:ui-monospace,monospace; font-size:.92em; background:#efe7da; padding:1px 5px; border-radius:4px}
+
+  /* ---- Sélecteur « Piger un document existant » ---- */
+  .dp-overlay{position:fixed; inset:0; background:rgba(42,36,32,.55); backdrop-filter:blur(3px);
+    display:grid; place-items:center; z-index:60; padding:18px}
+  .dp-modal{background:var(--panel); border:1px solid var(--line-strong); border-radius:var(--radius);
+    box-shadow:0 12px 40px rgba(42,36,32,.28); width:min(760px,94vw); max-height:86vh;
+    display:flex; flex-direction:column; overflow:hidden}
+  .dp-head{display:flex; align-items:center; gap:10px; padding:14px 18px; border-bottom:1px solid var(--line);
+    background:linear-gradient(#fbf8f2,#f6f1e8)}
+  .dp-head h3{font-family:"Fraunces",Georgia,serif; font-size:18px; margin:0}
+  .dp-head .x{margin-left:auto}
+  .dp-tools{padding:13px 18px; border-bottom:1px solid var(--line); display:flex; flex-direction:column; gap:10px}
+  .dp-row2{display:flex; gap:12px; align-items:center; flex-wrap:wrap}
+  .dp-chips{display:flex; gap:6px; background:#efe7da; border:1px solid var(--line-strong); border-radius:8px; padding:3px}
+  .dp-chip{background:none; color:var(--muted); padding:6px 13px; font-weight:600; font-size:13px; border-radius:6px}
+  .dp-chip.on{background:var(--burgundy); color:#fff}
+  .dp-row2 select{flex:1; min-width:180px}
+  .dp-list{overflow:auto; padding:8px; display:flex; flex-direction:column; gap:7px; background:#fffdf9}
+  .dp-item{display:flex; gap:12px; align-items:center; text-align:left; width:100%; cursor:pointer;
+    background:#fff; border:1px solid var(--line); border-radius:8px; padding:9px 11px}
+  .dp-item:hover{border-color:var(--burgundy); background:var(--burgundy-soft)}
+  .dp-thumb{flex:0 0 56px; width:56px; height:56px; border-radius:6px; overflow:hidden;
+    display:grid; place-items:center; background:#f3ece0; border:1px solid var(--line)}
+  .dp-thumb img{width:100%; height:100%; object-fit:cover; display:block}
+  .dp-thumb.txt{color:var(--line-strong); font-size:24px; font-family:Georgia,serif}
+  .dp-it-body{flex:1; min-width:0; display:flex; flex-direction:column; gap:3px}
+  .dp-it-title{font-weight:600; font-size:14px; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .dp-it-snip{font-size:12.5px; color:var(--muted); line-height:1.4;
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden}
+  .dp-it-meta{font-size:11px; color:var(--gold); text-transform:uppercase; letter-spacing:.04em;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .dp-pick{flex:0 0 auto; font-size:12.5px; font-weight:700; color:var(--burgundy); white-space:nowrap}
+  .dp-empty{padding:26px 18px; text-align:center; color:var(--muted); font-size:13.5px}
+  .dp-foot{display:flex; gap:12px; align-items:center; flex-wrap:wrap; padding:12px 18px;
+    border-top:1px solid var(--line); background:var(--panel)}
+  @media(max-width:680px){.dp-thumb{flex-basis:44px;width:44px;height:44px}}
 </style>
 </head>
 <body>
@@ -275,6 +311,7 @@
           <button class="btn-add" data-layout="text-only" type="button">&#65291; Texte</button>
           <button class="btn-add" data-layout="image-only" type="button">&#65291; Image</button>
           <button class="btn-add" data-layout="text-image" type="button">&#65291; Texte + image</button>
+          <button class="btn-add" id="btnPickDoc" type="button" style="border-style:solid; margin-left:auto">&#128206; Piger un document existant</button>
         </div>
         <details class="preview" style="margin-top:14px">
           <summary>T&eacute;l&eacute;verser une image dans le d&eacute;p&ocirc;t</summary>
@@ -318,6 +355,34 @@
     <button class="btn ghost" id="btnReset">R&eacute;initialiser le formulaire</button>
     <span class="grow"></span>
     <span class="muted" id="catalogInfo"></span>
+  </div>
+</div>
+
+<!-- Sélecteur « Piger un document existant » -->
+<div class="dp-overlay hide" id="docPicker" aria-hidden="true">
+  <div class="dp-modal" role="dialog" aria-label="Piger un document existant">
+    <div class="dp-head">
+      <h3>Piger un document existant</h3>
+      <button class="x" type="button" data-close aria-label="Fermer">&times;</button>
+    </div>
+    <div class="dp-tools">
+      <input type="text" id="dpSearch" placeholder="Rechercher dans les titres, le texte, la r&eacute;alit&eacute; sociale&hellip;">
+      <div class="dp-row2">
+        <div class="dp-chips">
+          <button type="button" class="dp-chip on" data-type="all">Tous</button>
+          <button type="button" class="dp-chip" data-type="text">Avec texte</button>
+          <button type="button" class="dp-chip" data-type="image">Avec image</button>
+        </div>
+        <select id="dpRealite"></select>
+      </div>
+    </div>
+    <div class="dp-list" id="dpList"></div>
+    <div class="dp-foot">
+      <span class="muted" id="dpCount"></span>
+      <span style="flex:1"></span>
+      <span class="note" style="margin:0">Chaque s&eacute;lection cr&eacute;e une <strong>copie ind&eacute;pendante</strong>.</span>
+      <button class="btn ghost sm" type="button" data-close>Termin&eacute;</button>
+    </div>
   </div>
 </div>
 
@@ -749,6 +814,103 @@
 
   // ===================== Documents =====================
   $$('[data-layout]').forEach(b=> b.onclick=()=>addDocCard({layout:b.getAttribute('data-layout')}) );
+
+  // ----- Sélecteur « Piger un document existant » (copie indépendante) -----
+  (function(){
+    const ov=$('#docPicker'); if(!ov) return;
+    const listEl=$('#dpList'), searchEl=$('#dpSearch'), realiteEl=$('#dpRealite'), countEl=$('#dpCount');
+    const realiteTitre={}; (DATA.realites_sociales||[]).forEach(r=>{ realiteTitre[r.id]=r.titre||r.id; });
+    let docIndex=null, typeFilter='all';
+
+    function buildIndex(){
+      const out=[];
+      (DATA.questions||[]).forEach(q=>{
+        (q.documents||[]).forEach(d=>{
+          if(!d) return;
+          const hasTxt=!!(d.text&&String(d.text).trim());
+          const hasImg=!!d.imageUrl;
+          if(!hasTxt && !hasImg) return;   // rien à copier
+          const rt=realiteTitre[q.realite_sociale_id]||q.realite_sociale_id||'';
+          out.push({ doc:d, hasTxt, hasImg, realiteId:q.realite_sociale_id||'', realiteTitre:rt,
+            op:q.operation||'',
+            search:((d.title||'')+' '+(d.text||'')+' '+rt+' '+(q.operation||'')+' '+(q.id||'')).toLowerCase() });
+        });
+      });
+      return out;
+    }
+    function fillRealiteFilter(){
+      const ids=new Set(docIndex.map(e=>e.realiteId).filter(Boolean));
+      let html='<option value="">Toutes les r&eacute;alit&eacute;s sociales</option>';
+      (DATA.realites_sociales||[]).filter(r=>ids.has(r.id)).forEach(r=>{
+        html+='<option value="'+esc(r.id)+'">'+esc(r.titre||r.id)+'</option>'; });
+      realiteEl.innerHTML=html;
+    }
+    function render(){
+      const terms=(searchEl.value||'').trim().toLowerCase().split(/\s+/).filter(Boolean);
+      const rf=realiteEl.value;
+      const rows=docIndex.filter(e=>{
+        if(typeFilter==='text' && !e.hasTxt) return false;
+        if(typeFilter==='image' && !e.hasImg) return false;
+        if(rf && e.realiteId!==rf) return false;
+        if(terms.length && !terms.every(t=>e.search.includes(t))) return false;
+        return true;
+      });
+      countEl.textContent=rows.length+' document'+(rows.length>1?'s':'');
+      if(!rows.length){ listEl.innerHTML='<div class="dp-empty">Aucun document ne correspond &agrave; ta recherche.</div>'; return; }
+      const frag=document.createDocumentFragment();
+      rows.slice(0,400).forEach(e=>{
+        const d=e.doc, parsed=parseDocTitle(d.title||'');
+        const titleTxt=parsed.detail || d.title || (e.hasImg?'(image sans titre)':'(document)');
+        const thumb=e.hasImg
+          ? '<span class="dp-thumb"><img loading="lazy" src="../'+esc(d.imageUrl)+'" alt=""></span>'
+          : '<span class="dp-thumb txt">&para;</span>';
+        const snip=e.hasTxt ? esc(String(d.text).slice(0,150))+(String(d.text).length>150?'&hellip;':'') : '<em>Image seule</em>';
+        const row=document.createElement('button');
+        row.type='button'; row.className='dp-item';
+        row.innerHTML=thumb+'<span class="dp-it-body">'+
+            '<span class="dp-it-title">'+esc(titleTxt)+'</span>'+
+            '<span class="dp-it-snip">'+snip+'</span>'+
+            '<span class="dp-it-meta">'+esc(e.realiteTitre)+(e.op?' &middot; '+esc(e.op):'')+'</span>'+
+          '</span><span class="dp-pick">+ Copier</span>';
+        row.onclick=()=>pick(e);
+        frag.appendChild(row);
+      });
+      listEl.innerHTML=''; listEl.appendChild(frag);
+      if(rows.length>400){ const m=document.createElement('div'); m.className='dp-empty';
+        m.innerHTML='&hellip; '+(rows.length-400)+' autres &mdash; affine ta recherche pour les voir.'; listEl.appendChild(m); }
+    }
+    function pick(e){
+      const d=e.doc, parsed=parseDocTitle(d.title||'');
+      // copie indépendante : numéro retiré (la carte prend le suivant) ; les id sont régénérés à l'enregistrement
+      const copy={
+        layout: d.layout || (e.hasImg&&e.hasTxt?'text-image':(e.hasImg?'image-only':'text-only')),
+        title: parsed.detail,
+        sources: (d.sources||[]).slice()
+      };
+      if(d.text) copy.text=d.text;
+      if(d.imageUrl) copy.imageUrl=d.imageUrl;
+      if(d.imageWidthCm!=null) copy.imageWidthCm=d.imageWidthCm;
+      addDocCard(copy);
+      refreshPreview();
+      toast('Document copi\u00e9 dans la question.','ok');
+    }
+    function open(){
+      if(!docIndex){ docIndex=buildIndex(); fillRealiteFilter(); }
+      searchEl.value=''; realiteEl.value=''; typeFilter='all';
+      $$('.dp-chip',ov).forEach(c=>c.classList.toggle('on', c.getAttribute('data-type')==='all'));
+      ov.classList.remove('hide'); render(); setTimeout(()=>searchEl.focus(),30);
+    }
+    function close(){ ov.classList.add('hide'); }
+
+    const btn=$('#btnPickDoc'); if(btn) btn.onclick=open;
+    $$('#docPicker [data-close]').forEach(b=> b.onclick=close);
+    ov.addEventListener('click', ev=>{ if(ev.target===ov) close(); });
+    document.addEventListener('keydown', ev=>{ if(ev.key==='Escape' && !ov.classList.contains('hide')) close(); });
+    searchEl.addEventListener('input', render);
+    realiteEl.addEventListener('change', render);
+    $$('.dp-chip',ov).forEach(c=> c.onclick=()=>{ typeFilter=c.getAttribute('data-type');
+      $$('.dp-chip',ov).forEach(x=>x.classList.toggle('on',x===c)); render(); });
+  })();
   // « Document N : détail » -> {num, detail} ; préserve les numéros existants (qui ne suivent pas toujours la position)
   function parseDocTitle(t){
     t=String(t==null?'':t);
