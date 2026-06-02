@@ -38,6 +38,8 @@
   --realite-color-9-bg: #dde6ee;
   --realite-color-10: #7a3a4a;  /* bordeaux profond : expansion du monde industriel (idx 9) */
   --realite-color-10-bg: #ecdfe2;
+  --realite-color-11: #c8951f;  /* or antique / moutarde : reconnaissance des libertés et des droits civils (idx 10) */
+  --realite-color-11-bg: #f6edcf;
   --shadow-sm: 0 1px 2px rgba(42, 38, 32, 0.06);
   --shadow-md: 0 2px 6px rgba(42, 38, 32, 0.08);
   --radius: 4px;
@@ -274,6 +276,7 @@ html, body {
 .question-card[data-realite-idx="7"] { border-left: 4px solid var(--realite-color-8); }
 .question-card[data-realite-idx="8"] { border-left: 4px solid var(--realite-color-9); }
 .question-card[data-realite-idx="9"] { border-left: 4px solid var(--realite-color-10); }
+.question-card[data-realite-idx="10"] { border-left: 4px solid var(--realite-color-11); }
 
 .tag-realite[data-realite-idx="0"] { background: var(--realite-color-1); color: #fff; }
 .tag-realite[data-realite-idx="1"] { background: var(--realite-color-2); color: #fff; }
@@ -285,6 +288,7 @@ html, body {
 .tag-realite[data-realite-idx="7"] { background: var(--realite-color-8); color: #fff; }
 .tag-realite[data-realite-idx="8"] { background: var(--realite-color-9); color: #fff; }
 .tag-realite[data-realite-idx="9"] { background: var(--realite-color-10); color: #fff; }
+.tag-realite[data-realite-idx="10"] { background: var(--realite-color-11); color: #fff; }
 
 /* === Groupes repliables par réalité sociale === */
 .realite-group {
@@ -345,6 +349,10 @@ html, body {
 .realite-group-header[data-realite-idx="9"] {
   background: var(--realite-color-10-bg);
   border-left: 4px solid var(--realite-color-10);
+}
+.realite-group-header[data-realite-idx="10"] {
+  background: var(--realite-color-11-bg);
+  border-left: 4px solid var(--realite-color-11);
 }
 .realite-toggle {
   display: inline-flex;
