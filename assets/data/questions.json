@@ -26331,6 +26331,397 @@
           "valeur": "Parmi les actions réalisées, il y a des manifestations pacifiques comme les sit-in, les marches et le boycott de différents produits ou services."
         }
       ]
+    },
+    {
+      "id": "q-faits-8",
+      "operation": "Établir des faits",
+      "numero": 4,
+      "niveau": 2,
+      "realite_sociale_id": "reconnaissance-libertes-droits-civils",
+      "questionBody": {
+        "prompt": "Comment se nomme l'action de désobéissance civile présentée dans le document 1 ?",
+        "responseSpace": [
+          {
+            "type": "lines",
+            "count": 1
+          }
+        ]
+      },
+      "reglettes": [
+        {
+          "type": "simple",
+          "id": "r-q-faits-8-1",
+          "label": "Réglette (1 point)",
+          "opLabel": "Établir des faits",
+          "maxPoints": 1,
+          "levels": [
+            {
+              "points": "1 point",
+              "condition": "L'élève établit correctement le fait."
+            },
+            {
+              "points": "0 point",
+              "condition": "L'élève établit incorrectement le fait ou ne l'établit pas."
+            }
+          ]
+        }
+      ],
+      "documents": [
+        {
+          "id": "d-q-faits-8-1",
+          "title": "Document 1",
+          "layout": "image-only",
+          "imageUrl": "assets/img/faits-8/Greensboro_sit-in_lunch_counter.jpg",
+          "sources": [
+            "Source de l’image : RadioFan, Lunch counter from the F. W. Woolworth, Wikimedia Commons. Licence : Creative Commons BY-SA 3.0."
+          ]
+        }
+      ],
+      "corrige": [
+        {
+          "kind": "texte",
+          "valeur": "L'action de désobéissance civile est un sit-in."
+        }
+      ]
+    },
+    {
+      "id": "q-differences-similitudes-2",
+      "operation": "Dégager des différences et des similitudes",
+      "numero": 5,
+      "niveau": 2,
+      "realite_sociale_id": "reconnaissance-libertes-droits-civils",
+      "questionBody": {
+        "prompt": "Dégage une similitude dans les actions posées par les militants pour les droits civiques aux États-Unis.",
+        "responseSpace": [
+          {
+            "type": "lines",
+            "count": 3
+          }
+        ]
+      },
+      "reglettes": [
+        {
+          "type": "simple",
+          "id": "r-q-differences-similitudes-2-1",
+          "label": "Réglette (2 points)",
+          "opLabel": "Dégager des différences et des similitudes",
+          "maxPoints": 2,
+          "levels": [
+            {
+              "points": "2 points",
+              "condition": "L'élève dégage correctement la similitude."
+            },
+            {
+              "points": "1 point",
+              "condition": "L'élève dégage partiellement la similitude."
+            },
+            {
+              "points": "0 point",
+              "condition": "L'élève dégage incorrectement la similitude."
+            }
+          ]
+        }
+      ],
+      "documents": [
+        {
+          "id": "d-q-differences-similitudes-2-1",
+          "title": "Document 1 : Sit-in",
+          "layout": "text-image",
+          "text": "« Autre objet de lutte : les pratiques ségrégationnistes dans les restaurants. Dans un restaurant pour les Blancs ou dans une section du restaurant réservée aux Blancs, les pacifistes noirs s’assoient et attendent que quelqu’un vienne prendre leur commande. Invariablement, le propriétaire appelle la police, qui les déloge et les expulse. Puis, ils reviennent au même restaurant, toujours plus nombreux, attendre d’être servis. La vague de sit-in commence le premier février 1960, à Greensboro, en Caroline du Nord, lorsque quatre étudiants noirs refusent de quitter le comptoir de lunch d’un magasin Woolworth réservé aux Blancs. En septembre 1961, plus de 70 000 étudiants, noirs et blancs, auront participé à un ou plusieurs sit-in. »",
+          "imageUrl": "assets/img/differences-similitudes-2/day2.png",
+          "sources": [
+            "Source de l'image : Jack Moebes / Greensboro-News Record, Le sit-in de Greensboro (1960), UNC School of Education. Licence : Creative Commons (BY-NC-SA)."
+          ]
+        },
+        {
+          "id": "d-q-differences-similitudes-2-2",
+          "title": "Document 2 : Rosa Parks",
+          "layout": "image-only",
+          "imageUrl": "assets/img/differences-similitudes-2/2026-06-05 11_13_43-.png",
+          "sources": [
+            "Source de l'image : United Press Photo, Rosa Parks assise à l’avant de l’autobus, regardant par la fenêtre (21 décembre 1956), Library of Congress, LC-USZ62-111235. Licence : image du domaine public."
+          ]
+        }
+      ],
+      "corrige": [
+        {
+          "kind": "texte",
+          "valeur": "La similitude dans les actions posées par les militants des droits civiques est qu'il s'agit d'actions non violentes OU que les actions sont de la désobéissance civile."
+        }
+      ]
+    },
+    {
+      "id": "q-causes-consequences-1",
+      "operation": "Déterminer des causes et des conséquences",
+      "numero": 6,
+      "niveau": 2,
+      "realite_sociale_id": "reconnaissance-libertes-droits-civils",
+      "questionBody": {
+        "prompt": "Détermine une conséquence politique du mouvement pour les droits civiques aux États-Unis.",
+        "responseSpace": [
+          {
+            "type": "lines",
+            "count": 2
+          }
+        ]
+      },
+      "reglettes": [
+        {
+          "type": "simple",
+          "id": "r-q-causes-consequences-1-1",
+          "label": "Réglette (2 points)",
+          "opLabel": "Déterminer des causes et des conséquences",
+          "maxPoints": 2,
+          "levels": [
+            {
+              "points": "2 points",
+              "condition": "L'élève détermine correctement la conséquence."
+            },
+            {
+              "points": "1 point",
+              "condition": "L'élève détermine plus ou moins correctement la conséquence."
+            },
+            {
+              "points": "0 point",
+              "condition": "L'élève détermine incorrectement la conséquence ou ne la détermine pas."
+            }
+          ]
+        }
+      ],
+      "documents": [
+        {
+          "id": "d-q-causes-consequences-1-1",
+          "title": "Document 1 : Des lois contre la ségrégation",
+          "layout": "text-image",
+          "text": "La lutte pour les droits des Noirs obtient de grands succès dans les années 1950 et 1960. Le gouvernement fédéral adopte plusieurs lois pour garantir une plus grande égalité aux Noirs, dont voici les principales :\n\n1957 : loi interdisant la ségrégation en matière électorale.\n1961 : loi interdisant la ségrégation dans les transports routiers.\n1964 : loi interdisant la discrimination basée sur la race, la couleur, la religion ou le sexe (Civil Rights Act).\n1968 : loi interdisant la ségrégation dans le logement.",
+          "imageUrl": "assets/img/causes-consequences-1/Lyndon_Johnson_signing_Civil_Rights_Act,_July_2,_1964.jpg",
+          "sources": [
+            "Source du texte : Service national du RÉCIT, domaine de l’univers social",
+            "Source de l'image : Cecil Stoughton, Signature du Civil Rights Act de 1964 aux États-Unis, Wikimedia Commons. Licence : image du domaine public."
+          ]
+        }
+      ],
+      "corrige": [
+        {
+          "kind": "texte",
+          "valeur": "Une conséquence du mouvement pour les droits civiques aux États-Unis est la fin de la ségrégation raciale dans l'exercice du droit de vote OU le Civil Rights Act qui met fin aux discriminations basées sur la race, la couleur, la religion ou le sexe."
+        }
+      ]
+    },
+    {
+      "id": "q-relation-6",
+      "operation": "Mettre en relation des faits",
+      "numero": 7,
+      "niveau": 2,
+      "realite_sociale_id": "reconnaissance-libertes-droits-civils",
+      "questionBody": {
+        "prompt": "Associe le nom du militant du mouvement pour les droits civiques aux États-Unis à l'image correspondante.",
+        "responseSpace": [
+          {
+            "type": "checkbox-table",
+            "columns": [
+              "Martin Luther King Jr.",
+              "Rosa Parks",
+              "Claudette Colvin",
+              "Malcom X"
+            ],
+            "rows": [
+              "Document 1",
+              "Document 2",
+              "Document 3",
+              "Document 4"
+            ]
+          }
+        ]
+      },
+      "reglettes": [
+        {
+          "type": "simple",
+          "id": "r-q-relation-6-1",
+          "label": "Réglette (2 points)",
+          "opLabel": "Mettre en relation des faits",
+          "maxPoints": 2,
+          "levels": [
+            {
+              "points": "2 points",
+              "condition": "L'élève met en relation les faits. (4 sur 4)"
+            },
+            {
+              "points": "1 point",
+              "condition": "L'élève met en relation certains faits. (2 ou 3 sur 4)"
+            },
+            {
+              "points": "0 point",
+              "condition": "L'élève ne met pas en relation le fait. (0 ou 1 sur 4)"
+            }
+          ]
+        }
+      ],
+      "documents": [
+        {
+          "id": "d-q-relation-6-1",
+          "title": "Document 1",
+          "layout": "image-only",
+          "imageUrl": "assets/img/relation-6/Malcolm_X_NYWTS_2a.jpg",
+          "sources": [
+            "Source de l'image : Ed Ford, World Telegram staff photographer, [...] NYWTS 2a, Wikimedia Commons. Licence : image du domaine public."
+          ]
+        },
+        {
+          "id": "d-q-relation-6-2",
+          "title": "Document 2",
+          "layout": "image-only",
+          "imageUrl": "assets/img/relation-6/2026-06-05 11_13_43-.png",
+          "sources": [
+            "Source de l'image : United Press Photo, [...] assise à l’avant de l’autobus, regardant par la fenêtre (21 décembre 1956), Library of Congress, LC-USZ62-111235. Licence : image du domaine public."
+          ]
+        },
+        {
+          "id": "d-q-relation-6-3",
+          "title": "Document 3",
+          "layout": "image-only",
+          "imageUrl": "assets/img/relation-6/Claudette_Colvin.jpg",
+          "sources": [
+            "Source de l'image : The Visibility Project, [...], Wikimedia Commons. Licence : image du domaine public."
+          ]
+        },
+        {
+          "id": "d-q-relation-6-4",
+          "title": "Document 4",
+          "layout": "image-only",
+          "imageUrl": "assets/img/relation-6/Martin_Luther_King,_Jr.jpg",
+          "sources": [
+            "Source de l'image : Bernie Faingold, [...], Wikimedia Commons. Licence : image du domaine public."
+          ]
+        }
+      ],
+      "corrige": [
+        {
+          "kind": "cases",
+          "lignes": [
+            {
+              "cochees": [
+                {
+                  "coche": false
+                },
+                {
+                  "coche": false
+                },
+                {
+                  "coche": false
+                },
+                {
+                  "coche": true
+                }
+              ]
+            },
+            {
+              "cochees": [
+                {
+                  "coche": false
+                },
+                {
+                  "coche": true
+                },
+                {
+                  "coche": false
+                },
+                {
+                  "coche": false
+                }
+              ]
+            },
+            {
+              "cochees": [
+                {
+                  "coche": false
+                },
+                {
+                  "coche": false
+                },
+                {
+                  "coche": true
+                },
+                {
+                  "coche": false
+                }
+              ]
+            },
+            {
+              "cochees": [
+                {
+                  "coche": true
+                },
+                {
+                  "coche": false
+                },
+                {
+                  "coche": false
+                },
+                {
+                  "coche": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q-causes-consequences-2",
+      "operation": "Déterminer des causes et des conséquences",
+      "numero": 8,
+      "niveau": 2,
+      "realite_sociale_id": "reconnaissance-libertes-droits-civils",
+      "questionBody": {
+        "prompt": "Détermine une cause de la faible représentation des Noirs en politique dans la première moitié du 20e siècle.",
+        "responseSpace": [
+          {
+            "type": "lines",
+            "count": 3
+          }
+        ]
+      },
+      "reglettes": [
+        {
+          "type": "simple",
+          "id": "r-q-causes-consequences-2-1",
+          "label": "Réglette (2 points)",
+          "opLabel": "Déterminer des causes et des conséquences",
+          "maxPoints": 2,
+          "levels": [
+            {
+              "points": "2 points",
+              "condition": "L'élève détermine correctement la cause."
+            },
+            {
+              "points": "1 point",
+              "condition": "L'élève détermine plus ou moins correctement la cause."
+            },
+            {
+              "points": "0 point",
+              "condition": "L'élève détermine incorrectement la cause ou ne la détermine pas."
+            }
+          ]
+        }
+      ],
+      "documents": [
+        {
+          "id": "d-q-causes-consequences-2-1",
+          "title": "Document 1 : Le droit de vote des Noirs",
+          "layout": "text-only",
+          "text": "Entre 1876 et 1964, les municipalités et les États du Sud mettent en œuvre une série de règlements visant à limiter le droit de vote des Noirs. Par exemple, la clause du « grand-père » limite le droit de vote à ceux dont les aïeuls figurent déjà sur les listes électorales, ce qui excluait la plupart des anciens esclaves du Sud. De plus, ils imposent des frais d’inscription électorale très élevés, qui empêchent les Noirs et les Blancs les plus pauvres de se présenter aux urnes. Enfin, ils instituent des tests de connaissances obligatoires pour limiter l’inscription aux listes électorales et exclure les Noirs peu instruits. Jusque dans la moitié des années 1960, le nombre d’élus noirs demeure infime.",
+          "sources": [
+            "Source du texte : Service national du RÉCIT, domaine de l’univers social."
+          ]
+        }
+      ],
+      "corrige": [
+        {
+          "kind": "texte",
+          "valeur": "Le droit de votes des Noirs est limité par de nombreuses mesures : limitation du droit de vote à ceux dont les aïeuls figurent déjà sur les listes électorales, frais d’inscription électorale très élevés, tests de connaissances obligatoires, etc."
+        }
+      ]
     }
   ]
 }
