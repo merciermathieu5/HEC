@@ -2372,25 +2372,26 @@
 
       // Aspect ratio réel de l'image (si présente)
       function calcImageDims(imgInfo, targetWidthCm) {
-        if (!imgInfo) return { widthPx: Math.round(targetWidthCm * 28.35), heightPx: Math.round(targetWidthCm * 28.35) };
-        const widthPx = Math.round(targetWidthCm * 28.35);
+        // docx attend des pixels @96 DPI : 1 cm = 37.7953 px (et non 28.35 = 72 DPI).
+        const PX_PER_CM = 37.7953;
+        if (!imgInfo) return { widthPx: Math.round(targetWidthCm * PX_PER_CM), heightPx: Math.round(targetWidthCm * PX_PER_CM) };
+        const widthPx = Math.round(targetWidthCm * PX_PER_CM);
         const ratio = imgInfo.naturalHeight / imgInfo.naturalWidth;
         return { widthPx, heightPx: Math.round(widthPx * ratio) };
       }
 
       if (d_doc.layout === 'text-image') {
         const imgInfo = imageCache[d_doc.imageUrl];
-        const targetCm = d_doc.imageWidthCm || 3.5;
-        const dims = calcImageDims(imgInfo, targetCm);
-        const imgChildren = imgInfo
-          ? [new Paragraph({
-              alignment: AlignmentType.CENTER,
-              children: [new ImageRun({ data: imgInfo.bytes, transformation: { width: dims.widthPx, height: dims.heightPx }, type: imgInfo.format || 'png' })]
-            })]
-          : [new Paragraph({ children: [new TextRun({ text: "[image]" })] })];
 
         if (isNarrow) {
           // Mode étroit : image au-dessus, texte en-dessous (1 colonne)
+          const colCm = (innerW - 280) / 567;                 // largeur utile de la cellule, en cm
+          const targetCm = Math.min(d_doc.imageWidthCm || colCm, colCm);
+          const dims = calcImageDims(imgInfo, targetCm);
+          const imgChildren = imgInfo
+            ? [new Paragraph({ alignment: AlignmentType.CENTER,
+                children: [new ImageRun({ data: imgInfo.bytes, transformation: { width: dims.widthPx, height: dims.heightPx }, type: imgInfo.format || 'png' })] })]
+            : [new Paragraph({ children: [new TextRun({ text: "[image]" })] })];
           const cellChildren = [titleP, ...imgChildren, new Paragraph({
             children: [new TextRun({ text: d_doc.text, size: fontSize })],
             spacing: { before: 80, after: 80 }
@@ -2408,9 +2409,18 @@
             })]
           }));
         } else {
-          // Mode large : texte à gauche (70%), image à droite (30%)
-          const textW = Math.round(innerW * 0.62);
+          // Mode large : texte à gauche (55%), image à droite (45%).
+          // L'image remplit sa colonne par défaut (plus de petit défaut à 3,5 cm),
+          // et ne peut pas dépasser la largeur de colonne (pas de débordement).
+          const textW = Math.round(innerW * 0.55);
           const imgW = innerW - textW;
+          const colCm = (imgW - 280) / 567;                   // largeur utile de la colonne image, en cm
+          const targetCm = Math.min(d_doc.imageWidthCm || colCm, colCm);
+          const dims = calcImageDims(imgInfo, targetCm);
+          const imgChildren = imgInfo
+            ? [new Paragraph({ alignment: AlignmentType.CENTER,
+                children: [new ImageRun({ data: imgInfo.bytes, transformation: { width: dims.widthPx, height: dims.heightPx }, type: imgInfo.format || 'png' })] })]
+            : [new Paragraph({ children: [new TextRun({ text: "[image]" })] })];
           const textCellChildren = [titleP, new Paragraph({
             children: [new TextRun({ text: d_doc.text, size: fontSize })],
             spacing: { after: 120 }
