@@ -389,6 +389,7 @@
 <div class="toast" id="toast"></div>
 
 <script src="../assets/js/data.js"></script>
+<script src="../assets/js/cms-adapter.js"></script>
 <script>
 (function(){
   'use strict';
@@ -475,7 +476,7 @@
   fillSelect($('#fOp'), DATA.operations_intellectuelles, {blank:'Toutes'});
   fillRealiteSelect($('#fRealite'), 'Toutes');
 
-  (function buildPresets(){
+  function buildPresets(){
     const seen=new Map();
     (DATA.questions||[]).forEach(q=>(q.reglettes||[]).forEach(r=>{
       const c=Object.assign({},r); delete c.id; delete c.label;
@@ -493,7 +494,17 @@
     presets.forEach((p,k)=>{ p.i=k; });   // réindexer APRÈS le tri : p.i == position réelle dans le tableau
     presetBySig={}; presets.forEach(p=>{ const s=regSig(p.reglette); if(!(s in presetBySig)) presetBySig[s]=p.i; });
     opRegGroups={}; (DATA.questions||[]).forEach(q=>{ const op=q.operation||''; (q.reglettes||[]).forEach(r=>{ (opRegGroups[op]=opRegGroups[op]||{})[r.opLabel||'']=1; }); });
-  })();
+  }
+  // SOURCE UNIQUE DES QUESTIONS : assets/data/questions.json. data.js ne contient
+  // plus que les métadonnées (réalités, OI). On charge ici le JSON pour alimenter
+  // les réglettes prémémorisées, le « Piger un document existant » et la
+  // détection de collisions d'identifiants (allIds).
+  fetch('../assets/data/questions.json',{cache:'no-store'})
+    .then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+    .then(data=>{ const list=Array.isArray(data)?data:(data.questions||[]);
+      DATA.questions=list.map(window.QuizCMS.toRuntime); })
+    .catch(e=>{ console.warn('[admin] questions.json non chargé :', e&&e.message); })
+    .finally(()=>{ buildPresets(); if(typeof refreshRegPresets==='function') refreshRegPresets(); });
   function presetSelectHTML(op){
     const allow = (op && opRegGroups[op]) ? opRegGroups[op] : null;   // filtre selon les réglettes réellement utilisées avec cette opération
     const groups={}; presets.forEach(p=>{ if(allow && !allow[p.group]) return; (groups[p.group]=groups[p.group]||[]).push(p); });

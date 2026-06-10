@@ -293,7 +293,11 @@
     el.catalogList.innerHTML = '';
 
     if (state.filteredQuestions.length === 0) {
-      el.catalogList.innerHTML = '<div class="hint" style="text-align:center;padding:1.5rem;">Aucune question ne correspond aux filtres.</div>';
+      if (DATA.questions.length === 0) {
+        el.catalogList.innerHTML = '<div class="hint" style="text-align:center;padding:1.5rem;">⚠ Le catalogue n\'a pas pu être chargé (assets/data/questions.json inaccessible).<br>Vérifie que le site est servi par un serveur web (GitHub Pages) et non ouvert en fichier local.</div>';
+      } else {
+        el.catalogList.innerHTML = '<div class="hint" style="text-align:center;padding:1.5rem;">Aucune question ne correspond aux filtres.</div>';
+      }
       return;
     }
 
@@ -2723,10 +2727,11 @@
   }
 
   // ====== BOOT ======
-  // Avant init(), on tente de charger les questions éditées via le CMS
-  // (assets/data/questions.json). Si le fichier est absent ou illisible
-  // (ex. ouverture en file://), on retombe proprement sur les données
-  // héritées de data.js — l'app fonctionne exactement comme avant.
+  // SOURCE UNIQUE DES QUESTIONS : assets/data/questions.json (format CMS,
+  // converti par cms-adapter.js). data.js ne fournit plus que les métadonnées
+  // (réalités sociales, opérations intellectuelles) et un tableau questions
+  // vide que l'on remplit ici. Si le fichier est absent ou illisible
+  // (ex. ouverture en file://), le catalogue affiche un message explicite.
   async function loadCMSQuestions() {
     if (typeof window.QuizCMS === 'undefined') return;       // adaptateur non chargé
     if (typeof DATA === 'undefined' || !DATA || !Array.isArray(DATA.questions)) return; // data.js absent / vide
@@ -2743,9 +2748,9 @@
         if (indexById.has(rq.id)) { DATA.questions[indexById.get(rq.id)] = rq; remplacees++; }
         else { DATA.questions.push(rq); indexById.set(rq.id, DATA.questions.length - 1); ajoutees++; }
       });
-      console.info(`[CMS] questions.json : ${remplacees} remplacée(s), ${ajoutees} ajoutée(s).`);
+      console.info(`[CMS] questions.json : ${ajoutees} question(s) chargée(s)${remplacees ? `, ${remplacees} remplacée(s)` : ''}.`);
     } catch (e) {
-      console.warn('[CMS] questions.json non chargé — données héritées utilisées.', e && e.message);
+      console.error('[CMS] questions.json non chargé — le catalogue sera vide.', e && e.message);
     }
   }
 
