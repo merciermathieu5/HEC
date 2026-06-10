@@ -795,7 +795,7 @@ mark.search-hit {
   text-overflow: ellipsis;
   overflow: hidden;
 }
-.btn-sm { padding: 0.35rem 0.7rem; font-size: 0.78rem; flex: 0; }
+.btn-sm { padding: 0.35rem 0.7rem; font-size: 0.78rem; flex: 0 0 auto; }
 .btn:disabled { opacity: 0.4; cursor: not-allowed; }
 .btn-primary { background: var(--color-primary); color: #fff; box-shadow: var(--shadow-sm); }
 .btn-primary:hover:not(:disabled) { background: var(--color-primary-hover); box-shadow: var(--shadow-md); }
