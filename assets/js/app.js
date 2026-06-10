@@ -18,6 +18,9 @@
     previewMode: 'cahier',
     // Terme de recherche courant (normalisé : minuscules, sans accents)
     searchTerm: '',
+    // Générateur unifié : document à produire et disposition des documents
+    docMode: 'cahier',      // 'cahier' | 'guide'
+    layoutMode: 'std',      // 'std' (documents avec chaque question) | 'fin' (regroupés à la fin)
   };
 
   // ====== DOM ======
@@ -33,14 +36,8 @@
     resetFilters:     $('reset-filters'),
     searchInput:      $('search-input'),
     searchClear:      $('search-clear'),
-    btnGenerate:        $('btn-generate'),
-    btnGenerateCorrige: $('btn-generate-corrige'),
-    btnPreview:         $('btn-preview'),
-    btnPreviewCorrige:  $('btn-preview-corrige'),
-    btnGenerateVariante: $('btn-generate-variante'),
-    btnPreviewVariante:  $('btn-preview-variante'),
-    btnGenerateCorrigeVariante: $('btn-generate-corrige-variante'),
-    btnPreviewCorrigeVariante:  $('btn-preview-corrige-variante'),
+    btnPreviewGo:     $('btn-preview-go'),
+    btnDownloadGo:    $('btn-download-go'),
     btnClear:           $('btn-clear-cahier'),
     btnShuffle:         $('btn-shuffle-cahier'),
     loading:            $('loading-overlay'),
@@ -57,10 +54,68 @@
     // Par défaut, toutes les réalités sociales sont repliées dans le catalogue
     DATA.realites_sociales.forEach(r => collapsedRealites.add(r.id));
     populateFilters();
+    buildRealitesRail();
     attachEventListeners();
     applyFilters();
     initSortable();
     renderCahier();
+  }
+
+  // ====== FRISE DES RÉALITÉS SOCIALES (navigation principale) ======
+  // Bande des 12 réalités (Sec 1 puis Sec 2, ordre chronologique) : légende des
+  // couleurs du catalogue ET filtre par réalité sociale. Cliquer une réalité
+  // filtre le catalogue (re-cliquer la réalité active retire le filtre).
+  // Libellés : nom complet de la réalité sociale (PFEQ), sans abréviation.
+  function buildRealitesRail() {
+    const rail = document.getElementById('realites-rail');
+    if (!rail) return;
+    // Ordre d'affichage : Sec 1 d'abord, ordre chronologique stable à l'intérieur de chaque niveau
+    const realites = DATA.realites_sociales
+      .map((r, idx) => ({ ...r, idx }))
+      .sort((a, b) => a.niveau - b.niveau);
+    realites.forEach(r => {
+      const seg = document.createElement('button');
+      seg.type = 'button';
+      seg.className = 'rail-seg';
+      seg.dataset.realite = r.id;
+      seg.style.setProperty('--seg-color', `var(--realite-color-${r.idx + 1})`);
+      seg.innerHTML = `<span class="rail-p">${escapeHtml(r.titre)}</span><span class="rail-years">Secondaire ${r.niveau}</span>`;
+      seg.title = `${r.titre} — Secondaire ${r.niveau}`;
+      seg.setAttribute('aria-label', `Filtrer le catalogue : ${r.titre} (Secondaire ${r.niveau})`);
+      seg.addEventListener('click', () => {
+        el.filterRealite.value = (el.filterRealite.value === r.id) ? '' : r.id;
+        applyFilters();
+      });
+      rail.appendChild(seg);
+    });
+  }
+  function syncRealitesRail() {
+    const rail = document.getElementById('realites-rail');
+    if (!rail) return;
+    const current = el.filterRealite.value;
+    rail.querySelectorAll('.rail-seg').forEach(seg => {
+      const active = !!current && seg.dataset.realite === current;
+      seg.classList.toggle('active', active);
+      seg.setAttribute('aria-pressed', String(active));
+    });
+    rail.classList.toggle('has-active', !!current);
+  }
+
+  // ====== GÉNÉRATEUR UNIFIÉ (Document × Disposition) ======
+  function syncGenerator() {
+    document.querySelectorAll('.seg-btn[data-doc]').forEach(b => {
+      const on = b.dataset.doc === state.docMode;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-pressed', String(on));
+    });
+    document.querySelectorAll('.seg-btn[data-layout]').forEach(b => {
+      const on = b.dataset.layout === state.layoutMode;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-pressed', String(on));
+    });
+    if (el.btnDownloadGo) {
+      el.btnDownloadGo.textContent = state.docMode === 'guide' ? '⬇ Télécharger le guide' : '⬇ Télécharger le cahier';
+    }
   }
 
   function populateFilters() {
@@ -82,17 +137,44 @@
     [el.filterNiveau, el.filterRealite, el.filterOp].forEach(s =>
       s.addEventListener('change', applyFilters)
     );
+    // Pilules de niveau (Tous / Secondaire 1 / Secondaire 2) → pilotent le select caché
+    document.querySelectorAll('.pill-niveau').forEach(p => {
+      p.addEventListener('click', () => {
+        el.filterNiveau.value = p.dataset.niveau;
+        applyFilters();
+      });
+    });
+    // Générateur unifié
+    document.querySelectorAll('.seg-btn[data-doc]').forEach(b =>
+      b.addEventListener('click', () => { state.docMode = b.dataset.doc; syncGenerator(); }));
+    document.querySelectorAll('.seg-btn[data-layout]').forEach(b =>
+      b.addEventListener('click', () => { state.layoutMode = b.dataset.layout; syncGenerator(); }));
+    el.btnPreviewGo.addEventListener('click', () =>
+      previewCahier(state.docMode === 'guide', state.layoutMode === 'fin'));
+    el.btnDownloadGo.addEventListener('click', () =>
+      generateDocx(true, state.docMode === 'guide', state.layoutMode === 'fin'));
+    syncGenerator();
+    // Recherche : anti-rebond léger (le rendu complet du catalogue à chaque frappe
+    // devient perceptible quand le catalogue grossit).
+    let _searchTimer = null;
+    el.searchInput.addEventListener('input', () => {
+      el.searchClear.hidden = !el.searchInput.value;
+      clearTimeout(_searchTimer);
+      _searchTimer = setTimeout(applyFilters, 140);
+    });
+    el.searchClear.addEventListener('click', () => {
+      el.searchInput.value = '';
+      el.searchInput.focus();
+      applyFilters();
+    });
     el.resetFilters.addEventListener('click', () => {
       el.filterNiveau.value = '';
       el.filterRealite.value = '';
       el.filterOp.value = '';
       el.searchInput.value = '';
-      applyFilters();
-    });
-    el.searchInput.addEventListener('input', applyFilters);
-    el.searchClear.addEventListener('click', () => {
-      el.searchInput.value = '';
-      el.searchInput.focus();
+      // Réinitialiser replie aussi toutes les réalités (retour à l'état initial)
+      collapsedRealites.clear();
+      DATA.realites_sociales.forEach(r => collapsedRealites.add(r.id));
       applyFilters();
     });
     el.btnClear.addEventListener('click', () => {
@@ -101,14 +183,6 @@
       renderCahier();
     });
     el.btnShuffle.addEventListener('click', shuffleCahier);
-    el.btnGenerate.addEventListener('click', () => generateDocx(true));
-    el.btnGenerateCorrige.addEventListener('click', () => generateDocx(true, /*corrige*/ true));
-    el.btnPreview.addEventListener('click', () => previewCahier(false));
-    el.btnPreviewCorrige.addEventListener('click', () => previewCahier(true));
-    el.btnGenerateVariante.addEventListener('click', () => generateDocx(true, false, /*variant*/ true));
-    el.btnPreviewVariante.addEventListener('click', () => previewCahier(false, /*variant*/ true));
-    el.btnGenerateCorrigeVariante.addEventListener('click', () => generateDocx(true, /*corrige*/ true, /*variant*/ true));
-    el.btnPreviewCorrigeVariante.addEventListener('click', () => previewCahier(/*corrige*/ true, /*variant*/ true));
     el.modalClose.addEventListener('click', closePreview);
     el.modalDownload.addEventListener('click', () => {
       const mode = state.previewMode;
@@ -197,26 +271,24 @@
       return true;
     });
 
-    // Une recherche déplie toutes les sections pour montrer les résultats.
-    // Sinon : si l'utilisateur filtre sur une réalité précise, on la déplie ;
-    // si aucun filtre, on remet toutes les réalités repliées par défaut.
-    if (term) {
-      collapsedRealites.clear();
-    } else if (rea) {
-      collapsedRealites.delete(rea);
-    } else {
-      DATA.realites_sociales.forEach(r => collapsedRealites.add(r.id));
-    }
+    // Dépliage : la recherche et le filtre de réalité DÉPLIENT à l'affichage sans
+    // écraser l'état de repli choisi par l'utilisateur (voir renderCatalog).
 
-    el.catalogCount.textContent = `${state.filteredQuestions.length} question(s)`;
+    const n = state.filteredQuestions.length;
+    el.catalogCount.textContent = `${n} question${n > 1 ? 's' : ''}`;
+    syncRealitesRail();
+    document.querySelectorAll('.pill-niveau').forEach(p =>
+      p.classList.toggle('active', p.dataset.niveau === el.filterNiveau.value));
     renderCatalog();
   }
 
-  // État global des groupes repliés (par realite_sociale_id)
+  // État global des groupes repliés (par realite_sociale_id) et des fiches dépliées (par question id)
   const collapsedRealites = new Set();
+  const expandedQuestions = new Set();
 
   // ====== RENDU DU CATALOGUE ======
-  // (Pas de sous-pièces cochables : chaque question est une unité atomique)
+  // Rangées compactes par réalité sociale ; clic sur la rangée = fiche détaillée
+  // (documents, réglette) ; bouton « + Ajouter » = sélection explicite.
   function renderCatalog() {
     el.catalogList.innerHTML = '';
 
@@ -231,6 +303,8 @@
       realiteTitleById[r.id] = r.titre;
       realiteIdxById[r.id] = i;
     });
+    const realiteNiveauById = {};
+    DATA.realites_sociales.forEach(r => realiteNiveauById[r.id] = r.niveau);
 
     // Grouper les questions filtrées par réalité sociale, triées par niveau
     // (Sec 1 d'abord, puis Sec 2). L'ordre d'insertion dans Map est conservé
@@ -246,34 +320,52 @@
     });
 
     // Construire les groupes pour chaque réalité présente
+    const realiteFilter = el.filterRealite.value;
     groupsMap.forEach((questions, realiteId) => {
       if (questions.length === 0) return;
       const realiteIdx = realiteIdxById[realiteId] ?? 0;
       const realiteTitle = realiteTitleById[realiteId] || 'Sans réalité';
+      const realiteNiveau = realiteNiveauById[realiteId];
+      const realiteMatchesFilter = !!realiteFilter && realiteFilter === realiteId;
 
       const groupEl = document.createElement('div');
       groupEl.className = 'realite-group';
-      if (collapsedRealites.has(realiteId)) groupEl.classList.add('collapsed');
+      // État affiché : recherche active → tout déplié ; réalité filtrée (frise) → son
+      // groupe déplié ; sinon on respecte l'état replié choisi par l'utilisateur.
+      const isCollapsed = !state.searchTerm && !realiteMatchesFilter && collapsedRealites.has(realiteId);
+      if (isCollapsed) groupEl.classList.add('collapsed');
 
-      // En-tête de groupe (cliquable)
+      const nAdded = questions.filter(q => isQuestionUsed(q.id)).length;
       const headerEl = document.createElement('div');
       headerEl.className = 'realite-group-header';
       headerEl.setAttribute('data-realite-idx', String(realiteIdx));
+      headerEl.setAttribute('role', 'button');
+      headerEl.setAttribute('tabindex', '0');
+      headerEl.setAttribute('aria-expanded', String(!isCollapsed));
       const allUsed = questions.every(q => isQuestionUsed(q.id));
-      const toggleAllLabel = allUsed ? 'Tout décocher' : 'Tout cocher';
+      const toggleAllLabel = allUsed ? 'Tout retirer' : 'Tout ajouter';
       headerEl.innerHTML = `
         <span class="realite-toggle" aria-hidden="true">▼</span>
+        ${realiteNiveau ? `<span class="rg-periode">Sec ${realiteNiveau}</span>` : ''}
         <span class="realite-group-title">${escapeHtml(realiteTitle)}</span>
-        <span class="realite-group-count">${questions.length} question${questions.length > 1 ? 's' : ''}</span>
+        <span class="realite-group-count">${questions.length} question${questions.length > 1 ? 's' : ''}${nAdded ? ` <b class="rg-added">· ${nAdded} au cahier</b>` : ''}</span>
         <button type="button" class="realite-group-toggle-all" aria-label="${toggleAllLabel} pour cette réalité">${toggleAllLabel}</button>
       `;
-      headerEl.addEventListener('click', (e) => {
-        if (e.target.closest('.realite-group-toggle-all')) return;
+      const toggleGroup = () => {
+        if (state.searchTerm) return;   // pendant une recherche, tout reste déplié
         if (collapsedRealites.has(realiteId)) collapsedRealites.delete(realiteId);
         else collapsedRealites.add(realiteId);
         renderCatalog();
+      };
+      headerEl.addEventListener('click', (e) => {
+        if (e.target.closest('.realite-group-toggle-all')) return;
+        toggleGroup();
       });
-      // Bouton « Tout cocher / décocher » : ne déclenche pas le repli du groupe
+      headerEl.addEventListener('keydown', (e) => {
+        if (e.target.closest('.realite-group-toggle-all')) return;
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleGroup(); }
+      });
+      // Bouton « Tout ajouter / retirer » : ne déclenche pas le repli du groupe
       const toggleAllBtn = headerEl.querySelector('.realite-group-toggle-all');
       toggleAllBtn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -291,56 +383,88 @@
       cardsContainer.className = 'realite-group-cards';
 
       questions.forEach(q => {
+        const used = isQuestionUsed(q.id);
+        const expanded = expandedQuestions.has(q.id);
+        const pointsTotal = computeQuestionPoints(q);
+        const nDocs = (q.documents || []).filter(Boolean).length;
+
         const card = document.createElement('div');
         card.className = 'question-card';
         card.setAttribute('data-realite-idx', String(realiteIdx));
-        if (isQuestionUsed(q.id)) card.classList.add('has-selection');
+        if (used) card.classList.add('has-selection');
+        if (expanded) card.classList.add('open');
 
-        const checked = isQuestionUsed(q.id) ? 'checked' : '';
-        const pointsTotal = computeQuestionPoints(q);
-        const realite = realiteTitleById[q.realite_sociale_id] || '';
-
-        const tagsHtml = `
-          <div class="q-meta">
-            <span class="tag tag-niveau">Secondaire ${q.niveau}</span>
-            <span class="tag tag-operation">${escapeHtml(q.operation)}</span>
-            <span class="tag tag-numero">#${q.numero}</span>
-            ${realite ? `<span class="tag tag-realite" data-realite-idx="${realiteIdx}">${escapeHtml(realite)}</span>` : ''}
-            ${pointsTotal > 0 ? `<span class="tag tag-points">${pointsTotal} pts</span>` : ''}
-          </div>
-        `;
+        const promptHtml = state.searchTerm
+          ? highlightMatches(q.questionBody.prompt, state.searchTerm)
+          : escapeHtml(q.questionBody.prompt);
 
         card.innerHTML = `
-          <div class="question-header">
-            <input type="checkbox" class="q-checkbox" data-q-id="${q.id}" ${checked} aria-label="Sélectionner cette question">
+          <div class="question-header" role="button" tabindex="0" aria-expanded="${expanded}">
+            <span class="q-chevron" aria-hidden="true">›</span>
             <div class="q-content">
-              ${tagsHtml}
-              <p class="q-prompt">${state.searchTerm ? highlightMatches(q.questionBody.prompt, state.searchTerm) : escapeHtml(q.questionBody.prompt)}</p>
-              ${state.searchTerm && !termInPrompt(q, state.searchTerm) ? '<span class="q-doc-hit">🔍 trouvé dans un document</span>' : ''}
+              <p class="q-prompt">${promptHtml}</p>
+              <div class="q-meta">
+                <span class="chip chip-type">${escapeHtml(q.operation)}</span>
+                <span class="chip">Sec ${q.niveau}</span>
+                <span class="chip">#${q.numero}</span>
+                ${nDocs ? `<span class="chip">${nDocs} doc${nDocs > 1 ? 's' : ''}</span>` : ''}
+                ${pointsTotal > 0 ? `<span class="chip chip-pts">${pointsTotal} pts</span>` : ''}
+                ${state.searchTerm && !termInPrompt(q, state.searchTerm) ? '<span class="q-doc-hit">🔍 trouvé dans un document</span>' : ''}
+              </div>
             </div>
+            <button type="button" class="q-add ${used ? 'added' : ''}" aria-label="${used ? 'Retirer la question du cahier' : 'Ajouter la question au cahier'}">${used ? '✓ Au cahier' : '+ Ajouter'}</button>
           </div>
+          <div class="q-detail" ${expanded ? '' : 'hidden'}></div>
         `;
 
-        const header = card.querySelector('.question-header');
-        const checkbox = card.querySelector('.q-checkbox');
+        // Fiche détaillée (remplie au premier dépliage, contenu statique)
+        const detailEl = card.querySelector('.q-detail');
+        const fillDetail = () => {
+          if (detailEl.dataset.filled) return;
+          detailEl.dataset.filled = '1';
+          const docsList = (q.documents || []).filter(Boolean)
+            .map(d => `<li>${escapeHtml(d.title)}</li>`).join('');
+          const reglettes = (q.reglettes || []).filter(Boolean)
+            .map(r => `${escapeHtml(r.label || 'Réglette')}${r.maxPoints ? ` — ${r.maxPoints} points` : ''}`).join(' · ');
+          detailEl.innerHTML = `
+            <div class="qd-grid">
+              <div class="qd-block">
+                <span class="qd-label">Évaluation</span>
+                <span>${reglettes || '—'}</span>
+              </div>
+              ${docsList ? `
+              <div class="qd-block">
+                <span class="qd-label">Dossier documentaire</span>
+                <ul class="qd-docs">${docsList}</ul>
+              </div>` : ''}
+            </div>
+          `;
+        };
+        if (expanded) fillDetail();
 
-        function toggleSelection() {
-          if (isQuestionUsed(q.id)) {
-            removeAllPiecesForQuestion(q.id);
-          } else {
-            addAllPiecesForQuestion(q);
-          }
+        const header = card.querySelector('.question-header');
+        const addBtn = card.querySelector('.q-add');
+
+        const toggleExpand = () => {
+          const isOpen = card.classList.toggle('open');
+          if (isOpen) { expandedQuestions.add(q.id); fillDetail(); detailEl.hidden = false; }
+          else { expandedQuestions.delete(q.id); detailEl.hidden = true; }
+          header.setAttribute('aria-expanded', String(isOpen));
+        };
+        header.addEventListener('click', (e) => {
+          if (e.target.closest('.q-add')) return;
+          toggleExpand();
+        });
+        header.addEventListener('keydown', (e) => {
+          if (e.target.closest('.q-add')) return;
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleExpand(); }
+        });
+        addBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (isQuestionUsed(q.id)) removeAllPiecesForQuestion(q.id);
+          else addAllPiecesForQuestion(q);
           renderCatalog();
           renderCahier();
-        }
-
-        header.addEventListener('click', (e) => {
-          if (e.target === checkbox) return;
-          toggleSelection();
-        });
-        checkbox.addEventListener('change', (e) => {
-          e.stopPropagation();
-          toggleSelection();
         });
 
         cardsContainer.appendChild(card);
@@ -485,6 +609,19 @@
   }
 
   // ====== RENDU CAHIER (par groupe-question) ======
+  // Points du cahier ventilés par niveau (Secondaire 1 / 2), pour le tableau de bord
+  function computeCahierPointsByNiveau() {
+    const acc = { 1: 0, 2: 0, total: 0 };
+    state.cahier.forEach(p => {
+      if (p.kind !== 'reglette') return;
+      const q = DATA.questions.find(x => x.id === p.questionId);
+      if (!q) return;
+      const r = q.reglettes.find(x => x.id === p.pieceId);
+      if (r && r.maxPoints) { acc[q.niveau] = (acc[q.niveau] || 0) + r.maxPoints; acc.total += r.maxPoints; }
+    });
+    return acc;
+  }
+
   function renderCahier() {
     el.cahierList.innerHTML = '';
     el.cahierList.classList.toggle('empty', state.cahier.length === 0);
@@ -500,12 +637,23 @@
       current.pieces.push(p);
     });
 
-    const realiteTitleById = {};
-    DATA.realites_sociales.forEach(r => realiteTitleById[r.id] = r.titre);
+    if (groups.length === 0) {
+      el.cahierList.innerHTML = `
+        <div class="cahier-empty">
+          <span class="ce-icon" aria-hidden="true">📚</span>
+          <p class="ce-title">Le cahier est vide</p>
+          <ol class="ce-steps">
+            <li>Choisis une réalité sociale dans la frise (ou cherche un mot-clé)</li>
+            <li>Ajoute des questions avec le bouton <b>+ Ajouter</b></li>
+            <li>Réordonne-les ici, puis génère le cahier et son guide</li>
+          </ol>
+        </div>`;
+    }
 
-    groups.forEach(g => {
+    groups.forEach((g, idx) => {
       const q = DATA.questions.find(x => x.id === g.questionId);
       if (!q) return;
+      const pts = computeQuestionPoints(q);
 
       const card = document.createElement('div');
       card.className = 'cahier-group';
@@ -514,11 +662,13 @@
       const header = document.createElement('header');
       header.className = 'cahier-group-header';
       header.innerHTML = `
-        <span class="cahier-handle" aria-hidden="true">⋮⋮</span>
+        <span class="cahier-handle" aria-hidden="true" title="Glisser pour réordonner">⋮⋮</span>
+        <span class="cahier-num" aria-label="Question ${idx + 1} du cahier">${idx + 1}</span>
         <div class="cahier-group-meta">
-          <span class="cahier-type t-question">#${q.numero}</span>
-          <span class="cahier-group-title" title="${escapeHtml(q.operation)}">${escapeHtml(q.operation)}</span>
+          <span class="cahier-group-title">${escapeHtml(q.operation)}</span>
+          <span class="cahier-prompt" title="${escapeHtml(q.questionBody.prompt)}">${escapeHtml(q.questionBody.prompt)}</span>
         </div>
+        <span class="cahier-pts">${pts} pts</span>
         <button class="cahier-group-remove" type="button" aria-label="Retirer la question">×</button>
       `;
       header.querySelector('.cahier-group-remove').addEventListener('click', (e) => {
@@ -532,21 +682,25 @@
       el.cahierList.appendChild(card);
     });
 
+    // Tableau de bord : total + ventilation par niveau
+    const ponder = computeCahierPointsByNiveau();
+    const chips = [];
+    if (ponder[1] > 0) chips.push(`<span class="dash-chip">Secondaire 1 <b>${ponder[1]}</b></span>`);
+    if (ponder[2] > 0) chips.push(`<span class="dash-chip">Secondaire 2 <b>${ponder[2]}</b></span>`);
     el.cahierCount.innerHTML = `
-      <span>${groups.length} question${groups.length > 1 ? 's' : ''}</span>
-      <span style="margin: 0 0.4rem;">·</span>
-      <span class="points-total">${computeCahierPoints()} pts</span>
+      <div class="dash-main">
+        <span class="dash-q"><b>${groups.length}</b> question${groups.length > 1 ? 's' : ''}</span>
+        <span class="dash-sep" aria-hidden="true"></span>
+        <span class="dash-pts"><b>${ponder.total}</b> points</span>
+      </div>
+      ${chips.length > 1 ? `<div class="dash-chips">${chips.join('')}</div>` : ''}
     `;
-    el.btnGenerate.disabled = state.cahier.length === 0;
-    el.btnGenerateCorrige.disabled = state.cahier.length === 0;
-    el.btnClear.disabled    = state.cahier.length === 0;
-    el.btnShuffle.disabled  = groups.length < 2;
-    el.btnPreview.disabled  = state.cahier.length === 0;
-    el.btnPreviewCorrige.disabled = state.cahier.length === 0;
-    el.btnGenerateVariante.disabled = state.cahier.length === 0;
-    el.btnPreviewVariante.disabled  = state.cahier.length === 0;
-    el.btnGenerateCorrigeVariante.disabled = state.cahier.length === 0;
-    el.btnPreviewCorrigeVariante.disabled  = state.cahier.length === 0;
+
+    const empty = state.cahier.length === 0;
+    el.btnPreviewGo.disabled = empty;
+    el.btnDownloadGo.disabled = empty;
+    el.btnClear.disabled = empty;
+    el.btnShuffle.disabled = groups.length < 2;
   }
 
   // ====== DRAG-AND-DROP (au niveau des groupes-questions) ======

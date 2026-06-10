@@ -4,150 +4,108 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Histoire et éducation à la citoyenneté - Catalogue d'opérations intellectuelles au premier cycle du secondaire</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%238B3A2E'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-weight='bold' font-size='17' fill='%23F3EFE6' text-anchor='middle'%3EHE%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
-  <style>
-    .admin-link{
-      margin-left:auto; display:inline-flex; align-items:center; gap:.4rem;
-      font-family:inherit; font-size:.85rem; font-weight:600; text-decoration:none;
-      color:var(--color-primary); background:#fff; border:1px solid var(--color-border-strong);
-      padding:.45rem .8rem; border-radius:7px; white-space:nowrap; transition:all .15s;
-    }
-    .admin-link:hover{ background:var(--color-primary); color:#fff; border-color:var(--color-primary-hover); }
-    @media (max-width:600px){ .admin-link{ font-size:.8rem; padding:.4rem .65rem; } }
-  </style>
 </head>
 <body>
   <header class="site-header">
     <div class="header-inner">
-      <h1 class="site-title">Histoire et éducation à la citoyenneté <span class="title-sep">—</span> <span class="title-sub">Catalogue d'opérations intellectuelles au premier cycle du secondaire</span></h1>
+      <h1 class="site-title">Histoire et éducation à la citoyenneté <span class="title-sub">Catalogue d'opérations intellectuelles au premier cycle du secondaire</span></h1>
       <a href="admin/index.html" class="admin-link" target="_blank" rel="noopener" title="Console d'administration — réservée à l'enseignant">⚙ Console admin</a>
     </div>
   </header>
+
+  <!-- FRISE DES RÉALITÉS SOCIALES : navigation principale du catalogue (peuplée par app.js) -->
+  <nav id="realites-rail" class="periodes-rail" aria-label="Frise des réalités sociales — cliquer une réalité pour filtrer le catalogue"></nav>
 
   <main class="layout">
 
     <!-- ========================================== -->
     <!-- COLONNE GAUCHE : CATALOGUE                  -->
     <!-- ========================================== -->
-    <section class="panel panel-catalog" aria-label="Catalogue des pièces">
+    <section class="panel panel-catalog" aria-label="Catalogue des questions">
       <header class="panel-header">
         <h2>Catalogue</h2>
-        <span id="catalog-count" class="muted">0 question(s)</span>
+        <span id="catalog-count" class="muted">0 question</span>
       </header>
 
       <!-- RECHERCHE -->
       <div class="catalog-search">
         <span class="search-icon" aria-hidden="true">🔍</span>
         <input type="search" id="search-input" class="search-input"
-               placeholder="Rechercher un mot dans les énoncés et les documents…"
+               placeholder="Rechercher dans les énoncés et les documents…"
                autocomplete="off" aria-label="Rechercher dans les énoncés et les documents">
         <button type="button" id="search-clear" class="search-clear" aria-label="Effacer la recherche" hidden>×</button>
       </div>
 
-      <!-- FILTRES -->
+      <!-- FILTRES : niveau en pilules, opération en liste, réinitialisation -->
       <div class="filters">
-        <div class="filter">
-          <label for="filter-niveau">Niveau</label>
-          <select id="filter-niveau">
-            <option value="">Tous</option>
-            <option value="1">Secondaire 1</option>
-            <option value="2">Secondaire 2</option>
-          </select>
+        <div class="filter filter-type" role="group" aria-label="Filtrer par niveau">
+          <button type="button" class="pill pill-niveau active" data-niveau="">Tous</button>
+          <button type="button" class="pill pill-niveau" data-niveau="1">Secondaire 1</button>
+          <button type="button" class="pill pill-niveau" data-niveau="2">Secondaire 2</button>
         </div>
-        <div class="filter">
-          <label for="filter-realite">Réalité sociale</label>
-          <select id="filter-realite"><option value="">Toutes</option></select>
-        </div>
-        <div class="filter">
-          <label for="filter-operation">Opération intellectuelle</label>
-          <select id="filter-operation"><option value="">Toutes</option></select>
+        <div class="filter filter-op">
+          <select id="filter-operation" aria-label="Filtrer par opération intellectuelle"><option value="">Toutes les opérations</option></select>
         </div>
         <button id="reset-filters" type="button" class="btn-link">↺ Réinitialiser</button>
       </div>
+
+      <!-- Sélecteurs d'état conservés pour la logique de filtrage (pilotés par les pilules et la frise) -->
+      <select id="filter-niveau" hidden aria-hidden="true" tabindex="-1">
+        <option value="">Tous</option>
+        <option value="1">Secondaire 1</option>
+        <option value="2">Secondaire 2</option>
+      </select>
+      <select id="filter-realite" hidden aria-hidden="true" tabindex="-1"><option value=""></option></select>
 
       <!-- LISTE DES QUESTIONS -->
       <div id="catalog-list" class="catalog-list"></div>
     </section>
 
     <!-- ========================================== -->
-    <!-- COLONNE DROITE : CAHIER EN CONSTRUCTION     -->
+    <!-- COLONNE DROITE : MON CAHIER                 -->
     <!-- ========================================== -->
     <section class="panel panel-cahier" aria-label="Cahier en construction">
       <header class="panel-header">
-        <h2>Cahier en construction</h2>
-        <span id="cahier-count" class="cahier-stats">0 question</span>
+        <h2>Mon cahier</h2>
       </header>
 
-      <p class="hint">
-        Coche des éléments dans le catalogue pour les ajouter ici.<br>
-        Glisse-dépose pour réordonner, ou utilise « Mélanger l'ordre » pour les disposer au hasard.
-      </p>
+      <!-- Tableau de bord du cahier (rempli par app.js) -->
+      <div id="cahier-count" class="cahier-dash" aria-live="polite"></div>
 
       <div id="cahier-list" class="cahier-list"></div>
 
       <div class="cahier-actions">
 
-        <div class="action-group">
-          <span class="action-group-label">Cahier de l'élève</span>
-          <div class="action-group-row">
-            <button id="btn-preview" type="button" class="btn btn-secondary" disabled>
-              👁 Aperçu
-            </button>
-            <button id="btn-generate" type="button" class="btn btn-primary" disabled>
-              ⬇ Télécharger
-            </button>
-          </div>
-        </div>
-
-        <div class="action-group">
-          <span class="action-group-label">Guide de l'enseignant</span>
-          <div class="action-group-row">
-            <button id="btn-preview-corrige" type="button" class="btn btn-secondary" disabled>
-              👁 Aperçu
-            </button>
-            <button id="btn-generate-corrige" type="button" class="btn btn-primary" disabled>
-              ⬇ Télécharger
-            </button>
-          </div>
-        </div>
-
-        <!-- VARIANTE (test) : documents regroupés à la fin, numérotés globalement -->
-        <div class="action-group action-group--variante">
-          <span class="action-group-variante-head">
-            Variante
-            <span class="action-group-tag">documents à la fin</span>
-          </span>
-          <div class="action-subgroup">
-            <span class="action-subgroup-label">Cahier de l'élève</span>
-            <div class="action-group-row">
-              <button id="btn-preview-variante" type="button" class="btn btn-secondary" disabled>
-                👁 Aperçu
-              </button>
-              <button id="btn-generate-variante" type="button" class="btn btn-primary" disabled>
-                ⬇ Télécharger
-              </button>
+        <!-- GÉNÉRATEUR UNIFIÉ : Document × Disposition → Aperçu / Télécharger -->
+        <div class="generator">
+          <div class="gen-row">
+            <span class="gen-label">Document</span>
+            <div class="seg" role="group" aria-label="Choix du document à produire">
+              <button type="button" class="seg-btn active" data-doc="cahier" aria-pressed="true">Cahier de l'élève</button>
+              <button type="button" class="seg-btn" data-doc="guide" aria-pressed="false">Guide de l'enseignant</button>
             </div>
           </div>
-          <div class="action-subgroup">
-            <span class="action-subgroup-label">Guide de l'enseignant</span>
-            <div class="action-group-row">
-              <button id="btn-preview-corrige-variante" type="button" class="btn btn-secondary" disabled>
-                👁 Aperçu
-              </button>
-              <button id="btn-generate-corrige-variante" type="button" class="btn btn-primary" disabled>
-                ⬇ Télécharger
-              </button>
+          <div class="gen-row">
+            <span class="gen-label">Documents</span>
+            <div class="seg" role="group" aria-label="Disposition des documents dans le cahier">
+              <button type="button" class="seg-btn active" data-layout="std" aria-pressed="true">Avec chaque question</button>
+              <button type="button" class="seg-btn" data-layout="fin" aria-pressed="false">Regroupés à la fin</button>
             </div>
+          </div>
+          <div class="gen-go">
+            <button id="btn-preview-go" type="button" class="btn btn-secondary" disabled>👁 Aperçu</button>
+            <button id="btn-download-go" type="button" class="btn btn-primary" disabled>⬇ Télécharger le cahier</button>
           </div>
         </div>
 
         <div class="action-group-utility">
-          <button id="btn-shuffle-cahier" type="button" class="btn btn-secondary" disabled>
-            🔀 Mélanger l'ordre
-          </button>
-          <button id="btn-clear-cahier" type="button" class="btn btn-secondary btn-clear" disabled>
-            ↺ Vider le cahier
-          </button>
+          <button id="btn-shuffle-cahier" type="button" class="btn btn-ghost" disabled>🔀 Mélanger l'ordre</button>
+          <button id="btn-clear-cahier" type="button" class="btn btn-ghost btn-clear" disabled>↺ Vider le cahier</button>
         </div>
 
       </div>
