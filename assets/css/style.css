@@ -651,6 +651,40 @@ mark.search-hit {
   overflow: hidden;
   transition: border-color var(--transition), box-shadow var(--transition);
 }
+
+/* Intercalaire de section (2+ réalités sociales dans le cahier) — non glissable */
+.cahier-section-divider {
+  flex-shrink: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  padding: 0.45rem 0.2rem 0.25rem;
+  border-bottom: 2px solid var(--color-primary);
+  margin-top: 0.35rem;
+  user-select: none;
+}
+.cahier-section-divider:first-child { margin-top: 0; }
+.csd-lettre {
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: var(--color-primary);
+  white-space: nowrap;
+}
+.csd-titre {
+  flex: 1;
+  min-width: 0;
+  font-weight: 600;
+  font-size: 0.8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.csd-pts {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  white-space: nowrap;
+}
 .cahier-group.sortable-ghost { opacity: 0.4; }
 .cahier-group.sortable-chosen { box-shadow: var(--shadow-md); border-color: var(--color-primary); }
 

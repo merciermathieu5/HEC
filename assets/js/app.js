@@ -564,7 +564,20 @@
         return (orderMap[aKey] ?? 999) - (orderMap[bKey] ?? 999);
       });
     });
-    state.cahier = groupOrder.flatMap(qId => groups.get(qId));
+    // Ordonner les groupes-questions par réalité sociale (ordre canonique PFEQ :
+    // Sec 1 puis Sec 2, chronologique). Tri STABLE : à l'intérieur d'une même
+    // réalité, l'ordre choisi par l'utilisateur (insertion / glisser-déposer /
+    // hasard) est conservé. Avec une seule réalité, c'est un no-op.
+    const rank = realiteRankById();
+    const realiteRankOfQ = (qId) => {
+      const q = DATA.questions.find(x => x.id === qId);
+      return q ? (rank[q.realite_sociale_id] ?? 999) : 999;
+    };
+    const orderedQIds = groupOrder
+      .map((qId, i) => ({ qId, i }))
+      .sort((a, b) => (realiteRankOfQ(a.qId) - realiteRankOfQ(b.qId)) || (a.i - b.i))
+      .map(o => o.qId);
+    state.cahier = orderedQIds.flatMap(qId => groups.get(qId));
   }
 
   // Place les questions dans un ordre aléatoire (mélange les groupes-questions,
@@ -586,6 +599,9 @@
       }
     } while (order.join('|') === original && order.length > 1 && ++tries < 8);
     state.cahier = order.flatMap(qId => groups.get(qId));
+    // Rétablir le regroupement par réalité sociale : le mélange est donc
+    // appliqué À L'INTÉRIEUR de chaque section (l'ordre des sections reste canonique).
+    sortCahier();
     renderCahier();
   }
 
@@ -610,6 +626,75 @@
 
   function removeAllPiecesForQuestion(qId) {
     state.cahier = state.cahier.filter(p => p.questionId !== qId);
+  }
+
+  // ====== SECTIONS PAR RÉALITÉ SOCIALE ======
+  // Rang canonique PFEQ : Secondaire 1 d'abord, puis Secondaire 2 ; ordre
+  // chronologique stable à l'intérieur de chaque niveau (= ordre du tableau
+  // DATA.realites_sociales, comme la frise et le catalogue).
+  function realiteRankById() {
+    const rank = {};
+    DATA.realites_sociales
+      .map((r, idx) => ({ ...r, idx }))
+      .sort((a, b) => (a.niveau - b.niveau) || (a.idx - b.idx))
+      .forEach((r, i) => { rank[r.id] = i; });
+    return rank;
+  }
+
+  const SECTION_LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+  // Découpe le cahier en sections (une par réalité sociale présente), dans
+  // l'ordre canonique PFEQ. SOURCE UNIQUE consommée par les 4 générateurs
+  // docx, la couverture et le panneau cahier — garantit que cahier, variante,
+  // guide et comptabilisation itèrent strictement dans le même ordre.
+  // Retourne : [{ realiteId, titre, niveau, lettre, groups: [{questionId, pieces}], points }]
+  // NB : une seule réalité ⇒ une seule section ⇒ les générateurs conservent
+  // leur comportement actuel (aucun bandeau, total unique).
+  function computeSections() {
+    // 1) Grouper les pièces consécutives par question (invariant de sortCahier)
+    const groups = [];
+    let cur = null;
+    state.cahier.forEach(p => {
+      if (!cur || cur.questionId !== p.questionId) {
+        cur = { questionId: p.questionId, pieces: [] };
+        groups.push(cur);
+      }
+      cur.pieces.push(p);
+    });
+
+    // 2) Regrouper les questions par réalité sociale (ordre canonique)
+    const rank = realiteRankById();
+    const byRealite = new Map();
+    groups.forEach(g => {
+      const q = DATA.questions.find(x => x.id === g.questionId);
+      const rid = q ? q.realite_sociale_id : '__inconnue__';
+      if (!byRealite.has(rid)) byRealite.set(rid, []);
+      byRealite.get(rid).push(g);
+    });
+
+    const sections = [...byRealite.entries()]
+      .sort((a, b) => (rank[a[0]] ?? 999) - (rank[b[0]] ?? 999))
+      .map(([rid, gs], i) => {
+        const r = DATA.realites_sociales.find(x => x.id === rid);
+        // Points de la section : somme des réglettes effectivement ajoutées
+        let points = 0;
+        gs.forEach(g => g.pieces.forEach(p => {
+          if (p.kind !== 'reglette') return;
+          const q = DATA.questions.find(x => x.id === p.questionId);
+          const reg = q && q.reglettes.find(x => x.id === p.pieceId);
+          if (reg && reg.maxPoints) points += reg.maxPoints;
+        }));
+        return {
+          realiteId: rid,
+          titre: r ? r.titre : 'Sans réalité sociale',
+          niveau: r ? r.niveau : null,
+          lettre: SECTION_LETTERS[i] || String(i + 1),
+          groups: gs,
+          points
+        };
+      });
+
+    return sections;
   }
 
   // ====== RENDU CAHIER (par groupe-question) ======
@@ -654,10 +739,29 @@
         </div>`;
     }
 
-    groups.forEach((g, idx) => {
+    // Sections par réalité sociale (intercalaires visibles si 2+ réalités).
+    // La numérotation des questions reste CONTINUE (1 à N) à travers les sections.
+    const sections = computeSections();
+    const multiSections = sections.length > 1;
+
+    let seqNumero = 0;
+    sections.forEach(sec => {
+      if (multiSections) {
+        const divider = document.createElement('div');
+        divider.className = 'cahier-section-divider';
+        divider.innerHTML = `
+          <span class="csd-lettre">Section ${escapeHtml(sec.lettre)}</span>
+          <span class="csd-titre">${escapeHtml(sec.titre)}</span>
+          <span class="csd-pts">${sec.points} pts</span>
+        `;
+        el.cahierList.appendChild(divider);
+      }
+
+      sec.groups.forEach(g => {
       const q = DATA.questions.find(x => x.id === g.questionId);
       if (!q) return;
       const pts = computeQuestionPoints(q);
+      seqNumero++;
 
       const card = document.createElement('div');
       card.className = 'cahier-group';
@@ -667,7 +771,7 @@
       header.className = 'cahier-group-header';
       header.innerHTML = `
         <span class="cahier-handle" aria-hidden="true" title="Glisser pour réordonner">⋮⋮</span>
-        <span class="cahier-num" aria-label="Question ${idx + 1} du cahier">${idx + 1}</span>
+        <span class="cahier-num" aria-label="Question ${seqNumero} du cahier">${seqNumero}</span>
         <div class="cahier-group-meta">
           <span class="cahier-group-title">${escapeHtml(q.operation)}</span>
           <span class="cahier-prompt" title="${escapeHtml(q.questionBody.prompt)}">${escapeHtml(q.questionBody.prompt)}</span>
@@ -684,6 +788,7 @@
       card.appendChild(header);
 
       el.cahierList.appendChild(card);
+      });
     });
 
     // Tableau de bord : total + ventilation par niveau
@@ -723,6 +828,10 @@
           state.cahier.filter(p => p.questionId === qid).forEach(p => newCahier.push(p));
         });
         state.cahier = newCahier;
+        // Le réordonnancement libre reste possible À L'INTÉRIEUR d'une section ;
+        // un déplacement entre deux réalités sociales est ramené dans sa section
+        // (tri stable : la position relative voulue est conservée au mieux).
+        sortCahier();
         renderCahier();
       }
     });
@@ -743,16 +852,14 @@
     // ---- Page couverture (toujours en premier) ----
     const coverElements = buildCoverPage(docx);
 
-    // ---- Grouper les pièces du cahier par question (consécutivement) ----
-    const groups = [];
-    let cur = null;
-    state.cahier.forEach(p => {
-      if (!cur || cur.questionId !== p.questionId) {
-        cur = { questionId: p.questionId, pieces: [] };
-        groups.push(cur);
-      }
-      cur.pieces.push(p);
-    });
+    // ---- Sections par réalité sociale (source unique : computeSections) ----
+    // Une seule réalité ⇒ une seule section ⇒ comportement actuel inchangé.
+    const sections = computeSections();
+    const multiSections = sections.length > 1;
+    // Liste plate ordonnée des groupes-questions, annotée de leur section
+    const orderedGroups = [];
+    sections.forEach(sec => sec.groups.forEach((g, gIdx) =>
+      orderedGroups.push({ ...g, _sec: sec, _firstOfSection: gIdx === 0 })));
 
     const NO_B = { style: BorderStyle.NONE, size: 0, color: "FFFFFF" };
     const WRAPPER_NO_BORDERS = { top: NO_B, bottom: NO_B, left: NO_B, right: NO_B };
@@ -762,17 +869,23 @@
     // Saut de page après la couverture
     bodyChildren.push(new Paragraph({ children: [new PageBreak()] }));
 
-    groups.forEach((g, idx) => {
+    orderedGroups.forEach((g, idx) => {
       const q = DATA.questions.find(x => x.id === g.questionId);
       if (!q) return;
 
-      // Numéro séquentiel : 1, 2, 3… dans l'ordre du cahier (et non l'ordre de l'opération)
+      // Numéro séquentiel : 1, 2, 3… CONTINU à travers les sections
       const seqNumero = idx + 1;
 
       // Saut de page avant chaque question (sauf la première) pour démarrer
       // chaque question sur une page neuve — assure une vraie pagination visible.
       if (idx > 0) {
         bodyChildren.push(new Paragraph({ children: [new PageBreak()] }));
+      }
+
+      // Bandeau de section au-dessus de la première question de chaque section
+      // (la question démarrant déjà sur une page neuve, le bandeau ouvre la page).
+      if (multiSections && g._firstOfSection) {
+        bodyChildren.push(buildSectionBanner(docx, g._sec.lettre, g._sec.titre));
       }
 
       // Pièces "noyau" : énoncé + réglette → enveloppe non-coupable
@@ -950,25 +1063,23 @@
 
     const coverElements = buildCoverPage(docx);
 
-    // Grouper les pièces du cahier par question (consécutivement)
-    const groups = [];
-    let cur = null;
-    state.cahier.forEach(p => {
-      if (!cur || cur.questionId !== p.questionId) {
-        cur = { questionId: p.questionId, pieces: [] };
-        groups.push(cur);
-      }
-      cur.pieces.push(p);
-    });
+    // Sections par réalité sociale (source unique : computeSections) — le MÊME
+    // ordre d'itération que le guide variante, sinon les renvois divergent.
+    const sections = computeSections();
+    const multiSections = sections.length > 1;
+    const orderedGroups = [];
+    sections.forEach(sec => sec.groups.forEach((g, gIdx) =>
+      orderedGroups.push({ ...g, _sec: sec, _firstOfSection: gIdx === 0 })));
 
     const NO_B = { style: BorderStyle.NONE, size: 0, color: "FFFFFF" };
     const WRAPPER_NO_BORDERS = { top: NO_B, bottom: NO_B, left: NO_B, right: NO_B };
 
     // ---- PASSE 1 : numérotation globale des documents + table local→global par question ----
+    // La numérotation reste CONTINUE à travers les sections (renvois uniques).
     let globalDoc = 0;
-    const endDocs = []; // { doc (titre renuméroté, légende conservée), narrow }
+    const endDocs = []; // { doc (titre renuméroté, légende conservée), narrow, sec }
     const isDocNarrow = (d) => !d.imageUrl || (d.imageWidthCm || 12) <= 7;
-    groups.forEach(g => {
+    orderedGroups.forEach(g => {
       const q = DATA.questions.find(x => x.id === g.questionId);
       g._map = {};
       if (!q) return;
@@ -980,7 +1091,7 @@
         const local = localDocNumber(doc, idx);
         g._map[local] = globalDoc;
         // Titre renuméroté en conservant la légende : « Document 1 : Les 95 thèses » → « Document 7 : Les 95 thèses »
-        endDocs.push({ doc: { ...doc, title: ren(doc.title) }, narrow: isDocNarrow(doc) });
+        endDocs.push({ doc: { ...doc, title: ren(doc.title) }, narrow: isDocNarrow(doc), sec: g._sec });
       });
     });
 
@@ -989,11 +1100,18 @@
     bodyChildren.push(new Paragraph({ children: [new PageBreak()] }));
 
     // ---- PASSE 2 : énoncés (question → espace de réponse → réglette), AUCUN document intercalé ----
-    groups.forEach((g, idx) => {
+    orderedGroups.forEach((g, idx) => {
       const q0 = DATA.questions.find(x => x.id === g.questionId);
       if (!q0) return;
       const q = renumberQuestion(q0, g._map);
       const seqNumero = idx + 1;
+
+      // Bandeau de section avant la première question de chaque section.
+      // SANS saut de page : la variante privilégie la densité (les questions
+      // s'enchaînent) ; le bandeau keepNext reste solidaire de sa question.
+      if (multiSections && g._firstOfSection) {
+        bodyChildren.push(buildSectionBanner(docx, g._sec.lettre, g._sec.titre, { before: idx > 0 ? 240 : 0 }));
+      }
 
       const corePieces = g.pieces.filter(p => p.kind === 'questionBody' || p.kind === 'reglette');
       const coreChildren = [];
@@ -1030,29 +1148,46 @@
       bodyChildren.push(new Paragraph({ children: [new TextRun({ text: "", size: 12 })], spacing: { before: 0, after: 120 } }));
     });
 
-    // ---- DOCUMENTS REGROUPÉS À LA FIN (numérotés 1..N), appariés si étroits ----
+    // ---- DOSSIER DOCUMENTAIRE À LA FIN (numérotation continue 1..N) ----
+    // 2+ sections : titre global « Dossier documentaire » puis un sous-bandeau
+    // « Section A — … » par réalité ; l'appariement des documents étroits ne
+    // traverse jamais une frontière de section.
     if (endDocs.length > 0) {
       bodyChildren.push(new Paragraph({ children: [new PageBreak()] }));
       bodyChildren.push(new Paragraph({
-        children: [new TextRun({ text: "Documents", bold: true, size: 32, color: "8B3A2E" })],
+        children: [new TextRun({ text: multiSections ? "Dossier documentaire" : "Documents", bold: true, size: 32, color: "8B3A2E" })],
         spacing: { after: 160 },
         border: { bottom: { style: BorderStyle.SINGLE, size: 8, color: "8B3A2E", space: 4 } }
       }));
 
-      const slots = [];
-      let i = 0;
-      while (i < endDocs.length) {
-        const a = endDocs[i];
-        const b = (i + 1 < endDocs.length) ? endDocs[i + 1] : null;
-        if (b && a.narrow && b.narrow) { slots.push([a.doc, b.doc]); i += 2; }
-        else { slots.push([a.doc]); i += 1; }
-      }
-      slots.forEach((slot, sIdx) => {
-        if (sIdx > 0) {
-          bodyChildren.push(new Paragraph({ children: [new TextRun({ text: "", size: 8 })], spacing: { before: 0, after: 80 } }));
+      // Découper endDocs en tranches par section (ordre déjà sectionné par la passe 1)
+      const docSlices = [];
+      endDocs.forEach(e => {
+        const last = docSlices[docSlices.length - 1];
+        if (last && last.sec === e.sec) last.items.push(e);
+        else docSlices.push({ sec: e.sec, items: [e] });
+      });
+
+      docSlices.forEach((slice, slIdx) => {
+        if (multiSections) {
+          bodyChildren.push(buildSectionBanner(docx, slice.sec.lettre, slice.sec.titre, { size: 26, before: slIdx > 0 ? 280 : 0 }));
         }
-        if (slot.length === 1) bodyChildren.push(...builders.buildDocument(slot[0]));
-        else bodyChildren.push(builders.buildPairedDocuments(slot[0], slot[1]));
+
+        const slots = [];
+        let i = 0;
+        while (i < slice.items.length) {
+          const a = slice.items[i];
+          const b = (i + 1 < slice.items.length) ? slice.items[i + 1] : null;
+          if (b && a.narrow && b.narrow) { slots.push([a.doc, b.doc]); i += 2; }
+          else { slots.push([a.doc]); i += 1; }
+        }
+        slots.forEach((slot, sIdx) => {
+          if (sIdx > 0) {
+            bodyChildren.push(new Paragraph({ children: [new TextRun({ text: "", size: 8 })], spacing: { before: 0, after: 80 } }));
+          }
+          if (slot.length === 1) bodyChildren.push(...builders.buildDocument(slot[0]));
+          else bodyChildren.push(builders.buildPairedDocuments(slot[0], slot[1]));
+        });
       });
     }
 
@@ -1089,21 +1224,18 @@
     const ALL_BORDERS = { top: TEXT_BORDER, bottom: TEXT_BORDER, left: TEXT_BORDER, right: TEXT_BORDER };
     const CELL_MARGINS = { top: 80, bottom: 80, left: 120, right: 120 };
 
-    // Grouper les pièces par question (on conserve les pièces pour pouvoir, en mode variante,
-    // compter les documents réellement présents — strictement la même logique que le cahier variante).
+    // Sections par réalité sociale (source unique : computeSections) — ordre
+    // STRICTEMENT identique aux deux cahiers, sinon numéros et renvois divergent.
+    const corrSections = computeSections();
+    const corrMultiSections = corrSections.length > 1;
     const groups = [];
-    let cur = null;
-    state.cahier.forEach(p => {
-      if (!cur || cur.questionId !== p.questionId) {
-        cur = { questionId: p.questionId, pieces: [] };
-        groups.push(cur);
-      }
-      cur.pieces.push(p);
-    });
+    corrSections.forEach(sec => sec.groups.forEach((g, gIdx) =>
+      groups.push({ ...g, _sec: sec, _firstOfSection: gIdx === 0 })));
 
     // MODE VARIANTE : numérotation globale des documents, IDENTIQUE à buildDocxBlobFlat
-    // (mêmes pièces-documents comptées, dans le même ordre) → les renvois du guide concordent
-    // exactement avec le cahier variante. Le guide n'affiche pas les documents pour autant.
+    // (mêmes pièces-documents comptées, dans le même ordre sectionné) → les renvois du
+    // guide concordent exactement avec le cahier variante. Le guide n'affiche pas les
+    // documents pour autant.
     if (flat) {
       let globalDoc = 0;
       groups.forEach(g => {
@@ -1184,6 +1316,11 @@
           })()
         : qRaw;
       const seqNumero = idx + 1;
+
+      // Intercalaire de section (2+ réalités) — sans saut de page, le guide est compact
+      if (corrMultiSections && g._firstOfSection) {
+        bodyChildren.push(buildSectionBanner(docx, g._sec.lettre, g._sec.titre, { size: 26, before: idx > 0 ? 320 : 0 }));
+      }
 
       // Titre concis : "Question N"
       bodyChildren.push(new Paragraph({
@@ -1526,6 +1663,24 @@
   }
 
   // ====== PAGE COUVERTURE ======
+  // Bandeau de section (.docx) : « Section A — La sédentarisation », style
+  // assorti aux titres burgundy existants. Utilisé par le cahier, la variante
+  // et le guide quand le cahier couvre 2+ réalités sociales.
+  function buildSectionBanner(d, lettre, titre, opts) {
+    const { Paragraph, TextRun, BorderStyle } = d;
+    const size = (opts && opts.size) || 30;
+    const spacingBefore = (opts && opts.before) || 0;
+    return new Paragraph({
+      spacing: { before: spacingBefore, after: 200 },
+      keepNext: true,
+      border: { bottom: { style: BorderStyle.SINGLE, size: 8, color: "8B3A2E", space: 4 } },
+      children: [
+        new TextRun({ text: `Section ${lettre}`, bold: true, size, color: "8B3A2E" }),
+        new TextRun({ text: ` — ${titre}`, bold: true, size, color: "2A2620" })
+      ]
+    });
+  }
+
   function buildCoverPage(d) {
     const {
       Paragraph, TextRun, Table, TableRow, TableCell,
@@ -1635,49 +1790,110 @@
       rows: [fieldRow('Nom'), fieldRow('Groupe'), fieldRow('Date')]
     }));
 
-    // Espace puis bloc Total — tableau 3 colonnes : "Total :" / ligne / "/ N points"
+    // Espace puis bloc des résultats.
+    // 1 réalité sociale : ligne « Total : ___ / N points » (comportement historique).
+    // 2+ réalités : une ligne par section (« Section A — Titre : ___ / n points »)
+    // puis la ligne Total — points calculés par computeSections (réglettes ajoutées).
+    const coverSections = computeSections();
+    const coverMulti = coverSections.length > 1;
+
     out.push(new Paragraph({
       children: [new TextRun({ text: "" })],
-      spacing: { before: 1400 }
+      spacing: { before: coverMulti ? 700 : 1400 }
     }));
 
-    out.push(new Table({
-      width: { size: 5800, type: WidthType.DXA },
-      columnWidths: [1700, 2200, 1900],
-      alignment: AlignmentType.CENTER,
-      rows: [new TableRow({
-        height: { value: 700, rule: "atLeast" },
-        children: [
-          new TableCell({
-            width: { size: 1700, type: WidthType.DXA },
-            borders: NO_BORDERS,
-            verticalAlign: VerticalAlign.BOTTOM,
-            margins: { top: 120, bottom: 120, left: 0, right: 200 },
-            children: [new Paragraph({
-              alignment: AlignmentType.RIGHT,
-              children: [new TextRun({ text: "Total :", bold: true, size: 32 })]
-            })]
-          }),
-          new TableCell({
-            width: { size: 2200, type: WidthType.DXA },
-            borders: { top: NO_BORDER, bottom: TEXT_BORDER, left: NO_BORDER, right: NO_BORDER },
-            verticalAlign: VerticalAlign.BOTTOM,
-            margins: { top: 120, bottom: 120, left: 0, right: 0 },
-            children: [new Paragraph({ children: [new TextRun({ text: "" })] })]
-          }),
-          new TableCell({
-            width: { size: 1900, type: WidthType.DXA },
-            borders: NO_BORDERS,
-            verticalAlign: VerticalAlign.BOTTOM,
-            margins: { top: 120, bottom: 120, left: 200, right: 0 },
-            children: [new Paragraph({
-              alignment: AlignmentType.LEFT,
-              children: [new TextRun({ text: `/ ${totalPoints} points`, bold: true, size: 32, color: "8B3A2E" })]
-            })]
-          })
-        ]
-      })]
-    }));
+    // Fabrique d'une rangée résultat : libellé (droite) / ligne d'écriture / « / N points »
+    const resultRow = (labelRuns, pts, opts) => new TableRow({
+      height: { value: (opts && opts.height) || 560, rule: "atLeast" },
+      children: [
+        new TableCell({
+          width: { size: 5600, type: WidthType.DXA },
+          borders: NO_BORDERS,
+          verticalAlign: VerticalAlign.BOTTOM,
+          margins: { top: 100, bottom: 100, left: 0, right: 200 },
+          children: [new Paragraph({
+            alignment: AlignmentType.RIGHT,
+            children: labelRuns
+          })]
+        }),
+        new TableCell({
+          width: { size: 1900, type: WidthType.DXA },
+          borders: { top: NO_BORDER, bottom: TEXT_BORDER, left: NO_BORDER, right: NO_BORDER },
+          verticalAlign: VerticalAlign.BOTTOM,
+          margins: { top: 100, bottom: 100, left: 0, right: 0 },
+          children: [new Paragraph({ children: [new TextRun({ text: "" })] })]
+        }),
+        new TableCell({
+          width: { size: 2100, type: WidthType.DXA },
+          borders: NO_BORDERS,
+          verticalAlign: VerticalAlign.BOTTOM,
+          margins: { top: 100, bottom: 100, left: 200, right: 0 },
+          children: [new Paragraph({
+            alignment: AlignmentType.LEFT,
+            children: [new TextRun({ text: `/ ${pts} points`, bold: true, size: (opts && opts.ptsSize) || 24, color: "8B3A2E" })]
+          })]
+        })
+      ]
+    });
+
+    if (coverMulti) {
+      const rows = coverSections.map(sec => resultRow(
+        [
+          new TextRun({ text: `Section ${sec.lettre}`, bold: true, size: 24, color: "8B3A2E" }),
+          new TextRun({ text: ` — ${sec.titre} :`, size: 24 })
+        ],
+        sec.points
+      ));
+      rows.push(resultRow(
+        [new TextRun({ text: "Total :", bold: true, size: 30 })],
+        totalPoints,
+        { height: 700, ptsSize: 30 }
+      ));
+      out.push(new Table({
+        width: { size: 9600, type: WidthType.DXA },
+        columnWidths: [5600, 1900, 2100],
+        alignment: AlignmentType.CENTER,
+        rows
+      }));
+    } else {
+      out.push(new Table({
+        width: { size: 5800, type: WidthType.DXA },
+        columnWidths: [1700, 2200, 1900],
+        alignment: AlignmentType.CENTER,
+        rows: [new TableRow({
+          height: { value: 700, rule: "atLeast" },
+          children: [
+            new TableCell({
+              width: { size: 1700, type: WidthType.DXA },
+              borders: NO_BORDERS,
+              verticalAlign: VerticalAlign.BOTTOM,
+              margins: { top: 120, bottom: 120, left: 0, right: 200 },
+              children: [new Paragraph({
+                alignment: AlignmentType.RIGHT,
+                children: [new TextRun({ text: "Total :", bold: true, size: 32 })]
+              })]
+            }),
+            new TableCell({
+              width: { size: 2200, type: WidthType.DXA },
+              borders: { top: NO_BORDER, bottom: TEXT_BORDER, left: NO_BORDER, right: NO_BORDER },
+              verticalAlign: VerticalAlign.BOTTOM,
+              margins: { top: 120, bottom: 120, left: 0, right: 0 },
+              children: [new Paragraph({ children: [new TextRun({ text: "" })] })]
+            }),
+            new TableCell({
+              width: { size: 1900, type: WidthType.DXA },
+              borders: NO_BORDERS,
+              verticalAlign: VerticalAlign.BOTTOM,
+              margins: { top: 120, bottom: 120, left: 200, right: 0 },
+              children: [new Paragraph({
+                alignment: AlignmentType.LEFT,
+                children: [new TextRun({ text: `/ ${totalPoints} points`, bold: true, size: 32, color: "8B3A2E" })]
+              })]
+            })
+          ]
+        })]
+      }));
+    }
 
     return out;
   }
