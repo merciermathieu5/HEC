@@ -866,8 +866,12 @@
 
     const bodyChildren = [];
     bodyChildren.push(...coverElements);
-    // Saut de page après la couverture
-    bodyChildren.push(new Paragraph({ children: [new PageBreak()] }));
+    // Saut de page après la couverture. En mode sectionné, c'est le bandeau de la
+    // Section A qui porte le saut (pageBreakBefore) — aucun paragraphe vide ne
+    // précède le bandeau, qui démarre donc exactement en haut de la page.
+    if (!multiSections) {
+      bodyChildren.push(new Paragraph({ children: [new PageBreak()] }));
+    }
 
     orderedGroups.forEach((g, idx) => {
       const q = DATA.questions.find(x => x.id === g.questionId);
@@ -876,16 +880,14 @@
       // Numéro séquentiel : 1, 2, 3… CONTINU à travers les sections
       const seqNumero = idx + 1;
 
-      // Saut de page avant chaque question (sauf la première) pour démarrer
-      // chaque question sur une page neuve — assure une vraie pagination visible.
-      if (idx > 0) {
-        bodyChildren.push(new Paragraph({ children: [new PageBreak()] }));
-      }
-
-      // Bandeau de section au-dessus de la première question de chaque section
-      // (la question démarrant déjà sur une page neuve, le bandeau ouvre la page).
       if (multiSections && g._firstOfSection) {
-        bodyChildren.push(buildSectionBanner(docx, g._sec.lettre, g._sec.titre));
+        // Tête de section : le bandeau porte lui-même le saut de page
+        // (pas de paragraphe vide → pas de ligne blanche au-dessus).
+        bodyChildren.push(buildSectionBanner(docx, g._sec.lettre, g._sec.titre, { pageBreakBefore: true }));
+      } else if (idx > 0) {
+        // Saut de page avant chaque question (sauf la première) pour démarrer
+        // chaque question sur une page neuve — assure une vraie pagination visible.
+        bodyChildren.push(new Paragraph({ children: [new PageBreak()] }));
       }
 
       // Pièces "noyau" : énoncé + réglette → enveloppe non-coupable
@@ -1097,7 +1099,11 @@
 
     const bodyChildren = [];
     bodyChildren.push(...coverElements);
-    bodyChildren.push(new Paragraph({ children: [new PageBreak()] }));
+    // Saut de page après la couverture : porté par le bandeau de la Section A en
+    // mode sectionné (aucune ligne blanche en tête de page), sinon paragraphe-saut.
+    if (!multiSections) {
+      bodyChildren.push(new Paragraph({ children: [new PageBreak()] }));
+    }
 
     // ---- PASSE 2 : énoncés (question → espace de réponse → réglette), AUCUN document intercalé ----
     orderedGroups.forEach((g, idx) => {
@@ -1107,10 +1113,12 @@
       const seqNumero = idx + 1;
 
       // Bandeau de section avant la première question de chaque section.
-      // SANS saut de page : la variante privilégie la densité (les questions
+      // Section A : porte le saut de page après la couverture. Sections suivantes :
+      // SANS saut de page (la variante privilégie la densité, les questions
       // s'enchaînent) ; le bandeau keepNext reste solidaire de sa question.
       if (multiSections && g._firstOfSection) {
-        bodyChildren.push(buildSectionBanner(docx, g._sec.lettre, g._sec.titre, { before: idx > 0 ? 240 : 0 }));
+        bodyChildren.push(buildSectionBanner(docx, g._sec.lettre, g._sec.titre,
+          idx === 0 ? { pageBreakBefore: true } : { before: 280 }));
       }
 
       const corePieces = g.pieces.filter(p => p.kind === 'questionBody' || p.kind === 'reglette');
@@ -1153,8 +1161,8 @@
     // « Section A — … » par réalité ; l'appariement des documents étroits ne
     // traverse jamais une frontière de section.
     if (endDocs.length > 0) {
-      bodyChildren.push(new Paragraph({ children: [new PageBreak()] }));
       bodyChildren.push(new Paragraph({
+        pageBreakBefore: true,
         children: [new TextRun({ text: multiSections ? "Dossier documentaire" : "Documents", bold: true, size: 32, color: "8B3A2E" })],
         spacing: { after: 160 },
         border: { bottom: { style: BorderStyle.SINGLE, size: 8, color: "8B3A2E", space: 4 } }
@@ -1664,16 +1672,18 @@
 
   // ====== PAGE COUVERTURE ======
   // Bandeau de section (.docx) : « Section A — La sédentarisation », style
-  // assorti aux titres burgundy existants. Utilisé par le cahier, la variante
-  // et le guide quand le cahier couvre 2+ réalités sociales.
+  // assorti aux titres burgundy existants. SANS ligne sous le bandeau : les
+  // titres de question portent déjà la leur, deux traits superposés sont laids.
+  // L'option pageBreakBefore évite le paragraphe vide d'un PageBreak explicite
+  // (qui crée une ligne blanche injustifiée en tête de page).
   function buildSectionBanner(d, lettre, titre, opts) {
-    const { Paragraph, TextRun, BorderStyle } = d;
+    const { Paragraph, TextRun } = d;
     const size = (opts && opts.size) || 30;
     const spacingBefore = (opts && opts.before) || 0;
     return new Paragraph({
-      spacing: { before: spacingBefore, after: 200 },
+      spacing: { before: spacingBefore, after: 160 },
       keepNext: true,
-      border: { bottom: { style: BorderStyle.SINGLE, size: 8, color: "8B3A2E", space: 4 } },
+      pageBreakBefore: !!(opts && opts.pageBreakBefore),
       children: [
         new TextRun({ text: `Section ${lettre}`, bold: true, size, color: "8B3A2E" }),
         new TextRun({ text: ` — ${titre}`, bold: true, size, color: "2A2620" })
@@ -1684,7 +1694,7 @@
   function buildCoverPage(d) {
     const {
       Paragraph, TextRun, Table, TableRow, TableCell,
-      AlignmentType, BorderStyle, WidthType, VerticalAlign
+      AlignmentType, BorderStyle, WidthType, VerticalAlign, ShadingType
     } = d;
 
     const TEXT_BORDER = { style: BorderStyle.SINGLE, size: 4, color: "000000" };
@@ -1761,97 +1771,180 @@
       out.push(new Paragraph({ children: [new TextRun({ text: "" })], spacing: { after: 900 } }));
     }
 
-    // Champs : Nom, Groupe, Date — tableau 2 colonnes
-    const fieldRow = (label) => new TableRow({
-      height: { value: 600, rule: "atLeast" },
-      children: [
-        new TableCell({
-          width: { size: 2000, type: WidthType.DXA },
-          borders: NO_BORDERS,
-          verticalAlign: VerticalAlign.BOTTOM,
-          margins: { top: 120, bottom: 120, left: 0, right: 240 },
-          children: [new Paragraph({
-            alignment: AlignmentType.RIGHT,
-            children: [new TextRun({ text: `${label} :`, bold: true, size: 28 })]
-          })]
-        }),
-        new TableCell({
-          width: { size: 5500, type: WidthType.DXA },
-          borders: { top: NO_BORDER, bottom: TEXT_BORDER, left: NO_BORDER, right: NO_BORDER },
-          margins: { top: 120, bottom: 120, left: 0, right: 0 },
-          children: [new Paragraph({ children: [new TextRun({ text: "" })] })]
-        })
-      ]
-    });
-    out.push(new Table({
-      width: { size: 7500, type: WidthType.DXA },
-      columnWidths: [2000, 5500],
-      alignment: AlignmentType.CENTER,
-      rows: [fieldRow('Nom'), fieldRow('Groupe'), fieldRow('Date')]
-    }));
-
-    // Espace puis bloc des résultats.
-    // 1 réalité sociale : ligne « Total : ___ / N points » (comportement historique).
-    // 2+ réalités : une ligne par section (« Section A — Titre : ___ / n points »)
-    // puis la ligne Total — points calculés par computeSections (réglettes ajoutées).
+    // Champs : Nom, Groupe, Date.
+    // 2+ sections : carte bordée assortie au tableau des résultats (même largeur,
+    // mêmes filets, libellés sur fond teinté) → la couverture forme un ensemble
+    // cohérent de deux cartes empilées.
+    // 1 réalité : style historique (libellés à droite, lignes d'écriture).
     const coverSections = computeSections();
     const coverMulti = coverSections.length > 1;
 
+    if (coverMulti) {
+      const LINE_ID = { style: BorderStyle.SINGLE, size: 4, color: "C9B8B3" };
+      const LINED_ID = { top: LINE_ID, bottom: LINE_ID, left: LINE_ID, right: LINE_ID };
+      const CM_ID = { top: 110, bottom: 110, left: 160, right: 160 };
+      const W_ID = [2200, 6500]; // même largeur totale que le tableau des résultats (8700)
+
+      const idRow = (label) => new TableRow({
+        height: { value: 540, rule: "atLeast" },
+        children: [
+          new TableCell({
+            width: { size: W_ID[0], type: WidthType.DXA },
+            borders: LINED_ID, margins: CM_ID,
+            verticalAlign: VerticalAlign.CENTER,
+            shading: { type: ShadingType.CLEAR, color: "auto", fill: "F4EAE7" },
+            children: [new Paragraph({
+              alignment: AlignmentType.LEFT,
+              children: [new TextRun({ text: label, bold: true, size: 24 })]
+            })]
+          }),
+          new TableCell({
+            width: { size: W_ID[1], type: WidthType.DXA },
+            borders: LINED_ID, margins: CM_ID,
+            verticalAlign: VerticalAlign.CENTER,
+            children: [new Paragraph({ children: [new TextRun({ text: "" })] })]
+          })
+        ]
+      });
+      out.push(new Table({
+        width: { size: W_ID[0] + W_ID[1], type: WidthType.DXA },
+        columnWidths: W_ID,
+        alignment: AlignmentType.CENTER,
+        rows: [idRow('Nom'), idRow('Groupe'), idRow('Date')]
+      }));
+    } else {
+      const fieldRow = (label) => new TableRow({
+        height: { value: 600, rule: "atLeast" },
+        children: [
+          new TableCell({
+            width: { size: 2000, type: WidthType.DXA },
+            borders: NO_BORDERS,
+            verticalAlign: VerticalAlign.BOTTOM,
+            margins: { top: 120, bottom: 120, left: 0, right: 240 },
+            children: [new Paragraph({
+              alignment: AlignmentType.RIGHT,
+              children: [new TextRun({ text: `${label} :`, bold: true, size: 28 })]
+            })]
+          }),
+          new TableCell({
+            width: { size: 5500, type: WidthType.DXA },
+            borders: { top: NO_BORDER, bottom: TEXT_BORDER, left: NO_BORDER, right: NO_BORDER },
+            margins: { top: 120, bottom: 120, left: 0, right: 0 },
+            children: [new Paragraph({ children: [new TextRun({ text: "" })] })]
+          })
+        ]
+      });
+      out.push(new Table({
+        width: { size: 7500, type: WidthType.DXA },
+        columnWidths: [2000, 5500],
+        alignment: AlignmentType.CENTER,
+        rows: [fieldRow('Nom'), fieldRow('Groupe'), fieldRow('Date')]
+      }));
+    }
+
+    // Espace puis bloc des résultats.
+    // 1 réalité sociale : ligne « Total : ___ / N points » (comportement historique).
+    // 2+ réalités : tableau de résultats bordé — en-tête « Résultats », une rangée
+    // par section (libellé À GAUCHE, espace de correction, « / n points »), rangée
+    // Total contrastée. Points calculés par computeSections (réglettes ajoutées).
+
     out.push(new Paragraph({
       children: [new TextRun({ text: "" })],
-      spacing: { before: coverMulti ? 700 : 1400 }
+      spacing: { before: coverMulti ? 600 : 1400 }
     }));
 
-    // Fabrique d'une rangée résultat : libellé (droite) / ligne d'écriture / « / N points »
-    const resultRow = (labelRuns, pts, opts) => new TableRow({
-      height: { value: (opts && opts.height) || 560, rule: "atLeast" },
-      children: [
-        new TableCell({
-          width: { size: 5600, type: WidthType.DXA },
-          borders: NO_BORDERS,
-          verticalAlign: VerticalAlign.BOTTOM,
-          margins: { top: 100, bottom: 100, left: 0, right: 200 },
-          children: [new Paragraph({
-            alignment: AlignmentType.RIGHT,
-            children: labelRuns
-          })]
-        }),
-        new TableCell({
-          width: { size: 1900, type: WidthType.DXA },
-          borders: { top: NO_BORDER, bottom: TEXT_BORDER, left: NO_BORDER, right: NO_BORDER },
-          verticalAlign: VerticalAlign.BOTTOM,
-          margins: { top: 100, bottom: 100, left: 0, right: 0 },
-          children: [new Paragraph({ children: [new TextRun({ text: "" })] })]
-        }),
-        new TableCell({
-          width: { size: 2100, type: WidthType.DXA },
-          borders: NO_BORDERS,
-          verticalAlign: VerticalAlign.BOTTOM,
-          margins: { top: 100, bottom: 100, left: 200, right: 0 },
-          children: [new Paragraph({
-            alignment: AlignmentType.LEFT,
-            children: [new TextRun({ text: `/ ${pts} points`, bold: true, size: (opts && opts.ptsSize) || 24, color: "8B3A2E" })]
-          })]
-        })
-      ]
-    });
-
     if (coverMulti) {
-      const rows = coverSections.map(sec => resultRow(
-        [
-          new TextRun({ text: `Section ${sec.lettre}`, bold: true, size: 24, color: "8B3A2E" }),
-          new TextRun({ text: ` — ${sec.titre} :`, size: 24 })
-        ],
-        sec.points
-      ));
-      rows.push(resultRow(
-        [new TextRun({ text: "Total :", bold: true, size: 30 })],
-        totalPoints,
-        { height: 700, ptsSize: 30 }
-      ));
+      const LINE = { style: BorderStyle.SINGLE, size: 4, color: "C9B8B3" };
+      const LINED = { top: LINE, bottom: LINE, left: LINE, right: LINE };
+      const CM = { top: 110, bottom: 110, left: 160, right: 160 };
+      const W = [5700, 1500, 1500];
+
+      const rows = [];
+
+      // En-tête « Résultats » : bande burgundy pleine largeur
+      rows.push(new TableRow({
+        height: { value: 440, rule: "atLeast" },
+        tableHeader: true,
+        children: [new TableCell({
+          columnSpan: 3,
+          borders: LINED,
+          shading: { type: ShadingType.CLEAR, color: "auto", fill: "8B3A2E" },
+          margins: CM,
+          verticalAlign: VerticalAlign.CENTER,
+          children: [new Paragraph({
+            alignment: AlignmentType.CENTER,
+            children: [new TextRun({ text: "RÉSULTATS", bold: true, size: 24, color: "FFFFFF" })]
+          })]
+        })]
+      }));
+
+      // Une rangée par section : libellé à gauche / espace de correction / « / n points »
+      coverSections.forEach(sec => {
+        rows.push(new TableRow({
+          height: { value: 520, rule: "atLeast" },
+          children: [
+            new TableCell({
+              width: { size: W[0], type: WidthType.DXA },
+              borders: LINED, margins: CM, verticalAlign: VerticalAlign.CENTER,
+              children: [new Paragraph({
+                alignment: AlignmentType.LEFT,
+                children: [
+                  new TextRun({ text: `Section ${sec.lettre}`, bold: true, size: 24, color: "8B3A2E" }),
+                  new TextRun({ text: ` — ${sec.titre}`, size: 24 })
+                ]
+              })]
+            }),
+            new TableCell({
+              width: { size: W[1], type: WidthType.DXA },
+              borders: LINED, margins: CM, verticalAlign: VerticalAlign.CENTER,
+              children: [new Paragraph({ children: [new TextRun({ text: "" })] })]
+            }),
+            new TableCell({
+              width: { size: W[2], type: WidthType.DXA },
+              borders: LINED, margins: CM, verticalAlign: VerticalAlign.CENTER,
+              children: [new Paragraph({
+                alignment: AlignmentType.CENTER,
+                children: [new TextRun({ text: `/ ${sec.points} points`, bold: true, size: 22, color: "6E685C" })]
+              })]
+            })
+          ]
+        }));
+      });
+
+      // Rangée Total : fond teinté, typographie plus affirmée
+      rows.push(new TableRow({
+        height: { value: 600, rule: "atLeast" },
+        children: [
+          new TableCell({
+            width: { size: W[0], type: WidthType.DXA },
+            borders: LINED, margins: CM, verticalAlign: VerticalAlign.CENTER,
+            shading: { type: ShadingType.CLEAR, color: "auto", fill: "F4EAE7" },
+            children: [new Paragraph({
+              alignment: AlignmentType.LEFT,
+              children: [new TextRun({ text: "Total", bold: true, size: 28 })]
+            })]
+          }),
+          new TableCell({
+            width: { size: W[1], type: WidthType.DXA },
+            borders: LINED, margins: CM, verticalAlign: VerticalAlign.CENTER,
+            shading: { type: ShadingType.CLEAR, color: "auto", fill: "F4EAE7" },
+            children: [new Paragraph({ children: [new TextRun({ text: "" })] })]
+          }),
+          new TableCell({
+            width: { size: W[2], type: WidthType.DXA },
+            borders: LINED, margins: CM, verticalAlign: VerticalAlign.CENTER,
+            shading: { type: ShadingType.CLEAR, color: "auto", fill: "F4EAE7" },
+            children: [new Paragraph({
+              alignment: AlignmentType.CENTER,
+              children: [new TextRun({ text: `/ ${totalPoints} points`, bold: true, size: 26, color: "8B3A2E" })]
+            })]
+          })
+        ]
+      }));
+
       out.push(new Table({
-        width: { size: 9600, type: WidthType.DXA },
-        columnWidths: [5600, 1900, 2100],
+        width: { size: W[0] + W[1] + W[2], type: WidthType.DXA },
+        columnWidths: W,
         alignment: AlignmentType.CENTER,
         rows
       }));
