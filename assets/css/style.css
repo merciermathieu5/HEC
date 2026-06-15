@@ -30,8 +30,6 @@
   --color-success: #4a7c4f;
   --color-danger: #a84a3c;
   --color-blue-header: #1f77b4;
-  --niveau-1-color: #5e9c63;  /* Secondaire 1 — barre d'équilibre du tableau de bord */
-  --niveau-2-color: #4a86b0;  /* Secondaire 2 — barre d'équilibre du tableau de bord */
   --focus-ring: 0 0 0 3px rgba(139, 58, 46, 0.28);
   /* Palette HEC — 11 réalités sociales du premier cycle (index = ordre de DATA.realites_sociales) */
   --realite-color-1: #4a7c4f;   --realite-color-1-bg: #e8f0e3;   /* vert : renouvellement de la vision de l'Homme (idx 0) */
@@ -632,11 +630,9 @@ mark.search-hit {
   background: rgba(255, 255, 255, 0.08);
 }
 .dash-bar-seg { height: 100%; }
-.dash-bar-s1 { background: var(--niveau-1-color); }
-.dash-bar-s2 { background: var(--niveau-2-color); }
 .dash-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 0.9rem; margin-top: 0.35rem; }
 .dash-leg { font-size: 0.72rem; color: var(--color-text-on-ink-muted); display: inline-flex; align-items: center; }
-.dash-leg-dot { width: 9px; height: 9px; border-radius: 2px; margin-right: 0.3rem; display: inline-block; }
+.dash-leg-dot { width: 9px; height: 9px; border-radius: 2px; margin-right: 0.3rem; display: inline-block; flex: none; }
 .dash-oi { display: flex; flex-wrap: wrap; gap: 0.3rem; }
 .dash-oi-chip {
   font-size: 0.68rem;
@@ -651,13 +647,6 @@ mark.search-hit {
   background: rgba(74, 124, 79, 0.22);
   color: #bcdcbe;
 }
-.dash-realites { display: flex; flex-wrap: wrap; gap: 5px; }
-.dash-dot {
-  width: 13px; height: 13px; border-radius: 50%;
-  background: rgba(243, 239, 230, 0.12);
-  display: inline-block;
-}
-.dash-dot.on { box-shadow: 0 0 0 1px rgba(243, 239, 230, 0.2); }
 
 .cahier-list {
   flex: 0 1 auto;

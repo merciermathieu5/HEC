@@ -791,10 +791,8 @@
       });
     });
 
-    // Tableau de bord : total, équilibre par niveau, couverture des OI et des réalités.
+    // Tableau de bord : total, équilibre par réalité sociale, couverture des OI.
     // Tout est dérivé du cahier en cours (aucun stockage).
-    const ponder = computeCahierPointsByNiveau();
-
     if (groups.length === 0) {
       el.cahierCount.innerHTML = `
         <div class="dash-main">
@@ -803,56 +801,47 @@
           <span class="dash-pts"><b>0</b> points</span>
         </div>`;
     } else {
-      // Couverture : opérations intellectuelles et réalités présentes dans le cahier
+      // Opérations intellectuelles présentes dans le cahier
       const opsCouvertes = new Set();
-      const realitesCouvertes = new Set();
       groups.forEach(g => {
         const q = DATA.questions.find(x => x.id === g.questionId);
-        if (!q) return;
-        if (q.operation) opsCouvertes.add(q.operation);
-        if (q.realite_sociale_id) realitesCouvertes.add(q.realite_sociale_id);
+        if (q && q.operation) opsCouvertes.add(q.operation);
       });
 
-      // Barre d'équilibre par niveau (proportionnelle aux points)
-      const total = ponder.total || 0;
+      // Barre d'équilibre par réalité sociale (proportionnelle aux points).
+      // Réutilise les sections déjà calculées : une section = une réalité (ordre canonique).
+      const total = sections.reduce((s, sec) => s + sec.points, 0);
       const pct = n => total > 0 ? Math.round((n / total) * 100) : 0;
       const barSegs = [];
-      if (ponder[1] > 0) barSegs.push(`<div class="dash-bar-seg dash-bar-s1" style="width:${pct(ponder[1])}%"></div>`);
-      if (ponder[2] > 0) barSegs.push(`<div class="dash-bar-seg dash-bar-s2" style="width:${pct(ponder[2])}%"></div>`);
       const legend = [];
-      if (ponder[1] > 0) legend.push(`<span class="dash-leg"><span class="dash-leg-dot dash-bar-s1"></span>Secondaire 1 · ${ponder[1]} pts</span>`);
-      if (ponder[2] > 0) legend.push(`<span class="dash-leg"><span class="dash-leg-dot dash-bar-s2"></span>Secondaire 2 · ${ponder[2]} pts</span>`);
+      sections.forEach(sec => {
+        if (sec.points <= 0) return;
+        const idx = DATA.realites_sociales.findIndex(r => r.id === sec.realiteId);
+        const colorVar = idx >= 0 ? `var(--realite-color-${idx + 1})` : 'var(--color-text-on-ink-muted)';
+        const prefix = multiSections ? `${escapeHtml(sec.lettre)} · ` : '';
+        barSegs.push(`<div class="dash-bar-seg" style="width:${pct(sec.points)}%;background:${colorVar}" title="${escapeHtml(sec.titre)} · ${sec.points} pts"></div>`);
+        legend.push(`<span class="dash-leg"><span class="dash-leg-dot" style="background:${colorVar}"></span>${prefix}${escapeHtml(sec.titre)} · ${sec.points} pts</span>`);
+      });
 
       // Chips des opérations intellectuelles (ordre canonique PFEQ)
       const oiChips = DATA.operations_intellectuelles
         .map(op => `<span class="dash-oi-chip${opsCouvertes.has(op) ? ' on' : ''}">${escapeHtml(op)}</span>`)
         .join('');
 
-      // Pastilles des réalités (ordre canonique = index de couleur)
-      const dots = DATA.realites_sociales.map((r, i) => {
-        const on = realitesCouvertes.has(r.id);
-        const color = on ? ` style="background: var(--realite-color-${i + 1})"` : '';
-        return `<span class="dash-dot${on ? ' on' : ''}"${color} title="${escapeHtml(r.titre)} — Secondaire ${r.niveau}"></span>`;
-      }).join('');
-
       el.cahierCount.innerHTML = `
         <div class="dash-main">
           <span class="dash-q"><b>${groups.length}</b> question${groups.length > 1 ? 's' : ''}</span>
           <span class="dash-sep" aria-hidden="true"></span>
-          <span class="dash-pts"><b>${ponder.total}</b> points</span>
+          <span class="dash-pts"><b>${total}</b> points</span>
         </div>
         <div class="dash-section">
-          <div class="dash-label">Équilibre par niveau</div>
+          <div class="dash-label">Équilibre par réalité sociale</div>
           <div class="dash-bar" aria-hidden="true">${barSegs.join('')}</div>
           <div class="dash-legend">${legend.join('')}</div>
         </div>
         <div class="dash-section">
           <div class="dash-label">Opérations intellectuelles <b>${opsCouvertes.size} / ${DATA.operations_intellectuelles.length}</b></div>
           <div class="dash-oi">${oiChips}</div>
-        </div>
-        <div class="dash-section">
-          <div class="dash-label">Réalités représentées <b>${realitesCouvertes.size} / ${DATA.realites_sociales.length}</b></div>
-          <div class="dash-realites" aria-hidden="true">${dots}</div>
         </div>`;
     }
 
