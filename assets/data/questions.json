@@ -16404,22 +16404,17 @@
       "realite_sociale_id": "romanisation",
       "questionBody": {
         "prompt": "À l'aide des documents 1 et 2, dégage une différence et une similitude entre l'éducation des garçons et des filles chez les enfants de patriciens.",
-        "bullets": [],
-        "instructions": [],
         "responseSpace": [
           {
-            "type": "labeled-list",
-            "items": [
-              "Différence",
-              "Similitude"
-            ]
+            "type": "lines",
+            "count": 3
           }
         ]
       },
       "reglettes": [
         {
           "type": "simple",
-          "id": "r-rom-di2",
+          "id": "r-q-rom-differences-2-1",
           "label": "Réglette (4 points)",
           "opLabel": "Dégager des différences et des similitudes",
           "maxPoints": 4,
@@ -16441,7 +16436,7 @@
       ],
       "documents": [
         {
-          "id": "rom-di1-d3",
+          "id": "d-q-rom-differences-2-1",
           "title": "Document 1 : L'éducation",
           "layout": "text-only",
           "text": "« Au sein des familles les plus aisées, les jeunes enfants étaient le plus souvent confiés à une nourrice dans la prime jeunesse, alors qu'un esclave lettré leur enseignait par la suite les rudiments de la lecture et de l'écriture. [...]. La première instruction formelle, qui va de 7 à 11 ans, était en principe dispensée aux garçons comme aux filles dans une école (ludus) sur le Forum par le magister ludi. »",
@@ -16450,7 +16445,7 @@
           ]
         },
         {
-          "id": "rom-di1-d4",
+          "id": "d-q-rom-differences-2-2",
           "title": "Document 2 : Objectifs distincts",
           "layout": "text-only",
           "text": "« L'instruction [des garçons], à partir de 16 ans, était quant à elle essentiellement oratoire et transmise par un rhéteur qui préparait le jeune citoyen à assumer, par la parole, son rôle futur sur la scène politique de la cité, que ce soit en tant qu'avocat ou que magistrat. La rhétorique était une science du discours, qui recouvrait autant l'art de la démonstration que celui de la prestation oratoire ou de la « livraison ». » « Sous la République, la jeune fille romaine n'était la plupart du temps qu'un rouage dans les stratégies matrimoniales de sa famille. Elle était fiancée vers l'âge de 6 ou 7 ans et servait à nouer des alliances politiques avec d'autres clans. Elle était mariée vers l'âge de 13 ans. Ce n'est que graduellement, sous l'Empire, que le statut de la femme romaine s'émancipa peu à peu. »",
@@ -16461,11 +16456,8 @@
       ],
       "corrige": [
         {
-          "kind": "lettres",
-          "valeurs": [
-            "Les garçons sont élevés afin de participer à la vie politique romaine, alors que les jeunes filles sont éduquées afin de devenir de bonnes épouses romaines.",
-            "Les garçons et les filles reçoivent la même éducation jusqu'à l'âge de 7 ans, auprès de leur mère."
-          ]
+          "kind": "texte",
+          "valeur": ""
         }
       ]
     },
