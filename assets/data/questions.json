@@ -20769,41 +20769,35 @@
       "realite_sociale_id": "christianisation-occident",
       "questionBody": {
         "prompt": "Comment se nomme le type d'architecture présenté dans le document 2 ?",
-        "bullets": [],
-        "instructions": [],
         "responseSpace": [
           {
             "type": "lines",
-            "count": 2
+            "count": 1
           }
         ]
       },
       "reglettes": [
         {
           "type": "simple",
-          "id": "r-chr-f7",
-          "label": "Réglette (2 points)",
+          "id": "r-q-chr-faits-7-1",
+          "label": "Réglette (1 point)",
           "opLabel": "Établir des faits",
-          "maxPoints": 2,
+          "maxPoints": 1,
           "levels": [
             {
-              "points": "2 points",
-              "condition": "L'élève établit correctement les faits. (2 sur 2)"
-            },
-            {
               "points": "1 point",
-              "condition": "L'élève établit partiellement les faits. (1 sur 2)"
+              "condition": "L'élève établit correctement le fait."
             },
             {
               "points": "0 point",
-              "condition": "L'élève n'établit pas les faits. (0 sur 2)"
+              "condition": "L'élève établit incorrectement le fait ou ne l'établit pas."
             }
           ]
         }
       ],
       "documents": [
         {
-          "id": "chr-f3-d2",
+          "id": "d-q-chr-faits-7-1",
           "title": "Document 2 : Architecture gothique",
           "layout": "text-image",
           "text": "Au 12e siècle, un nouveau style architectural fait son apparition : l'architecture gothique. Les nouvelles techniques utilisées permettent la création d'églises plus hautes et plus larges. En effet, l'utilisation d'arc diagonal pour soutenir la voûte et d'arc-boutant (demi-arc) renforce les murs et solidifie les constructions. De larges fenêtres habillées de magnifiques vitraux laissent la lumière inonder l'intérieur des édifices. L'art gothique déborde bientôt du cadre religieux et influence la construction d'autres bâtiments comme les châteaux, les palais et les forteresses. Il se répand grâce aux maîtres bâtisseurs qui parcourent l'Europe à la demande des ordres religieux, des évêques et des princes. Ces bâtisseurs contribuent ainsi à la diffusion des connaissances en mathématiques et en géométrie appliquées.",
