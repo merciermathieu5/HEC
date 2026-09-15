@@ -7,7 +7,7 @@
       "niveau": 2,
       "realite_sociale_id": "renouvellement-vision-homme",
       "questionBody": {
-        "prompt": "À l'aide des documents 1 à 3, établis des liens entre les éléments suivants :",
+        "prompt": "Au début du 16e siècle, l'Église catholique occupe une place centrale dans les royaumes d'Europe. Explique de quelle façon les actions reprochées au clergé catholique ont transformé la culture des royaumes d'Europe. Pour répondre, précise chacun des éléments ci-dessous et relie-les entre eux. Utilise les documents 1, 2 et 3.",
         "bullets": [
           "Une action reprochée au clergé catholique",
           "Une action de Martin Luther",
@@ -630,7 +630,7 @@
       "niveau": 2,
       "realite_sociale_id": "renouvellement-vision-homme",
       "questionBody": {
-        "prompt": "À l'aide des documents 1 à 3, établis des liens entre les éléments suivants :",
+        "prompt": "Au 16e siècle, un nouveau mouvement culturel prend de l'essor en Europe. Explique de quelle façon ce mouvement a poussé l'Église catholique à réagir. Pour répondre, précise chacun des éléments ci-dessous et relie-les entre eux. Utilise les documents 1, 2 et 3.",
         "bullets": [
           "Un mouvement culturel qui prend de l'essor au 16e siècle",
           "Un événement organisé en réponse à ce mouvement",
@@ -1228,7 +1228,7 @@
       "niveau": 2,
       "realite_sociale_id": "renouvellement-vision-homme",
       "questionBody": {
-        "prompt": "À l'aide des documents 1 à 3, établis des liens entre les éléments suivants :",
+        "prompt": "La Renaissance est une période de grandes inventions en Europe. Explique de quelle façon l'une de ces inventions a transformé la vie des populations européennes. Pour répondre, précise chacun des éléments ci-dessous et relie-les entre eux. Utilise les documents 1, 2 et 3.",
         "bullets": [
           "Une nouvelle invention",
           "Un impact sur la disponibilité des livres",
@@ -2614,7 +2614,7 @@
       "niveau": 2,
       "realite_sociale_id": "expansion-europeenne",
       "questionBody": {
-        "prompt": "À l'aide des documents 1 à 3, établis des liens entre les éléments suivants :",
+        "prompt": "À la fin du 15e siècle, les royaumes européens se lancent dans de grandes explorations maritimes. Explique de quelle façon ces explorations ont bouleversé la population autochtone de l'Amérique. Pour répondre, précise chacun des éléments ci-dessous et relie-les entre eux. Utilise les documents 1, 2 et 3.",
         "bullets": [
           "La rencontre de deux mondes",
           "Un impact sur la santé des Autochtones",
@@ -3210,7 +3210,7 @@
       "niveau": 2,
       "realite_sociale_id": "expansion-europeenne",
       "questionBody": {
-        "prompt": "À l'aide des documents 1 à 3, établis des liens entre les éléments suivants :",
+        "prompt": "Au 16e siècle, les royaumes européens s'intéressent de plus en plus au territoire de l'Amérique. Explique de quelle façon les besoins des royaumes européens ont eu des répercussions sur les Aztèques. Pour répondre, précise chacun des éléments ci-dessous et relie-les entre eux. Utilise les documents 1, 2 et 3.",
         "bullets": [
           "Un besoin des royaumes européens",
           "Les ressources naturelles présentes en Amérique",
@@ -3796,7 +3796,7 @@
       "niveau": 2,
       "realite_sociale_id": "expansion-europeenne",
       "questionBody": {
-        "prompt": "À l'aide des documents 1 à 3, établis des liens entre les éléments suivants :",
+        "prompt": "Au 15e siècle, les monarques européens recherchent des produits de luxe provenant de l'Asie. Explique de quelle façon un événement géopolitique majeur a forcé les Portugais à modifier leurs routes commerciales. Pour répondre, précise chacun des éléments ci-dessous et relie-les entre eux. Utilise les documents 1, 2 et 3.",
         "bullets": [
           "Des produits de luxe recherchés par les monarques européens",
           "Un événement géopolitique majeur au 15e siècle",
@@ -5136,7 +5136,7 @@
       "niveau": 2,
       "realite_sociale_id": "revolution-americaine",
       "questionBody": {
-        "prompt": "À l'aide des documents 1 à 3, établis des liens entre les éléments suivants :",
+        "prompt": "Dans la deuxième moitié du 18e siècle, les relations se détériorent entre la Grande-Bretagne et ses Treize colonies américaines. Explique de quelle façon la situation économique de la Grande-Bretagne a provoqué la colère des colons américains. Pour répondre, précise chacun des éléments ci-dessous et relie-les entre eux. Utilise les documents 1, 2 et 3.",
         "bullets": [
           "La situation économique de la Grande-Bretagne",
           "Une mesure imposée aux 13 colonies américaines",
@@ -5789,7 +5789,7 @@
       "niveau": 2,
       "realite_sociale_id": "revolution-americaine",
       "questionBody": {
-        "prompt": "À l'aide des documents 1 à 3, établis des liens entre les éléments suivants :",
+        "prompt": "Au 18e siècle, de nouvelles idées circulent en Europe et en Amérique. Explique de quelle façon les idées des Lumières ont influencé le mouvement révolutionnaire américain. Pour répondre, précise chacun des éléments ci-dessous et relie-les entre eux. Utilise les documents 1, 2 et 3.",
         "bullets": [
           "Une idée issue du siècle des Lumières",
           "Un moyen de diffusion des idées et des connaissances",
@@ -6406,7 +6406,7 @@
       "niveau": 2,
       "realite_sociale_id": "revolution-americaine",
       "questionBody": {
-        "prompt": "À l'aide des documents 1 à 3, établis des liens entre les éléments suivants :",
+        "prompt": "Au 18e siècle, les Treize colonies américaines connaissent une croissance démographique rapide. Explique de quelle façon les intentions des colons et les objectifs de la couronne britannique ont eu un impact sur les frontières des Treize colonies. Pour répondre, précise chacun des éléments ci-dessous et relie-les entre eux. Utilise les documents 1, 2 et 3.",
         "bullets": [
           "Un désir territorial des 13 colonies américaines",
           "Un objectif de la couronne britannique",
@@ -7756,7 +7756,7 @@
       "niveau": 1,
       "realite_sociale_id": "sedentarisation",
       "questionBody": {
-        "prompt": "À l'aide des documents 1 à 3, établis des liens entre les éléments suivants :",
+        "prompt": "Au Néolithique, au Moyen-Orient, les êtres humains commencent à pratiquer l'agriculture. Explique de quelle façon les caractéristiques naturelles de la région ont permis d'augmenter la production agricole. Pour répondre, précise chacun des éléments ci-dessous et relie-les entre eux. Utilise les documents 1, 2 et 3.",
         "bullets": [
           "Un élément naturel favorisant l'agriculture",
           "Une nouvelle technique agricole",
@@ -8381,7 +8381,7 @@
       "niveau": 1,
       "realite_sociale_id": "sedentarisation",
       "questionBody": {
-        "prompt": "À l'aide des documents 1 à 3, établis des liens entre les éléments suivants :",
+        "prompt": "Au Néolithique, les êtres humains se nourrissent de plus en plus grâce à l'agriculture. Explique de quelle façon les caractéristiques naturelles du territoire et une nouvelle invention ont transformé leur mode de vie. Pour répondre, précise chacun des éléments ci-dessous et relie-les entre eux. Utilise les documents 1, 2 et 3.",
         "bullets": [
           "Une caractéristique naturelle du territoire",
           "Une invention utile à la conservation des aliments",
@@ -8989,7 +8989,7 @@
       "niveau": 1,
       "realite_sociale_id": "sedentarisation",
       "questionBody": {
-        "prompt": "À l'aide des documents 1 à 3, établis des liens entre les éléments suivants :",
+        "prompt": "Au Néolithique, le mode de vie des êtres humains se transforme. Explique de quelle façon leur nouvelle façon de s'organiser a fait apparaître des pratiques culturelles qui nous renseignent sur la hiérarchie sociale de l'époque. Pour répondre, précise chacun des éléments ci-dessous et relie-les entre eux. Utilise les documents 1, 2 et 3.",
         "bullets": [
           "Organisation des populations au Néolithique",
           "Une nouvelle pratique culturelle",
@@ -10312,7 +10312,7 @@
       "niveau": 1,
       "realite_sociale_id": "emergence-civilisation",
       "questionBody": {
-        "prompt": "À l'aide des documents 1 à 3, établis des liens entre les éléments suivants :",
+        "prompt": "Vers -3500, les premières cités-États se développent en Mésopotamie. Explique de quelle façon la production agricole de la région a mené à une invention qui facilite les échanges commerciaux. Pour répondre, précise chacun des éléments ci-dessous et relie-les entre eux. Utilise les documents 1, 2 et 3.",
         "bullets": [
           "La production agricole en Mésopotamie",
           "Le développement des échanges commerciaux",
@@ -10929,7 +10929,7 @@
       "niveau": 1,
       "realite_sociale_id": "emergence-civilisation",
       "questionBody": {
-        "prompt": "À l'aide des documents 1 à 3, établis des liens entre les éléments suivants :",
+        "prompt": "Vers -3500, une invention majeure voit le jour en Mésopotamie. Explique de quelle façon cette invention a transformé l'administration et la justice dans l'empire babylonien. Pour répondre, précise chacun des éléments ci-dessous et relie-les entre eux. Utilise les documents 1, 2 et 3.",
         "bullets": [
           "Une invention dans le domaine de la communication",
           "Une utilisation politique de cette invention",
@@ -11549,7 +11549,7 @@
       "niveau": 1,
       "realite_sociale_id": "emergence-civilisation",
       "questionBody": {
-        "prompt": "À l'aide des documents 1 à 3, établis des liens entre les éléments suivants :",
+        "prompt": "Dans l'Antiquité, les Mésopotamiens commercent avec les régions voisines. Explique de quelle façon un élément naturel du territoire a favorisé le développement des routes commerciales. Pour répondre, précise chacun des éléments ci-dessous et relie-les entre eux. Utilise les documents 1, 2 et 3.",
         "bullets": [
           "Un élément naturel favorisant le déplacement",
           "Un nouveau moyen de transport",
@@ -12913,7 +12913,7 @@
       "niveau": 1,
       "realite_sociale_id": "premiere-experience-democratie",
       "questionBody": {
-        "prompt": "À l'aide des documents 1 à 3, établis des liens entre les éléments suivants :",
+        "prompt": "Dans l'Antiquité, la Grèce est divisée en de nombreuses cités-États. Explique de quelle façon les caractéristiques du territoire grec ont influencé le développement des régimes politiques des cités-États. Pour répondre, précise chacun des éléments ci-dessous et relie-les entre eux. Utilise les documents 1, 2 et 3.",
         "bullets": [
           "Une caractéristique territoriale de la Grèce",
           "Un impact sur l'emplacement des Cités-État",
@@ -13543,7 +13543,7 @@
       "niveau": 1,
       "realite_sociale_id": "premiere-experience-democratie",
       "questionBody": {
-        "prompt": "À l'aide des documents 1 à 3, établis des liens entre les éléments suivants :",
+        "prompt": "Dans l'Antiquité, la cité-État d'Athènes développe un régime démocratique. Explique de quelle façon l'éducation des garçons athéniens les prépare à jouer leur rôle politique. Pour répondre, précise chacun des éléments ci-dessous et relie-les entre eux. Utilise les documents 1, 2 et 3.",
         "bullets": [
           "L'éducation des garçons",
           "Le rôle des citoyens athéniens",
@@ -14145,7 +14145,7 @@
       "niveau": 1,
       "realite_sociale_id": "premiere-experience-democratie",
       "questionBody": {
-        "prompt": "À l'aide des documents 1 à 3, établis des liens entre les éléments suivants :",
+        "prompt": "Dans l'Antiquité, la cité-État d'Athènes est située à proximité de la mer Méditerranée. Explique de quelle façon le commerce méditerranéen a contribué à l'enrichissement d'Athènes. Pour répondre, précise chacun des éléments ci-dessous et relie-les entre eux. Utilise les documents 1, 2 et 3.",
         "bullets": [
           "Le commerce méditérannéen",
           "Une construction favorisant le commerce",
@@ -15500,7 +15500,7 @@
       "niveau": 1,
       "realite_sociale_id": "romanisation",
       "questionBody": {
-        "prompt": "À l'aide des documents 1 à 3, explique comment l'annexion de nouveaux territoires par Rome transforme la culture des populations conquises.",
+        "prompt": "À partir du 1er siècle avant notre ère, Rome étend son territoire autour du bassin méditerranéen. Explique de quelle façon l'annexion de nouvelles provinces a transformé la culture des populations conquises. Pour répondre, précise chacun des éléments ci-dessous et relie-les entre eux. Utilise les documents 1, 2 et 3.",
         "bullets": [
           "Un motif de l'annexion de nouveaux territoires",
           "Une nouvelle province romaine au 1er siècle avant notre ère",
@@ -16148,7 +16148,7 @@
       "niveau": 1,
       "realite_sociale_id": "romanisation",
       "questionBody": {
-        "prompt": "À l'aide des documents 1 à 3, explique comment la situation territoriale de l'empire romain a participé à sa chute.",
+        "prompt": "Au 2e siècle de notre ère, l'Empire romain domine le bassin méditerranéen. Explique de quelle façon la situation territoriale de l'empire a facilité les actions des peuples germaniques. Pour répondre, précise chacun des éléments ci-dessous et relie-les entre eux. Utilise les documents 1, 2 et 3.",
         "bullets": [
           "La situation territoriale de l'empire romain au 2e siècle de notre ère",
           "Une problématique liée à la situation territoriale",
@@ -16780,7 +16780,7 @@
       "niveau": 1,
       "realite_sociale_id": "romanisation",
       "questionBody": {
-        "prompt": "À l'aide des documents 1 à 3, explique comment certaines classes sociales peuvent obtenir les mêmes droits que les patriciens romains.",
+        "prompt": "Dans l'Empire romain, les habitants ne possèdent pas tous les mêmes droits. Explique de quelle façon un habitant de l'empire peut améliorer sa situation politique en devenant citoyen romain. Pour répondre, précise chacun des éléments ci-dessous et relie-les entre eux. Utilise les documents 1, 2 et 3.",
         "bullets": [
           "Une classe sociale qui ne possède pas de droits sur le plan politique",
           "Une manière d'obtenir la citoyenneté romaine",
@@ -18183,7 +18183,7 @@
       "niveau": 1,
       "realite_sociale_id": "christianisation-occident",
       "questionBody": {
-        "prompt": "À l'aide des documents 1 à 3, explique comment le christianisme fut progressivement toléré dans l'Empire romain au 4e siècle de notre ère.",
+        "prompt": "En 312, l'empereur Constantin s'apprête à livrer la bataille du pont Milvius. Explique de quelle façon une décision prise lors de cette bataille a transformé les croyances religieuses de l'empereur, puis celles des habitants de l'Empire romain. Pour répondre, précise chacun des éléments ci-dessous et relie-les entre eux. Utilise les documents 1, 2 et 3.",
         "bullets": [
           "Une décision prise par Constantin lors de la bataille du pont Milvius",
           "Une conséquence sur ses croyances religieuses",
@@ -18776,7 +18776,7 @@
       "niveau": 1,
       "realite_sociale_id": "christianisation-occident",
       "questionBody": {
-        "prompt": "À l'aide des documents 1 à 3, explique comment les croisades ont favorisé l'avancement des connaissances scientifiques en Europe.",
+        "prompt": "En 1095, le pape Urbain II pose une action qui marquera l'histoire de l'Occident. Explique de quelle façon cette action a mené à des avancées scientifiques en Europe. Pour répondre, précise chacun des éléments ci-dessous et relie-les entre eux. Utilise les documents 1, 2 et 3.",
         "bullets": [
           "Une action du pape Urbain II",
           "La réaction des chrétiens d'Europe",
@@ -19383,7 +19383,7 @@
       "niveau": 1,
       "realite_sociale_id": "christianisation-occident",
       "questionBody": {
-        "prompt": "À l'aide des documents 1 à 3, explique comment le développement de l'architecture a transformé les lieux de culte chrétiens à travers l'Europe médiévale.",
+        "prompt": "Au 12e siècle, un nouveau style architectural apparaît en Europe. Explique de quelle façon ce style a permis de construire des lieux de culte chrétiens plus grands et plus lumineux. Pour répondre, précise chacun des éléments ci-dessous et relie-les entre eux. Utilise les documents 1, 2 et 3.",
         "bullets": [
           "Un nouveau style architectural qui apparaît en Europe",
           "De nouvelles techniques de construction qui apparaissent avec ce style",
@@ -20823,7 +20823,7 @@
       "niveau": 2,
       "realite_sociale_id": "industrialisation",
       "questionBody": {
-        "prompt": "À l'aide des documents 1 à 3, établis des liens entre les éléments suivants :",
+        "prompt": "Au 19e siècle, la Grande-Bretagne s'industrialise et les usines se multiplient. Explique de quelle façon les conditions de travail des ouvriers ont poussé le gouvernement britannique à mettre en place de nouvelles mesures. Pour répondre, précise chacun des éléments ci-dessous et relie-les entre eux. Utilise les documents 1, 2 et 3.",
         "bullets": [
           "Les conditions de vie et de travail des ouvriers",
           "Une action réalisée par les ouvriers",
@@ -21414,7 +21414,7 @@
       "niveau": 2,
       "realite_sociale_id": "industrialisation",
       "questionBody": {
-        "prompt": "À l'aide des documents 1 à 3, établis des liens entre les éléments suivants :",
+        "prompt": "Au 18e siècle, les campagnes britanniques se transforment. Explique de quelle façon une mesure du gouvernement britannique a contribué au développement rapide des villes. Pour répondre, précise chacun des éléments ci-dessous et relie-les entre eux. Utilise les documents 1, 2 et 3.",
         "bullets": [
           "Une mesure mise en place par le gouvernement britannique",
           "Un mouvement de population causé par cette mesure",
@@ -22068,7 +22068,7 @@
       "niveau": 2,
       "realite_sociale_id": "industrialisation",
       "questionBody": {
-        "prompt": "À l'aide des documents 1 à 3, établis des liens entre les éléments suivants :",
+        "prompt": "Au 19e siècle, l'Angleterre est au cœur de la révolution industrielle. Explique de quelle façon une ressource naturelle présente sur son territoire a transformé le transport des marchandises. Pour répondre, précise chacun des éléments ci-dessous et relie-les entre eux. Utilise les documents 1, 2 et 3.",
         "bullets": [
           "La présence d'une ressource naturelle en Angleterre",
           "Une invention dans le domaine du transport",
@@ -23423,7 +23423,7 @@
       "niveau": 2,
       "realite_sociale_id": "expansion-monde-industriel",
       "questionBody": {
-        "prompt": "À l'aide des documents 1 à 3, établis des liens entre les éléments suivants :",
+        "prompt": "À la fin du 19e siècle, les puissances européennes exploitent les ressources de leurs colonies en Afrique. Explique de quelle façon les besoins d'une industrie européenne ont eu des conséquences sur la population du Congo belge. Pour répondre, précise chacun des éléments ci-dessous et relie-les entre eux. Utilise les documents 1, 2 et 3.",
         "bullets": [
           "Une industrie européenne",
           "Une ressource naturelle nécessaire à cette industrie",
@@ -24015,7 +24015,7 @@
       "niveau": 2,
       "realite_sociale_id": "expansion-monde-industriel",
       "questionBody": {
-        "prompt": "À l'aide des documents 1 à 3, établis des liens entre les éléments suivants :",
+        "prompt": "À la fin du 19e siècle, plusieurs puissances européennes souhaitent étendre leur empire colonial en Afrique. Explique de quelle façon un événement survenu en 1884-1885 a transformé le territoire africain et les relations entre les nations qui l'habitent. Pour répondre, précise chacun des éléments ci-dessous et relie-les entre eux. Utilise les documents 1, 2 et 3.",
         "bullets": [
           "Un événement rassemblant les puissances européennes en 1884-85",
           "Une conséquence sur le territoire de l'Afrique",
@@ -24672,7 +24672,7 @@
       "niveau": 2,
       "realite_sociale_id": "expansion-monde-industriel",
       "questionBody": {
-        "prompt": "À l'aide des documents 1 à 3, établis des liens entre les éléments suivants :",
+        "prompt": "Au 19e siècle, l'Allemagne participe à la colonisation de l'Afrique. Explique de quelle façon les actions menées contre la nation des Hereros ont eu des conséquences démographiques importantes. Pour répondre, précise chacun des éléments ci-dessous et relie-les entre eux. Utilise les documents 1, 2 et 3.",
         "bullets": [
           "Une colonie africaine sous domination allemande",
           "Une action réalisée envers la nation des Hereros",
