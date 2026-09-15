@@ -1470,7 +1470,7 @@
       "documents": [
         {
           "id": "ch2-d1",
-          "title": "Document 1 : Giotto di Bondone",
+          "title": "Document 1 : Giotto di Bondone (Moyen Âge)",
           "layout": "text-image",
           "text": "Giotto di Bondone est un peintre, sculpteur et architecte italien du 13e siècle qui a bénéficié du soutien de plusieurs mécènes comme Enrico Scrovegni, pour qui il a peint les fresques de la chapelle Scrovegni à Padoue.",
           "imageUrl": "assets/img/changements-2/img000.png",
@@ -1482,7 +1482,7 @@
         },
         {
           "id": "ch2-d2",
-          "title": "Document 2 : La famille Médicis",
+          "title": "Document 2 : La famille Médicis (Renaissance)",
           "layout": "text-only",
           "text": "Plusieurs hommes influents ont subventionné des artistes de la Renaissance. Cosme de Médicis, banquier florentin, a commandé de nombreuses œuvres d'art. Son petit-fils, Laurent de Médicis, est également devenu le mécène de plusieurs artistes de la Renaissance, dont Le Verrocchio, Léonard de Vinci, Sandro Botticelli et Michel-Ange. Laurent de Médicis était aussi le dirigeant de la cité de Florence où il régnait sans partage.",
           "sources": [
@@ -3439,7 +3439,7 @@
       "documents": [
         {
           "id": "exp-ch1-d2",
-          "title": "Document 2 : Adoption du catholicisme",
+          "title": "Document 2 : Adoption du catholicisme (après l'arrivée des Européens)",
           "layout": "text-only",
           "text": "C'est à l'arrivée des Espagnols en 1519, avec Hernan Cortès à sa tête, que l'empire s'est effondré et que la population a adhéré rapidement aux croyances religieuses des conquérants, aux croyances chrétiennes.",
           "sources": [
@@ -3448,7 +3448,7 @@
         },
         {
           "id": "exp-ch1-d3",
-          "title": "Document 3 : La spiritualité aztèque",
+          "title": "Document 3 : La spiritualité aztèque (avant l'arrivée des Européens)",
           "layout": "text-only",
           "text": "Les Aztèques croyaient que l'équilibre de l'univers reposait sur des forces cosmiques et des cycles de création et de destruction. Ils pensaient que leur monde était le cinquième et dernier de ces cycles, et qu'il avait été précédé par quatre mondes qui avaient été détruits par des catastrophes naturelles. Parmi les dieux les plus importants de la spiritualité aztèque figuraient Huitzilopochtli (dieu du soleil et de la guerre), Tlaloc (dieu de la pluie, de la fertilité et de l'eau), Quetzalcoatl (dieu de la connaissance, du vent et de la civilisation), Tezcatlipoca (dieu de la nuit, du chaos et des conflits) et Coatlicue (déesse de la terre et de la fertilité, mère des dieux et des hommes).",
           "sources": [
@@ -4031,7 +4031,7 @@
       "documents": [
         {
           "id": "exp-ch2-d1",
-          "title": "Document 1 : Approvisionnement en or et en argent",
+          "title": "Document 1 : Approvisionnement en or et en argent (15e siècle)",
           "layout": "text-only",
           "text": "Au 15e siècle, les pays d'Afrique du Nord, comme le Maroc et l'Algérie, possèdent des gisements d'or et d'argent. L'or était également extrait de certaines régions comme les royaumes du Mali et du Ghana. Il était ensuite acheminé à travers le Sahara vers le Maghreb puis vers l'Europe en utilisant les routes commerciales transsahariennes.",
           "sources": [
@@ -4040,7 +4040,7 @@
         },
         {
           "id": "exp-ch2-d2",
-          "title": "Document 2 : Les mines de Potosi",
+          "title": "Document 2 : Les mines de Potosi (16e siècle)",
           "layout": "text-only",
           "text": "L'argent commence à être exploité à Potosi douze ans seulement après la conquête espagnole de l'Empire inca. La « découverte » du site relève de la légende. En 1545, Diego Huallpa, un éleveur quechua de lamas, aurait perdu une de ses bêtes à flanc de montagne. Au cours de son ascension pour la retrouver, une rafale de vent l'aurait forcé à s'accrocher à un buisson qui se serait déraciné, découvrant une pépite d'argent natif. Huallpa serait retourné plusieurs fois sur place pour ramasser le minerai d'argent affleurant le sol, et se serait montré incapable de cacher à ses proches la provenance de cette manne soudaine. La rumeur de sa bonne fortune aurait atteint les oreilles de Juan de Villarroel, un conquistador désargenté fraîchement arrivé dans les Andes, après une série de mauvais coups en Amérique centrale. Ce dernier se serait empressé de faire enregistrer officiellement à son nom la découverte de la « montagne de l'argent ».",
           "sources": [
@@ -5397,7 +5397,7 @@
       "documents": [
         {
           "id": "rch1-d1",
-          "title": "Document 1 : Empire colonial britannique",
+          "title": "Document 1 : Empire colonial britannique (en 1763)",
           "layout": "text-only",
           "text": "En plus des Treize colonies américaines, la Grande-Bretagne est présente sur tous les continents du globe. Elle possède des colonies dans les Antilles (Jamaïque, Bahamas, Bermudes, etc.), en Afrique (Île James, Île de Bunce, etc.) et, avec la fin de la guerre de Sept Ans, une nouvelle colonie s'ajoute en Amérique : la Province de Québec.",
           "sources": [
@@ -8005,7 +8005,7 @@
       "documents": [
         {
           "id": "sed-ch1-d1",
-          "title": "Document 1 : L'agriculture",
+          "title": "Document 1 : L'agriculture (Néolithique)",
           "layout": "text-only",
           "text": "En plus de pratiquer la chasse, la pêche et la cueillette, les humains qui vivent durant cette période pratiquent l'agriculture et l'élevage afin de subvenir à leurs besoins alimentaires.",
           "sources": [
@@ -8014,7 +8014,7 @@
         },
         {
           "id": "sed-ch1-d2",
-          "title": "Document 2 : Chasseurs-cueilleurs",
+          "title": "Document 2 : Chasseurs-cueilleurs (Paléolithique)",
           "layout": "text-only",
           "text": "Les humains du Paléolithique vivent en petits groupes de chasseurs-cueilleurs. Ils sont des prédateurs et suivent les troupeaux de gibiers afin de subvenir à leurs besoins.",
           "sources": [
@@ -9708,7 +9708,7 @@
       "documents": [
         {
           "id": "sed-ch2-d1",
-          "title": "Document 1 : Les réseaux d'échanges",
+          "title": "Document 1 : Les réseaux d'échanges (Néolithique)",
           "layout": "text-only",
           "text": "« Les populations néolithiques entretiennent des réseaux d'échange bien rodés reliant entre elles différentes aires géographiques, parfois fort distantes les unes des autres. Ces relations favorisent la diffusion d'idées et de techniques. Les premiers échanges, basés sur le troc, ont certainement lieu entre membres d'une même communauté, au sein du village. On échange des colliers de perles, des pointes de flèche, des armatures de faucilles, de la viande, etc. Les productions sont également échangées de village en village. Le bétail, les fromages, les outils, les tissus, les coquillages et même les femmes ont sans doute été l'objet de transactions entre communautés. »",
           "sources": [
@@ -9717,7 +9717,7 @@
         },
         {
           "id": "sed-ch2-d2",
-          "title": "Document 2 : Le troc",
+          "title": "Document 2 : Le troc (Paléolithique)",
           "layout": "text-only",
           "text": "Il est probable que le troc ait été utilisé au Paléolithique, bien que les preuves archéologiques soient limitées. Au cours de cette période, les humains étaient principalement des chasseurs-cueilleurs, vivant en groupes relativement petits. Les chercheurs ont découvert certaines preuves d'échanges, comme des pierres et des coquillages qui ont été transportés sur de longues distances. Cela suggère que ces matériaux étaient échangés entre des groupes qui ne partageaient pas le même environnement.",
           "sources": [
@@ -10562,7 +10562,7 @@
       "documents": [
         {
           "id": "civ-ch1-d1",
-          "title": "Document 1 : Une religion polythéiste",
+          "title": "Document 1 : Une religion polythéiste (Antiquité)",
           "layout": "text-only",
           "text": "Un des dieux les plus importants du panthéon sumérien est Anu. C'est le dieu du ciel. Il est considéré comme le dieu suprême et le père de tous les autres dieux. Son autorité s'étendait sur le cosmos et il jouait un rôle essentiel dans l'ordre et la structure du monde. Enki, pour sa part, est le dieu de la sagesse, de la connaissance et de la magie. Il est associé à l'eau douce et est considéré comme le créateur de l'humanité. Il a modelé les premiers êtres humains à partir d'argile.",
           "sources": [
@@ -10571,7 +10571,7 @@
         },
         {
           "id": "civ-ch1-d2",
-          "title": "Document 2 : Animisme",
+          "title": "Document 2 : Animisme (Préhistoire)",
           "layout": "text-image",
           "text": "Durant la préhistoire, les peuples de la Mésopotamie sont animistes. Ils attribuent une âme ou un esprit aux éléments de la nature comme les arbres, les rivières et les animaux.",
           "imageUrl": "assets/img/civ-changements-1/img000.png",
@@ -11173,7 +11173,7 @@
       "documents": [
         {
           "id": "civ-ch1-d3",
-          "title": "Document 3 : Organisation sociale au Néolithique",
+          "title": "Document 3 : Organisation sociale au Néolithique (Préhistoire)",
           "layout": "text-only",
           "text": "Plusieurs objets de la vie quotidienne ont été retrouvés dans les tombes datant du 4e et 5e millénaire avant J-C : des bijoux en or, des boucles d'oreilles, des bracelets, des colliers de perles, etc. On a aussi trouvé des coquillages, ce qui témoigne de nombreux échanges grâce au troc. Néanmoins, les archéologues ont aussi découvert que certaines tombes ne contenaient que le corps de la personne défunte, sans objet du quotidien. Il est donc possible que certains habitants du Néolithique accumulaient des richesses et que d'autres n'en aient pas la possibilité.",
           "sources": [
@@ -11182,7 +11182,7 @@
         },
         {
           "id": "civ-ch1-d4",
-          "title": "Document 4 : La hiérarchie sociale en Mésopotamie",
+          "title": "Document 4 : La hiérarchie sociale en Mésopotamie (Antiquité)",
           "layout": "text-only",
           "text": "Le roi dirige l'administration de la Cité-État et siège au palais. Les scribes travaillent pour le roi et forment un groupe fort important dans la société mésopotamienne puisqu'ils sont les spécialistes de l'écriture. Cette compétence leur permet de travailler dans les temples, les écoles et les palais. Ils sont chargés de mettre par écrit les directives du roi, de consigner les informations pertinentes à l'administration et de les diffuser parmi la population. Viennent ensuite, dans l'ordre, les artisans et les marchands, les paysans et les esclaves.",
           "sources": [
@@ -11787,7 +11787,7 @@
       "documents": [
         {
           "id": "civ-ch2-d1",
-          "title": "Document 1 : Se nourrir dans le Croissant fertile",
+          "title": "Document 1 : Se nourrir dans le Croissant fertile (Antiquité)",
           "layout": "text-image",
           "text": "L'agriculture était variée et abondante en Mésopotamie, grâce à la fertilité de la région et à l'irrigation assurée par le Tigre et l'Euphrate. Par exemple, les Mésopotamiens cultivaient du blé, de l'orge, des lentilles, des pois chiches, des figues et des dattes. Grâce à cette production agricole, ils sont en mesure de combler leurs besoins alimentaires en plus de dégager des surplus alimentaires.",
           "imageUrl": "assets/img/civ-changements-2/img000.png",
@@ -11799,7 +11799,7 @@
         },
         {
           "id": "civ-ch2-d2",
-          "title": "Document 2 : La révolution agricole au Néolithique",
+          "title": "Document 2 : La révolution agricole au Néolithique (Préhistoire)",
           "layout": "text-only",
           "text": "La plupart des habitants sont des paysans. Ils cultivent l'orge et le blé dans les champs environnants, en plus de faire l'élevage de chèvres et de moutons. Avec le temps, l'amélioration des techniques agricoles permet de produire des surplus et de bien nourrir tous les habitants des villes et des villages.",
           "sources": [
@@ -12270,7 +12270,7 @@
       "documents": [
         {
           "id": "civ-ch2-d3",
-          "title": "Document 3 : Le troc",
+          "title": "Document 3 : Le troc (Préhistoire)",
           "layout": "text-only",
           "text": "Les premiers échanges, [...], ont certainement lieu entre membres d'une même communauté, au sein du village. On échange des colliers de perles, des pointes de flèche, des armatures de faucilles, de la viande, etc. Les productions sont également échangées de village en village. Le bétail, les fromages, les outils, les tissus, les coquillages et même les femmes ont sans doute été l'objet de transactions entre communautés.",
           "sources": [
@@ -12279,7 +12279,7 @@
         },
         {
           "id": "civ-ch2-d4",
-          "title": "Document 4 : Le marchand",
+          "title": "Document 4 : Le marchand (Antiquité)",
           "layout": "image-only",
           "imageUrl": "assets/img/civ-changements-2/img001.png",
           "imageWidthCm": 7,
@@ -13776,7 +13776,7 @@
       "documents": [
         {
           "id": "dem-ch1-d1",
-          "title": "Document 1 : L'oligarchie athénienne",
+          "title": "Document 1 : L'oligarchie athénienne (8e siècle avant notre ère)",
           "layout": "text-only",
           "text": "« Au 8e siècle av. J.-C. est fondée la Cité-État d'Athènes, une cité autonome (pólis) qui englobe non seulement la ville d'Athènes, mais également les territoires avoisinants. Plutôt qu'être dirigée par un roi, Athènes est alors gouvernée par un petit groupe de puissants aristocrates : c'est ce qu'on appelle une oligarchie. C'est au cours de cette période oligarchique, ponctuée de quelques épisodes de tyrannies et de crises sociales, que se mettent en place les fondements de la démocratie athénienne. »",
           "sources": [
@@ -13785,7 +13785,7 @@
         },
         {
           "id": "dem-ch1-d2",
-          "title": "Document 2 : Les réformes de Clisthène",
+          "title": "Document 2 : Les réformes de Clisthène (fin du 6e siècle avant notre ère)",
           "layout": "text-only",
           "text": "« Clisthène joue un rôle primordial à la fin du 6e siècle av. J.-C. pour remanier les institutions politiques d'Athènes et permettre la naissance de la démocratie. Clisthène répartit les citoyens en 10 tribus territoriales. De la sorte, tous les citoyens d'une portion de territoire, peu importe leur fortune ou leur naissance, font partie d'une même tribu. Cette réforme affaiblit la puissance de l'ancienne aristocratie et permet véritablement l'isonomie, c'est-à-dire l'égalité de tous les citoyens devant la loi, qu'ils soient riches ou pauvres. »",
           "sources": [
@@ -14380,7 +14380,7 @@
       "documents": [
         {
           "id": "dem-ch2-d2",
-          "title": "Document 1 : La Ligue de Délos",
+          "title": "Document 1 : La Ligue de Délos (fin des guerres médiques)",
           "layout": "text-only",
           "text": "La Ligue de Délos rassemblait près de 250 cités grecques, principalement situées dans l'Ionie, la Carie, l'Hellespont, la Thrace et dans les nombreuses îles de la mer Égée. Son objectif était de créer une alliance militaire. Cette alliance était dominée par Athènes et avait pour but de protéger les cités-État grecques de l'empire perse et de se défendre contre de futures attaques de cette puissance.",
           "sources": [
@@ -17015,7 +17015,7 @@
       "documents": [
         {
           "id": "rom-ch2-d1",
-          "title": "Document 1 : L'Édit perpétuel",
+          "title": "Document 1 : L'Édit perpétuel (2e siècle)",
           "layout": "text-only",
           "text": "Vers 131, l'empereur exige la création d'un recueil de lois, regroupant les décisions judiciaires émises par les magistrats romains. Ce code, connu sous le nom d'Édit perpétuel, est devenu le point de référence obligatoire pour tous les magistrats et gouverneurs dans l'exercice de la justice. Ce faisant, il a permis d'appliquer un ensemble de lois cohérent et uniforme dans l'ensemble de l'Empire. [Cependant], de nombreuses lois contenues dans les anciens ouvrages étaient répétitives, contradictoires ou ne répondaient tout simplement pas aux exigences d'une société qui avait évolué depuis l'époque romaine. [Avec ses] 2 000 livres et 3 millions de lignes de texte juridique, [le système de justice romain était devenu inefficace, incohérent et très mal interprété].",
           "sources": [
@@ -17024,7 +17024,7 @@
         },
         {
           "id": "rom-ch2-d2",
-          "title": "Document 2 : Le Code Justinien",
+          "title": "Document 2 : Le Code Justinien (6e siècle)",
           "layout": "text-only",
           "text": "[Avec le Code Justinien], l'empereur atteint ses multiples objectifs : rendre les lois plus claires pour tous, réduire le nombre d'affaires portées devant les tribunaux (beaucoup étaient fondées sur des malentendus et une mauvaise interprétation de ce qu'était réellement la loi) et accélérer le traitement des affaires juridiques.",
           "sources": [
@@ -19616,7 +19616,7 @@
       "documents": [
         {
           "id": "chr-ch2-d1",
-          "title": "Document 1 : Pèlerin",
+          "title": "Document 1 : Pèlerin (Moyen Âge)",
           "layout": "image-only",
           "imageUrl": "assets/img/christianisation-changements-2/img000.png",
           "imageWidthCm": 7,
@@ -21070,7 +21070,7 @@
       "documents": [
         {
           "id": "ind-ch1-d1",
-          "title": "Document 1",
+          "title": "Document 1 (18e siècle)",
           "layout": "text-only",
           "text": "« Cette insalubrité puise essentiellement son origine dans le rôle économique et commercial central de la plupart des villes, où de gros volumes de produits agricoles et industriels transitaient depuis et vers les marchés, les quais, les magasins et les ateliers. Cette activité économique générait un important trafic de véhicules, d'humains et d'animaux, la plupart du temps désorganisé, ainsi qu'une quantité impressionnante de déchets, de saletés et de crottin de cheval. Les chevaux étaient en effet les principaux moteurs du système de transport. »",
           "sources": [
@@ -21079,7 +21079,7 @@
         },
         {
           "id": "ind-ch1-d2",
-          "title": "Document 2 : La locomotive et les chemins de fer",
+          "title": "Document 2 : La locomotive et les chemins de fer (19e siècle)",
           "layout": "text-only",
           "text": "Au début du 19e siècle, la locomotive à vapeur et les chemins de fer se développent rapidement en Angleterre, mais il faudra quelques années avant que le rail ne remplace les canaux comme principal moyen de transport. En 1840, l'Angleterre ne compte que 1349 kilomètres de chemin de fer, mais près de 17 000 en 1860 et plus de 30 000 en 1880. Le train peut atteindre 60 à 75 km/h et peut transporter jusqu'à 2 000 tonnes de marchandises.",
           "sources": [
