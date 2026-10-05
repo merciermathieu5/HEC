@@ -9918,8 +9918,6 @@
       "realite_sociale_id": "sedentarisation",
       "questionBody": {
         "prompt": "Indique si les documents 4 et 5 correspondent au travail du paysan ou à celui de l'artisan.",
-        "bullets": [],
-        "instructions": [],
         "responseSpace": [
           {
             "type": "labeled-list",
@@ -9933,7 +9931,7 @@
       "reglettes": [
         {
           "type": "simple",
-          "id": "r-sed-r4",
+          "id": "r-q-sed-relation-4-1",
           "label": "Réglette (2 points)",
           "opLabel": "Mettre en relation des faits",
           "maxPoints": 2,
@@ -9955,19 +9953,19 @@
       ],
       "documents": [
         {
-          "id": "sed-r2-d4",
+          "id": "d-q-sed-relation-4-1",
           "title": "Document 4 : Production alimentaire",
           "layout": "text-only",
-          "text": "La plupart des habitants sont des paysans. Ils cultivent l'orge et le blé dans les champs environnants, en plus de faire l'élevage de chèvres et de moutons. Avec le temps, l'amélioration des techniques agricoles permet de produire des surplus et de bien nourrir tous les habitants des villes et des villages.",
+          "text": "La plupart des habitants sont des [...]. Ils cultivent l'orge et le blé dans les champs environnants, en plus de faire l'élevage de chèvres et de moutons. Avec le temps, l'amélioration des techniques agricoles permet de produire des surplus et de bien nourrir tous les habitants des villes et des villages.",
           "sources": [
             "Source du texte : Service national du RÉCIT, domaine de l'univers social."
           ]
         },
         {
-          "id": "sed-r2-d5",
+          "id": "d-q-sed-relation-4-2",
           "title": "Document 5 : Nouveaux procédés",
           "layout": "text-only",
-          "text": "La spécialisation des artisans leur permet de développer leurs habiletés et leur expertise dans la production d'un bien. Par exemple, le potier fabrique des pots en terre cuite (poterie), le forgeron travaille le métal (armes, outils) et le vannier fabrique des paniers tressés (vannerie).",
+          "text": "La spécialisation des [...] leur permet de développer leurs habiletés et leur expertise dans la production d'un bien. Par exemple, le potier fabrique des pots en terre cuite (poterie), le forgeron travaille le métal (armes, outils) et le vannier fabrique des paniers tressés (vannerie).",
           "sources": [
             "Source du texte : Service national du RÉCIT, domaine de l'univers social."
           ]
