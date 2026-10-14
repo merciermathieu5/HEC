@@ -9445,8 +9445,6 @@
       "realite_sociale_id": "sedentarisation",
       "questionBody": {
         "prompt": "Associe les documents 1 à 3 à l'innovation apparue lors de la Préhistoire lui correspondant.",
-        "bullets": [],
-        "instructions": [],
         "responseSpace": [
           {
             "type": "labeled-list",
@@ -9461,7 +9459,7 @@
       "reglettes": [
         {
           "type": "simple",
-          "id": "r-sed-r3",
+          "id": "r-q-sed-relation-3-1",
           "label": "Réglette (2 points)",
           "opLabel": "Mettre en relation des faits",
           "maxPoints": 2,
@@ -9483,7 +9481,7 @@
       ],
       "documents": [
         {
-          "id": "sed-r2-d1",
+          "id": "d-q-sed-relation-3-1",
           "title": "Document 1 : La meule",
           "layout": "text-only",
           "text": "Cette innovation est très utile pour les habitants de Çatal Höyük. Elle permet de moudre le grain, en l'écrasant avec une pierre sur un plateau circulaire. Grâce à cette innovation, les paysans se mettent à produire de la farine, puis du pain.",
@@ -9492,17 +9490,17 @@
           ]
         },
         {
-          "id": "sed-r2-d2",
+          "id": "d-q-sed-relation-3-2",
           "title": "Document 2 : Un outil agricole",
           "layout": "image-only",
           "imageUrl": "assets/img/sed-relation-2/img000.png",
           "imageWidthCm": 7,
           "sources": [
-            "Source de l'image : H. Camps-Fabrer, Houe, Encyclopédie berbère, consulté le 24 septembre 2020."
+            "Source de l'image : H. Camps-Fabrer, [...], Encyclopédie berbère, consulté le 24 septembre 2020."
           ]
         },
         {
-          "id": "sed-r2-d3",
+          "id": "d-q-sed-relation-3-3",
           "title": "Document 3 : Les contenants de terre cuite",
           "layout": "text-only",
           "text": "Pour les agriculteurs, [...] représente une innovation fort utile. Les contenants de terre cuite permettent en effet de conserver et de transporter les récoltes et les aliments, sous forme de grains, de farine ou de liquide. Les récipients de céramique servent aussi à la cuisson des aliments.",
